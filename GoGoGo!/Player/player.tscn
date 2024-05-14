@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://5re3nmcyjgut"]
+[gd_scene load_steps=2 format=3 uid="uid://5re3nmcyjgut"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_i1a7c"]
 
 [node name="Player" type="Node2D"]
+script = ExtResource("1_i1a7c")
+
+[node name="temporarySprite" type="ColorRect" parent="."]
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+color = Color(0.254902, 1, 1, 1)
