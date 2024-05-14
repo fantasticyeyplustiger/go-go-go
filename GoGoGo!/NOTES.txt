@@ -1,0 +1,21 @@
+laser beam: kills player and destroys any objects that come in contact with it
+- big orange arrow to indicate coming
+- usually lasts for a second or two, but can last longer if modified by level creator
+
+boulder: kills player, moves at a relatively slow speed in one direction
+- small, red arrow to indicate coming
+
+rock pellet: inflicts damage on player, moves 3x faster than boulder (4 kill player)
+- sharp, red arrow to indicate coming
+
+iron pellet: inflicts damage on player, moves 5x faster than boulder (2 kill player)
+- sharp, blue arrow to indicate coming
+
+steel ball: goes slightly faster than boulder and isn't affected by laser beam, kills player
+- small, blue arrow to indicate coming
+
+exploding tile: explodes at a designated rhythm, but is safe for the most part. takes 2 hp from the player
+if in the blast radius, kills the player if standing directly on it during explosion
+- red circle and exclamation mark in the middle to indicate explosion
+
+conveyor: moves the player in a certain direction every X seconds, doesn't affect obstacles
