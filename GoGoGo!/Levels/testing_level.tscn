@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmdbva8kn4x2k"]
+
+[ext_resource type="PackedScene" uid="uid://dxmp7dh3ta2e5" path="res://TileMaps/Map1TileMap.tscn" id="1_5yvkk"]
+[ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
+
+[node name="testing level" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_5yvkk")]
+layer_0/tile_data = PackedInt32Array(-65537, 1, 0, -65536, 1, 0, 1, 1, 0, -1, 1, 0, 65535, 1, 0, -131072, 1, 0, 0, 1, 0, -131071, 1, 0, -65535, 1, 0, -131073, 1, 0, 131071, 1, 0, -196608, 1, 0, 65536, 1, 0, -196607, 1, 0, 65537, 1, 0, -196606, 1, 0, -131070, 1, 0, -65534, 1, 0, 2, 1, 0, 65538, 1, 0, -196605, 1, 0, -131069, 1, 0, -65533, 1, 0, 3, 1, 0, 65539, 1, 0, -196604, 1, 0, -131068, 1, 0, -65532, 1, 0, 4, 1, 0, 65540, 1, 0, -196603, 1, 0, -131067, 1, 0, -65531, 1, 0, 5, 1, 0, 65541, 1, 0, -196602, 1, 0, -131066, 1, 0, -65530, 1, 0, 6, 1, 0, 65542, 1, 0, -196601, 1, 0, -131065, 1, 0, -65529, 1, 0, 7, 1, 0, 65543, 1, 0)
+
+[node name="Player" parent="." instance=ExtResource("2_2enu4")]
+position = Vector2(896, -128)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(896, -128)
+zoom = Vector2(0.5, 0.5)

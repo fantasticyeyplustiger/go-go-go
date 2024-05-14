@@ -8,9 +8,10 @@ texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_i2s3q"]
+tile_size = Vector2i(256, 256)
 sources/1 = SubResource("TileSetAtlasSource_cnqv7")
 
 [node name="TileMap" type="TileMap"]
 tile_set = SubResource("TileSet_i2s3q")
-rendering_quadrant_size = 64
+rendering_quadrant_size = 128
 format = 2
