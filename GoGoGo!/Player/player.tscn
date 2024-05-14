@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://5re3nmcyjgut"]
+[gd_scene load_steps=5 format=3 uid="uid://5re3nmcyjgut"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_i1a7c"]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ru7bf"]
+size = Vector2(512, 512)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx3e2"]
+size = Vector2(160, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4b14"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_i1a7c")
 
 [node name="temporarySprite" type="ColorRect" parent="."]
@@ -11,3 +20,16 @@ offset_top = -80.0
 offset_right = 80.0
 offset_bottom = 80.0
 color = Color(0.254902, 1, 1, 1)
+
+[node name="BorderDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderDetector"]
+shape = SubResource("RectangleShape2D_ru7bf")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_jx3e2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x4b14")
