@@ -25,3 +25,5 @@ shape = SubResource("RectangleShape2D_jx3e2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_x4b14")
+
+[node name="WallDetector" type="RayCast2D" parent="."]
