@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=4 format=3 uid="uid://bmdbva8kn4x2k"]
 
 [ext_resource type="PackedScene" uid="uid://dxmp7dh3ta2e5" path="res://TileMaps/Map1TileMap.tscn" id="1_5yvkk"]
 [ext_resource type="Script" path="res://Levels/LevelScript.gd" id="1_q061h"]
-[ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
-[ext_resource type="PackedScene" uid="uid://c640xr3dmutlw" path="res://Obstacles/Boulder.tscn" id="4_g6jd0"]
+[ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/Player.tscn" id="2_2enu4"]
 
 [node name="testing level" type="Node2D"]
 script = ExtResource("1_q061h")
@@ -21,9 +20,6 @@ position = Vector2(1408, -896)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1408, -896)
 zoom = Vector2(0.5, 0.5)
-
-[node name="Boulder" parent="." instance=ExtResource("4_g6jd0")]
-position = Vector2(-1120, 96)
 
 [node name="Timer" type="Timer" parent="."]
 

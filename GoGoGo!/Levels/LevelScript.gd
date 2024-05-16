@@ -5,14 +5,29 @@ extends Node2D
 @export var beats_per_minute = 0
 
 var rng = RandomNumberGenerator.new()
-var wave = 1
+var wave = 0
 var attack_rows = 0
 var attack_columns = 0
+
+#region obstacle variables
+var bouler = preload("res://Obstacles/Boulder.tscn")
+var steel_ball = preload("res://Obstacles/SteelBall.tscn")
+var rock_pellet = preload("res://Obstacles/RockPellet.tscn")
+var iron_pellet = preload("res://Obstacles/IronPellet.tscn")
+#endregion
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Timer.wait_time = 2
 	pass # Replace with function body.
+
+'''
+var obj = preload(copy path).instantiate()
+add_child(obj)
+obj.global_position = pos
+'''
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

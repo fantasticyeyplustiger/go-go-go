@@ -14,6 +14,10 @@ config/name="Go Go Go!"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://Player/Globals.gd"
+
 [display]
 
 window/size/viewport_width=1920

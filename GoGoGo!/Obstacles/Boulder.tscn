@@ -1,13 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://c640xr3dmutlw"]
 
-[ext_resource type="Script" path="res://Obstacles/Bouler.gd" id="1_uqm3y"]
+[ext_resource type="Script" path="res://Obstacles/RollingObstacle.gd" id="1_vnufw"]
 [ext_resource type="Texture2D" uid="uid://bttqsq4ajaflm" path="res://Sprites/bouler.png" id="2_qpimg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btsxh"]
 size = Vector2(192, 192)
 
 [node name="Boulder" type="Node2D"]
-script = ExtResource("1_uqm3y")
+script = ExtResource("1_vnufw")
+speed = 128
+rotate_speed = 0.15
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qpimg")
