@@ -17,15 +17,18 @@ extends Node2D
 #region variables
 enum obstacles {NONE, BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET}
 
+const obstacle_speeds = {obstacles.NONE : 0, obstacles.BOULDER : 128, obstacles.ROCK_PELLET : 512,
+			obstacles.STEEL_BALL : 256, obstacles.IRON_PELLET : 1024}
+
 var rng = RandomNumberGenerator.new()
 var wave = 1
 var tile_size = 256
 
 # obstacles will move in that direction when attacking
-var attack_right_rows = []
-var attack_left_rows = []
-var attack_up_columns = []
-var attack_down_columns = []
+var attack_right_rows = range(rows)
+var attack_left_rows = range(rows)
+var attack_up_columns = range(columns)
+var attack_down_columns = range(columns)
 
 # obstacles will move in that direction once spawned at that position in the array
 var spawn_to_right = []
@@ -45,14 +48,13 @@ var iron_pellet = preload("res://Obstacles/IronPellet.tscn").instantiate()
 func _ready():
 	
 	#region initializing arrays
-	attack_right_rows.resize(rows)
-	attack_left_rows.resize(rows)
-	spawn_to_right.resize(rows)
-	spawn_to_left.resize(rows)
-	attack_up_columns.resize(columns)
-	attack_down_columns.resize(columns)
-	spawn_to_up.resize(columns)
-	spawn_to_down.resize(columns)
+	attack_right_rows.resize(rows); attack_left_rows.resize(rows)
+	spawn_to_right.resize(rows); spawn_to_left.resize(rows)
+	attack_up_columns.resize(columns); attack_down_columns.resize(columns)
+	spawn_to_up.resize(columns); spawn_to_down.resize(columns)
+	
+	array_initializer(attack_right_rows); array_initializer(attack_left_rows)
+	array_initializer(attack_up_columns); array_initializer(attack_down_columns)
 	
 	initialize_obstacle_spawner_positions(rows, spawn_to_left, start_left_column, 0, tile_size)
 	initialize_obstacle_spawner_positions(rows, spawn_to_right, start_right_column, 0, tile_size)
@@ -61,7 +63,12 @@ func _ready():
 #endregion
 	
 	$Timer.wait_time = 2
+	$Timer.start()
 	pass # Replace with function body.
+
+func array_initializer(array):
+	for i in array:
+		array.insert(i, 0)
 
 '''
 -- INITIALIZE OBSTACLE SPAWNER POSITIONS --
@@ -85,17 +92,60 @@ var obj = preload(copy path).instantiate()
 add_child(obj)
 obj.global_position = pos
 '''
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 '''
--- GET RANDOM OBSTACLES --
-- gets a random number of obstacles to roll down the map
-- the higher the wave, the more obstacles there will be
+-- ATTACK --
+- called after the get_attack function
+- sends out a wave of attacks and resets the attack rows and columns to obstacles.NONE afterward
 '''
-func get_random_obstacles(wave, attack_rows, attack_columns):
-	var obstacles = rng.randi_range(1, 3)
-	obstacles = obstacles * (wave / 5)
+func attack():
+	
+	for i in attack_left_rows:
+		if attack_left_rows[i] != 0:
+			roll_obstacle_down(-1, 0, attack_left_rows[i], spawn_to_left[i])
+	
+	for i in attack_right_rows:
+		if attack_right_rows[i] != 0:
+			roll_obstacle_down(1, 0, attack_right_rows[i], spawn_to_right[i])
+	
+	for i in attack_down_columns:
+		if attack_down_columns[i] != 0:
+			roll_obstacle_down(0, -1, attack_down_columns[i], spawn_to_down[i])
+	
+	for i in attack_up_columns:
+		if attack_up_columns[i] != 0:
+			roll_obstacle_down(0, 1, attack_up_columns[i], spawn_to_up[i])
+	
+	wave += 1
 
+func roll_obstacle_down(x_direction, y_direction, obstacle, spawn_location):
+	#var boulder = preload("res://Obstacles/Boulder.tscn").instantiate()
+	#var steel_ball = preload("res://Obstacles/SteelBall.tscn").instantiate()
+	#var rock_pellet = preload("res://Obstacles/RockPellet.tscn").instantiate()
+	#var iron_pellet = preload("res://Obstacles/IronPellet.tscn").instantiate()
+	
+	#var obj = preload(copy path).instantiate()
+	#add_child(obj)
+	#obj.global_position = pos
+	
+	match obstacle:
+		obstacles.BOULDER:
+			roll_specific_obstacle_down(x_direction, y_direction, boulder, spawn_location)
+		obstacles.STEEL_BALL:
+			roll_specific_obstacle_down(x_direction, y_direction, steel_ball, spawn_location)
+		obstacles.IRON_PELLET:
+			roll_specific_obstacle_down(x_direction, y_direction, iron_pellet, spawn_location)
+		obstacles.ROCK_PELLET:
+			roll_specific_obstacle_down(x_direction, y_direction, rock_pellet, spawn_location)
+	
+	pass
+
+func roll_specific_obstacle_down(x_direction, y_direction, obstacle, spawn_location):
+	add_child(obstacle)
+	obstacle.global_position = spawn_location
+	obstacle.translate(x_direction, y_direction)
+
+#region all "get" functions
 '''
 -- GET ATTACK --
 - gets the places the level is going to attack from for ONE wave
@@ -162,6 +212,7 @@ func get_random_row_or_column(direction):
 - input: wave (the higher the wave, the more likely more obstacles will come)
 '''
 func get_amount_of_attacks(wave):
+#endregion
 	
 	var possible_attack_spots
 	
@@ -197,4 +248,5 @@ func on_rhythm():
 	
 	var amount_of_attacks = get_amount_of_attacks(wave)
 	get_attack(amount_of_attacks)
-	pass # Replace with function body.
+	attack()
+
