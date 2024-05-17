@@ -28,4 +28,4 @@ shape = SubResource("RectangleShape2D_x4b14")
 
 [node name="WallDetector" type="RayCast2D" parent="."]
 
-[connection signal="area_entered" from="Hitbox" to="." method="die"]
+[connection signal="area_entered" from="Hitbox" to="." method="get_damaged"]

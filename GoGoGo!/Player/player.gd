@@ -54,7 +54,7 @@ func move(direction):
 		moving = false
 
 
-func die(area):
+func get_damaged(area):
 	#Globals.emit_signal(stop_level)
 	
 	pass
