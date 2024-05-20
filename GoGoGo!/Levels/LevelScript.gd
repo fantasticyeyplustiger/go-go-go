@@ -15,7 +15,6 @@ extends Node2D
 #endregion
 
 #region variables
-enum obstacles {NONE, BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET}
 
 const obstacle_speeds = {obstacles.NONE : 0, obstacles.BOULDER : 128, obstacles.ROCK_PELLET : 512,
 			obstacles.STEEL_BALL : 256, obstacles.IRON_PELLET : 1024}
@@ -25,10 +24,10 @@ var wave = 1
 var tile_size = 256
 
 # obstacles will move in that direction when attacking
-var attack_right_rows = range(rows)
-var attack_left_rows = range(rows)
-var attack_up_columns = range(columns)
-var attack_down_columns = range(columns)
+var attack_right_rows = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+var attack_left_rows = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+var attack_up_columns = [0, 0, 0, 0, 0]
+var attack_down_columns = [0, 0, 0, 0, 0]
 
 # obstacles will move in that direction once spawned at that position in the array
 var spawn_to_right = []
@@ -44,6 +43,7 @@ var rock_pellet = preload("res://Obstacles/RockPellet.tscn").instantiate()
 var iron_pellet = preload("res://Obstacles/IronPellet.tscn").instantiate()
 #endregion
 
+enum obstacles {NONE, BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET}
 
 func _ready():
 	
@@ -53,8 +53,8 @@ func _ready():
 	attack_up_columns.resize(columns); attack_down_columns.resize(columns)
 	spawn_to_up.resize(columns); spawn_to_down.resize(columns)
 	
-	array_initializer(attack_right_rows); array_initializer(attack_left_rows)
-	array_initializer(attack_up_columns); array_initializer(attack_down_columns)
+	#array_initializer(attack_right_rows); array_initializer(attack_left_rows)
+	#array_initializer(attack_up_columns); array_initializer(attack_down_columns)
 	
 	initialize_obstacle_spawner_positions(rows, spawn_to_left, start_left_column, 0, tile_size)
 	initialize_obstacle_spawner_positions(rows, spawn_to_right, start_right_column, 0, tile_size)
@@ -68,7 +68,7 @@ func _ready():
 
 func array_initializer(array):
 	for i in array:
-		array.insert(i, 0)
+		array.append(0)
 
 '''
 -- INITIALIZE OBSTACLE SPAWNER POSITIONS --
@@ -100,21 +100,21 @@ obj.global_position = pos
 '''
 func attack():
 	
-	for i in attack_left_rows:
+	for i in attack_left_rows.size():
 		if attack_left_rows[i] != 0:
 			roll_obstacle_down(-1, 0, attack_left_rows[i], spawn_to_left[i])
 	
-	for i in attack_right_rows:
+	for i in attack_right_rows.size():
 		if attack_right_rows[i] != 0:
 			roll_obstacle_down(1, 0, attack_right_rows[i], spawn_to_right[i])
 	
-	for i in attack_down_columns:
+	for i in attack_down_columns.size():
 		if attack_down_columns[i] != 0:
-			roll_obstacle_down(0, -1, attack_down_columns[i], spawn_to_down[i])
+			roll_obstacle_down(0, 1, attack_down_columns[i], spawn_to_down[i])
 	
-	for i in attack_up_columns:
+	for i in attack_up_columns.size():
 		if attack_up_columns[i] != 0:
-			roll_obstacle_down(0, 1, attack_up_columns[i], spawn_to_up[i])
+			roll_obstacle_down(0, -1, attack_up_columns[i], spawn_to_up[i])
 	
 	wave += 1
 
@@ -130,20 +130,26 @@ func roll_obstacle_down(x_direction, y_direction, obstacle, spawn_location):
 	
 	match obstacle:
 		obstacles.BOULDER:
-			roll_specific_obstacle_down(x_direction, y_direction, boulder, spawn_location)
+			roll_specific_obstacle_down(x_direction, y_direction, boulder, spawn_location, 1)
+			print("instancing bouler")
 		obstacles.STEEL_BALL:
-			roll_specific_obstacle_down(x_direction, y_direction, steel_ball, spawn_location)
+			roll_specific_obstacle_down(x_direction, y_direction, steel_ball, spawn_location, 3)
+			print("instancing s ball")
 		obstacles.IRON_PELLET:
-			roll_specific_obstacle_down(x_direction, y_direction, iron_pellet, spawn_location)
+			roll_specific_obstacle_down(x_direction, y_direction, iron_pellet, spawn_location, 4)
+			print("instancing i pellet")
 		obstacles.ROCK_PELLET:
-			roll_specific_obstacle_down(x_direction, y_direction, rock_pellet, spawn_location)
+			roll_specific_obstacle_down(x_direction, y_direction, rock_pellet, spawn_location, 2)
+			print("rock pellet")
 	
 	pass
 
-func roll_specific_obstacle_down(x_direction, y_direction, obstacle, spawn_location):
-	add_child(obstacle)
+func roll_specific_obstacle_down(x_direction, y_direction, obstacle, spawn_location, obstacle_type):
+	var direction = Vector2(x_direction, y_direction)
+	var rolling_obstacle = obstacle
+	add_child(rolling_obstacle)
 	obstacle.global_position = spawn_location
-	obstacle.translate(x_direction, y_direction)
+	Globals.emit_signal("roll_obstacle", direction * 1024)
 
 #region all "get" functions
 '''
@@ -155,8 +161,7 @@ func get_attack(amount_of_attacks):
 	for attacks in amount_of_attacks:
 		
 		# left_right and up_down are not the same to prevent confusion
-		var left_right = randi_range(0, 1)
-		var up_down = randi_range(0, 1)
+		var up_downOrLeft_right = randi_range(0, 1)
 		
 		var vertical_or_horizontal = randi_range(0, 1)
 		
@@ -167,7 +172,7 @@ func get_attack(amount_of_attacks):
 		
 		if vertical_or_horizontal == 0: # vertical
 			
-			if up_down == 0: # up
+			if up_downOrLeft_right == 0: # up
 				attack_up_columns[attack_spot] = obstacle
 				
 			else: # down
@@ -175,7 +180,7 @@ func get_attack(amount_of_attacks):
 		
 		else: # horizontal
 			
-			if left_right == 0: # left
+			if up_downOrLeft_right == 0: # left
 				attack_left_rows[attack_spot] = obstacle
 				
 			else:
@@ -191,7 +196,15 @@ func get_random_obstacle():
 	
 	var obstacle = rng.randi_range(1, 4)
 	
-	return obstacles.keys()[obstacle]
+	match obstacle:
+		1:
+			return obstacles.BOULDER
+		2:
+			return obstacles.ROCK_PELLET
+		3:
+			return obstacles.STEEL_BALL
+		4:
+			return obstacles.IRON_PELLET
 
 '''
 -- GET RANDOM ROW OR COLUMN --
@@ -199,12 +212,16 @@ func get_random_obstacle():
 - input: direction (decides if rows or columns should be returned)
 '''
 func get_random_row_or_column(direction):
-	
-	if direction == 0:
-		return rng.randi_range(0, rows - 1)
+	var returnVar
+	if direction == 1:
+		returnVar = rng.randi_range(0, rows - 1)
+		print(returnVar)
+		return returnVar
 		
-	elif direction == 1:
-		return rng.randi_range(0, columns - 1)
+	elif direction == 0:
+		returnVar = rng.randi_range(0, columns - 1)
+		print(returnVar)
+		return returnVar
 
 '''
 -- GET AMOUNT OF ATTACKS --
@@ -247,6 +264,7 @@ func get_amount_of_attacks(wave):
 func on_rhythm():
 	
 	var amount_of_attacks = get_amount_of_attacks(wave)
+	print("Attack Count: ", amount_of_attacks)
 	get_attack(amount_of_attacks)
 	attack()
 

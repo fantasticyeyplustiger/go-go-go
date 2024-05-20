@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://fg5lh7e21fy2"]
+[gd_scene load_steps=5 format=3 uid="uid://fg5lh7e21fy2"]
 
 [ext_resource type="Script" path="res://Obstacles/RollingObstacle.gd" id="1_ojklq"]
 [ext_resource type="Texture2D" uid="uid://bttqsq4ajaflm" path="res://Sprites/bouler.png" id="2_inht4"]
@@ -6,9 +6,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_datqh"]
 size = Vector2(96, 96)
 
-[node name="RockPellet" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0q8o"]
+
+[node name="RockPellet" type="CharacterBody2D"]
 script = ExtResource("1_ojklq")
-speed = 512
 rotate_speed = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -19,3 +20,6 @@ texture = ExtResource("2_inht4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_datqh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b0q8o")
