@@ -9,8 +9,10 @@ size = Vector2(192, 192)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sbhix"]
 
 [node name="Boulder" type="CharacterBody2D"]
+collision_layer = 8
 script = ExtResource("1_vnufw")
 rotate_speed = 0.15
+direction = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qpimg")

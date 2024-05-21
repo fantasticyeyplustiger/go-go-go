@@ -1,5 +1,14 @@
 extends Node
 
+enum directions {DOWN, LEFT, RIGHT, UP}
+		
+enum obstacle_types {BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET}
+
+const roll_direction = {directions.DOWN : Vector2.DOWN, directions.LEFT : Vector2.LEFT,
+		directions.RIGHT : Vector2.RIGHT, directions.UP : Vector2.UP}
+
+const obstacle_speed = {obstacle_types.BOULDER : 700, obstacle_types.ROCK_PELLET : 1000,
+				obstacle_types.STEEL_BALL : 1400, obstacle_types.IRON_PELLET : 2000}
 
 # Globals.emit_signal(signal name)
 # Globals.(signal name).connect()

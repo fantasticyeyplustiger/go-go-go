@@ -1,9 +1,16 @@
 extends CharacterBody2D
 
 @export var rotate_speed = 0.0
+@export var direction : Globals.directions = Globals.directions.UP
+@export var obstacle_type : Globals.obstacle_types = Globals.obstacle_types.BOULDER
+
+func _init(dir, obs_type):
+	direction = dir
+	obstacle_type = obs_type
+	pass
 
 func _ready():
-	Globals.connect("roll_obstacle", on_roll)
+	velocity = Globals.obstacle_speed[obstacle_type] * Globals.roll_direction[direction]
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
