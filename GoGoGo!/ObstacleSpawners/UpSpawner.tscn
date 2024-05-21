@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://cif1rmnl34r5x"]
+
+[ext_resource type="Texture2D" uid="uid://nm7um3p87m5" path="res://Sprites/UpDoot.png" id="1_3uhsu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xqs4b"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"down_arrow",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"left_arrow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3uhsu")
+}],
+"loop": true,
+"name": &"right_arrow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3uhsu")
+}],
+"loop": true,
+"name": &"up_arrow",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xqs4b")
+animation = &"right_arrow"
