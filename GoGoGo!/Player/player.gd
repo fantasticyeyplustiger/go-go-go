@@ -12,15 +12,9 @@ var health = 5
 
 '''
 -- READY --
-- sets the position of the player to the center
-- called once player is instanced
 '''
 func _ready():
-	
-	#position = position.snapped(Vector2.ONE * tile_size)
-	#position += Vector2.ONE * (tile_size/2)
 	pass
-	
 
 '''
 -- UNHANDLED INPUT --
@@ -31,26 +25,27 @@ func _unhandled_input(event):
 	if moving: # so it can't change directions in the middle of its animation
 		return
 	
-	for dir in inputs.keys():
-		if event.is_action_pressed(dir):
-			move(dir)
+	for direction in inputs.keys():
+		if event.is_action_pressed(direction):
+			move(direction)
 
 '''
 -- MOVE --
 - moves the player in one singular direction if possible
 '''
-func move(dir):
+func move(direction):
 	
 	# makes sure player can't move on top of a "wall"
-	ray.target_position = inputs[dir] * tile_size
+	ray.target_position = inputs[direction] * tile_size
 	ray.force_raycast_update()
 	
 	if !ray.is_colliding():
 		# move player to another tile
 		var tween = create_tween()
+		var move_direction = inputs[direction] * tile_size
 		
 		tween.tween_property(self, "position",
-		position + (inputs[dir] * tile_size),
+		(position + move_direction),
 		1.0/move_speed).set_trans(Tween.TRANS_BOUNCE)
 		
 		# player can't move while animation plays
@@ -59,3 +54,7 @@ func move(dir):
 		moving = false
 
 
+func get_damaged(area):
+	#Globals.emit_signal(stop_level)
+	
+	pass
