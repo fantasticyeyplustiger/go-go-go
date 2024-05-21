@@ -9,6 +9,8 @@ size = Vector2(160, 160)
 size = Vector2(128, 128)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_i1a7c")
 
 [node name="temporarySprite" type="ColorRect" parent="."]
@@ -27,3 +29,5 @@ shape = SubResource("RectangleShape2D_jx3e2")
 shape = SubResource("RectangleShape2D_x4b14")
 
 [node name="WallDetector" type="RayCast2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="get_damaged"]

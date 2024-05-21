@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://bygm43b0g2aaw"]
+[gd_scene load_steps=5 format=3 uid="uid://bygm43b0g2aaw"]
 
-[node name="SteelBall" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://b3mw7lgxdp6qw" path="res://Sprites/fat bouler.png" id="1_s71o0"]
+[ext_resource type="Script" path="res://Obstacles/RollingObstacle.gd" id="1_soe57"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ff2it"]
+size = Vector2(192, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eln0d"]
+
+[node name="SteelBall" type="CharacterBody2D"]
+script = ExtResource("1_soe57")
+rotate_speed = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s71o0")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ff2it")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_eln0d")
