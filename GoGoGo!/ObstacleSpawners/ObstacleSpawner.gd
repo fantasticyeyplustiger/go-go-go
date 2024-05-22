@@ -26,7 +26,7 @@ func _ready():
 '''
 func flash_arrow(arrow_delay : float):
 	if arrow_delay <= 0:
-		# roll_obstacle()
+		roll_obstacle()
 		return
 	
 	$Arrow.visible = true
@@ -36,13 +36,13 @@ func flash_arrow(arrow_delay : float):
 	flash_arrow(arrow_delay - 0.1)
 
 '''
-- clones the an obstacle and rolls it down a specific direction
-'''
-
-'''
 var obj = preload(copy path).instantiate()
 add_child(obj)
 obj.global_position = pos
+'''
+
+'''
+- clones an obstacle and rolls in a specific direction
 '''
 func roll_obstacle():
 	

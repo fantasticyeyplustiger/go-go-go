@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var rotate_speed = 0.0
+@export var rotate_speed : float = 0.0
 @export var direction : Globals.directions = Globals.directions.UP
 @export var obstacle_type : Globals.obstacle_types = Globals.obstacle_types.BOULDER
 

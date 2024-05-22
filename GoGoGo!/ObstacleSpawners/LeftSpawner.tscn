@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs00xa4axldl3"]
+
+[ext_resource type="PackedScene" uid="uid://cif1rmnl34r5x" path="res://ObstacleSpawners/UpSpawner.tscn" id="1_qiaho"]
+
+[node name="LeftSpawner" type="Node2D"]
+
+[node name="UpSpawner" parent="." instance=ExtResource("1_qiaho")]
+direction = 1
