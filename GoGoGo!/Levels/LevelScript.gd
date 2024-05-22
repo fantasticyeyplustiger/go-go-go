@@ -83,6 +83,8 @@ func attack():
 		match spawn_left_or_right[i]:
 			-1: # spawn an obstacle and roll it to the left
 				get_node("LeftSpawners/LeftSpawner" + str(i + 1)).flash_arrow(0.5)
+			0:
+				continue
 			1: # spawn an obstacle and roll it to the right
 				get_node("RightSpawners/RightSpawner" + str(i + 1)).flash_arrow(0.5)
 	
@@ -91,6 +93,8 @@ func attack():
 		match spawn_up_or_down[i]:
 			-1:
 				get_node("UpSpawners/UpSpawner" + str(i + 1)).flash_arrow(0.5)
+			0:
+				continue
 			1:
 				get_node("DownSpawners/DownSpawner" + str(i + 1)).flash_arrow(0.5)
 	pass
