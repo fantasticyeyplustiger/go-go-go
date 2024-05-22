@@ -46,7 +46,7 @@ obj.global_position = pos
 '''
 func roll_obstacle():
 	
-	boulder.init(direction, Globals.obstacle_types.BOULDER)
+	boulder.initialize(direction, Globals.obstacle_types.BOULDER)
 	add_child(boulder)
 	boulder.global_position = global_position
 	

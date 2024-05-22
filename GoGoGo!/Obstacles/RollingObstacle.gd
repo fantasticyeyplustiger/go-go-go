@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var direction : Globals.directions = Globals.directions.UP
 @export var obstacle_type : Globals.obstacle_types = Globals.obstacle_types.BOULDER
 
-func _init(dir, obs_type):
+func initialize(dir, obs_type):
 	direction = dir
 	obstacle_type = obs_type
 	pass
@@ -21,3 +21,6 @@ func _physics_process(delta):
 
 func on_roll(roll_velocity):
 	velocity = roll_velocity
+
+func die():
+	queue_free()

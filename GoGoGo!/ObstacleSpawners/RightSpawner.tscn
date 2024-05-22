@@ -1,8 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://py6dh66fpkmy"]
+[gd_scene load_steps=7 format=3 uid="uid://py6dh66fpkmy"]
 
-[ext_resource type="PackedScene" uid="uid://cif1rmnl34r5x" path="res://ObstacleSpawners/UpSpawner.tscn" id="1_8soau"]
+[ext_resource type="Script" path="res://ObstacleSpawners/ObstacleSpawner.gd" id="1_w6o24"]
+[ext_resource type="Texture2D" uid="uid://ckntjwovxe1ic" path="res://Sprites/DownDoot.png" id="2_e8awc"]
+[ext_resource type="Texture2D" uid="uid://dkapiwbqs4pwb" path="res://Sprites/LeftDoot (1).png" id="3_nxhqe"]
+[ext_resource type="Texture2D" uid="uid://b2oiwblrepkse" path="res://Sprites/RightDoot.png" id="4_enisw"]
+[ext_resource type="Texture2D" uid="uid://nm7um3p87m5" path="res://Sprites/UpDoot.png" id="5_6yhmw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tu8pq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e8awc")
+}],
+"loop": true,
+"name": &"down_arrow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nxhqe")
+}],
+"loop": true,
+"name": &"left_arrow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_enisw")
+}],
+"loop": true,
+"name": &"right_arrow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_6yhmw")
+}],
+"loop": true,
+"name": &"up_arrow",
+"speed": 5.0
+}]
 
 [node name="RightSpawner" type="Node2D"]
-
-[node name="UpSpawner" parent="." instance=ExtResource("1_8soau")]
+script = ExtResource("1_w6o24")
 direction = 2
+
+[node name="Arrow" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_tu8pq")
+animation = &"up_arrow"
