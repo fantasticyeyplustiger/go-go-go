@@ -26,13 +26,12 @@ func _ready():
 '''
 func flash_arrow(arrow_delay : float):
 	if arrow_delay <= 0:
+		$Arrow.visible = false
 		roll_obstacle()
 		return
 	
-	$Arrow.visible = true
-	await get_tree().create_timer(arrow_delay)
-	$Arrow.visible = false
-	await get_tree().create_timer(arrow_delay)
+	$Arrow.visible = !$Arrow.visible
+	await get_tree().create_timer(arrow_delay).timeout
 	flash_arrow(arrow_delay - 0.1)
 
 '''
@@ -47,7 +46,8 @@ obj.global_position = pos
 func roll_obstacle():
 	
 	boulder.initialize(direction, Globals.obstacle_types.BOULDER)
-	add_child(boulder)
+	if not find_child("Boulder", false, false):
+		add_child(boulder)
 	boulder.global_position = global_position
 	
 	pass

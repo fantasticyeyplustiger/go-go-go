@@ -23,4 +23,4 @@ func on_roll(roll_velocity):
 	velocity = roll_velocity
 
 func die():
-	queue_free()
+	pass

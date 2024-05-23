@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dh3yd7e511h1p"
+path="res://.godot/imported/Mr Oops!.mp3-8e1667d3a30aec300b0220f53709b852.mp3str"
+
+[deps]
+
+source_file="res://Music/Mr Oops!.mp3"
+dest_files=["res://.godot/imported/Mr Oops!.mp3-8e1667d3a30aec300b0220f53709b852.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

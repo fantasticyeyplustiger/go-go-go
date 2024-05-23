@@ -39,18 +39,18 @@ func move(direction):
 	ray.target_position = inputs[direction] * tile_size
 	ray.force_raycast_update()
 	
-	if !ray.is_colliding():
+	if not ray.is_colliding():
 		# move player to another tile
-		var tween = create_tween()
+		var move_animation = create_tween()
 		var move_direction = inputs[direction] * tile_size
 		
-		tween.tween_property(self, "position",
+		move_animation.tween_property(self, "position",
 		(position + move_direction),
 		1.0/move_speed).set_trans(Tween.TRANS_BOUNCE)
 		
 		# player can't move while animation plays
 		moving = true
-		await tween.finished
+		await move_animation.finished
 		moving = false
 
 

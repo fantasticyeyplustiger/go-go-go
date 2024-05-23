@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=9 format=3 uid="uid://bmdbva8kn4x2k"]
 
 [ext_resource type="PackedScene" uid="uid://dxmp7dh3ta2e5" path="res://TileMaps/Map1TileMap.tscn" id="1_5yvkk"]
 [ext_resource type="Script" path="res://Levels/LevelScript.gd" id="1_q061h"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ceoptljlkcl4m" path="res://ObstacleSpawners/DownSpawner.tscn" id="5_53x5i"]
 [ext_resource type="PackedScene" uid="uid://bs00xa4axldl3" path="res://ObstacleSpawners/LeftSpawner.tscn" id="6_0rxm6"]
 [ext_resource type="PackedScene" uid="uid://py6dh66fpkmy" path="res://ObstacleSpawners/RightSpawner.tscn" id="7_8o137"]
+[ext_resource type="AudioStream" uid="uid://dh3yd7e511h1p" path="res://Music/Mr Oops!.mp3" id="8_ivlhn"]
 
 [node name="testing level" type="Node2D"]
 script = ExtResource("1_q061h")
@@ -23,10 +24,10 @@ position = Vector2(896, -640)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(768, -768)
-zoom = Vector2(0.18, 0.18)
+zoom = Vector2(0.45, 0.45)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 
 [node name="UpSpawners" type="Node2D" parent="."]
 
@@ -107,5 +108,8 @@ position = Vector2(-128, -1152)
 
 [node name="RightSpawner6" parent="RightSpawners" instance=ExtResource("7_8o137")]
 position = Vector2(-128, -1408)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ivlhn")
 
 [connection signal="timeout" from="Timer" to="." method="on_rhythm"]
