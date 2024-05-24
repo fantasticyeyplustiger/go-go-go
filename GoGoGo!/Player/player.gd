@@ -7,6 +7,7 @@ var tile_size = 256
 var move_speed = 16
 var moving = false
 var health = 5
+var is_dead : bool = false
 
 @onready var ray = $WallDetector
 
@@ -22,12 +23,13 @@ func _ready():
 - it's called unhandled to deal with GUI easier (GUI takes higher priority)
 '''
 func _unhandled_input(event):
-	if moving: # so it can't change directions in the middle of its animation
+	if moving or is_dead: # so it can't change directions in the middle of its animation
 		return
 	
 	for direction in inputs.keys():
 		if event.is_action_pressed(direction):
 			move(direction)
+	
 
 '''
 -- MOVE --
@@ -53,8 +55,7 @@ func move(direction):
 		await move_animation.finished
 		moving = false
 
-
 func get_damaged(area):
-	#Globals.emit_signal(stop_level)
-	
-	pass
+	is_dead = true
+	$temporarySprite.color = "#FF0000"
+	print("haha you died")

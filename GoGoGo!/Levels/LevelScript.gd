@@ -4,8 +4,7 @@ extends Node2D
 @export var columns : int = 0
 @export var row_attack_spot_limit : int = 0
 @export var column_attack_spot_limit : int = 0
-
-var wave = 0
+@export var wave : int = 0
 var start_music = false
 
 var row_attacks
@@ -23,6 +22,10 @@ func _physics_process(_delta):
 	if start_music:
 		$AudioStreamPlayer.play()
 		start_music = false
+
+func _unhandled_input(event):
+	if Input.is_action_pressed("respawn"):
+		get_tree().reload_current_scene()
 
 '''
 -- GET AMOUNT OF ATTACKS --
@@ -94,6 +97,9 @@ func attack():
 	
 	var arrow_delay = 0.6
 	
+	if wave > 50:
+		arrow_delay = 0.4
+	
 	for i in spawn_left_or_right.size():
 		var spawner_position = str(i + 1)
 		
@@ -126,9 +132,6 @@ func reset_attacks(spawn_array):
 	for i in spawn_array:
 		
 		spawn_array[i] = 0
-		
-		pass
-	pass
 
 '''
 -- ON RHYTHM --
@@ -139,7 +142,13 @@ func on_rhythm():
 	if wave == 1:
 		start_music = true
 	
-	if wave > 30:
+	if wave > 120:
+		$Timer.wait_time = 1.5
+	elif wave > 90:
+		$Timer.wait_time = 1.7
+	elif wave > 60:
+		$Timer.wait_time = 2
+	elif wave > 30:
 		$Timer.wait_time = 2.5
 	
 	print("wave: " + str(wave))

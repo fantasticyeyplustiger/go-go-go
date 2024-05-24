@@ -2,7 +2,12 @@ extends Node2D
 
 @export var direction : Globals.directions = Globals.directions.UP
 
+enum boulder_counts {ONE, TWO}
+
+var rolling_boulder = boulder_counts.ONE
+
 var boulder = preload("res://Obstacles/Boulder.tscn").instantiate()
+var boulder2 = preload("res://Obstacles/Boulder.tscn").instantiate()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,9 +50,22 @@ obj.global_position = pos
 '''
 func roll_obstacle():
 	
-	boulder.initialize(direction, Globals.obstacle_types.BOULDER)
-	if not find_child("Boulder", false, false):
-		add_child(boulder)
-	boulder.global_position = global_position
+	if rolling_boulder == boulder_counts.ONE:
 	
-	pass
+		boulder.initialize(direction, Globals.obstacle_types.BOULDER)
+		if not find_child("Boulder", false, false):
+			add_child(boulder)
+		boulder.global_position = global_position
+		
+		rolling_boulder = boulder_counts.TWO
+	
+	else: # boulder2 is required because this spawner can only spawn one boulder at a time
+		# otherwise, and level can't grow more difficult
+		# if this doesn't exist boulder1 will go back to spawner before it goes through entire map
+		
+		boulder2.initialize(direction, Globals.obstacle_types.BOULDER)
+		if not find_child("Boulder1", false, false):
+			add_child(boulder2)
+		boulder2.global_position = global_position
+		
+		rolling_boulder = boulder_counts.ONE
