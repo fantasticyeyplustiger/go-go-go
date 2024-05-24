@@ -9,6 +9,9 @@ var rolling_boulder = boulder_counts.ONE
 var boulder = preload("res://Obstacles/Boulder.tscn").instantiate()
 var boulder2 = preload("res://Obstacles/Boulder.tscn").instantiate()
 
+var boulder_added : bool = false
+var boulder_added2 : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	match direction:
@@ -53,8 +56,9 @@ func roll_obstacle():
 	if rolling_boulder == boulder_counts.ONE:
 	
 		boulder.initialize(direction, Globals.obstacle_types.BOULDER)
-		if not find_child("Boulder", false, false):
+		if not boulder_added:
 			add_child(boulder)
+			boulder_added = true
 		boulder.global_position = global_position
 		
 		rolling_boulder = boulder_counts.TWO
@@ -64,8 +68,9 @@ func roll_obstacle():
 		# if this doesn't exist boulder1 will go back to spawner before it goes through entire map
 		
 		boulder2.initialize(direction, Globals.obstacle_types.BOULDER)
-		if not find_child("Boulder1", false, false):
+		if not boulder_added2:
 			add_child(boulder2)
+			boulder_added2 = true
 		boulder2.global_position = global_position
 		
 		rolling_boulder = boulder_counts.ONE
