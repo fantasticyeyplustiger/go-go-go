@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cif1rmnl34r5x"]
+[gd_scene load_steps=8 format=3 uid="uid://cif1rmnl34r5x"]
 
 [ext_resource type="Texture2D" uid="uid://nm7um3p87m5" path="res://Sprites/UpDoot.png" id="1_3uhsu"]
 [ext_resource type="Script" path="res://ObstacleSpawners/ObstacleSpawner.gd" id="1_6tooo"]
 [ext_resource type="Texture2D" uid="uid://ckntjwovxe1ic" path="res://Sprites/DownDoot.png" id="1_oixkc"]
 [ext_resource type="Texture2D" uid="uid://dkapiwbqs4pwb" path="res://Sprites/LeftDoot (1).png" id="2_n0csd"]
 [ext_resource type="Texture2D" uid="uid://b2oiwblrepkse" path="res://Sprites/RightDoot.png" id="3_amewl"]
+[ext_resource type="AudioStream" uid="uid://chg0m6eftnsj0" path="res://SFX/Boulder Fall.mp3" id="6_g5xhv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xqs4b"]
 animations = [{
@@ -48,3 +49,8 @@ script = ExtResource("1_6tooo")
 visible = false
 sprite_frames = SubResource("SpriteFrames_xqs4b")
 animation = &"up_arrow"
+
+[node name="BoulderSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_g5xhv")
+volume_db = -15.0
+pitch_scale = 3.0

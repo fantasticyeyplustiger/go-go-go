@@ -5,7 +5,9 @@ extends Node2D
 @export var row_attack_spot_limit : int = 0
 @export var column_attack_spot_limit : int = 0
 @export var wave : int = 0
+
 var start_music = false
+var start_wave = true
 
 var row_attacks
 var column_attacks
@@ -23,7 +25,7 @@ func _physics_process(_delta):
 		$AudioStreamPlayer.play()
 		start_music = false
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):
 		get_tree().reload_current_scene()
 
@@ -32,7 +34,7 @@ func _unhandled_input(event):
 - gets the amount of attacks to send for this wave
 - input: wave (the higher the wave, the more likely more obstacles will come)
 '''
-func get_amount_of_attacks(wave, row_or_column_limit):
+func get_amount_of_attacks():
 #endregion
 	
 	var possible_attack_spots : int
@@ -61,7 +63,7 @@ func get_random_number(lower_bound : int, upper_bound : int):
 
 '''
 -- GET ATTACK --
-- gets 
+- gets all of the places where obstacles are going to attack
 '''
 func get_attack():
 	
@@ -93,6 +95,10 @@ func get_attack():
 		if not random_spawn == 0:
 			column_limit_breaker += 1
 
+'''
+-- ATTACK --
+- attacks the places the obstacles are going to attack from get_attack()
+'''
 func attack():
 	
 	var arrow_delay = 0.6
@@ -139,8 +145,9 @@ func reset_attacks(spawn_array):
 '''
 func on_rhythm():
 	
-	if wave == 1:
+	if start_wave:
 		start_music = true
+		start_wave = false
 	
 	if wave > 120:
 		$Timer.wait_time = 1.5
@@ -153,8 +160,8 @@ func on_rhythm():
 	
 	print("wave: " + str(wave))
 	
-	row_attacks = get_amount_of_attacks(wave, row_attack_spot_limit)
-	column_attacks = get_amount_of_attacks(wave, column_attack_spot_limit)
+	row_attacks = get_amount_of_attacks()
+	column_attacks = get_amount_of_attacks()
 	
 	get_attack()
 	attack()

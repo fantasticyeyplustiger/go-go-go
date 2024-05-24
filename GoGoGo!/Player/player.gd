@@ -55,7 +55,7 @@ func move(direction):
 		await move_animation.finished
 		moving = false
 
-func get_damaged(area):
+func get_damaged(_area):
 	is_dead = true
 	$temporarySprite.color = "#FF0000"
 	print("haha you died")

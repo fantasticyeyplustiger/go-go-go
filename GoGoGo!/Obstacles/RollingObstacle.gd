@@ -14,7 +14,7 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 	$Sprite2D.rotate(rotate_speed)
 	pass

@@ -74,3 +74,5 @@ func roll_obstacle():
 		boulder2.global_position = global_position
 		
 		rolling_boulder = boulder_counts.ONE
+	
+	$BoulderSFX.play()

@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxmp7dh3ta2e5"]
+[gd_scene load_steps=10 format=3 uid="uid://dxmp7dh3ta2e5"]
 
 [ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="1_bqj5p"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="1_wjeaf"]
+[ext_resource type="Texture2D" uid="uid://2m6iicmpflej" path="res://Sprites/WallRamp.png" id="3_u2t77"]
+[ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="4_nw8lb"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fo2m4"]
 resource_name = "Walls"
@@ -12,12 +14,29 @@ texture = ExtResource("1_bqj5p")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rycjy"]
+texture = ExtResource("3_u2t77")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ymu8m"]
+texture = ExtResource("4_nw8lb")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_i2s3q"]
 tile_size = Vector2i(256, 256)
 sources/1 = SubResource("TileSetAtlasSource_cnqv7")
 sources/0 = SubResource("TileSetScenesCollectionSource_fo2m4")
+sources/2 = SubResource("TileSetAtlasSource_rycjy")
+sources/3 = SubResource("TileSetAtlasSource_ymu8m")
 
 [node name="TileMap" type="TileMap"]
 tile_set = SubResource("TileSet_i2s3q")
 rendering_quadrant_size = 128
 format = 2
+layer_0/name = "floor"
+layer_1/name = "walls"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "wall collision"
+layer_2/tile_data = PackedInt32Array()
