@@ -6,8 +6,8 @@ extends Node2D
 @export var column_attack_spot_limit : int = 0
 @export var wave : int = 0
 
-var start_music = false
-var start_wave = true
+var start_music : bool = false
+var start_wave : bool = true
 
 var row_attacks
 var column_attacks
@@ -144,6 +144,8 @@ func reset_attacks(spawn_array):
 - every X seconds (change in timer node) send out a wave of attacks
 '''
 func on_rhythm():
+	
+	$WaveLabel.text = ("Wave: \n" + str(wave))
 	
 	if start_wave:
 		start_music = true

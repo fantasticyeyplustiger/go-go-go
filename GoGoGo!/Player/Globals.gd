@@ -8,7 +8,7 @@ const roll_direction = {directions.DOWN : Vector2.DOWN, directions.LEFT : Vector
 		directions.RIGHT : Vector2.RIGHT, directions.UP : Vector2.UP}
 
 const obstacle_speed = {obstacle_types.BOULDER : 750, obstacle_types.ROCK_PELLET : 2000,
-				obstacle_types.STEEL_BALL : 1500, obstacle_types.IRON_PELLET : 3000}
+				obstacle_types.STEEL_BALL : 2000, obstacle_types.IRON_PELLET : 3000}
 
 # Globals.emit_signal(signal name)
 # Globals.(signal name).connect()
