@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ceoptljlkcl4m" path="res://ObstacleSpawners/DownSpawner.tscn" id="5_53x5i"]
 [ext_resource type="PackedScene" uid="uid://bs00xa4axldl3" path="res://ObstacleSpawners/LeftSpawner.tscn" id="6_0rxm6"]
 [ext_resource type="PackedScene" uid="uid://py6dh66fpkmy" path="res://ObstacleSpawners/RightSpawner.tscn" id="7_8o137"]
-[ext_resource type="AudioStream" uid="uid://dh3yd7e511h1p" path="res://Music/Mr Oops!.mp3" id="8_ivlhn"]
+[ext_resource type="AudioStream" uid="uid://cgjfyjio58nom" path="res://Music/shploink.ogg" id="8_qv6dt"]
 
 [node name="testing level" type="Node2D"]
 script = ExtResource("1_q061h")
@@ -16,6 +16,7 @@ columns = 6
 row_attack_spot_limit = 4
 column_attack_spot_limit = 4
 wave = 1
+bpm = 120.0
 
 [node name="TileMap" parent="." instance=ExtResource("1_5yvkk")]
 layer_0/tile_data = PackedInt32Array(-393216, 1, 0, -327680, 1, 0, -262144, 1, 0, -196608, 1, 0, -131072, 1, 0, -65536, 1, 0, -393215, 1, 0, -327679, 1, 0, -262143, 1, 0, -196607, 1, 0, -131071, 1, 0, -65535, 1, 0, -393214, 1, 0, -327678, 1, 0, -262142, 1, 0, -196606, 1, 0, -131070, 1, 0, -65534, 1, 0, -393213, 1, 0, -327677, 1, 0, -262141, 1, 0, -196605, 1, 0, -131069, 1, 0, -65533, 1, 0, -393212, 1, 0, -327676, 1, 0, -262140, 1, 0, -196604, 1, 0, -131068, 1, 0, -65532, 1, 0, -393211, 1, 0, -327675, 1, 0, -262139, 1, 0, -196603, 1, 0, -131067, 1, 0, -65531, 1, 0, -327681, 0, 65536, -262145, 0, 65536, -196609, 0, 65536, -131073, 0, 65536, -65537, 0, 65536, -1, 0, 65536, 0, 0, 65536, 1, 0, 65536, 2, 0, 65536, 3, 0, 65536, 4, 0, 65536, 5, 0, 65536, -393210, 0, 65536, -327674, 0, 65536, -262138, 0, 65536, -196602, 0, 65536, -131066, 0, 65536, -65530, 0, 65536, -458752, 0, 65536, -458751, 0, 65536, -458750, 0, 65536, -458749, 0, 65536, -458748, 0, 65536, -458747, 0, 65536)
@@ -27,9 +28,6 @@ position = Vector2(896, -640)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(768, -768)
 zoom = Vector2(0.45, 0.45)
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
 
 [node name="UpSpawners" type="Node2D" parent="."]
 
@@ -111,8 +109,8 @@ position = Vector2(-128, -1152)
 [node name="RightSpawner6" parent="RightSpawners" instance=ExtResource("7_8o137")]
 position = Vector2(-128, -1408)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_ivlhn")
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_qv6dt")
 
 [node name="WaveLabel" type="Label" parent="."]
 offset_left = -800.0
@@ -121,5 +119,3 @@ offset_right = -749.0
 offset_bottom = -841.0
 theme_override_font_sizes/font_size = 150
 text = "Wave: "
-
-[connection signal="timeout" from="Timer" to="." method="on_rhythm"]

@@ -5,25 +5,38 @@ extends Node2D
 @export var row_attack_spot_limit : int = 0
 @export var column_attack_spot_limit : int = 0
 @export var wave : int = 0
+@export var bpm : float
 
-var start_music : bool = false
+@onready var audio = $Music
+
+var start_music : bool = true
 var start_wave : bool = true
 
 var row_attacks
 var column_attacks
 
+var nextBeat=0
+var beatLength = 0
+
 # -1 = left or up, 1 = right or down
 var spawn_left_or_right : Array[int] = [0, 0, 0, 0, 0, 0]
 var spawn_up_or_down : Array[int] = [0, 0, 0, 0, 0, 0]
 
+
 func _ready():
-	$Timer.start()
+	bpm/=8
+	beatLength = (60/bpm)*1000
 	pass
 
 func _physics_process(_delta):
 	if start_music:
-		$AudioStreamPlayer.play()
+		audio.play()
 		start_music = false
+	var songMilliseconds = audio.get_playback_position()*1000
+	if(songMilliseconds>nextBeat):
+		print("beat triggered!")
+		nextBeat+=beatLength
+		on_rhythm()
 
 func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):

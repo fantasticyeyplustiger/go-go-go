@@ -43,8 +43,6 @@ LEVEL MAKING SYSTEM:
 		type. Each one has info on what the obstacle will do once spawned (speed, damage, etc.)
 		
 			- The obstacles should also have keybinds to automatically set them.
-		
-		
 	
 	
 	-- THERE WILL BE A RECTANGULAR CHART at the bottom with circles that glow up when the melody of
