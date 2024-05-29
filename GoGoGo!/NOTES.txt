@@ -20,6 +20,45 @@ if in the blast radius, kills the player if standing directly on it during explo
 
 conveyor: moves the player in a certain direction every X seconds, doesn't affect obstacles
 
-
-how to set obstacle spawner???
-most likely have to set them for a map manually
+LEVEL MAKING SYSTEM:
+	
+	-- THE USER SHOULD SET A BPM INTO THE LEVEL. According to this BPM, the level should
+	give out "guidelines" for when the level attacks the player.
+	
+		- It is important to note that the user should still have the ability to make attacks that
+		are "off" the BPM. That way, they can make attacks based on the instrumental rather than
+		the main melody, for example, similar to Geometry Dash.
+	
+	
+	-- IN THE "GUIDELINES," the user has the ability to either send out a randomized set of obstacles
+	(as for how random, the user can choose to a certain extent) OR the user can send out a
+	specific, controlled amount of obstacles no matter what type or position.
+	
+		- For most obstacles, they will simply roll down the lane. However, exploding tiles and
+		laser beams will be treated differently accordingly. For example, the laser beam will have
+		a parameter to determine how long it should last, and the exploding tile should have a set
+		rhythm to it.
+		
+		- To set an obstacle, click on one of the obstacle spawner positions and select an obstacle
+		type. Each one has info on what the obstacle will do once spawned (speed, damage, etc.)
+		
+			- The obstacles should also have keybinds to automatically set them.
+		
+		
+	
+	
+	-- THERE WILL BE A RECTANGULAR CHART at the bottom with circles that glow up when the melody of
+	the song reaches it. To edit the guidelines, the user should click on the glowing circle or
+	simply press a keybind assigned to it.
+	
+		- Each one of the guidelines represents a "wave" of obstacles.
+		
+		- If the guideline there has been edited, it will run an algorithm that determines how many
+		different types of obstacles are in that wave, which one has the most obstacles, and put a
+		sprite of the type with the most obstacles on the circle.
+		
+		- If the guideline there has been set to a randomized wave, it'll simply display
+		the letter "R" on top of the circle.
+	
+	
+	
