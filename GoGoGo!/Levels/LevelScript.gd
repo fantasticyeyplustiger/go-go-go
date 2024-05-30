@@ -35,6 +35,7 @@ class levelData:
 		events.append(dataStruct)
 	func _load_from_string(string):
 		var data = JSON.parse_string(string)
+		events = data.events
 	func _stringify():
 		var savedData={
 			"events":events
@@ -48,6 +49,7 @@ var data = levelData.new()
 - initializes some values
 '''
 func _ready():
+	data._load_from_string("{\"events\":[{\"timing\":100,\"type\":0}]}")
 	print(data._stringify())
 	bpm /= 4
 	beatLength = (60/bpm) * 1000
