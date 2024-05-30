@@ -24,25 +24,9 @@ var spawn_up_or_down : Array[int] = [0, 0, 0, 0, 0, 0]
 
 
 
-class levelData: 
-	var events = []
+
 	
-	func _add_event(timing,type):
-		var dataStruct={
-			"timing":timing,
-			"type":type
-		}
-		events.append(dataStruct)
-	func _load_from_string(string):
-		var data = JSON.parse_string(string)
-		events = data.events
-	func _stringify():
-		var savedData={
-			"events":events
-		}
-		return JSON.stringify(savedData)
-	
-var data = levelData.new()
+var data = Globals.levelData.new()
 
 '''
 -- READY --

@@ -17,3 +17,21 @@ const obstacle_speed = {obstacle_types.BOULDER : 750, obstacle_types.ROCK_PELLET
 
 signal roll_obstacle(roll_velocity)
 signal stop_level()
+
+class levelData: 
+	var events = []
+	
+	func _add_event(timing,type):
+		var dataStruct={
+			"timing":timing,
+			"type":type
+		}
+		events.append(dataStruct)
+	func _load_from_string(string):
+		var data = JSON.parse_string(string)
+		events = data.events
+	func _stringify():
+		var savedData={
+			"events":events
+		}
+		return JSON.stringify(savedData)
