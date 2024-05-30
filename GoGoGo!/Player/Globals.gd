@@ -1,5 +1,7 @@
 extends Node
 
+var songMilliseconds=0
+
 enum directions {DOWN, LEFT, RIGHT, UP}
 		
 enum obstacle_types {BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET}

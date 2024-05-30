@@ -12,6 +12,10 @@ var boulder2 = preload("res://Obstacles/Boulder.tscn").instantiate()
 var boulder_added : bool = false
 var boulder_added2 : bool = false
 
+var spawnTime=30
+
+var canAttack : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	match direction:
@@ -28,6 +32,15 @@ func _ready():
 			$Arrow.play("up_arrow")
 			
 
+func _physics_process(delta):
+	if(canAttack):
+		$Arrow.visible = !$Arrow.visible
+		if(Globals.songMilliseconds>=spawnTime):
+			roll_obstacle()
+			canAttack=false
+	else:
+		$Arrow.visible = false
+
 '''
 - flashes the arrow sprite a few times
 - input: time the arrow should be visible and invisible in seconds
@@ -35,7 +48,6 @@ func _ready():
 func flash_arrow(arrow_delay : float):
 	if arrow_delay <= 0:
 		$Arrow.visible = false
-		roll_obstacle()
 		return
 	
 	$Arrow.visible = !$Arrow.visible

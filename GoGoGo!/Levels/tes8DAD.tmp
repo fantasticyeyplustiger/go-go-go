@@ -33,21 +33,27 @@ zoom = Vector2(0.45, 0.45)
 
 [node name="UpSpawner1" parent="UpSpawners" instance=ExtResource("4_stp0o")]
 position = Vector2(128, 128)
+direction = null
 
 [node name="UpSpawner2" parent="UpSpawners" instance=ExtResource("4_stp0o")]
 position = Vector2(384, 128)
+direction = null
 
 [node name="UpSpawner3" parent="UpSpawners" instance=ExtResource("4_stp0o")]
 position = Vector2(640, 128)
+direction = null
 
 [node name="UpSpawner4" parent="UpSpawners" instance=ExtResource("4_stp0o")]
 position = Vector2(896, 128)
+direction = null
 
 [node name="UpSpawner5" parent="UpSpawners" instance=ExtResource("4_stp0o")]
 position = Vector2(1152, 128)
+direction = null
 
 [node name="UpSpawner6" parent="UpSpawners" instance=ExtResource("4_stp0o")]
 position = Vector2(1408, 128)
+direction = null
 
 [node name="DownSpawners" type="Node2D" parent="."]
 

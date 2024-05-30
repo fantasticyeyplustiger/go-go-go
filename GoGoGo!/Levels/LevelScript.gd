@@ -32,8 +32,8 @@ func _physics_process(_delta):
 	if start_music:
 		audio.play()
 		start_music = false
-	var songMilliseconds = audio.get_playback_position()*1000
-	if(songMilliseconds>nextBeat):
+	Globals.songMilliseconds = audio.get_playback_position()*1000
+	if(Globals.songMilliseconds>nextBeat):
 		print("beat triggered!")
 		nextBeat+=beatLength
 		on_rhythm()
@@ -114,10 +114,9 @@ func get_attack():
 '''
 func attack():
 	
-	var arrow_delay = beatLength/8000
+	var spawnTime = nextBeat-beatLength/2
 	
-	if wave > 50:
-		arrow_delay = beatLength/8000
+	var arrow_delay = 0.3
 	
 	for i in spawn_left_or_right.size():
 		var spawner_position = str(i + 1)
@@ -126,11 +125,15 @@ func attack():
 			-1: # spawn an obstacle and roll it to the left
 				var left_spawner = get_node("LeftSpawners/LeftSpawner" + spawner_position)
 				left_spawner.flash_arrow(arrow_delay)
+				left_spawner.spawnTime=spawnTime
+				left_spawner.canAttack=true
 			0:
 				continue
 			1: # spawn an obstacle and roll it to the right
 				var right_spawner = get_node("RightSpawners/RightSpawner" + spawner_position)
 				right_spawner.flash_arrow(arrow_delay)
+				right_spawner.spawnTime=spawnTime
+				right_spawner.canAttack=true
 	
 	for i in spawn_up_or_down.size():
 		var spawner_position = str(i + 1)
@@ -139,11 +142,15 @@ func attack():
 			-1: # spawn an obstacle and roll it up
 				var up_spawner = get_node("UpSpawners/UpSpawner" + spawner_position)
 				up_spawner.flash_arrow(arrow_delay)
+				up_spawner.spawnTime=spawnTime
+				up_spawner.canAttack=true
 			0:
 				continue
 			1: # spawn an obstacle and roll it down
 				var down_spawner = get_node("DownSpawners/DownSpawner" + spawner_position)
 				down_spawner.flash_arrow(arrow_delay)
+				down_spawner.spawnTime=spawnTime
+				down_spawner.canAttack=true
 	
 
 
