@@ -22,21 +22,30 @@ var beatLength = 0
 var spawn_left_or_right : Array[int] = [0, 0, 0, 0, 0, 0]
 var spawn_up_or_down : Array[int] = [0, 0, 0, 0, 0, 0]
 
+var boulder = preload("res://Obstacles/Boulder.tscn")
 
-
-
-	
 var data = Globals.levelData.new()
+
+var spawners = []
+
+var gridSize=6
 
 '''
 -- READY --
 - initializes some values
 '''
 func _ready():
-	data._load_from_string("{\"events\":[{\"timing\":100,\"type\":0}]}")
-	print(data._stringify())
+	data._add_event(1000,0,Vector2(0,0))
+	data._add_event(2000,0,Vector2(2,0))
+	data._add_event(3000,0,Vector2(0,2))
+	data._add_event(4000,0,Vector2(0,3))
+	#data._load_from_string("{\"events\":[{\"timing\":100,\"type\":0}]}")
 	bpm /= 4
 	beatLength = (60/bpm) * 1000
+	for x in gridSize:
+		spawners.append([])
+		for y in gridSize:
+			spawners[x].append(Vector2(128+x*256,-128+(gridSize-y)*-256))
 
 '''
 -- PHYSICS PROCESS --
@@ -46,11 +55,36 @@ func _physics_process(_delta):
 	if start_music:
 		audio.play()
 		start_music = false
+		
 	Globals.songMilliseconds = audio.get_playback_position()*1000
+	var events = data.events
+	var loopRange = range(0,events.size())
+	for i in loopRange:
+		if(events[i].timing <= Globals.songMilliseconds&&!events[i].activated):
+			var newBoulder = boulder.instantiate()
+			add_child(newBoulder)
+			var spawnPosition=events[i].position
+			
+			newBoulder.global_position=spawners[spawnPosition.x][spawnPosition.y]
+			
+			var direction = Globals.directions.RIGHT
+			if(spawnPosition.x==7&&spawnPosition.y>0):
+				direction = Globals.directions.LEFT
+			elif(spawnPosition.x>0&&spawnPosition.y==7):
+				direction = Globals.directions.UP
+			elif(spawnPosition.x>0&&spawnPosition.y==0):
+				direction = Globals.directions.DOWN
+			
+			newBoulder.direction=direction
+			
+			var SFX = newBoulder.find_child("BoulderSFX")
+			SFX.play()
+			events[i].activated=true
+			print("spawned boulder!")
+	
 	if(Globals.songMilliseconds>nextBeat):
-		print("beat triggered!")
 		nextBeat += beatLength
-		on_rhythm()
+		# on_rhythm()
 
 '''
 -- UNHANDLED INPUT --
