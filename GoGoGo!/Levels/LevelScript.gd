@@ -24,7 +24,7 @@ var spawn_up_or_down : Array[int] = [0, 0, 0, 0, 0, 0]
 
 
 func _ready():
-	bpm/=8
+	bpm/=4
 	beatLength = (60/bpm)*1000
 	pass
 
@@ -114,10 +114,10 @@ func get_attack():
 '''
 func attack():
 	
-	var arrow_delay = 0.6
+	var arrow_delay = beatLength/8000
 	
 	if wave > 50:
-		arrow_delay = 0.4
+		arrow_delay = beatLength/8000
 	
 	for i in spawn_left_or_right.size():
 		var spawner_position = str(i + 1)
@@ -163,15 +163,6 @@ func on_rhythm():
 	if start_wave:
 		start_music = true
 		start_wave = false
-	
-	if wave > 120:
-		$Timer.wait_time = 1.5
-	elif wave > 90:
-		$Timer.wait_time = 1.7
-	elif wave > 60:
-		$Timer.wait_time = 2
-	elif wave > 30:
-		$Timer.wait_time = 2.5
 	
 	print("wave: " + str(wave))
 	
