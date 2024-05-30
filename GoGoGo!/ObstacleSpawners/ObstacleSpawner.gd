@@ -2,15 +2,9 @@ extends Node2D
 
 @export var direction : Globals.directions = Globals.directions.UP
 
-enum boulder_counts {ONE, TWO}
-
-var rolling_boulder = boulder_counts.ONE
-
-var boulder = preload("res://Obstacles/Boulder.tscn").instantiate()
-var boulder2 = preload("res://Obstacles/Boulder.tscn").instantiate()
+var boulder = preload("res://Obstacles/Boulder.tscn")
 
 var boulder_added : bool = false
-var boulder_added2 : bool = false
 
 var spawnTime=30
 
@@ -65,26 +59,9 @@ obj.global_position = pos
 '''
 func roll_obstacle():
 	
-	if rolling_boulder == boulder_counts.ONE:
+	var newBoulder = boulder.instantiate()
 	
-		boulder.initialize(direction, Globals.obstacle_types.BOULDER)
-		if not boulder_added:
-			add_child(boulder)
-			boulder_added = true
-		boulder.global_position = global_position
-		
-		rolling_boulder = boulder_counts.TWO
-	
-	else: # boulder2 is required because this spawner can only spawn one boulder at a time
-		# otherwise, and level can't grow more difficult
-		# if this doesn't exist boulder1 will go back to spawner before it goes through entire map
-		
-		boulder2.initialize(direction, Globals.obstacle_types.BOULDER)
-		if not boulder_added2:
-			add_child(boulder2)
-			boulder_added2 = true
-		boulder2.global_position = global_position
-		
-		rolling_boulder = boulder_counts.ONE
+	newBoulder.initialize(direction, Globals.obstacle_types.BOULDER)
+	newBoulder.global_position = global_position
 	
 	$BoulderSFX.play()

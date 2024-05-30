@@ -22,11 +22,33 @@ var beatLength = 0
 var spawn_left_or_right : Array[int] = [0, 0, 0, 0, 0, 0]
 var spawn_up_or_down : Array[int] = [0, 0, 0, 0, 0, 0]
 
+
+
+class levelData: 
+	var events = []
+	
+	func _add_event(timing,type):
+		var dataStruct={
+			"timing":timing,
+			"type":type
+		}
+		events.append(dataStruct)
+	func _load_from_string(string):
+		var data = JSON.parse_string(string)
+	func _stringify():
+		var savedData={
+			"events":events
+		}
+		return JSON.stringify(savedData)
+	
+var data = levelData.new()
+
 '''
 -- READY --
 - initializes some values
 '''
 func _ready():
+	print(data._stringify())
 	bpm /= 4
 	beatLength = (60/bpm) * 1000
 
@@ -133,7 +155,7 @@ func attack():
 	var arrow_delay = 0.3
 	
 	for i in spawn_left_or_right.size():
-		spawner_position = str(i + 1)
+		var spawner_position = str(i + 1)
 		
 		match spawn_left_or_right[i]:
 			-1: # spawn an obstacle and roll it to the left
@@ -152,7 +174,7 @@ func attack():
 	reset_attacks(spawn_left_or_right)
 	
 	for i in spawn_up_or_down.size():
-		spawner_position = str(i + 1)
+		var spawner_position = str(i + 1)
 		
 		match spawn_up_or_down[i]:
 			-1: # spawn an obstacle and roll it up
