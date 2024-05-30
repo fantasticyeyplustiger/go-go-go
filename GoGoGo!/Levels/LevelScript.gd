@@ -22,12 +22,18 @@ var beatLength = 0
 var spawn_left_or_right : Array[int] = [0, 0, 0, 0, 0, 0]
 var spawn_up_or_down : Array[int] = [0, 0, 0, 0, 0, 0]
 
-
+'''
+-- READY --
+- initializes some values
+'''
 func _ready():
-	bpm/=4
-	beatLength = (60/bpm)*1000
-	pass
+	bpm /= 4
+	beatLength = (60/bpm) * 1000
 
+'''
+-- PHYSICS PROCESS --
+- starts music, starts the wave, and attacks the player at a set BPM
+'''
 func _physics_process(_delta):
 	if start_music:
 		audio.play()
@@ -35,9 +41,13 @@ func _physics_process(_delta):
 	Globals.songMilliseconds = audio.get_playback_position()*1000
 	if(Globals.songMilliseconds>nextBeat):
 		print("beat triggered!")
-		nextBeat+=beatLength
+		nextBeat += beatLength
 		on_rhythm()
 
+'''
+-- UNHANDLED INPUT --
+- respawns the player when they press "R"
+'''
 func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):
 		get_tree().reload_current_scene()
@@ -70,6 +80,11 @@ func get_amount_of_attacks():
 	var attack_spots = randi_range(wave_spawn_booster, possible_attack_spots)
 	return attack_spots
 
+'''
+-- GET RANDOM NUMBER --
+- gets a random number within a range of two integers. doesn't actually need to be a function,
+just looks more readable than "randi()"
+'''
 func get_random_number(lower_bound : int, upper_bound : int):
 	var random_number = randi_range(lower_bound, upper_bound)
 	return random_number
@@ -113,13 +128,12 @@ func get_attack():
 - attacks the places the obstacles are going to attack from get_attack()
 '''
 func attack():
-	
 	var spawnTime = nextBeat-beatLength/2
 	
 	var arrow_delay = 0.3
 	
 	for i in spawn_left_or_right.size():
-		var spawner_position = str(i + 1)
+		spawner_position = str(i + 1)
 		
 		match spawn_left_or_right[i]:
 			-1: # spawn an obstacle and roll it to the left
@@ -135,8 +149,10 @@ func attack():
 				right_spawner.spawnTime=spawnTime
 				right_spawner.canAttack=true
 	
+	reset_attacks(spawn_left_or_right)
+	
 	for i in spawn_up_or_down.size():
-		var spawner_position = str(i + 1)
+		spawner_position = str(i + 1)
 		
 		match spawn_up_or_down[i]:
 			-1: # spawn an obstacle and roll it up
@@ -152,11 +168,15 @@ func attack():
 				down_spawner.spawnTime=spawnTime
 				down_spawner.canAttack=true
 	
+	reset_attacks(spawn_up_or_down)
+	
 
-
+'''
+-- RESET ATTACKS --
+- resets all the values inside the array to 0 (no obstacle)
+'''
 func reset_attacks(spawn_array):
 	for i in spawn_array:
-		
 		spawn_array[i] = 0
 
 '''
@@ -178,8 +198,5 @@ func on_rhythm():
 	
 	get_attack()
 	attack()
-	
-	reset_attacks(spawn_left_or_right)
-	reset_attacks(spawn_up_or_down)
 	
 	wave += 1

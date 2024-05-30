@@ -6,7 +6,7 @@ var inputs = {"right": Vector2.RIGHT, "left": Vector2.LEFT,
 var tile_size = 256
 var move_speed = 16
 var moving = false
-var health = 5
+var health = 10
 var is_dead : bool = false
 
 @onready var ray = $WallDetector
@@ -55,6 +55,10 @@ func move(direction):
 		await move_animation.finished
 		moving = false
 
+'''
+-- GET DAMAGED --
+- kills the player (will damage them later)
+'''
 func get_damaged(_area):
 	is_dead = true
 	$temporarySprite.color = "#FF0000"
