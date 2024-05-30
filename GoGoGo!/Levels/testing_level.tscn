@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dxmp7dh3ta2e5" path="res://TileMaps/Map1TileMap.tscn" id="1_5yvkk"]
 [ext_resource type="Script" path="res://Levels/LevelScript.gd" id="1_q061h"]
-[ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
+[ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/Player.tscn" id="2_2enu4"]
 [ext_resource type="PackedScene" uid="uid://cif1rmnl34r5x" path="res://ObstacleSpawners/UpSpawner.tscn" id="4_stp0o"]
 [ext_resource type="PackedScene" uid="uid://ceoptljlkcl4m" path="res://ObstacleSpawners/DownSpawner.tscn" id="5_53x5i"]
 [ext_resource type="PackedScene" uid="uid://bs00xa4axldl3" path="res://ObstacleSpawners/LeftSpawner.tscn" id="6_0rxm6"]
