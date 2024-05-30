@@ -133,7 +133,7 @@ func attack():
 	var arrow_delay = 0.3
 	
 	for i in spawn_left_or_right.size():
-		spawner_position = str(i + 1)
+		var spawner_position = str(i + 1)
 		
 		match spawn_left_or_right[i]:
 			-1: # spawn an obstacle and roll it to the left
@@ -152,7 +152,7 @@ func attack():
 	reset_attacks(spawn_left_or_right)
 	
 	for i in spawn_up_or_down.size():
-		spawner_position = str(i + 1)
+		var spawner_position = str(i + 1)
 		
 		match spawn_up_or_down[i]:
 			-1: # spawn an obstacle and roll it up
