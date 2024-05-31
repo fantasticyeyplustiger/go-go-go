@@ -21,10 +21,12 @@ signal stop_level()
 class levelData: 
 	var events = []
 	
-	func _add_event(timing,type):
+	func _add_event(timing,type,position):
 		var dataStruct={
 			"timing":timing,
-			"type":type
+			"type":type,
+			"activated":false,
+			"position":position
 		}
 		events.append(dataStruct)
 	func _load_from_string(string):

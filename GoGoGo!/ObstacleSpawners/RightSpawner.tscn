@@ -1,11 +1,80 @@
 [gd_scene load_steps=8 format=3 uid="uid://py6dh66fpkmy"]
 
-[ext_resource type="Script" path="res://ObstacleSpawners/ObstacleSpawner.gd" id="1_w6o24"]
 [ext_resource type="Texture2D" uid="uid://ckntjwovxe1ic" path="res://Sprites/DownDoot.png" id="2_e8awc"]
 [ext_resource type="Texture2D" uid="uid://dkapiwbqs4pwb" path="res://Sprites/LeftDoot (1).png" id="3_nxhqe"]
 [ext_resource type="Texture2D" uid="uid://b2oiwblrepkse" path="res://Sprites/RightDoot.png" id="4_enisw"]
 [ext_resource type="Texture2D" uid="uid://nm7um3p87m5" path="res://Sprites/UpDoot.png" id="5_6yhmw"]
 [ext_resource type="AudioStream" uid="uid://chg0m6eftnsj0" path="res://SFX/Boulder Fall.mp3" id="6_7hrfq"]
+
+[sub_resource type="GDScript" id="GDScript_cif23"]
+script/source = "extends Node2D
+
+@export var direction : Globals.directions = Globals.directions.UP
+
+var boulder = preload(\"res://Obstacles/Boulder.tscn\")
+
+var boulder_added : bool = false
+
+var spawnTime=30
+
+var canAttack : bool = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	match direction:
+		Globals.directions.DOWN:
+			$Arrow.play(\"down_arrow\")
+			
+		Globals.directions.LEFT:
+			$Arrow.play(\"left_arrow\")
+			
+		Globals.directions.RIGHT:
+			$Arrow.play(\"right_arrow\")
+			
+		Globals.directions.UP:
+			$Arrow.play(\"up_arrow\")
+			
+
+func _physics_process(delta):
+	if(canAttack):
+		$Arrow.visible = !$Arrow.visible
+		if(Globals.songMilliseconds>=spawnTime):
+			roll_obstacle()
+			canAttack=false
+	else:
+		$Arrow.visible = false
+
+'''
+- flashes the arrow sprite a few times
+- input: time the arrow should be visible and invisible in seconds
+'''
+func flash_arrow(arrow_delay : float):
+	if arrow_delay <= 0:
+		$Arrow.visible = false
+		return
+	
+	$Arrow.visible = !$Arrow.visible
+	await get_tree().create_timer(arrow_delay).timeout
+	flash_arrow(arrow_delay - 0.1)
+
+'''
+var obj = preload(copy path).instantiate()
+add_child(obj)
+obj.global_position = pos
+'''
+
+'''
+- clones an obstacle and rolls in a specific direction
+'''
+func roll_obstacle():
+	
+	var newBoulder = boulder.instantiate()
+	
+	newBoulder.initialize(direction, Globals.obstacle_types.BOULDER)
+	newBoulder.global_position = global_position
+	
+	$BoulderSFX.play()
+"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tu8pq"]
 animations = [{
@@ -43,7 +112,7 @@ animations = [{
 }]
 
 [node name="RightSpawner" type="Node2D"]
-script = ExtResource("1_w6o24")
+script = SubResource("GDScript_cif23")
 direction = 2
 
 [node name="Arrow" type="AnimatedSprite2D" parent="."]
