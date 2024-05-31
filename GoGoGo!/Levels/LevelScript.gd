@@ -46,6 +46,7 @@ func _ready():
 		spawners.append([])
 		for y in gridSize:
 			spawners[x].append(Vector2(128+(x-1)*256,-128+(6-y)*-256))
+	gridSize-=1
 
 '''
 -- PHYSICS PROCESS --
