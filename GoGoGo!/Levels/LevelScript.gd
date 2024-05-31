@@ -37,10 +37,21 @@ var gridSize=7
 - initializes some values
 '''
 func _ready():
-	data._add_event(1000,0,Vector2(6,1))
-	data._add_event(2000,0,Vector2(2,0))
-	data._add_event(3000,0,Vector2(0,2))
-	data._add_event(4000,0,Vector2(1,6))
+	data._add_event(8000,0,Vector2(4,0))
+	data._add_event(10000,0,Vector2(0,2))
+	data._add_event(12000,0,Vector2(2,6))
+	data._add_event(13000,0,Vector2(6,3))
+	data._add_event(14000,0,Vector2(1,6))
+	data._add_event(14500,0,Vector2(6,5))
+	data._add_event(15000,0,Vector2(3,0))
+	data._add_event(15500,0,Vector2(0,1))
+	data._add_event(15600,0,Vector2(0,2))
+	data._add_event(15700,0,Vector2(0,3))
+	data._add_event(15800,0,Vector2(0,4))
+	data._add_event(15900,0,Vector2(0,5))
+	data._add_event(16000,0,Vector2(1,6))
+	data._add_event(16000,0,Vector2(5,6))
+	print(data._stringify())
 	#data._load_from_string("{\"events\":[{\"timing\":100,\"type\":0}]}")
 	bpm /= 4
 	beatLength = (60/bpm) * 1000
@@ -61,7 +72,6 @@ func _find_spawner(pos,arrayPosition):
 		for i in 6:
 			var spawner = get_node(spawnerTypes[z]+"Spawners/"+spawnerTypes[z]+"Spawner"+str(i+1))
 			if(pos==spawner.global_position):
-				print("found at "+str(pos))
 				return [spawner,spawnerTypes[z]]
 	return [null,""]
 
