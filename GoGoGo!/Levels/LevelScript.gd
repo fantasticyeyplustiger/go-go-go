@@ -63,32 +63,36 @@ func _physics_process(_delta):
 	for i in loopRange:
 		if(events[i].timing <= Globals.songMilliseconds&&!events[i].activated):
 			# all the code below spawns a boulder, change this to a function once we add more obstacles!
-			var newBoulder = boulder.instantiate()
-			add_child(newBoulder)
-			var spawnPosition=events[i].position
-			
-			newBoulder.global_position=spawners[spawnPosition.x][spawnPosition.y]
-			
-			var direction = Globals.directions.RIGHT
-			if(spawnPosition.x==6&&spawnPosition.y>0):
-				direction = Globals.directions.LEFT
-				newBoulder.global_position.x+=256
-			elif(spawnPosition.x>0&&spawnPosition.y==6):
-				direction = Globals.directions.UP
-				newBoulder.global_position.y+=256
-			elif(spawnPosition.x>0&&spawnPosition.y==0):
-				direction = Globals.directions.DOWN
-			
-			newBoulder.direction=direction
-			
-			var SFX = newBoulder.find_child("BoulderSFX")
-			SFX.play()
-			events[i].activated=true
-			print("spawned boulder!")
+			_spawn_obstacle(events[i])
 	
 	if(Globals.songMilliseconds>nextBeat):
 		nextBeat += beatLength
 		# on_rhythm()
+
+func _spawn_obstacle(object):
+	if(object.type==0):
+		var newBoulder = boulder.instantiate()
+		add_child(newBoulder)
+		var spawnPosition=object.position
+		
+		newBoulder.global_position=spawners[spawnPosition.x][spawnPosition.y]
+		
+		var direction = Globals.directions.RIGHT
+		if(spawnPosition.x==6&&spawnPosition.y>0):
+			direction = Globals.directions.LEFT
+			newBoulder.global_position.x+=256
+		elif(spawnPosition.x>0&&spawnPosition.y==6):
+			direction = Globals.directions.UP
+			newBoulder.global_position.y+=256
+		elif(spawnPosition.x>0&&spawnPosition.y==0):
+			direction = Globals.directions.DOWN
+		
+		newBoulder.direction=direction
+		
+		var SFX = newBoulder.find_child("BoulderSFX")
+		SFX.play()
+		object.activated=true
+		print("spawned boulder!")
 
 '''
 -- UNHANDLED INPUT --
