@@ -30,8 +30,6 @@ var data = Globals.levelData.new()
 
 var spawners = []
 
-var visualSpawners=[]
-
 var gridSize=7
 
 '''
@@ -51,26 +49,21 @@ func _ready():
 		for y in gridSize:
 			spawners[x].append(Vector2(128+(x-1)*256,-128+(6-y)*-256))
 	
-	_assign_spawners()
-	
 	gridSize-=1
 	
-func _assign_spawners():
+func _find_spawner(pos,arrayPosition):
+	if(arrayPosition.x==6&&arrayPosition.y>0):
+		pos.x+=256
+	elif(arrayPosition.x>0&&arrayPosition.y==6):
+		pos.y+=256
 	var spawnerTypes=["Up","Down","Left","Right"]
-	for x in gridSize:
-		visualSpawners.append([])
-		for y in gridSize:
-			for z in spawnerTypes.size():
-				for i in 6:
-					var spawner = get_node(spawnerTypes[z]+"Spawners/"+spawnerTypes[z]+"Spawner"+str(i+1))
-					var positionToCheck=spawners[x][y]
-					if(x==6):
-						positionToCheck.x+=256
-					if(y==6):
-						positionToCheck.y+=256
-					if(positionToCheck==spawner.global_position):
-						visualSpawners[x].append(spawner)
-						print("found node at "+str(x)+" "+str(y))
+	for z in spawnerTypes.size():
+		for i in 6:
+			var spawner = get_node(spawnerTypes[z]+"Spawners/"+spawnerTypes[z]+"Spawner"+str(i+1))
+			if(pos==spawner.global_position):
+				print("found at "+str(pos))
+				return [spawner,spawnerTypes[z]]
+	return [null,""]
 
 '''
 -- PHYSICS PROCESS --
@@ -80,13 +73,34 @@ func _physics_process(_delta):
 	if start_music:
 		audio.play()
 		start_music = false
+	#set the song milliseconds
 	Globals.songMilliseconds = audio.get_playback_position()*1000
 	var events = data.events
 	var loopRange = range(0,events.size())
+	
+	#do arrow stuff (feel free to edit this)
 	for i in loopRange:
 		var objectPosition=events[i].position
-		var arrow=visualSpawners[objectPosition.x][objectPosition.y].get_node("Arrow")
-		arrow.visible=true
+		var spawner=_find_spawner(spawners[objectPosition.x][objectPosition.y],objectPosition)
+		var spawnerType=spawner[1]
+		spawner=spawner[0]
+		if(spawner!=null):
+			
+			var arrow=spawner.get_node("Arrow")
+			match spawnerType:
+				"Down":
+					arrow.play("down_arrow")
+				"Left":
+					arrow.play("left_arrow")
+				"Right":
+					arrow.play("right_arrow")
+				"Up":
+					arrow.play("up_arrow")
+			
+			arrow.visible=false
+			if(events[i].timing <= Globals.songMilliseconds+beatLength/4&&!events[i].activated):
+				arrow.visible=true
+		
 		if(events[i].timing <= Globals.songMilliseconds&&!events[i].activated):
 			# all the code below spawns a boulder, change this to a function once we add more obstacles!
 			_spawn_obstacle(events[i])
