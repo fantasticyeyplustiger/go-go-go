@@ -10,6 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
+	velocity = Globals.obstacle_speed[obstacle_type] * Globals.roll_direction[direction]
 	move_and_slide()
 	$Sprite2D.rotate(rotate_speed)
 	pass

@@ -111,6 +111,7 @@ position = Vector2(-128, -1408)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_b13p7")
+volume_db = -13.117
 
 [node name="WaveLabel" type="Label" parent="."]
 offset_left = -961.0

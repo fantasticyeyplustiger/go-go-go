@@ -28,24 +28,24 @@ var data = Globals.levelData.new()
 
 var spawners = []
 
-var gridSize=6
+var gridSize=7
 
 '''
 -- READY --
 - initializes some values
 '''
 func _ready():
-	data._add_event(1000,0,Vector2(0,0))
+	data._add_event(1000,0,Vector2(6,1))
 	data._add_event(2000,0,Vector2(2,0))
 	data._add_event(3000,0,Vector2(0,2))
-	data._add_event(4000,0,Vector2(0,3))
+	data._add_event(4000,0,Vector2(1,6))
 	#data._load_from_string("{\"events\":[{\"timing\":100,\"type\":0}]}")
 	bpm /= 4
 	beatLength = (60/bpm) * 1000
 	for x in gridSize:
 		spawners.append([])
 		for y in gridSize:
-			spawners[x].append(Vector2(128+x*256,-128+(gridSize-y)*-256))
+			spawners[x].append(Vector2(128+(x-1)*256,-128+(6-y)*-256))
 
 '''
 -- PHYSICS PROCESS --
@@ -68,10 +68,12 @@ func _physics_process(_delta):
 			newBoulder.global_position=spawners[spawnPosition.x][spawnPosition.y]
 			
 			var direction = Globals.directions.RIGHT
-			if(spawnPosition.x==7&&spawnPosition.y>0):
+			if(spawnPosition.x==6&&spawnPosition.y>0):
 				direction = Globals.directions.LEFT
-			elif(spawnPosition.x>0&&spawnPosition.y==7):
+				newBoulder.global_position.x+=256
+			elif(spawnPosition.x>0&&spawnPosition.y==6):
 				direction = Globals.directions.UP
+				newBoulder.global_position.y+=256
 			elif(spawnPosition.x>0&&spawnPosition.y==0):
 				direction = Globals.directions.DOWN
 			
