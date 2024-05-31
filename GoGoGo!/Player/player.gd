@@ -8,14 +8,22 @@ var move_speed = 16
 var moving = false
 var health = 10
 var is_dead : bool = false
+var is_dashing : bool = false
 
 @onready var ray = $WallDetector
+@onready var dash_ray = $DashDetector
 
 '''
 -- READY --
 '''
 func _ready():
 	pass
+
+func _physics_process(_delta):
+	if Input.is_action_pressed("dash"):
+		is_dashing = true
+	else:
+		is_dashing = false
 
 '''
 -- UNHANDLED INPUT --
@@ -37,14 +45,24 @@ func _unhandled_input(event):
 '''
 func move(direction):
 	
+	var dash_multiplier = 1
+	
 	# makes sure player can't move on top of a "wall"
 	ray.target_position = inputs[direction] * tile_size
+	dash_ray.target_position = inputs[direction] * tile_size * 2
+	
 	ray.force_raycast_update()
+	dash_ray.force_raycast_update()
+	
+	if not dash_ray.is_colliding() and is_dashing:
+		dash_multiplier = 2
 	
 	if not ray.is_colliding():
 		# move player to another tile
+		move_speed = move_speed * dash_multiplier
+		
 		var move_animation = create_tween()
-		var move_direction = inputs[direction] * tile_size
+		var move_direction = inputs[direction] * (tile_size * dash_multiplier)
 		
 		move_animation.tween_property(self, "position",
 		(position + move_direction),
@@ -53,13 +71,22 @@ func move(direction):
 		# player can't move while animation plays
 		moving = true
 		await move_animation.finished
-		moving = false
+		
+		if is_dashing:
+			await get_tree().create_timer(0.1).timeout
+			moving = false
+		else:
+			moving = false
+		move_speed = 16
 
 '''
 -- GET DAMAGED --
 - kills the player (will damage them later)
 '''
 func get_damaged(_area):
+	if is_dashing and moving:
+		return
+	
 	is_dead = true
 	$temporarySprite.color = "#FF0000"
 	print("haha you died")
