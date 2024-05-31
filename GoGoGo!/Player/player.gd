@@ -8,6 +8,8 @@ var move_speed = 16
 var moving = false
 var health = 10
 var is_dead : bool = false
+var respawnTime=0
+var totalRespawnTime=60
 
 @onready var ray = $WallDetector
 
@@ -16,6 +18,12 @@ var is_dead : bool = false
 '''
 func _ready():
 	pass
+
+func _physics_process(delta):
+	if(is_dead):
+		respawnTime-=1
+		if(respawnTime<=0):
+			get_tree().reload_current_scene()
 
 '''
 -- UNHANDLED INPUT --
@@ -60,6 +68,9 @@ func move(direction):
 - kills the player (will damage them later)
 '''
 func get_damaged(_area):
+	if(!is_dead):
+		respawnTime=totalRespawnTime
 	is_dead = true
 	$temporarySprite.color = "#FF0000"
 	print("haha you died")
+	
