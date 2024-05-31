@@ -61,6 +61,7 @@ func _physics_process(_delta):
 	var loopRange = range(0,events.size())
 	for i in loopRange:
 		if(events[i].timing <= Globals.songMilliseconds&&!events[i].activated):
+			# all the code below spawns a boulder, change this to a function once we add more obstacles!
 			var newBoulder = boulder.instantiate()
 			add_child(newBoulder)
 			var spawnPosition=events[i].position
