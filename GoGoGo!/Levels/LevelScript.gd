@@ -24,9 +24,13 @@ var spawn_up_or_down : Array[int] = [0, 0, 0, 0, 0, 0]
 
 var boulder = preload("res://Obstacles/Boulder.tscn")
 
+var arrow = preload("res://Sprites/RightDoot.png")
+
 var data = Globals.levelData.new()
 
 var spawners = []
+
+var visualSpawners=[]
 
 var gridSize=7
 
@@ -46,7 +50,27 @@ func _ready():
 		spawners.append([])
 		for y in gridSize:
 			spawners[x].append(Vector2(128+(x-1)*256,-128+(6-y)*-256))
+	
+	_assign_spawners()
+	
 	gridSize-=1
+	
+func _assign_spawners():
+	var spawnerTypes=["Up","Down","Left","Right"]
+	for x in gridSize:
+		visualSpawners.append([])
+		for y in gridSize:
+			for z in spawnerTypes.size():
+				for i in 6:
+					var spawner = get_node(spawnerTypes[z]+"Spawners/"+spawnerTypes[z]+"Spawner"+str(i+1))
+					var positionToCheck=spawners[x][y]
+					if(x==6):
+						positionToCheck.x+=256
+					if(y==6):
+						positionToCheck.y+=256
+					if(positionToCheck==spawner.global_position):
+						visualSpawners[x].append(spawner)
+						print("found node at "+str(x)+" "+str(y))
 
 '''
 -- PHYSICS PROCESS --
@@ -56,11 +80,13 @@ func _physics_process(_delta):
 	if start_music:
 		audio.play()
 		start_music = false
-		
 	Globals.songMilliseconds = audio.get_playback_position()*1000
 	var events = data.events
 	var loopRange = range(0,events.size())
 	for i in loopRange:
+		var objectPosition=events[i].position
+		var arrow=visualSpawners[objectPosition.x][objectPosition.y].get_node("Arrow")
+		arrow.visible=true
 		if(events[i].timing <= Globals.songMilliseconds&&!events[i].activated):
 			# all the code below spawns a boulder, change this to a function once we add more obstacles!
 			_spawn_obstacle(events[i])
@@ -74,7 +100,6 @@ func _spawn_obstacle(object):
 		var newBoulder = boulder.instantiate()
 		add_child(newBoulder)
 		var spawnPosition=object.position
-		
 		newBoulder.global_position=spawners[spawnPosition.x][spawnPosition.y]
 		
 		var direction = Globals.directions.RIGHT
