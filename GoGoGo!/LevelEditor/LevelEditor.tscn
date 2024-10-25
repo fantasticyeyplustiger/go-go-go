@@ -1,20 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://0vbf4nh5djlc"]
+[gd_scene load_steps=11 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
+[ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
+[ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="3_fuvo5"]
+[ext_resource type="Texture2D" uid="uid://2m6iicmpflej" path="res://Sprites/WallRamp.png" id="4_h8q0s"]
+[ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_ovd7d"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fxrkx"]
+resource_name = "Walls"
+scenes/1/scene = ExtResource("2_7h8jr")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ca4vl"]
+texture = ExtResource("3_fuvo5")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tny2p"]
+texture = ExtResource("4_h8q0s")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_frqsp"]
+texture = ExtResource("5_ovd7d")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_36nai"]
+tile_size = Vector2i(256, 256)
+sources/1 = SubResource("TileSetAtlasSource_ca4vl")
+sources/0 = SubResource("TileSetScenesCollectionSource_fxrkx")
+sources/2 = SubResource("TileSetAtlasSource_tny2p")
+sources/3 = SubResource("TileSetAtlasSource_frqsp")
 
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = -0.712
+anchor_top = -1.822
+anchor_right = 1.512
+anchor_bottom = 0.4
+offset_left = 1367.04
+offset_top = 1967.76
+offset_right = -983.04
+offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1127s")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_left = -1368.0
+offset_top = -1968.0
+offset_right = 2896.0
+offset_bottom = 432.0
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
@@ -32,5 +69,66 @@ text = "QUIT"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="floor" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAPr/AQAAAAAAAAAAAPv/AQAAAAAAAAAAAPz/AQAAAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQAAAAAAAAAAAP//AQAAAAAAAAABAPr/AQAAAAAAAAABAPv/AQAAAAAAAAABAPz/AQAAAAAAAAABAP3/AQAAAAAAAAABAP7/AQAAAAAAAAABAP//AQAAAAAAAAACAPr/AQAAAAAAAAACAPv/AQAAAAAAAAACAPz/AQAAAAAAAAACAP3/AQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAADAPr/AQAAAAAAAAADAPv/AQAAAAAAAAADAPz/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAAEAPr/AQAAAAAAAAAEAPv/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAFAPr/AQAAAAAAAAAFAPv/AQAAAAAAAAAFAPz/AQAAAAAAAAAFAP3/AQAAAAAAAAAFAP7/AQAAAAAAAAAFAP//AQAAAAAAAAD///r/AAAAAAAAAQD///v/AAAAAAAAAQD///z/AAAAAAAAAQD///3/AAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAPr/AAAAAAAAAQAGAPv/AAAAAAAAAQAGAPz/AAAAAAAAAQAGAP3/AAAAAAAAAQAGAP7/AAAAAAAAAQAGAP//AAAAAAAAAQAAAPn/AAAAAAAAAQABAPn/AAAAAAAAAQACAPn/AAAAAAAAAQADAPn/AAAAAAAAAQAEAPn/AAAAAAAAAQAFAPn/AAAAAAAAAQA=")
+tile_set = SubResource("TileSet_36nai")
+rendering_quadrant_size = 128
+
+[node name="walls" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD///r/AgAAAAAAAAD///v/AgAAAAAAAAD///z/AgAAAAAAAAD///3/AgAAAAAAAAD///7/AgAAAAAAAAD/////AgAAAAAAAAAAAAAAAgAAAAAAAGABAAAAAgAAAAAAAGACAAAAAgAAAAAAAGADAAAAAgAAAAAAAGAEAAAAAgAAAAAAAGAFAAAAAgAAAAAAAGAGAP//AgAAAAAAADAGAP7/AgAAAAAAADAGAP3/AgAAAAAAADAGAPz/AgAAAAAAADAGAPv/AgAAAAAAADAGAPr/AgAAAAAAADAFAPn/AgAAAAAAAFAEAPn/AgAAAAAAAFADAPn/AgAAAAAAAFACAPn/AgAAAAAAAFABAPn/AgAAAAAAAFAAAPn/AgAAAAAAAFD///n/AwAAAAAAAAD//wAAAwAAAAAAAGAGAAAAAwAAAAAAADAGAPn/AwAAAAAAAFA=")
+tile_set = SubResource("TileSet_36nai")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(768, -768)
+zoom = Vector2(0.45, 0.45)
+
+[node name="DownRowStart" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 168.0
+offset_bottom = 168.0
+
+[node name="UpRowStart" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 128.0
+offset_top = -1664.0
+offset_right = 168.0
+offset_bottom = -1624.0
+
+[node name="LeftColumnStart" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -128.0
+offset_top = -1408.0
+offset_right = -88.0
+offset_bottom = -1368.0
+
+[node name="RightColumnStart" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 1664.0
+offset_top = -1408.0
+offset_right = 1704.0
+offset_bottom = -1368.0
+
+[node name="BPMLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1336.0
+offset_top = -1784.0
+offset_right = -1296.0
+offset_bottom = -1761.0
+theme_override_font_sizes/font_size = 150
+text = "BPM:"
+
+[node name="BPMLabel2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1336.0
+offset_top = -1544.0
+offset_right = -965.0
+offset_bottom = -1339.0
+theme_override_font_sizes/font_size = 150
+text = "C"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="quit"]

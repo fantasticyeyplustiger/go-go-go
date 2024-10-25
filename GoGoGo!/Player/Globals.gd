@@ -20,20 +20,31 @@ signal stop_level()
 
 class levelData: 
 	var events = []
+	var json = JSON.new
+	var path = "user://data.json"
 	
-	func _add_event(timing,type,position):
+	func _add_event(timing : int, type : int, position : Vector2):
+		
 		var dataStruct={
-			"timing":timing,
-			"type":type,
-			"activated":false,
-			"position":position
+			"timing" : timing * 1000,
+			"type" : type,
+			"activated" : false,
+			"position" : position
 		}
 		events.append(dataStruct)
+		
 	func _load_from_string(string):
 		var data = JSON.parse_string(string)
 		events = data.events
+		
 	func _stringify():
 		var savedData={
 			"events":events
 		}
 		return JSON.stringify(savedData)
+	
+	func save(content : String):
+		var file = FileAccess.open(path, FileAccess.WRITE)
+		file.store_string(json.stringify(content))
+		file.close()
+		file = null

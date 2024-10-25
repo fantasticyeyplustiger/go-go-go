@@ -1,13 +1,38 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=13 format=4 uid="uid://bmdbva8kn4x2k"]
 
-[ext_resource type="PackedScene" uid="uid://dxmp7dh3ta2e5" path="res://TileMaps/Map1TileMap.tscn" id="1_5yvkk"]
 [ext_resource type="Script" path="res://Levels/LevelScript.gd" id="1_q061h"]
-[ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/Player.tscn" id="2_2enu4"]
-[ext_resource type="PackedScene" uid="uid://cif1rmnl34r5x" path="res://ObstacleSpawners/UpSpawner.tscn" id="4_stp0o"]
-[ext_resource type="PackedScene" uid="uid://ceoptljlkcl4m" path="res://ObstacleSpawners/DownSpawner.tscn" id="5_53x5i"]
-[ext_resource type="PackedScene" uid="uid://bs00xa4axldl3" path="res://ObstacleSpawners/LeftSpawner.tscn" id="6_0rxm6"]
-[ext_resource type="PackedScene" uid="uid://py6dh66fpkmy" path="res://ObstacleSpawners/RightSpawner.tscn" id="7_8o137"]
+[ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
+[ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_xb43s"]
+[ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="3_pyhnl"]
+[ext_resource type="Texture2D" uid="uid://2m6iicmpflej" path="res://Sprites/WallRamp.png" id="4_ule1p"]
+[ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_53n1o"]
 [ext_resource type="AudioStream" uid="uid://civc3b3mrsjwm" path="res://Music/inferno.ogg" id="8_b13p7"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ha8rw"]
+resource_name = "Walls"
+scenes/1/scene = ExtResource("2_xb43s")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x32e3"]
+texture = ExtResource("3_pyhnl")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6xhs0"]
+texture = ExtResource("4_ule1p")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xkojb"]
+texture = ExtResource("5_53n1o")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_i2s3q"]
+tile_size = Vector2i(256, 256)
+sources/1 = SubResource("TileSetAtlasSource_x32e3")
+sources/0 = SubResource("TileSetScenesCollectionSource_ha8rw")
+sources/2 = SubResource("TileSetAtlasSource_6xhs0")
+sources/3 = SubResource("TileSetAtlasSource_xkojb")
 
 [node name="testing level" type="Node2D"]
 script = ExtResource("1_q061h")
@@ -18,9 +43,20 @@ column_attack_spot_limit = 4
 wave = 1
 bpm = 400.0
 
-[node name="TileMap" parent="." instance=ExtResource("1_5yvkk")]
-layer_0/tile_data = PackedInt32Array(-393216, 1, 0, -327680, 1, 0, -262144, 1, 0, -196608, 1, 0, -131072, 1, 0, -65536, 1, 0, -393215, 1, 0, -327679, 1, 0, -262143, 1, 0, -196607, 1, 0, -131071, 1, 0, -65535, 1, 0, -393214, 1, 0, -327678, 1, 0, -262142, 1, 0, -196606, 1, 0, -131070, 1, 0, -65534, 1, 0, -393213, 1, 0, -327677, 1, 0, -262141, 1, 0, -196605, 1, 0, -131069, 1, 0, -65533, 1, 0, -393212, 1, 0, -327676, 1, 0, -262140, 1, 0, -196604, 1, 0, -131068, 1, 0, -65532, 1, 0, -393211, 1, 0, -327675, 1, 0, -262139, 1, 0, -196603, 1, 0, -131067, 1, 0, -65531, 1, 0, -327681, 0, 65536, -262145, 0, 65536, -196609, 0, 65536, -131073, 0, 65536, -65537, 0, 65536, -1, 0, 65536, 0, 0, 65536, 1, 0, 65536, 2, 0, 65536, 3, 0, 65536, 4, 0, 65536, 5, 0, 65536, -393210, 0, 65536, -327674, 0, 65536, -262138, 0, 65536, -196602, 0, 65536, -131066, 0, 65536, -65530, 0, 65536, -458752, 0, 65536, -458751, 0, 65536, -458750, 0, 65536, -458749, 0, 65536, -458748, 0, 65536, -458747, 0, 65536)
-layer_1/tile_data = PackedInt32Array(-327681, 2, 0, -262145, 2, 0, -196609, 2, 0, -131073, 2, 0, -65537, 2, 0, -1, 2, 0, 0, 2, 1610612736, 1, 2, 1610612736, 2, 2, 1610612736, 3, 2, 1610612736, 4, 2, 1610612736, 5, 2, 1610612736, -65530, 2, 805306368, -131066, 2, 805306368, -196602, 2, 805306368, -262138, 2, 805306368, -327674, 2, 805306368, -393210, 2, 805306368, -458747, 2, 1342177280, -458748, 2, 1342177280, -458749, 2, 1342177280, -458750, 2, 1342177280, -458751, 2, 1342177280, -458752, 2, 1342177280, -393217, 3, 0, 65535, 3, 1610612736, 6, 3, 805306368, -458746, 3, 1342177280)
+[node name="floor" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAPr/AQAAAAAAAAAAAPv/AQAAAAAAAAAAAPz/AQAAAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQAAAAAAAAAAAP//AQAAAAAAAAABAPr/AQAAAAAAAAABAPv/AQAAAAAAAAABAPz/AQAAAAAAAAABAP3/AQAAAAAAAAABAP7/AQAAAAAAAAABAP//AQAAAAAAAAACAPr/AQAAAAAAAAACAPv/AQAAAAAAAAACAPz/AQAAAAAAAAACAP3/AQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAADAPr/AQAAAAAAAAADAPv/AQAAAAAAAAADAPz/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAAEAPr/AQAAAAAAAAAEAPv/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAFAPr/AQAAAAAAAAAFAPv/AQAAAAAAAAAFAPz/AQAAAAAAAAAFAP3/AQAAAAAAAAAFAP7/AQAAAAAAAAAFAP//AQAAAAAAAAD///r/AAAAAAAAAQD///v/AAAAAAAAAQD///z/AAAAAAAAAQD///3/AAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAPr/AAAAAAAAAQAGAPv/AAAAAAAAAQAGAPz/AAAAAAAAAQAGAP3/AAAAAAAAAQAGAP7/AAAAAAAAAQAGAP//AAAAAAAAAQAAAPn/AAAAAAAAAQABAPn/AAAAAAAAAQACAPn/AAAAAAAAAQADAPn/AAAAAAAAAQAEAPn/AAAAAAAAAQAFAPn/AAAAAAAAAQA=")
+tile_set = SubResource("TileSet_i2s3q")
+rendering_quadrant_size = 128
+
+[node name="walls" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD///r/AgAAAAAAAAD///v/AgAAAAAAAAD///z/AgAAAAAAAAD///3/AgAAAAAAAAD///7/AgAAAAAAAAD/////AgAAAAAAAAAAAAAAAgAAAAAAAGABAAAAAgAAAAAAAGACAAAAAgAAAAAAAGADAAAAAgAAAAAAAGAEAAAAAgAAAAAAAGAFAAAAAgAAAAAAAGAGAP//AgAAAAAAADAGAP7/AgAAAAAAADAGAP3/AgAAAAAAADAGAPz/AgAAAAAAADAGAPv/AgAAAAAAADAGAPr/AgAAAAAAADAFAPn/AgAAAAAAAFAEAPn/AgAAAAAAAFADAPn/AgAAAAAAAFACAPn/AgAAAAAAAFABAPn/AgAAAAAAAFAAAPn/AgAAAAAAAFD///n/AwAAAAAAAAD//wAAAwAAAAAAAGAGAAAAAwAAAAAAADAGAPn/AwAAAAAAAFA=")
+tile_set = SubResource("TileSet_i2s3q")
+
+[node name="wall collision" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_set = SubResource("TileSet_i2s3q")
 
 [node name="Player" parent="." instance=ExtResource("2_2enu4")]
 position = Vector2(896, -640)
@@ -28,86 +64,6 @@ position = Vector2(896, -640)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(768, -768)
 zoom = Vector2(0.45, 0.45)
-
-[node name="UpSpawners" type="Node2D" parent="."]
-
-[node name="UpSpawner1" parent="UpSpawners" instance=ExtResource("4_stp0o")]
-position = Vector2(128, 128)
-
-[node name="UpSpawner2" parent="UpSpawners" instance=ExtResource("4_stp0o")]
-position = Vector2(384, 128)
-
-[node name="UpSpawner3" parent="UpSpawners" instance=ExtResource("4_stp0o")]
-position = Vector2(640, 128)
-
-[node name="UpSpawner4" parent="UpSpawners" instance=ExtResource("4_stp0o")]
-position = Vector2(896, 128)
-
-[node name="UpSpawner5" parent="UpSpawners" instance=ExtResource("4_stp0o")]
-position = Vector2(1152, 128)
-
-[node name="UpSpawner6" parent="UpSpawners" instance=ExtResource("4_stp0o")]
-position = Vector2(1408, 128)
-
-[node name="DownSpawners" type="Node2D" parent="."]
-
-[node name="DownSpawner1" parent="DownSpawners" instance=ExtResource("5_53x5i")]
-position = Vector2(128, -1664)
-
-[node name="DownSpawner2" parent="DownSpawners" instance=ExtResource("5_53x5i")]
-position = Vector2(384, -1664)
-
-[node name="DownSpawner3" parent="DownSpawners" instance=ExtResource("5_53x5i")]
-position = Vector2(640, -1664)
-
-[node name="DownSpawner4" parent="DownSpawners" instance=ExtResource("5_53x5i")]
-position = Vector2(896, -1664)
-
-[node name="DownSpawner5" parent="DownSpawners" instance=ExtResource("5_53x5i")]
-position = Vector2(1152, -1664)
-
-[node name="DownSpawner6" parent="DownSpawners" instance=ExtResource("5_53x5i")]
-position = Vector2(1408, -1664)
-
-[node name="LeftSpawners" type="Node2D" parent="."]
-
-[node name="LeftSpawner1" parent="LeftSpawners" instance=ExtResource("6_0rxm6")]
-position = Vector2(1664, -128)
-
-[node name="LeftSpawner2" parent="LeftSpawners" instance=ExtResource("6_0rxm6")]
-position = Vector2(1664, -384)
-
-[node name="LeftSpawner3" parent="LeftSpawners" instance=ExtResource("6_0rxm6")]
-position = Vector2(1664, -640)
-
-[node name="LeftSpawner4" parent="LeftSpawners" instance=ExtResource("6_0rxm6")]
-position = Vector2(1664, -896)
-
-[node name="LeftSpawner5" parent="LeftSpawners" instance=ExtResource("6_0rxm6")]
-position = Vector2(1664, -1152)
-
-[node name="LeftSpawner6" parent="LeftSpawners" instance=ExtResource("6_0rxm6")]
-position = Vector2(1664, -1408)
-
-[node name="RightSpawners" type="Node2D" parent="."]
-
-[node name="RightSpawner1" parent="RightSpawners" instance=ExtResource("7_8o137")]
-position = Vector2(-128, -128)
-
-[node name="RightSpawner2" parent="RightSpawners" instance=ExtResource("7_8o137")]
-position = Vector2(-128, -384)
-
-[node name="RightSpawner3" parent="RightSpawners" instance=ExtResource("7_8o137")]
-position = Vector2(-128, -640)
-
-[node name="RightSpawner4" parent="RightSpawners" instance=ExtResource("7_8o137")]
-position = Vector2(-128, -896)
-
-[node name="RightSpawner5" parent="RightSpawners" instance=ExtResource("7_8o137")]
-position = Vector2(-128, -1152)
-
-[node name="RightSpawner6" parent="RightSpawners" instance=ExtResource("7_8o137")]
-position = Vector2(-128, -1408)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_b13p7")
