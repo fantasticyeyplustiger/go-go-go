@@ -129,6 +129,6 @@ offset_top = -1544.0
 offset_right = -965.0
 offset_bottom = -1339.0
 theme_override_font_sizes/font_size = 150
-text = "C"
+text = "Song:"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="quit"]
