@@ -44,6 +44,7 @@ offset_right = -983.04
 offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_1127s")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -52,6 +53,7 @@ offset_left = -1368.0
 offset_top = -1968.0
 offset_right = 2896.0
 offset_bottom = 432.0
+mouse_filter = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
@@ -61,6 +63,7 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -69,6 +72,7 @@ text = "QUIT"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="floor" type="TileMapLayer" parent="."]
 use_parent_material = true
