@@ -17,6 +17,7 @@ const obstacle_speed = {obstacle_types.BOULDER : 750, obstacle_types.ROCK_PELLET
 
 signal roll_obstacle(roll_velocity)
 signal stop_level()
+signal instruct
 
 class levelData: 
 	var events = []

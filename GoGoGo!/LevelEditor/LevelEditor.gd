@@ -4,7 +4,7 @@ var tile_size : int = 256
 var on_or_off_button_path = "res://LevelEditor/OnOrOffButton.tscn"
 var total_buttons : int
 var level_instruction_set : Array[Instruction]
-var instruction : Instruction
+var instruction : Instruction = Instruction.new()
 
 var current_beat : int = 0
 
@@ -17,7 +17,9 @@ func _ready():
 	# there are buttons at the ends of every row and column.
 	# activating one allows you to add an obstacle at that position.
 	# this, in turn, will set its corresponding position in a button array
-	# 
+	#
+	
+	Globals.instruct.connect(set_attack)
 	
 	instruction.fill_arrays_false(instruction.down_row, rows)
 	instruction.fill_arrays_false(instruction.up_row, rows)
@@ -26,20 +28,21 @@ func _ready():
 	
 	total_buttons = (2 * rows) + (2 * columns)
 	
-	load_row($DownRowStart.position, Globals.directions.UP)
-	load_row($UpRowStart.position, Globals.directions.DOWN)
-	
-	pass # Replace with function body.
+	load_buttons($DownRowStart.position, Globals.directions.UP, 256, 0)
+	load_buttons($UpRowStart.position, Globals.directions.DOWN, 256, 0)
+	load_buttons($RightColumnStart.position, Globals.directions.RIGHT, 256, 0)
+	load_buttons($LeftColumnStart.position, Globals.directions.LEFT, 256, 0)
 
 
 
-func load_row(starting_position : Vector2, direction : Globals.directions):
+func load_buttons(starting_position : Vector2, direction : Globals.directions, x : int, y : int):
 	
 	for i in rows:
 		var new_child = load(on_or_off_button_path).instantiate()
 		
 		new_child.index = i
 		new_child.direction = direction
+		new_child.position = starting_position + Vector2(x * i, y * i)
 		
 		new_child.pressed.connect(set_attack.bind(new_child.index, new_child.direction))
 
