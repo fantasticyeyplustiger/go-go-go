@@ -5,10 +5,6 @@ var index : int
 var direction : Globals.directions
 
 func _ready() -> void:
-	
-	Globals.signals.connect(Globals.instruct)
-	
-	
 	pass
 
 func _on_pressed() -> void:

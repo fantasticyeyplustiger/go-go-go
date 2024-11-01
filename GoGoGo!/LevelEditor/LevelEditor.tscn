@@ -64,11 +64,29 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
+theme_override_constants/separation = 20
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "QUIT"
+
+[node name="BPMLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+text = "BPM:"
+
+[node name="BPMLabel2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+text = "Song:"
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "PLAY"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -76,12 +94,14 @@ mouse_filter = 2
 
 [node name="floor" type="TileMapLayer" parent="."]
 use_parent_material = true
+position = Vector2(928, 0)
 tile_map_data = PackedByteArray("AAAAAPr/AQAAAAAAAAAAAPv/AQAAAAAAAAAAAPz/AQAAAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQAAAAAAAAAAAP//AQAAAAAAAAABAPr/AQAAAAAAAAABAPv/AQAAAAAAAAABAPz/AQAAAAAAAAABAP3/AQAAAAAAAAABAP7/AQAAAAAAAAABAP//AQAAAAAAAAACAPr/AQAAAAAAAAACAPv/AQAAAAAAAAACAPz/AQAAAAAAAAACAP3/AQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAADAPr/AQAAAAAAAAADAPv/AQAAAAAAAAADAPz/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAAEAPr/AQAAAAAAAAAEAPv/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAFAPr/AQAAAAAAAAAFAPv/AQAAAAAAAAAFAPz/AQAAAAAAAAAFAP3/AQAAAAAAAAAFAP7/AQAAAAAAAAAFAP//AQAAAAAAAAD///r/AAAAAAAAAQD///v/AAAAAAAAAQD///z/AAAAAAAAAQD///3/AAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAPr/AAAAAAAAAQAGAPv/AAAAAAAAAQAGAPz/AAAAAAAAAQAGAP3/AAAAAAAAAQAGAP7/AAAAAAAAAQAGAP//AAAAAAAAAQAAAPn/AAAAAAAAAQABAPn/AAAAAAAAAQACAPn/AAAAAAAAAQADAPn/AAAAAAAAAQAEAPn/AAAAAAAAAQAFAPn/AAAAAAAAAQA=")
 tile_set = SubResource("TileSet_36nai")
 rendering_quadrant_size = 128
 
 [node name="walls" type="TileMapLayer" parent="."]
 use_parent_material = true
+position = Vector2(928, 0)
 tile_map_data = PackedByteArray("AAD///r/AgAAAAAAAAD///v/AgAAAAAAAAD///z/AgAAAAAAAAD///3/AgAAAAAAAAD///7/AgAAAAAAAAD/////AgAAAAAAAAAAAAAAAgAAAAAAAGABAAAAAgAAAAAAAGACAAAAAgAAAAAAAGADAAAAAgAAAAAAAGAEAAAAAgAAAAAAAGAFAAAAAgAAAAAAAGAGAP//AgAAAAAAADAGAP7/AgAAAAAAADAGAP3/AgAAAAAAADAGAPz/AgAAAAAAADAGAPv/AgAAAAAAADAGAPr/AgAAAAAAADAFAPn/AgAAAAAAAFAEAPn/AgAAAAAAAFADAPn/AgAAAAAAAFACAPn/AgAAAAAAAFABAPn/AgAAAAAAAFAAAPn/AgAAAAAAAFD///n/AwAAAAAAAAD//wAAAwAAAAAAAGAGAAAAAwAAAAAAADAGAPn/AwAAAAAAAFA=")
 tile_set = SubResource("TileSet_36nai")
 
@@ -91,48 +111,31 @@ zoom = Vector2(0.45, 0.45)
 
 [node name="DownRowStart" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 128.0
-offset_top = 128.0
-offset_right = 168.0
-offset_bottom = 168.0
+offset_left = 936.0
+offset_top = 16.0
+offset_right = 976.0
+offset_bottom = 56.0
 
 [node name="UpRowStart" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 128.0
-offset_top = -1664.0
-offset_right = 168.0
-offset_bottom = -1624.0
+offset_left = 936.0
+offset_top = -1776.0
+offset_right = 976.0
+offset_bottom = -1736.0
 
 [node name="LeftColumnStart" type="Control" parent="."]
 anchors_preset = 0
-offset_left = -128.0
-offset_top = -1408.0
-offset_right = -88.0
-offset_bottom = -1368.0
+offset_left = 680.0
+offset_top = -1520.0
+offset_right = 720.0
+offset_bottom = -1480.0
 
 [node name="RightColumnStart" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 1664.0
-offset_top = -1408.0
-offset_right = 1704.0
-offset_bottom = -1368.0
-
-[node name="BPMLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = -1336.0
-offset_top = -1784.0
-offset_right = -1296.0
-offset_bottom = -1761.0
-theme_override_font_sizes/font_size = 150
-text = "BPM:"
-
-[node name="BPMLabel2" type="Label" parent="."]
-layout_mode = 0
-offset_left = -1336.0
-offset_top = -1544.0
-offset_right = -965.0
-offset_bottom = -1339.0
-theme_override_font_sizes/font_size = 150
-text = "Song:"
+offset_left = 2472.0
+offset_top = -1520.0
+offset_right = 2512.0
+offset_bottom = -1480.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="quit"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="play"]
