@@ -44,6 +44,9 @@ func load_buttons(starting_position : Vector2, direction : Globals.directions, x
 		
 		#print(new_child.position)
 
+'''
+Sets an attack at the corresponding location to an instruction.
+'''
 func set_attack(index : int, direction : Globals.directions):
 	
 	match direction:
@@ -96,6 +99,9 @@ func overwrite_instruction(current_beat : int):
 			level_instruction_set.remove_at(i)
 			break
 
+'''
+The set amount of attacks that will happen on a certain beat.
+'''
 class Instruction:
 	
 	var up_row : Array[bool]
