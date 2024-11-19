@@ -1,8 +1,8 @@
 extends Button
 
 var attack : bool = false
-var index : int
-var direction : Globals.directions
+
+var local_position : Vector2
 
 func _ready() -> void:
 	pass
@@ -15,5 +15,5 @@ func _on_pressed() -> void:
 			self.text = "ON"
 		false:
 			self.text = "OFF"
-	
-	Globals.emit_signal("instruct", index, direction)
+	print(local_position)
+	Globals.emit_signal("instruct", local_position)

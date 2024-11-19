@@ -1,10 +1,31 @@
-[gd_scene load_steps=11 format=4 uid="uid://0vbf4nh5djlc"]
+[gd_scene load_steps=13 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
 [ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="3_fuvo5"]
 [ext_resource type="Texture2D" uid="uid://2m6iicmpflej" path="res://Sprites/WallRamp.png" id="4_h8q0s"]
 [ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_ovd7d"]
+
+[sub_resource type="FontFile" id="FontFile_okppf"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+
+[sub_resource type="Theme" id="Theme_rixxp"]
+default_font = SubResource("FontFile_okppf")
+default_font_size = 100
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fxrkx"]
 resource_name = "Walls"
@@ -47,6 +68,13 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1127s")
 
+[node name="VScrollBar" type="VScrollBar" parent="."]
+layout_mode = 2
+offset_left = 272.0
+offset_top = -1936.0
+offset_right = 622.0
+offset_bottom = 400.0
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_left = -1368.0
@@ -72,12 +100,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "QUIT"
 
-[node name="BPMLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
-theme_override_font_sizes/font_size = 150
-text = "BPM:"
+theme = SubResource("Theme_rixxp")
+max_value = 2763.0
+prefix = "BPM: "
 
-[node name="BPMLabel2" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="SongLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 150
 text = "Song:"
@@ -87,6 +117,11 @@ custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "PLAY"
+
+[node name="BeatLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+text = "Beat:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -136,6 +171,13 @@ offset_left = 2472.0
 offset_top = -1520.0
 offset_right = 2512.0
 offset_bottom = -1480.0
+
+[node name="ButtonOrigin" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 672.0
+offset_top = -1792.0
+offset_right = 712.0
+offset_bottom = -1752.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="quit"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="play"]
