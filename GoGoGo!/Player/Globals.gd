@@ -24,7 +24,7 @@ class levelData:
 	var json = JSON.new
 	var path = "user://data.json"
 	
-	func _add_event(timing : int, type : int, position : Vector2):
+	func _add_event(timing : int, type : int, position : Vector2) -> void:
 		
 		var dataStruct={
 			"timing" : timing * 1000,
@@ -33,19 +33,44 @@ class levelData:
 			"position" : position
 		}
 		events.append(dataStruct)
+	
+	func _remove_event(timing : int, type : int, position : Vector2) -> void:
 		
+		var dataStruct={
+			"timing" : timing * 1000,
+			"type" : type,
+			"activated" : false,
+			"position" : position
+		}
+		
+		var iterator : int = 0
+		
+		for data in events:
+			if dataStruct == data:
+				events.remove_at(iterator)
+				return
+			
+			iterator += 1
+	
+	
 	func _load_from_string(string):
 		var data = JSON.parse_string(string)
 		events = data.events
-		
+	
+	
+	
 	func _stringify():
 		var savedData={
-			"events":events
+			"events" : events
 		}
 		return JSON.stringify(savedData)
+	
+	
 	
 	func save(content : String):
 		var file = FileAccess.open(path, FileAccess.WRITE)
 		file.store_string(json.stringify(content))
 		file.close()
 		file = null
+	
+	

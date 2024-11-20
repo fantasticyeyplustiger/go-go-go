@@ -13,7 +13,10 @@ func _on_pressed() -> void:
 	match attack:
 		true:
 			self.text = "ON"
+			$BoulderSprite.visible = true
 		false:
 			self.text = "OFF"
+			$BoulderSprite.visible = false
+	
 	print(local_position)
-	Globals.emit_signal("instruct", local_position)
+	Globals.emit_signal("instruct", local_position, attack)

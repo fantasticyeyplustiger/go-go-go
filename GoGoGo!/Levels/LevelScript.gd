@@ -28,7 +28,7 @@ var data = Globals.levelData.new()
 
 var spawners = []
 
-var gridSize=7
+var gridSize : int = 7
 
 '''
 -- READY --
@@ -93,9 +93,11 @@ func _spawn_obstacle(object):
 		if(spawnPosition.x == 6 and spawnPosition.y > 0):
 			direction = Globals.directions.LEFT
 			newBoulder.global_position.x+=256
+		
 		elif(spawnPosition.x > 0 and spawnPosition.y == 6):
 			direction = Globals.directions.UP
 			newBoulder.global_position.y+=256
+		
 		elif(spawnPosition.x > 0 and spawnPosition.y == 0):
 			direction = Globals.directions.DOWN
 		
