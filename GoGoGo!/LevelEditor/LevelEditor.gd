@@ -98,6 +98,8 @@ func save_attacks() -> void:
 	if check_all_buttons_off():
 		return
 	
+	
+	
 	# remove attack on this current beat and overwrite it
 
 
@@ -121,11 +123,14 @@ func check_all_buttons_off() -> bool:
 	
 	return true
 
-
+'''
+Turns every button off and disables their boulder sprites.
+'''
 func reset_buttons_to_false() -> void:
 	print(buttons.size())
 	for button in buttons:
 		button.text = "OFF"
+		button.get_child(0).visible = false
 		button.attack = false
 
 
@@ -137,13 +142,40 @@ func play() -> void:
 	
 	match is_playing:
 		false:
-			$MarginContainer/VBoxContainer/PlayButton.text = "PLAY"
+			$MarginContainer/Buttons/PlayButton.text = "PLAY"
 		true:
-			$MarginContainer/VBoxContainer/PlayButton.text = "PAUSE"
+			$MarginContainer/Buttons/PlayButton.text = "PAUSE"
 	
 	pass # Replace with function body.
 
 
 func change_chart(index : int) -> void:
+	current_beat = index
+	chart_has_changed = false
 	
-	pass # Replace with function body.
+	print(current_beat)
+	
+	var exists : bool = false
+	var attacks : Array[Vector2] = []
+	
+	for i in total_buttons:
+		exists = data._check_event_exists(current_beat, 0, buttons[i].local_position)
+		
+		if exists:
+			reset_buttons_to_false()
+			attacks = data._get_event_positions(current_beat, Globals.obstacle_types.BOULDER)
+			break
+	
+	if attacks.size() == 0:
+		reset_buttons_to_false()
+		return
+	
+	for data in attacks:
+		set_button_at(data)
+	
+
+
+func set_button_at(position):
+	for button in buttons:
+		if button.local_position == position:
+			button.switch_on()

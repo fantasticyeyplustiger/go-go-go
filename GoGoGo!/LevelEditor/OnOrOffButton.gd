@@ -20,3 +20,7 @@ func _on_pressed() -> void:
 	
 	print(local_position)
 	Globals.emit_signal("instruct", local_position, attack)
+
+func switch_on():
+	self.text = "ON"
+	$BoulderSprite.visible = true

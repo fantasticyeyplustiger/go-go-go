@@ -24,24 +24,21 @@ class levelData:
 	var json = JSON.new
 	var path = "user://data.json"
 	
-	func _add_event(timing : int, type : int, position : Vector2) -> void:
-		
-		var dataStruct={
+	func _create_event(timing : int, type : int, position : Vector2):
+		return {
 			"timing" : timing * 1000,
 			"type" : type,
 			"activated" : false,
 			"position" : position
 		}
-		events.append(dataStruct)
+	
+	func _add_event(timing : int, type : int, position : Vector2) -> void:
+		
+		events.append(_create_event(timing, type, position))
 	
 	func _remove_event(timing : int, type : int, position : Vector2) -> void:
 		
-		var dataStruct={
-			"timing" : timing * 1000,
-			"type" : type,
-			"activated" : false,
-			"position" : position
-		}
+		var dataStruct = _create_event(timing, type, position)
 		
 		var iterator : int = 0
 		
@@ -51,6 +48,25 @@ class levelData:
 				return
 			
 			iterator += 1
+	
+	func _check_event_exists(timing : int, type : int, position : Vector2) -> bool:
+		var dataStruct = _create_event(timing, type, position)
+		
+		for data in events:
+			if dataStruct == data:
+				return true
+		
+		return false
+	
+	
+	func _get_event_positions(timing, type):
+		var returning_events : Array[Vector2] = []
+		
+		for data in events:
+			if data.timing == timing and data.type == type:
+				returning_events.append(data.position)
+		
+		return returning_events
 	
 	
 	func _load_from_string(string):
