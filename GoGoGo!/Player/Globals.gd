@@ -33,36 +33,56 @@ class levelData:
 		}
 	
 	func _add_event(timing : int, type : int, position : Vector2) -> void:
-		
 		events.append(_create_event(timing, type, position))
+	
 	
 	func _remove_event(timing : int, type : int, position : Vector2) -> void:
 		
-		var dataStruct = _create_event(timing, type, position)
+		var data_struct = _create_event(timing, type, position)
 		
 		var iterator : int = 0
 		
 		for data in events:
-			if dataStruct == data:
+			if data_struct == data:
 				events.remove_at(iterator)
 				return
 			
 			iterator += 1
 	
+	
 	func _check_event_exists(timing : int, type : int, position : Vector2) -> bool:
-		var dataStruct = _create_event(timing, type, position)
+		var data_struct = _create_event(timing, type, position)
 		
 		for data in events:
-			if dataStruct == data:
+			if data_struct == data:
 				return true
 		
 		return false
 	
 	
-	func _get_event_positions(timing, type):
-		var returning_events : Array[Vector2] = []
+	
+	
+	
+	func _get_events(timing : int):
+		var returning_events = []
+		timing *= 1000
+		# timing is multiplied 1000 to convert it into milliseconds, just like data_struct
 		
 		for data in events:
+			
+			if data.timing == timing:
+				returning_events.append(data)
+		
+		return returning_events
+	
+	
+	func _get_event_positions(timing : int, type : int):
+		var returning_events : Array[Vector2] = []
+		timing *= 1000
+		# timing is multiplied 1000 to convert it into milliseconds, just like data_struct
+		
+		for data in events:
+			
 			if data.timing == timing and data.type == type:
 				returning_events.append(data.position)
 		
@@ -74,13 +94,11 @@ class levelData:
 		events = data.events
 	
 	
-	
 	func _stringify():
-		var savedData={
+		var saved_data={
 			"events" : events
 		}
-		return JSON.stringify(savedData)
-	
+		return JSON.stringify(saved_data)
 	
 	
 	func save(content : String):

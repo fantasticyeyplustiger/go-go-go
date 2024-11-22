@@ -15,7 +15,6 @@ offset_top = -0.199999
 offset_right = 8.0
 offset_bottom = 0.23999
 theme_override_font_sizes/font_size = 50
-text = "OFF"
 script = ExtResource("1_6ewt5")
 
 [node name="BoulderSprite" type="Sprite2D" parent="."]

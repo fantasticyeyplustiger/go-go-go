@@ -1,10 +1,11 @@
 extends Control
 
 var tile_size : int = 256
-var bpm : float = 0
+var bpm : float
 var on_or_off_button_path = "res://LevelEditor/OnOrOffButton.tscn"
 var total_buttons : int
 var data : Globals.levelData = Globals.levelData.new()
+var copy_data : Globals.levelData
 
 var current_beat : int = 0
 var old_beat : int
@@ -21,15 +22,14 @@ var chart_has_changed : bool = false
 @export var rows : int = 6
 @export var columns : int = 6
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	
 	song = $Song
 	song_length = song.stream.get_length()
-	bpm = 90
+	bpm = 180
 	
 	initialize_chart()
-	
 	
 	Globals.instruct.connect(set_attack)
 	
@@ -41,23 +41,12 @@ func _ready():
 	load_buttons($LeftColumnStart.position, Globals.directions.LEFT, 0, tile_size, $LeftColumnStart)
 
 
-func _process(delta: float) -> void:
-	old_beat = current_beat
-	
-	current_beat += int(Input.is_action_just_released("wheel_up")) - int(Input.is_action_just_released("wheel_down"))
-	current_beat += int(Input.is_action_just_released("up")) - int(Input.is_action_just_released("down"))
-	
-	if not (old_beat == current_beat):
-		save_attacks()
+func _physics_process(delta: float) -> void:
 	
 	
-	if current_beat < 0:
-		current_beat = 0
 	
 	var beat_label = $MarginContainer/BottomGUI/Labels/BeatLabel
 	beat_label.text = "Beat: " + str(current_beat)
-	
-	bpm = $MarginContainer/Buttons/SpinBox.value
 
 
 func load_buttons(starting_position : Vector2, direction : Globals.directions, x : int,
@@ -81,32 +70,20 @@ func set_attack(local_position : Vector2, attack : bool):
 	
 	if attack:
 		data._add_event(current_beat, Globals.obstacle_types.BOULDER, local_position)
+		$ItemList.set_item_icon(current_beat, $Boulder.texture)
+	
 	else:
 		data._remove_event(current_beat, Globals.obstacle_types.BOULDER, local_position)
+		
+		if check_all_buttons_off():
+			$ItemList.set_item_icon(current_beat, $Empty.texture)
 	
 	chart_has_changed = true
-
-# ONCE USER GOES TO ANOTHER BEAT, CHECK EVERY BUTTON'S ATTACK VARIABLE
-
-
-'''
-Adds the saved instruction after the user goes to another beat.
-If there is already a saved instruction at the current beat, it'll overwrite it.
-'''
-func save_attacks() -> void:
-	
-	if check_all_buttons_off():
-		return
-	
-	
-	
-	# remove attack on this current beat and overwrite it
 
 
 func initialize_chart() -> void:
 	
-	var temp_bpm = bpm / 4
-	beat_length = (60 / temp_bpm)
+	beat_length = (60 / bpm)
 	total_beats = song_length / beat_length
 	
 	var sprite : Sprite2D = $Empty
@@ -118,7 +95,7 @@ func initialize_chart() -> void:
 func check_all_buttons_off() -> bool:
 	
 	for button in buttons:
-		if button.text == "ON":
+		if button.attack == true:
 			return false
 	
 	return true
@@ -127,9 +104,7 @@ func check_all_buttons_off() -> bool:
 Turns every button off and disables their boulder sprites.
 '''
 func reset_buttons_to_false() -> void:
-	print(buttons.size())
 	for button in buttons:
-		button.text = "OFF"
 		button.get_child(0).visible = false
 		button.attack = false
 
@@ -140,20 +115,37 @@ func quit() -> void:
 
 func play() -> void:
 	
+	var song_position : float
+	song_position = current_beat * beat_length
+	
+	is_playing = not is_playing
+	
 	match is_playing:
 		false:
 			$MarginContainer/Buttons/PlayButton.text = "PLAY"
+			$PlayTimer.stop()
+			$Song.stop()
+		
 		true:
 			$MarginContainer/Buttons/PlayButton.text = "PAUSE"
+			$PlayTimer.wait_time = beat_length
+			$PlayTimer.start()
+			$Song.play(song_position)
+			
+			$ItemList.select(current_beat, true)
+			$ItemList.ensure_current_is_visible()
 	
-	pass # Replace with function body.
+	
 
 
+'''
+Grabs the part of the chart you've changed to, saves the one you were at,
+and loads changed chart. Resets all buttons to false if the loaded chart is empty.
+'''
 func change_chart(index : int) -> void:
+	
 	current_beat = index
 	chart_has_changed = false
-	
-	print(current_beat)
 	
 	var exists : bool = false
 	var attacks : Array[Vector2] = []
@@ -174,8 +166,31 @@ func change_chart(index : int) -> void:
 		set_button_at(data)
 	
 
-
+'''
+Turns on a specific button with the position given.
+'''
 func set_button_at(position):
 	for button in buttons:
 		if button.local_position == position:
 			button.switch_on()
+
+
+func for_every_beat() -> void:
+	
+	current_beat += 1
+	if current_beat > song_length:
+		$PlayTimer.stop()
+	
+	$ItemList.select(current_beat, true)
+	$ItemList.ensure_current_is_visible()
+	change_chart(current_beat)
+	
+
+func copy_attacks() -> void:
+	copy_data.events = data._get_events(current_beat)
+
+
+func paste_attacks() -> void:
+	
+	
+	pass # Replace with function body.
