@@ -5,7 +5,7 @@ var bpm : float
 var on_or_off_button_path = "res://LevelEditor/OnOrOffButton.tscn"
 var total_buttons : int
 var data : Globals.levelData = Globals.levelData.new()
-var copy_data : Globals.levelData
+var copy_data : Array[Vector2] = []
 
 var current_beat : int = 0
 var old_beat : int
@@ -18,6 +18,8 @@ var beat_length : float
 var total_beats : int
 
 var chart_has_changed : bool = false
+var is_saving : bool = false
+var is_loading : bool = false
 
 @export var rows : int = 6
 @export var columns : int = 6
@@ -31,6 +33,8 @@ func _ready():
 	
 	initialize_chart()
 	
+	$ItemList.select(0, true)
+	
 	Globals.instruct.connect(set_attack)
 	
 	total_buttons = (2 * rows) + (2 * columns)
@@ -43,10 +47,11 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	
-	
-	
 	var beat_label = $MarginContainer/BottomGUI/Labels/BeatLabel
 	beat_label.text = "Beat: " + str(current_beat)
+	
+	if chart_has_changed:
+		$MarginContainer/Buttons/SaveButton.disabled = false
 
 
 func load_buttons(starting_position : Vector2, direction : Globals.directions, x : int,
@@ -64,7 +69,7 @@ func load_buttons(starting_position : Vector2, direction : Globals.directions, x
 
 
 '''
-Sets an attack at the corresponding location to an instruction.
+Sets an attack at the corresponding location or deactivates it.
 '''
 func set_attack(local_position : Vector2, attack : bool):
 	
@@ -111,6 +116,7 @@ func reset_buttons_to_false() -> void:
 
 func quit() -> void:
 	get_tree().quit
+	self.queue_free()
 
 
 func play() -> void:
@@ -187,10 +193,40 @@ func for_every_beat() -> void:
 	
 
 func copy_attacks() -> void:
-	copy_data.events = data._get_events(current_beat)
-
+	
+	var exists : bool
+	
+	for i in total_buttons:
+		exists = data._check_event_exists(current_beat, 0, buttons[i].local_position)
+		
+		if exists:
+			copy_data = data._get_event_positions(current_beat, Globals.obstacle_types.BOULDER)
+			break
+	
+	$MarginContainer/Buttons/PasteButton.disabled = false
 
 func paste_attacks() -> void:
 	
+	reset_buttons_to_false()
 	
-	pass # Replace with function body.
+	for data in copy_data:
+		set_attack(data, true)
+		set_button_at(data)
+
+
+func save() -> void:
+	$SaveFolderSelect.popup()
+
+func load_data() -> void:
+	$LoadSaveSelect.popup()
+
+func save_folder_selected(dir: String) -> void:
+	var file = $SaveFolderSelect.current_file
+	data.save(dir, file, false)
+
+func load_save_file(path: String) -> void:
+	data._load(path)
+	
+	for event in data.events:
+		reset_buttons_to_false()
+		set_button_at(event.position)

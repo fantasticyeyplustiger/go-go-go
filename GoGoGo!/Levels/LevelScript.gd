@@ -35,14 +35,7 @@ var gridSize : int = 7
 - initializes some values
 '''
 func _ready():
-	data._add_event(1,0,Vector2(6,1))
-	data._add_event(2,0,Vector2(2,0))
-	data._add_event(3,0,Vector2(0,2))
-	data._add_event(4,0,Vector2(1,6))
-	data._add_event(5,0,Vector2(6,1))
-	data._add_event(6,0,Vector2(2,0))
-	data._add_event(7,0,Vector2(0,2))
-	data._add_event(8,0,Vector2(1,6))
+	data._load()
 	
 	#data._load_from_string("{\"events\":[{\"timing\":100,\"type\":0}]}")
 	bpm /= 4

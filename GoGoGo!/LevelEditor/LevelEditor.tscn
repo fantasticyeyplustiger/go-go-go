@@ -71,6 +71,24 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_1127s")
 
+[node name="SaveFolderSelect" type="FileDialog" parent="."]
+initial_position = 1
+size = Vector2i(638, 370)
+ok_button_text = "Save"
+dialog_hide_on_ok = true
+dialog_close_on_escape = false
+use_native_dialog = true
+
+[node name="LoadSaveSelect" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Load a File"
+initial_position = 1
+size = Vector2i(638, 370)
+ok_button_text = "Save"
+dialog_hide_on_ok = true
+dialog_close_on_escape = false
+use_native_dialog = true
+
 [node name="Song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_b3455")
 
@@ -142,7 +160,21 @@ text = "COPY"
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
+disabled = true
 text = "PASTE"
+
+[node name="SaveButton" type="Button" parent="MarginContainer/Buttons"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+disabled = true
+text = "SAVE"
+
+[node name="LoadButton" type="Button" parent="MarginContainer/Buttons"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "LOAD"
 
 [node name="BottomGUI" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -224,9 +256,13 @@ offset_top = -1792.0
 offset_right = 712.0
 offset_bottom = -1752.0
 
+[connection signal="dir_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
+[connection signal="file_selected" from="LoadSaveSelect" to="." method="load_save_file"]
 [connection signal="item_selected" from="ItemList" to="." method="change_chart"]
 [connection signal="timeout" from="PlayTimer" to="." method="for_every_beat"]
 [connection signal="pressed" from="MarginContainer/Buttons/Button" to="." method="quit"]
 [connection signal="pressed" from="MarginContainer/Buttons/PlayButton" to="." method="play"]
 [connection signal="pressed" from="MarginContainer/Buttons/CopyButton" to="." method="copy_attacks"]
 [connection signal="pressed" from="MarginContainer/Buttons/PasteButton" to="." method="paste_attacks"]
+[connection signal="pressed" from="MarginContainer/Buttons/SaveButton" to="." method="save"]
+[connection signal="pressed" from="MarginContainer/Buttons/LoadButton" to="." method="load_data"]

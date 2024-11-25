@@ -20,4 +20,4 @@ func _on_pressed() -> void:
 
 func switch_on():
 	$BoulderSprite.visible = true
-	attack = not attack
+	attack = true
