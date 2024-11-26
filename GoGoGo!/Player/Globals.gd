@@ -28,13 +28,12 @@ class levelData:
 	
 	'''
 	Creates and returns an event (dictionary) with the given parameters.
-	Timing is multiplied by 1000 to convert its seconds into milliseconds.
 	'''
 	func _create_event(timing : int, type : int, position : Vector2):
 		return {
-			"timing" : timing * 1000,
-			"type" : type,
 			"activated" : false,
+			"timing" : timing,
+			"type" : type,
 			"x" : position.x, # JSONs can't parse vectors, so position is separated into x and y
 			"y" : position.y
 		}
@@ -72,10 +71,11 @@ class levelData:
 	Returns true if exists, false otherwise.
 	'''
 	func _check_event_exists(timing : int, type : int, position : Vector2) -> bool:
-		var data_struct = _create_event(timing, type, position)
 		
 		for data in events:
-			if data_struct == data:
+			
+			# only these three variables need to be checked
+			if (position.x == data.x) and (position.y == data.y) and (timing == data.timing):
 				return true
 		
 		return false
@@ -86,8 +86,6 @@ class levelData:
 	'''
 	func _get_events(timing : int):
 		var returning_events = []
-		timing *= 1000
-		# timing is multiplied 1000 to convert it into milliseconds, just like data_struct
 		
 		for data in events:
 			
@@ -103,8 +101,6 @@ class levelData:
 	'''
 	func _get_event_positions(timing : int, type : int):
 		var returning_events : Array[Vector2] = []
-		timing *= 1000
-		# timing is multiplied 1000 to convert it into milliseconds, just like data_struct
 		
 		for data in events:
 			
@@ -121,7 +117,7 @@ class levelData:
 		events = data.events
 		random_attacks_on = data.random_attacks_on
 		
-		file.close()
+		file = null
 	
 	
 	
@@ -133,13 +129,12 @@ class levelData:
 		return JSON.stringify(saved_data)
 	
 	
-	func save(directory : String, save_file, random_attacks_on : bool):
+	func save(save_file, random_attacks_on : bool):
 		var file = FileAccess.open(save_file, FileAccess.WRITE)
 		file.store_string(_stringify(random_attacks_on))
 		print(_stringify(random_attacks_on))
 		
-		
-		file.close()
+		file = null
 	
 	
 	

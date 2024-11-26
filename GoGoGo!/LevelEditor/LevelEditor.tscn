@@ -81,12 +81,13 @@ use_native_dialog = true
 
 [node name="LoadSaveSelect" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Load a File"
+title = "Open a File"
 initial_position = 1
 size = Vector2i(638, 370)
-ok_button_text = "Save"
+ok_button_text = "Open"
 dialog_hide_on_ok = true
 dialog_close_on_escape = false
+file_mode = 0
 use_native_dialog = true
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
@@ -257,6 +258,7 @@ offset_right = 712.0
 offset_bottom = -1752.0
 
 [connection signal="dir_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
+[connection signal="file_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
 [connection signal="file_selected" from="LoadSaveSelect" to="." method="load_save_file"]
 [connection signal="item_selected" from="ItemList" to="." method="change_chart"]
 [connection signal="timeout" from="PlayTimer" to="." method="for_every_beat"]

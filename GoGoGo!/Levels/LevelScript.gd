@@ -35,19 +35,43 @@ var gridSize : int = 7
 - initializes some values
 '''
 func _ready():
-	data._load()
+	data._load("res://SavedLevels/MR OOPS HARD MODE")
 	
 	#data._load_from_string("{\"events\":[{\"timing\":100,\"type\":0}]}")
-	bpm /= 4
+	bpm = 180
 	beatLength = (60/bpm) * 1000
 	
 	for x in gridSize:
 		spawners.append([])
 		for y in gridSize:
-			spawners[x].append(Vector2(128+(x-1)*256,-128+(6-y)*-256))
+			spawners[x].append(Vector2( 128 + (x-1) * 256 , -128 + (6-y) * -256))
 		
 	
-	gridSize-=1
+	gridSize -= 1
+
+func load_spawners(starting_position : Vector2, direction : Globals.directions, x : int,
+					y : int, control_node : Control) -> void:
+	
+	for i in rows:
+		for j in columns:
+			
+			
+			
+			pass
+		pass
+
+'''
+	for i in rows:
+		var new_child = load(on_or_off_button_path).instantiate()
+		
+		control_node.add_child(new_child)
+		buttons.push_back(new_child)
+		new_child.position = Vector2(x * i, y * i)
+		new_child.local_position = Vector2(
+			(roundi(new_child.global_position.x - $ButtonOrigin.position.x)) / tile_size,
+			(roundi(new_child.global_position.y - $ButtonOrigin.position.y)) / tile_size)
+'''
+
 
 '''
 -- PHYSICS PROCESS --
@@ -63,7 +87,7 @@ func _physics_process(_delta):
 	var loopRange = range(0,events.size())
 	
 	for i in loopRange:
-		if(events[i].timing <= Globals.songMilliseconds && !events[i].activated):
+		if(events[i].timing * 1000 <= Globals.songMilliseconds && !events[i].activated):
 			# all the code below spawns a boulder, change this to a function once we add more obstacles!
 			_spawn_obstacle(events[i])
 	
@@ -77,7 +101,8 @@ func _spawn_obstacle(object):
 		
 		var newBoulder = boulder.instantiate()
 		add_child(newBoulder)
-		var spawnPosition=object.position
+		
+		var spawnPosition = Vector2(object.x, object.y)
 		
 		newBoulder.global_position=spawners[spawnPosition.x][spawnPosition.y]
 		
@@ -85,11 +110,11 @@ func _spawn_obstacle(object):
 		
 		if(spawnPosition.x == 6 and spawnPosition.y > 0):
 			direction = Globals.directions.LEFT
-			newBoulder.global_position.x+=256
+			newBoulder.global_position.x += 256
 		
 		elif(spawnPosition.x > 0 and spawnPosition.y == 6):
 			direction = Globals.directions.UP
-			newBoulder.global_position.y+=256
+			newBoulder.global_position.y += 256
 		
 		elif(spawnPosition.x > 0 and spawnPosition.y == 0):
 			direction = Globals.directions.DOWN

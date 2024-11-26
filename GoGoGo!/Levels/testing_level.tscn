@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=4 uid="uid://bmdbva8kn4x2k"]
 
-[ext_resource type="Script" path="res://Levels/LevelScript.gd" id="1_q061h"]
+[ext_resource type="Script" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
 [ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_xb43s"]
 [ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="3_pyhnl"]
 [ext_resource type="Texture2D" uid="uid://2m6iicmpflej" path="res://Sprites/WallRamp.png" id="4_ule1p"]
 [ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_53n1o"]
-[ext_resource type="AudioStream" uid="uid://civc3b3mrsjwm" path="res://Music/inferno.ogg" id="8_b13p7"]
+[ext_resource type="AudioStream" uid="uid://dh3yd7e511h1p" path="res://Music/Mr Oops!.mp3" id="7_ewu5e"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ha8rw"]
 resource_name = "Walls"
@@ -35,13 +35,7 @@ sources/2 = SubResource("TileSetAtlasSource_6xhs0")
 sources/3 = SubResource("TileSetAtlasSource_xkojb")
 
 [node name="testing level" type="Node2D"]
-script = ExtResource("1_q061h")
-rows = 6
-columns = 6
-row_attack_spot_limit = 4
-column_attack_spot_limit = 4
-wave = 1
-bpm = 400.0
+script = ExtResource("1_almtx")
 
 [node name="floor" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -66,7 +60,7 @@ position = Vector2(768, -768)
 zoom = Vector2(0.45, 0.45)
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_b13p7")
+stream = ExtResource("7_ewu5e")
 volume_db = -13.117
 
 [node name="WaveLabel" type="Label" parent="."]
@@ -76,3 +70,35 @@ offset_right = -486.0
 offset_bottom = -854.0
 theme_override_font_sizes/font_size = 150
 text = "Wave: "
+
+[node name="DownRowStart" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 56.0
+
+[node name="UpRowStart" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = -1776.0
+offset_right = 48.0
+offset_bottom = -1736.0
+
+[node name="LeftColumnStart" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -248.0
+offset_top = -1520.0
+offset_right = -208.0
+offset_bottom = -1480.0
+
+[node name="RightColumnStart" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1544.0
+offset_top = -1520.0
+offset_right = 1584.0
+offset_bottom = -1480.0

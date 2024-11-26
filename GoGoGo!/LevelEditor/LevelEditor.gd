@@ -39,10 +39,10 @@ func _ready():
 	
 	total_buttons = (2 * rows) + (2 * columns)
 	
-	load_buttons($DownRowStart.position, Globals.directions.UP, tile_size, 0, $DownRowStart)
-	load_buttons($UpRowStart.position, Globals.directions.DOWN, tile_size, 0, $UpRowStart)
-	load_buttons($RightColumnStart.position, Globals.directions.RIGHT, 0, tile_size, $RightColumnStart)
-	load_buttons($LeftColumnStart.position, Globals.directions.LEFT, 0, tile_size, $LeftColumnStart)
+	load_buttons($DownRowStart.position, tile_size, 0, $DownRowStart)
+	load_buttons($UpRowStart.position, tile_size, 0, $UpRowStart)
+	load_buttons($RightColumnStart.position, 0, tile_size, $RightColumnStart)
+	load_buttons($LeftColumnStart.position, 0, tile_size, $LeftColumnStart)
 
 
 func _physics_process(delta: float) -> void:
@@ -54,8 +54,7 @@ func _physics_process(delta: float) -> void:
 		$MarginContainer/Buttons/SaveButton.disabled = false
 
 
-func load_buttons(starting_position : Vector2, direction : Globals.directions, x : int,
-				 y : int, control_node : Control) -> void:
+func load_buttons(starting_position : Vector2, x : int, y : int, control_node : Control) -> void:
 	
 	for i in rows:
 		var new_child = load(on_or_off_button_path).instantiate()
@@ -64,12 +63,13 @@ func load_buttons(starting_position : Vector2, direction : Globals.directions, x
 		buttons.push_back(new_child)
 		new_child.position = Vector2(x * i, y * i)
 		new_child.local_position = Vector2(
-			(new_child.global_position.x - $ButtonOrigin.position.x) / tile_size,
-			(new_child.global_position.y - $ButtonOrigin.position.y) / tile_size)
+			(roundi(new_child.global_position.x - $ButtonOrigin.position.x)) / tile_size,
+			(roundi(new_child.global_position.y - $ButtonOrigin.position.y)) / tile_size)
 
 
 '''
 Sets an attack at the corresponding location or deactivates it.
+Called by OnOrOffButton being pressed.
 '''
 func set_attack(local_position : Vector2, attack : bool):
 	
@@ -197,6 +197,7 @@ func copy_attacks() -> void:
 	var exists : bool
 	
 	for i in total_buttons:
+		#exists cant detect loaded events?
 		exists = data._check_event_exists(current_beat, 0, buttons[i].local_position)
 		
 		if exists:
@@ -220,13 +221,25 @@ func save() -> void:
 func load_data() -> void:
 	$LoadSaveSelect.popup()
 
-func save_folder_selected(dir: String) -> void:
-	var file = $SaveFolderSelect.current_file
-	data.save(dir, file, false)
-
 func load_save_file(path: String) -> void:
+	
+	data = Globals.levelData.new()
+	
+	for i in $ItemList.item_count:
+		$ItemList.set_item_icon(i, $Empty.texture)
+	
 	data._load(path)
+	reset_buttons_to_false()
+	
+	var iterator : int = 0
 	
 	for event in data.events:
-		reset_buttons_to_false()
-		set_button_at(event.position)
+		
+		var event_position : Vector2 = Vector2(event.x, event.y)
+		$ItemList.set_item_icon(event.timing, $Boulder.texture)
+		
+		set_button_at(event_position)
+
+func save_folder_selected(path: String) -> void:
+	var file = $SaveFolderSelect.current_file
+	data.save(path, false)
