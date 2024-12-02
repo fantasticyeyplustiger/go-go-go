@@ -36,6 +36,17 @@ sources/3 = SubResource("TileSetAtlasSource_xkojb")
 
 [node name="testing level" type="Node2D"]
 script = ExtResource("1_almtx")
+rows = 6
+columns = 6
+bpm = 180.0
+
+[node name="BG2" type="ColorRect" parent="."]
+offset_left = -1392.0
+offset_top = 424.0
+offset_right = -1352.0
+offset_bottom = 464.0
+scale = Vector2(108.04, -60.52)
+color = Color(0, 0, 0, 1)
 
 [node name="floor" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -63,7 +74,14 @@ zoom = Vector2(0.45, 0.45)
 stream = ExtResource("7_ewu5e")
 volume_db = -13.117
 
+[node name="PlayTimer" type="Timer" parent="."]
+
+[node name="StartLevel" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
 [node name="WaveLabel" type="Label" parent="."]
+visible = false
 offset_left = -961.0
 offset_top = -1059.0
 offset_right = -486.0
@@ -71,34 +89,45 @@ offset_bottom = -854.0
 theme_override_font_sizes/font_size = 150
 text = "Wave: "
 
+[node name="BG1" type="ColorRect" parent="."]
+offset_left = -1392.0
+offset_top = 424.0
+offset_right = -1352.0
+offset_bottom = 464.0
+scale = Vector2(108.04, -60.52)
+color = Color(0, 0, 0, 1)
+
 [node name="DownRowStart" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 8.0
-offset_top = 16.0
-offset_right = 48.0
-offset_bottom = 56.0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 168.0
+offset_bottom = 168.0
 
 [node name="UpRowStart" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 8.0
-offset_top = -1776.0
-offset_right = 48.0
-offset_bottom = -1736.0
+offset_left = 128.0
+offset_top = -1664.0
+offset_right = 168.0
+offset_bottom = -1624.0
 
 [node name="LeftColumnStart" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -248.0
-offset_top = -1520.0
-offset_right = -208.0
-offset_bottom = -1480.0
+offset_left = -128.0
+offset_top = -1408.0
+offset_right = -88.0
+offset_bottom = -1368.0
 
 [node name="RightColumnStart" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1544.0
-offset_top = -1520.0
-offset_right = 1584.0
-offset_bottom = -1480.0
+offset_left = 1664.0
+offset_top = -1408.0
+offset_right = 1704.0
+offset_bottom = -1368.0
+
+[connection signal="timeout" from="PlayTimer" to="." method="play"]
+[connection signal="timeout" from="StartLevel" to="." method="start_level"]

@@ -60,18 +60,6 @@ func load_spawners(starting_position : Vector2, direction : Globals.directions, 
 			pass
 		pass
 
-'''
-	for i in rows:
-		var new_child = load(on_or_off_button_path).instantiate()
-		
-		control_node.add_child(new_child)
-		buttons.push_back(new_child)
-		new_child.position = Vector2(x * i, y * i)
-		new_child.local_position = Vector2(
-			(roundi(new_child.global_position.x - $ButtonOrigin.position.x)) / tile_size,
-			(roundi(new_child.global_position.y - $ButtonOrigin.position.y)) / tile_size)
-'''
-
 
 '''
 -- PHYSICS PROCESS --

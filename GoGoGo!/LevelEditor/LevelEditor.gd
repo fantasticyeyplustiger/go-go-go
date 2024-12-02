@@ -65,6 +65,7 @@ func load_buttons(starting_position : Vector2, x : int, y : int, control_node : 
 		new_child.local_position = Vector2(
 			(roundi(new_child.global_position.x - $ButtonOrigin.position.x)) / tile_size,
 			(roundi(new_child.global_position.y - $ButtonOrigin.position.y)) / tile_size)
+		
 
 
 '''
