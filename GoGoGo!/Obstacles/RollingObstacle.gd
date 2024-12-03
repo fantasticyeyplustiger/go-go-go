@@ -6,17 +6,19 @@ extends CharacterBody2D
 
 func _ready():
 	velocity = Globals.obstacle_speed[obstacle_type] * Globals.roll_direction[direction]
-	pass
+	$Sprite2D.rotate(rotate_speed)
+	$SFX.play()
+	print("obstacle spawned")
+
+func initialize():
+	_ready()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	velocity = Globals.obstacle_speed[obstacle_type] * Globals.roll_direction[direction]
 	move_and_slide()
-	$Sprite2D.rotate(rotate_speed)
-	pass
 
 func on_roll(roll_velocity):
 	velocity = roll_velocity
 
 func die():
-	pass
+	self.queue_free()

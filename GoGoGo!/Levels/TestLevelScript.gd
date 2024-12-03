@@ -29,6 +29,11 @@ var total_beats : int
 var current_beat : int = 0
 
 var data = Globals.levelData.new()
+var debug_vector : Vector2 = Vector2(-1, -1)
+
+var first_wave : bool = true
+
+var boulder = preload("res://Obstacles/Boulder.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,15 +45,21 @@ func _ready() -> void:
 	left_col_start = $LeftColumnStart.position
 	song_length = $Music.stream.get_length()
 	
-	spawn_at(down_row_start, tile_size, 0, $DownRowStart, 7)
-	spawn_at(up_row_start, tile_size, 0, $UpRowStart, 0)
-	spawn_at(right_col_start, 0, tile_size, $RightColumnStart, 7)
-	spawn_at(left_col_start, 0, tile_size, $LeftColumnStart, 0)
+	spawn_at(down_row_start, tile_size, 0, rows + 1)
+	spawn_at(up_row_start, tile_size, 0, 0)
+	spawn_at(right_col_start, 0, tile_size, columns + 1)
+	spawn_at(left_col_start, 0, tile_size, 0)
 	
 	init_play_timer()
 
+func _physics_process(delta: float) -> void:
+	pass
 
 func play() -> void:
+	
+	if first_wave:
+		$Music.play()
+		first_wave = false
 	
 	current_events = data._get_events(current_beat)
 	
@@ -56,14 +67,72 @@ func play() -> void:
 		return
 	
 	var event_position : Vector2
+	var spawn_position : Vector2
+	var obstacle
 	
 	for event in current_events:
 		
-		event_position = Vector2(event.x, event.y)
-		# search for the index the event position is inside of local_positions and spawn it there
+		obstacle = get_obstacle(event)
 		
+		event_position = Vector2(event.x, event.y)
+		
+		spawn_position = get_spawn_position(event_position)
+		
+		if event.x > 0 and event.y == 0:
+			obstacle.direction = Globals.directions.DOWN
+		
+		elif event.x > 0 and event.y == columns + 1:
+			obstacle.direction = Globals.directions.UP
+		
+		elif event.x == 0 and event.y > 0:
+			obstacle.direction = Globals.directions.LEFT
+		
+		else: #elif event.x == rows + 1 and event.y > 0:
+			obstacle.direction = Globals.directions.RIGHT
+		
+		obstacle.global_position = spawn_position
+		event.activated = true
+		
+		print(obstacle.global_position)
+	
 	
 	current_beat += 1
+
+func get_obstacle(event):
+	
+	var obstacle_type = get_obstacle_type(event.type)
+	
+	match obstacle_type:
+		
+		Globals.obstacle_types.BOULDER:
+			var a_boulder = boulder.instantiate()
+			a_boulder.initialize()
+			return a_boulder
+		
+		# add return instantiated scene accordingly
+		Globals.obstacle_types.ROCK_PELLET:
+			pass
+		
+		Globals.obstacle_types.STEEL_BALL:
+			pass
+		
+		Globals.obstacle_types.IRON_PELLET:
+			pass
+
+func get_obstacle_type(type) -> Globals.obstacle_types:
+	for i in Globals.obstacle_types.keys().size():
+		if type == i:
+			i = i as Globals.obstacle_types
+			return i
+	
+	return Globals.obstacle_types.BOULDER
+
+
+func get_spawn_position(local_position : Vector2) -> Vector2:
+	
+	var index = local_positions.find(local_position, 0)
+	
+	return spawn_positions[index]
 
 
 func init_play_timer() -> void:
@@ -72,11 +141,11 @@ func init_play_timer() -> void:
 	$PlayTimer.wait_time = beat_length
 
 
-func spawn_at(start_pos : Vector2, x_add : int, y_add : int, control_node : Control, constant : int) -> void:
+func spawn_at(start_pos : Vector2, x_add : int, y_add : int, constant : int) -> void:
 	
 	for i in rows:
 		
-		var spawn_pos : Vector2 = Vector2((x_add * i), (y_add * i)) + control_node.position
+		var spawn_pos : Vector2 = Vector2((x_add * i), (y_add * i))
 		spawn_pos += start_pos + Vector2(x_add, y_add)
 		
 		spawn_positions.append(spawn_pos)
@@ -97,4 +166,5 @@ func init_local_positions(constant_is_x : bool, constant : int) -> void:
 
 func start_level() -> void:
 	$BG1.visible = false
-	$PlayTimer.start
+	$PlayTimer.start(3)
+	

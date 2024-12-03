@@ -32,7 +32,7 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
-[node name="BoulderSFX" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_t4id5")
 volume_db = -15.0
 pitch_scale = 3.0
