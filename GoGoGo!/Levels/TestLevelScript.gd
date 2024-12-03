@@ -23,6 +23,7 @@ var spawn_positions : Array[Vector2] = []
 var local_positions : Array[Vector2] = []
 var current_events : Array
 
+var next_beat : float = 0
 var beat_length : float
 var song_length : float
 var total_beats : int
@@ -32,12 +33,13 @@ var data = Globals.levelData.new()
 var debug_vector : Vector2 = Vector2(-1, -1)
 
 var first_wave : bool = true
+var start : bool = false
 
 var boulder = preload("res://Obstacles/Boulder.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	data._load("res://SavedLevels/MR OOPS HARD MODE")
+	data._load("res://SavedLevels/MR OOPS HARD MODE.json")
 	
 	down_row_start = $DownRowStart.position
 	up_row_start = $UpRowStart.position
@@ -51,19 +53,33 @@ func _ready() -> void:
 	spawn_at(left_col_start, 0, tile_size, 0)
 	
 	init_play_timer()
+	
+	
 
 func _physics_process(delta: float) -> void:
-	pass
-
-func play() -> void:
+	if not start:
+		return
 	
 	if first_wave:
 		$Music.play()
 		first_wave = false
 	
+	Globals.songMilliseconds = $Music.get_playback_position() * 1000
+	
+	if(Globals.songMilliseconds > next_beat * 1000):
+		play()
+		# this is true
+		print(Globals.songMilliseconds)
+		print(current_beat)
+		next_beat += beat_length
+
+
+func play() -> void:
+	
 	current_events = data._get_events(current_beat)
 	
 	if current_events.is_empty():
+		current_beat += 1
 		return
 	
 	var event_position : Vector2
@@ -166,5 +182,7 @@ func init_local_positions(constant_is_x : bool, constant : int) -> void:
 
 func start_level() -> void:
 	$BG1.visible = false
-	$PlayTimer.start(3)
-	
+	$PlayTimer.start(2)
+
+func start_playing() -> void:
+	start = true
