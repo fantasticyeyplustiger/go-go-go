@@ -43,6 +43,7 @@ func _ready():
 	load_buttons($UpRowStart.position, tile_size, 0, $UpRowStart)
 	load_buttons($RightColumnStart.position, 0, tile_size, $RightColumnStart)
 	load_buttons($LeftColumnStart.position, 0, tile_size, $LeftColumnStart)
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -80,6 +81,7 @@ func set_attack(local_position : Vector2, attack : bool):
 	
 	else:
 		data._remove_event(current_beat, Globals.obstacle_types.BOULDER, local_position)
+		
 		
 		if check_all_buttons_off():
 			$ItemList.set_item_icon(current_beat, $Empty.texture)

@@ -39,7 +39,7 @@ var boulder = preload("res://Obstacles/Boulder.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	data._load("res://SavedLevels/MR OOPS HARD MODE.json")
+	data._load("res://SavedLevels/MR OOPS HARD MODE")
 	
 	down_row_start = $DownRowStart.position
 	up_row_start = $UpRowStart.position
@@ -49,34 +49,20 @@ func _ready() -> void:
 	
 	spawn_at(down_row_start, tile_size, 0, rows + 1)
 	spawn_at(up_row_start, tile_size, 0, 0)
-	spawn_at(right_col_start, 0, tile_size, columns + 1)
-	spawn_at(left_col_start, 0, tile_size, 0)
+	spawn_at(right_col_start, 0, tile_size, 0)
+	spawn_at(left_col_start, 0, tile_size, columns + 1)
 	
 	init_play_timer()
-	
-	
 
-func _physics_process(delta: float) -> void:
-	if not start:
-		return
-	
+
+
+func play() -> void:
 	if first_wave:
 		$Music.play()
 		first_wave = false
 	
-	Globals.songMilliseconds = $Music.get_playback_position() * 1000
-	
-	if(Globals.songMilliseconds > next_beat * 1000):
-		play()
-		# this is true
-		print(Globals.songMilliseconds)
-		print(current_beat)
-		next_beat += beat_length
-
-
-func play() -> void:
-	
 	current_events = data._get_events(current_beat)
+	$WaveLabel.text = "Beat: " + str(current_beat)
 	
 	if current_events.is_empty():
 		current_beat += 1
@@ -89,6 +75,7 @@ func play() -> void:
 	for event in current_events:
 		
 		obstacle = get_obstacle(event)
+		self.add_child(obstacle)
 		
 		event_position = Vector2(event.x, event.y)
 		
@@ -106,11 +93,15 @@ func play() -> void:
 		else: #elif event.x == rows + 1 and event.y > 0:
 			obstacle.direction = Globals.directions.RIGHT
 		
+		obstacle.change_velocity(obstacle.direction)
+		
 		obstacle.global_position = spawn_position
+		$Sprite2D.global_position = spawn_position
 		event.activated = true
 		
-		print(obstacle.global_position)
 	
+	$SFX.pitch_scale = randf_range(2.5, 3.5)
+	$SFX.play()
 	
 	current_beat += 1
 
@@ -122,7 +113,6 @@ func get_obstacle(event):
 		
 		Globals.obstacle_types.BOULDER:
 			var a_boulder = boulder.instantiate()
-			a_boulder.initialize()
 			return a_boulder
 		
 		# add return instantiated scene accordingly
@@ -162,7 +152,7 @@ func spawn_at(start_pos : Vector2, x_add : int, y_add : int, constant : int) -> 
 	for i in rows:
 		
 		var spawn_pos : Vector2 = Vector2((x_add * i), (y_add * i))
-		spawn_pos += start_pos + Vector2(x_add, y_add)
+		spawn_pos += start_pos
 		
 		spawn_positions.append(spawn_pos)
 	
@@ -182,7 +172,13 @@ func init_local_positions(constant_is_x : bool, constant : int) -> void:
 
 func start_level() -> void:
 	$BG1.visible = false
-	$PlayTimer.start(2)
+	await get_tree().create_timer(1.5).timeout
+	$PlayTimer.start()
 
-func start_playing() -> void:
-	start = true
+'''
+-- UNHANDLED INPUT --
+- respawns the player when they press "R"
+'''
+func _unhandled_input(_event):
+	if Input.is_action_pressed("respawn"):
+		get_tree().reload_current_scene()

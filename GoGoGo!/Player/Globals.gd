@@ -58,7 +58,7 @@ class levelData:
 		var iterator : int = 0
 		
 		for data in events:
-			if data_struct == data:
+			if data_struct.x == data.x and data_struct.y == data.y and data_struct.timing == data.timing:
 				events.remove_at(iterator)
 				return
 			
@@ -132,7 +132,6 @@ class levelData:
 	func save(save_file, random_attacks_on : bool):
 		var file = FileAccess.open(save_file, FileAccess.WRITE)
 		file.store_string(_stringify(random_attacks_on))
-		print(_stringify(random_attacks_on))
 		
 		file = null
 	
