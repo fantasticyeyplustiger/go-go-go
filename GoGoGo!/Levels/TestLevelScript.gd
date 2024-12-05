@@ -27,7 +27,7 @@ var next_beat : float = 0
 var beat_length : float
 var song_length : float
 var total_beats : int
-var current_beat : int = 0
+var current_beat : int = -3
 
 var data = Globals.levelData.new()
 var debug_vector : Vector2 = Vector2(-1, -1)
@@ -36,6 +36,7 @@ var first_wave : bool = true
 var start : bool = false
 
 var boulder = preload("res://Obstacles/Boulder.tscn")
+var arrow = preload("res://Arrows/boulder_arrow.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -57,6 +58,13 @@ func _ready() -> void:
 
 
 func play() -> void:
+	
+	show_arrows()
+	
+	if current_beat < 0:
+		current_beat += 1
+		return
+	
 	if first_wave:
 		$Music.play()
 		first_wave = false
@@ -96,14 +104,56 @@ func play() -> void:
 		obstacle.change_velocity(obstacle.direction)
 		
 		obstacle.global_position = spawn_position
-		$Sprite2D.global_position = spawn_position
 		event.activated = true
 		
 	
-	$SFX.pitch_scale = randf_range(2.5, 3.5)
+	$SFX.pitch_scale = randf_range(2.0, 4.0)
 	$SFX.play()
 	
 	current_beat += 1
+
+func show_arrows() -> void:
+	
+	print("current beat: " + str(current_beat))
+	
+	if current_beat + 3 < data.events.size():
+		current_events = data._get_events(current_beat + 3)
+	else:
+		return
+	
+	if current_events.is_empty():
+		return
+	
+	var event_position : Vector2
+	var spawn_position : Vector2
+	
+	for event in current_events:
+		
+		var new_arrow = arrow.instantiate()
+		
+		event_position = Vector2(event.x, event.y)
+		
+		spawn_position = get_spawn_position(event_position)
+		
+		if event.x > 0 and event.y == 0:
+			new_arrow.set_arrow(Globals.directions.DOWN)
+		
+		elif event.x == 0 and event.y > 0:
+			new_arrow.set_arrow(Globals.directions.LEFT)
+		
+		elif event.x == rows + 1 and event.y > 0:
+			new_arrow.set_arrow(Globals.directions.RIGHT)
+		
+		# it's already pointing up
+		# elif event.x > 0 and event.y == columns + 1:
+			# obstacle.direction = Globals.directions.UP
+		
+		new_arrow.global_position = spawn_position
+		
+		self.add_child(new_arrow)
+		
+		new_arrow.set_wait(beat_length * 3)
+	
 
 func get_obstacle(event):
 	
@@ -135,9 +185,7 @@ func get_obstacle_type(type) -> Globals.obstacle_types:
 
 
 func get_spawn_position(local_position : Vector2) -> Vector2:
-	
 	var index = local_positions.find(local_position, 0)
-	
 	return spawn_positions[index]
 
 
@@ -171,8 +219,6 @@ func init_local_positions(constant_is_x : bool, constant : int) -> void:
 
 
 func start_level() -> void:
-	$BG1.visible = false
-	await get_tree().create_timer(1.5).timeout
 	$PlayTimer.start()
 
 '''

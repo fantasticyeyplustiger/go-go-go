@@ -22,9 +22,7 @@ signal instruct
 class levelData: 
 	var events = []
 	var json = JSON.new
-	var path = "user://gogogo_data.ggg"
 	var random_attacks_on : bool
-	
 	
 	'''
 	Creates and returns an event (dictionary) with the given parameters.

@@ -17,7 +17,6 @@ func _on_pressed() -> void:
 			$BoulderSprite.visible = false
 	
 	Globals.emit_signal("instruct", local_position, attack)
-	print(local_position)
 
 func switch_on():
 	$BoulderSprite.visible = true
