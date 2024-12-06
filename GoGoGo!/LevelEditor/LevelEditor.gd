@@ -5,7 +5,7 @@ var bpm : float
 var on_or_off_button_path = "res://LevelEditor/OnOrOffButton.tscn"
 var total_buttons : int
 var data : Globals.levelData = Globals.levelData.new()
-var copy_data : Array[Vector2] = []
+var copy_data : Array[Vector2] = [] # CHANGE TO LEVELDATA
 
 var current_beat : int = 0
 var old_beat : int
