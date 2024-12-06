@@ -4,15 +4,9 @@ extends Node2D
 @export var columns : int = 0
 @export var bpm : float
 
-@onready var audio = $Music
+@onready var obstacle_holder : Node = $ObstacleHolder
 
 var tile_size = 256
-
-var start_music : bool = true
-var start_wave : bool = true
-
-var row_attacks
-var column_attacks
 
 var down_row_start : Vector2
 var up_row_start : Vector2
@@ -36,28 +30,44 @@ var first_wave : bool = true
 var start : bool = false
 
 var boulder = preload("res://Obstacles/Boulder.tscn")
+
 var arrow = preload("res://Arrows/boulder_arrow.tscn")
 
-# Called when the node enters the scene tree for the first time.
+
+'''
+Initializes important data and loads the level.
+- Called before everything else.
+'''
 func _ready() -> void:
 	data._load("res://SavedLevels/MR OOPS HARD MODE")
 	
+	song_length = $Music.stream.get_length()
+	
+	#region Initializes spawn_positions and local_positions.
 	down_row_start = $DownRowStart.position
 	up_row_start = $UpRowStart.position
 	right_col_start = $RightColumnStart.position
 	left_col_start = $LeftColumnStart.position
-	song_length = $Music.stream.get_length()
 	
 	spawn_at(down_row_start, tile_size, 0, rows + 1)
 	spawn_at(up_row_start, tile_size, 0, 0)
 	spawn_at(right_col_start, 0, tile_size, 0)
 	spawn_at(left_col_start, 0, tile_size, columns + 1)
+	#endregion
 	
 	init_play_timer()
 
 
-
+'''
+Shows the arrows for every obstacle that exists from the third beat after current_beat.
+Places down every obstacle that exists for this beat from the events in data.
+- Called once every "beat" (from $PlayTimer).
+'''
 func play() -> void:
+	
+	if current_beat > total_beats:
+		$PlayTimer.stop()
+		# Show win screen.
 	
 	show_arrows()
 	
@@ -70,8 +80,9 @@ func play() -> void:
 		first_wave = false
 	
 	current_events = data._get_events(current_beat)
-	$WaveLabel.text = "Beat: " + str(current_beat)
+	$WaveLabel.text = "Beat: " + str(current_beat) # Debugging.
 	
+	# If it's empty, there is no need to run this code.
 	if current_events.is_empty():
 		current_beat += 1
 		return
@@ -80,15 +91,17 @@ func play() -> void:
 	var spawn_position : Vector2
 	var obstacle
 	
+	# Places all of the obstacles from the current beat.
 	for event in current_events:
 		
 		obstacle = get_obstacle(event)
 		self.add_child(obstacle)
 		
 		event_position = Vector2(event.x, event.y)
-		
 		spawn_position = get_spawn_position(event_position)
 		
+		#region Decides obstacle's roll direction.
+		# Decides by looking at its local_position on the grid.
 		if event.x > 0 and event.y == 0:
 			obstacle.direction = Globals.directions.DOWN
 		
@@ -98,29 +111,36 @@ func play() -> void:
 		elif event.x == 0 and event.y > 0:
 			obstacle.direction = Globals.directions.LEFT
 		
-		else: #elif event.x == rows + 1 and event.y > 0:
+		else: #elif event.x == rows + 1 and event.y > 0:, base direction is always RIGHT
 			obstacle.direction = Globals.directions.RIGHT
+		#endregion
 		
+		# Changes where it rolls with the new direction.
 		obstacle.change_velocity(obstacle.direction)
 		
 		obstacle.global_position = spawn_position
 		event.activated = true
 		
-	
-	$SFX.pitch_scale = randf_range(2.0, 4.0)
+	# Randomly changes the pitch to prevent "audio fatigue."
+	$SFX.pitch_scale = randf_range(1.5, 4.5)
 	$SFX.play()
 	
 	current_beat += 1
 
+'''
+Shows the locations of where the next obstacles will appear after three beats.
+- Called from play().
+- Calls get_spawn_position() and set_arrow(), an Arrow method.
+'''
 func show_arrows() -> void:
 	
-	print("current beat: " + str(current_beat))
-	
+	# Condition is + 3 so it doesn't go out of the events' bounds.
 	if current_beat + 3 < data.events.size():
 		current_events = data._get_events(current_beat + 3)
 	else:
 		return
 	
+	# If it's empty, there is no need to run this code.
 	if current_events.is_empty():
 		return
 	
@@ -129,12 +149,13 @@ func show_arrows() -> void:
 	
 	for event in current_events:
 		
+		# Change this to "get" a specific type of arrow eventually.
 		var new_arrow = arrow.instantiate()
 		
 		event_position = Vector2(event.x, event.y)
-		
 		spawn_position = get_spawn_position(event_position)
 		
+		#region Decides the arrow's pointing direction.
 		if event.x > 0 and event.y == 0:
 			new_arrow.set_arrow(Globals.directions.DOWN)
 		
@@ -147,14 +168,19 @@ func show_arrows() -> void:
 		# it's already pointing up
 		# elif event.x > 0 and event.y == columns + 1:
 			# obstacle.direction = Globals.directions.UP
+		#endregion
 		
 		new_arrow.global_position = spawn_position
 		
 		self.add_child(new_arrow)
 		
 		new_arrow.set_wait(beat_length * 3)
-	
 
+'''
+Instantiates a specific type of obstacle from the data given.
+- Called from play().
+- Calls get_obstacle_type().
+'''
 func get_obstacle(event):
 	
 	var obstacle_type = get_obstacle_type(event.type)
@@ -175,26 +201,44 @@ func get_obstacle(event):
 		Globals.obstacle_types.IRON_PELLET:
 			pass
 
+'''
+Gets the type of obstacle from an int and converts it to the actual enum value.
+- Called from get_obstacle().
+'''
 func get_obstacle_type(type) -> Globals.obstacle_types:
 	for i in Globals.obstacle_types.keys().size():
 		if type == i:
-			i = i as Globals.obstacle_types
-			return i
+			var key : String = Globals.obstacle_types.find_key(i)
+			return Globals.obstacle_types[key]
 	
 	return Globals.obstacle_types.BOULDER
 
-
+'''
+Uses local_position to find the spawn location's index in spawn_positions.
+(The two are initialized at the same spots and indexes.)
+- Called from show_arrows() and play().
+'''
 func get_spawn_position(local_position : Vector2) -> Vector2:
 	var index = local_positions.find(local_position, 0)
 	return spawn_positions[index]
 
-
+'''
+Initializes the length of $PlayTimer's wait time and declares total_beats.
+- Called from _ready().
+'''
 func init_play_timer() -> void:
 	beat_length = (60 / bpm)
+	
+	@warning_ignore("narrowing_conversion")
 	total_beats = song_length / beat_length
+	
 	$PlayTimer.wait_time = beat_length
 
-
+'''
+Initializes every spawn location and local position accordingly for a singular row or column.
+- Called from _ready().
+- Calls init_local_positions().
+'''
 func spawn_at(start_pos : Vector2, x_add : int, y_add : int, constant : int) -> void:
 	
 	for i in rows:
@@ -207,7 +251,10 @@ func spawn_at(start_pos : Vector2, x_add : int, y_add : int, constant : int) -> 
 	init_local_positions(x_add == 0, constant)
 	
 
-
+'''
+Initializes a row or column of local positions after a row or column of spawn locations are initialized.
+- Called from spawn_at().
+'''
 func init_local_positions(constant_is_x : bool, constant : int) -> void:
 	if constant_is_x:
 		for i in columns:
@@ -217,13 +264,14 @@ func init_local_positions(constant_is_x : bool, constant : int) -> void:
 		for i in rows:
 			local_positions.append(Vector2(i + 1, constant))
 
-
+'''
+- Starts the level after $StartLevel's timer goes off.
+'''
 func start_level() -> void:
 	$PlayTimer.start()
 
 '''
--- UNHANDLED INPUT --
-- respawns the player when they press "R"
+- Respawns the player when they press the letter "R."
 '''
 func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):

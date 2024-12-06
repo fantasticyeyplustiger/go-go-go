@@ -54,7 +54,9 @@ func _physics_process(delta: float) -> void:
 	if chart_has_changed:
 		$MarginContainer/Buttons/SaveButton.disabled = false
 
-
+'''
+Initializes all of the buttons inside of the editor.
+'''
 func load_buttons(starting_position : Vector2, x : int, y : int, control_node : Control) -> void:
 	
 	for i in rows:
@@ -73,14 +75,14 @@ func load_buttons(starting_position : Vector2, x : int, y : int, control_node : 
 Sets an attack at the corresponding location or deactivates it.
 Called by OnOrOffButton being pressed.
 '''
-func set_attack(local_position : Vector2, attack : bool):
+func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle_types):
 	
 	if attack:
-		data._add_event(current_beat, Globals.obstacle_types.BOULDER, local_position)
+		data._add_event(current_beat, type, local_position)
 		$ItemList.set_item_icon(current_beat, $Boulder.texture)
 	
 	else:
-		data._remove_event(current_beat, Globals.obstacle_types.BOULDER, local_position)
+		data._remove_event(current_beat, type, local_position)
 		
 		
 		if check_all_buttons_off():
@@ -93,10 +95,11 @@ func initialize_chart() -> void:
 	
 	beat_length = (60 / bpm)
 	total_beats = song_length / beat_length
+	print(total_beats)
 	
 	var sprite : Sprite2D = $Empty
 	
-	for i in song_length:
+	for i in total_beats:
 		$ItemList.add_item(str(i), sprite.texture, true)
 
 
@@ -143,8 +146,6 @@ func play() -> void:
 			
 			$ItemList.select(current_beat, true)
 			$ItemList.ensure_current_is_visible()
-	
-	
 
 
 '''
@@ -195,12 +196,15 @@ func for_every_beat() -> void:
 	change_chart(current_beat)
 	
 
+'''
+Copies the attack from this part of the chart
+'''
 func copy_attacks() -> void:
 	
 	var exists : bool
 	
 	for i in total_buttons:
-		#exists cant detect loaded events?
+		
 		exists = data._check_event_exists(current_beat, 0, buttons[i].local_position)
 		
 		if exists:
