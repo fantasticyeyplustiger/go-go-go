@@ -16,8 +16,5 @@ func change_velocity(new_direction):
 func _physics_process(_delta):
 	move_and_slide()
 
-func on_roll(roll_velocity):
-	velocity = roll_velocity
-
 func die():
 	self.queue_free()

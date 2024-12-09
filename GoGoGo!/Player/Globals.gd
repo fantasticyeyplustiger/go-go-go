@@ -1,7 +1,5 @@
 extends Node
 
-var songMilliseconds=0
-
 enum directions {DOWN, LEFT, RIGHT, UP}
 		
 enum obstacle_types {BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET}
@@ -15,14 +13,13 @@ const obstacle_speed = {obstacle_types.BOULDER : 750, obstacle_types.ROCK_PELLET
 # Globals.emit_signal(signal name)
 # Globals.(signal name).connect()
 
-signal roll_obstacle(roll_velocity)
-signal stop_level()
+@warning_ignore("unused_signal")
 signal instruct
 
 class levelData: 
 	var events = []
 	var json = JSON.new
-	var random_attacks_on : bool
+	var random_attacks : bool
 	
 	'''
 	Creates and returns an event (dictionary) with the given parameters.
@@ -39,9 +36,13 @@ class levelData:
 	
 	'''
 	Creates an event and adds it to the events array.
-	Refer to _create_event() for the dictionary added.
+	If an event already exists at its spot, remove it.
+	
+	- Called by LevelEditor.
+	- Calls _remove_event() and _create_event().
 	'''
 	func _add_event(timing : int, type : int, position : Vector2) -> void:
+		_remove_event(timing, position)
 		events.append(_create_event(timing, type, position))
 	
 	
@@ -49,14 +50,15 @@ class levelData:
 	Creates an event from the given parameters and
 	removes any event that is exactly the same inside of the events array.
 	'''
-	func _remove_event(timing : int, type : int, position : Vector2) -> void:
+	func _remove_event(timing : int, position : Vector2) -> void:
 		
-		var data_struct = _create_event(timing, type, position)
+		var data_struct = _create_event(timing, 0, position)
 		
 		var iterator : int = 0
 		
 		for data in events:
 			if data_struct.x == data.x and data_struct.y == data.y and data_struct.timing == data.timing:
+				print("removed event: ", data)
 				events.remove_at(iterator)
 				return
 			
@@ -68,7 +70,7 @@ class levelData:
 	checks if the same event can be seen inside of the events array.
 	Returns true if exists, false otherwise.
 	'''
-	func _check_event_exists(timing : int, type : int, position : Vector2) -> bool:
+	func _check_event_exists(timing : int, position : Vector2) -> bool:
 		
 		for data in events:
 			
@@ -97,12 +99,12 @@ class levelData:
 	Gets every position of the events that happen on a certain beat.
 	Returns a Vector2 array with those positions.
 	'''
-	func _get_event_positions(timing : int, type : int):
+	func _get_event_positions(timing : int):
 		var returning_events : Array[Vector2] = []
 		
 		for data in events:
 			
-			if data.timing == timing and data.type == type:
+			if data.timing == timing:
 				var position : Vector2 = Vector2(data.x, data.y)
 				returning_events.append(position)
 		
@@ -113,7 +115,7 @@ class levelData:
 		var data = JSON.parse_string(file.get_line())
 		
 		events = data.events
-		random_attacks_on = data.random_attacks_on
+		random_attacks = data.random_attacks
 		
 		file = null
 	
@@ -122,7 +124,7 @@ class levelData:
 	func _stringify(random_attacks_on : bool):
 		var saved_data = {
 			"events" : events,
-			"random_attacks_on" : random_attacks_on
+			"random_attacks" : random_attacks_on
 		}
 		return JSON.stringify(saved_data)
 	

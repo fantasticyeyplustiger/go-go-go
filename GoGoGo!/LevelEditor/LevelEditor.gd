@@ -5,7 +5,7 @@ var bpm : float
 var on_or_off_button_path = "res://LevelEditor/OnOrOffButton.tscn"
 var total_buttons : int
 var data : Globals.levelData = Globals.levelData.new()
-var copy_data : Array[Vector2] = [] # CHANGE TO LEVELDATA
+var copy_data : Globals.levelData = Globals.levelData.new()
 
 var current_beat : int = 0
 var old_beat : int
@@ -17,7 +17,6 @@ var song : AudioStreamPlayer
 var beat_length : float
 var total_beats : int
 
-var chart_has_changed : bool = false
 var is_saving : bool = false
 var is_loading : bool = false
 
@@ -28,6 +27,7 @@ var is_loading : bool = false
 func _ready():
 	
 	song = $Song
+	@warning_ignore("narrowing_conversion")
 	song_length = song.stream.get_length()
 	bpm = 180
 	
@@ -39,25 +39,16 @@ func _ready():
 	
 	total_buttons = (2 * rows) + (2 * columns)
 	
-	load_buttons($DownRowStart.position, tile_size, 0, $DownRowStart)
-	load_buttons($UpRowStart.position, tile_size, 0, $UpRowStart)
-	load_buttons($RightColumnStart.position, 0, tile_size, $RightColumnStart)
-	load_buttons($LeftColumnStart.position, 0, tile_size, $LeftColumnStart)
+	load_buttons(tile_size, 0, $DownRowStart)
+	load_buttons(tile_size, 0, $UpRowStart)
+	load_buttons(0, tile_size, $RightColumnStart)
+	load_buttons(0, tile_size, $LeftColumnStart)
 	
-
-
-func _physics_process(delta: float) -> void:
-	
-	var beat_label = $MarginContainer/BottomGUI/Labels/BeatLabel
-	beat_label.text = "Beat: " + str(current_beat)
-	
-	if chart_has_changed:
-		$MarginContainer/Buttons/SaveButton.disabled = false
 
 '''
 Initializes all of the buttons inside of the editor.
 '''
-func load_buttons(starting_position : Vector2, x : int, y : int, control_node : Control) -> void:
+func load_buttons(x : int, y : int, control_node : Control) -> void:
 	
 	for i in rows:
 		var new_child = load(on_or_off_button_path).instantiate()
@@ -65,6 +56,7 @@ func load_buttons(starting_position : Vector2, x : int, y : int, control_node : 
 		control_node.add_child(new_child)
 		buttons.push_back(new_child)
 		new_child.position = Vector2(x * i, y * i)
+		@warning_ignore("integer_division")
 		new_child.local_position = Vector2(
 			(roundi(new_child.global_position.x - $ButtonOrigin.position.x)) / tile_size,
 			(roundi(new_child.global_position.y - $ButtonOrigin.position.y)) / tile_size)
@@ -82,20 +74,18 @@ func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle
 		$ItemList.set_item_icon(current_beat, $Boulder.texture)
 	
 	else:
-		data._remove_event(current_beat, type, local_position)
-		
+		data._remove_event(current_beat, local_position)
 		
 		if check_all_buttons_off():
 			$ItemList.set_item_icon(current_beat, $Empty.texture)
-	
-	chart_has_changed = true
 
 
 func initialize_chart() -> void:
 	
 	beat_length = (60 / bpm)
+	
+	@warning_ignore("narrowing_conversion")
 	total_beats = song_length / beat_length
-	print(total_beats)
 	
 	var sprite : Sprite2D = $Empty
 	
@@ -116,12 +106,10 @@ Turns every button off and disables their boulder sprites.
 '''
 func reset_buttons_to_false() -> void:
 	for button in buttons:
-		button.get_child(0).visible = false
-		button.attack = false
+		button.switch_off()
 
 
 func quit() -> void:
-	get_tree().quit
 	self.queue_free()
 
 
@@ -155,34 +143,38 @@ and loads changed chart. Resets all buttons to false if the loaded chart is empt
 func change_chart(index : int) -> void:
 	
 	current_beat = index
-	chart_has_changed = false
 	
 	var exists : bool = false
-	var attacks : Array[Vector2] = []
+	var attacks : Array = []
 	
 	for i in total_buttons:
-		exists = data._check_event_exists(current_beat, 0, buttons[i].local_position)
+		exists = data._check_event_exists(current_beat, buttons[i].local_position)
 		
 		if exists:
 			reset_buttons_to_false()
-			attacks = data._get_event_positions(current_beat, Globals.obstacle_types.BOULDER)
+			attacks = data._get_events(current_beat)
 			break
+	
+	$MarginContainer/Buttons/SaveButton.disabled = false
+	$MarginContainer/BottomGUI/Labels/BeatLabel.text = "Beat: " + str(current_beat)
 	
 	if attacks.size() == 0:
 		reset_buttons_to_false()
 		return
 	
-	for data in attacks:
-		set_button_at(data)
+	for attack in attacks:
+		print(attack)
+		var pos = Vector2(attack.x, attack.y)
+		set_button_at(pos, attack.type)
 	
 
 '''
 Turns on a specific button with the position given.
 '''
-func set_button_at(position):
+func set_button_at(pos : Vector2, type):
 	for button in buttons:
-		if button.local_position == position:
-			button.switch_on()
+		if button.local_position == pos:
+			button.switch_on(type)
 
 
 func for_every_beat() -> void:
@@ -205,10 +197,10 @@ func copy_attacks() -> void:
 	
 	for i in total_buttons:
 		
-		exists = data._check_event_exists(current_beat, 0, buttons[i].local_position)
+		exists = data._check_event_exists(current_beat, buttons[i].local_position)
 		
 		if exists:
-			copy_data = data._get_event_positions(current_beat, Globals.obstacle_types.BOULDER)
+			copy_data = data._get_events(current_beat)
 			break
 	
 	$MarginContainer/Buttons/PasteButton.disabled = false
@@ -217,9 +209,10 @@ func paste_attacks() -> void:
 	
 	reset_buttons_to_false()
 	
-	for data in copy_data:
-		set_attack(data, true)
-		set_button_at(data)
+	for event in copy_data.events:
+		var pos : Vector2 = Vector2(event.x, event.y)
+		set_attack(pos, true, event.type)
+		set_button_at(pos, event.type)
 
 
 func save() -> void:
@@ -238,15 +231,12 @@ func load_save_file(path: String) -> void:
 	data._load(path)
 	reset_buttons_to_false()
 	
-	var iterator : int = 0
-	
 	for event in data.events:
 		
 		var event_position : Vector2 = Vector2(event.x, event.y)
 		$ItemList.set_item_icon(event.timing, $Boulder.texture)
 		
-		set_button_at(event_position)
+		set_button_at(event_position, event.type)
 
 func save_folder_selected(path: String) -> void:
-	var file = $SaveFolderSelect.current_file
 	data.save(path, false)

@@ -93,14 +93,6 @@ use_native_dialog = true
 [node name="Song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_b3455")
 
-[node name="Empty" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_c8yye")
-
-[node name="Boulder" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("4_u8j4i")
-
 [node name="ItemList" type="ItemList" parent="."]
 layout_mode = 2
 offset_left = 252.0
@@ -221,6 +213,14 @@ tile_set = SubResource("TileSet_36nai")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(768, -768)
 zoom = Vector2(0.45, 0.45)
+
+[node name="Empty" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_c8yye")
+
+[node name="Boulder" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_u8j4i")
 
 [node name="DownRowStart" type="Control" parent="."]
 anchors_preset = 0

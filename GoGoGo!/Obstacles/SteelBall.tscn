@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Obstacles/RollingObstacle.gd" id="1_soe57"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ff2it"]
-size = Vector2(192, 192)
+size = Vector2(160, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eln0d"]
 
