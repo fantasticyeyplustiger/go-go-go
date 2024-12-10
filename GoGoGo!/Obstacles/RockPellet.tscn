@@ -9,8 +9,12 @@ size = Vector2(80, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0q8o"]
 
 [node name="RockPellet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 8
 script = ExtResource("1_ojklq")
 rotate_speed = 0.2
+direction = 2
+obstacle_type = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

@@ -9,8 +9,12 @@ size = Vector2(160, 160)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eln0d"]
 
 [node name="SteelBall" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 8
 script = ExtResource("1_soe57")
 rotate_speed = 0.3
+direction = 2
+obstacle_type = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_s71o0")

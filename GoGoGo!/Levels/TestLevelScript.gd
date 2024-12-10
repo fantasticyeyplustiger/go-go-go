@@ -30,6 +30,9 @@ var first_wave : bool = true
 var start : bool = false
 
 var boulder = preload("res://Obstacles/Boulder.tscn")
+var pellet = preload("res://Obstacles/RockPellet.tscn")
+var steel_ball = preload("res://Obstacles/SteelBall.tscn")
+var iron_pellet = preload("res://Obstacles/IronPellet.tscn")
 
 var arrow = preload("res://Arrows/boulder_arrow.tscn")
 
@@ -193,13 +196,16 @@ func get_obstacle(event):
 		
 		# add return instantiated scene accordingly
 		Globals.obstacle_types.ROCK_PELLET:
-			pass
+			var a_pellet = pellet.instantiate()
+			return a_pellet
 		
 		Globals.obstacle_types.STEEL_BALL:
-			pass
+			var a_steel_ball = steel_ball.instantiate()
+			return a_steel_ball
 		
 		Globals.obstacle_types.IRON_PELLET:
-			pass
+			var an_iron_pellet = iron_pellet.instantiate()
+			return an_iron_pellet
 
 '''
 Gets the type of obstacle from an int and converts it to the actual enum value.

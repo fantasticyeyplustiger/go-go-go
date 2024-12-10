@@ -163,7 +163,6 @@ func change_chart(index : int) -> void:
 		return
 	
 	for attack in attacks:
-		print(attack)
 		var pos = Vector2(attack.x, attack.y)
 		set_button_at(pos, attack.type)
 	
@@ -232,11 +231,9 @@ func load_save_file(path: String) -> void:
 	reset_buttons_to_false()
 	
 	for event in data.events:
-		
-		var event_position : Vector2 = Vector2(event.x, event.y)
 		$ItemList.set_item_icon(event.timing, $Boulder.texture)
-		
-		set_button_at(event_position, event.type)
+	
+	
 
 func save_folder_selected(path: String) -> void:
 	data.save(path, false)

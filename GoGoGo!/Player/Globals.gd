@@ -58,7 +58,6 @@ class levelData:
 		
 		for data in events:
 			if data_struct.x == data.x and data_struct.y == data.y and data_struct.timing == data.timing:
-				print("removed event: ", data)
 				events.remove_at(iterator)
 				return
 			
