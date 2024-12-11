@@ -179,7 +179,7 @@ func set_button_at(pos : Vector2, type):
 func for_every_beat() -> void:
 	
 	current_beat += 1
-	if current_beat > song_length:
+	if current_beat > total_beats:
 		$PlayTimer.stop()
 	
 	$ItemList.select(current_beat, true)
