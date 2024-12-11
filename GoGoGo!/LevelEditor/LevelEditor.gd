@@ -31,9 +31,6 @@ func _ready():
 	song_length = song.stream.get_length()
 	bpm = 180
 	
-	initialize_chart()
-	
-	$ItemList.select(0, true)
 	$MarginContainer/Buttons/SpinBox.value = bpm
 	
 	Globals.instruct.connect(set_attack)
@@ -244,4 +241,13 @@ func save_folder_selected(path: String) -> void:
 
 func bpm_changed(value: float) -> void:
 	bpm = value
+	initialize_chart()
+	
+	$ItemList.select(0, true)
 	print(bpm)
+
+
+func song_import(path: String) -> void:
+	if path.get_extension() == ".ogg" or path.get_extension() == ".mp3":
+		$Song.stream = path.get_file()
+	# else say incorrect audio format!
