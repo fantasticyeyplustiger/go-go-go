@@ -264,6 +264,7 @@ offset_bottom = -1752.0
 [connection signal="timeout" from="PlayTimer" to="." method="for_every_beat"]
 [connection signal="pressed" from="MarginContainer/Buttons/Button" to="." method="quit"]
 [connection signal="pressed" from="MarginContainer/Buttons/PlayButton" to="." method="play"]
+[connection signal="value_changed" from="MarginContainer/Buttons/SpinBox" to="." method="bpm_changed"]
 [connection signal="pressed" from="MarginContainer/Buttons/CopyButton" to="." method="copy_attacks"]
 [connection signal="pressed" from="MarginContainer/Buttons/PasteButton" to="." method="paste_attacks"]
 [connection signal="pressed" from="MarginContainer/Buttons/SaveButton" to="." method="save"]

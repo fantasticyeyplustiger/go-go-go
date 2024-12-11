@@ -34,6 +34,7 @@ func _ready():
 	initialize_chart()
 	
 	$ItemList.select(0, true)
+	$MarginContainer/Buttons/SpinBox.value = bpm
 	
 	Globals.instruct.connect(set_attack)
 	
@@ -237,3 +238,10 @@ func load_save_file(path: String) -> void:
 
 func save_folder_selected(path: String) -> void:
 	data.save(path, false)
+
+
+
+
+func bpm_changed(value: float) -> void:
+	bpm = value
+	print(bpm)
