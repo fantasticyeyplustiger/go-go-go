@@ -244,7 +244,7 @@ func bpm_changed(value: float) -> void:
 	initialize_chart()
 	
 	$ItemList.select(0, true)
-	print(bpm)
+	data.bpm = bpm
 
 
 func song_import(path: String) -> void:

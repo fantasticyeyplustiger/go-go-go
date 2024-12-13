@@ -20,6 +20,7 @@ class levelData:
 	var events = []
 	var json = JSON.new
 	var random_attacks : bool
+	var bpm : int
 	
 	'''
 	Creates and returns an event (dictionary) with the given parameters.
@@ -115,6 +116,7 @@ class levelData:
 		
 		events = data.events
 		random_attacks = data.random_attacks
+		bpm = data.bpm
 		
 		file = null
 	
@@ -123,7 +125,8 @@ class levelData:
 	func _stringify(random_attacks_on : bool):
 		var saved_data = {
 			"events" : events,
-			"random_attacks" : random_attacks_on
+			"random_attacks" : random_attacks_on,
+			"bpm" : bpm
 		}
 		return JSON.stringify(saved_data)
 	

@@ -73,10 +73,11 @@ func move(direction):
 		await move_animation.finished
 		
 		if is_dashing:
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.001).timeout
 			moving = false
 		else:
 			moving = false
+		
 		move_speed = 16
 
 '''
@@ -89,4 +90,3 @@ func get_damaged(_area):
 	
 	is_dead = true
 	$temporarySprite.color = "#FF0000"
-	print("haha you died")

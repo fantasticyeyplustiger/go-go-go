@@ -2,7 +2,6 @@ extends Node2D
 
 @export var rows : int = 0
 @export var columns : int = 0
-@export var bpm : float
 
 @onready var obstacle_holder : Node = $ObstacleHolder
 
@@ -22,6 +21,7 @@ var beat_length : float
 var song_length : float
 var total_beats : int
 var current_beat : int = -3
+var bpm : float
 
 var data = Globals.levelData.new()
 var debug_vector : Vector2 = Vector2(-1, -1)
@@ -233,6 +233,9 @@ Initializes the length of $PlayTimer's wait time and declares total_beats.
 - Called from _ready().
 '''
 func init_play_timer() -> void:
+	
+	bpm = data.bpm
+	
 	beat_length = (60 / bpm)
 	
 	@warning_ignore("narrowing_conversion")

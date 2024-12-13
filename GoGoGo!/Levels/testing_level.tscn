@@ -39,7 +39,6 @@ sources/3 = SubResource("TileSetAtlasSource_xkojb")
 script = ExtResource("1_almtx")
 rows = 6
 columns = 6
-bpm = 180.0
 
 [node name="BG2" type="ColorRect" parent="."]
 offset_left = -1392.0
