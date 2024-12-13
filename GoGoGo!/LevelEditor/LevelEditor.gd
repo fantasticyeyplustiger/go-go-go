@@ -1,8 +1,11 @@
 extends Control
 
-var tile_size : int = 256
-var bpm : float
-var on_or_off_button_path = "res://LevelEditor/OnOrOffButton.tscn"
+const on_or_off_button_path : String = "res://LevelEditor/OnOrOffButton.tscn"
+const tile_size : int = 256
+
+var test_level : String = "res://Levels/testing_level.tscn"
+
+var bpm : float = 180.0
 var total_buttons : int
 var data : Globals.levelData = Globals.levelData.new()
 var copy_data : Globals.levelData = Globals.levelData.new()
@@ -17,7 +20,7 @@ var song : AudioStreamPlayer
 var beat_length : float
 var total_beats : int
 
-var is_saving : bool = false
+var has_saved : bool = false
 var is_loading : bool = false
 
 @export var rows : int = 6
@@ -26,10 +29,16 @@ var is_loading : bool = false
 
 func _ready():
 	
+	if not Globals.data_path.is_empty():
+		data._load(Globals.data_path)
+		bpm = data.bpm
+		initialize_chart()
+		set_icons()
+	
+	
 	song = $Song
 	@warning_ignore("narrowing_conversion")
 	song_length = song.stream.get_length()
-	bpm = 180
 	
 	$MarginContainer/Buttons/SpinBox.value = bpm
 	
@@ -54,6 +63,7 @@ func load_buttons(x : int, y : int, control_node : Control) -> void:
 		control_node.add_child(new_child)
 		buttons.push_back(new_child)
 		new_child.position = Vector2(x * i, y * i)
+		
 		@warning_ignore("integer_division")
 		new_child.local_position = Vector2(
 			(roundi(new_child.global_position.x - $ButtonOrigin.position.x)) / tile_size,
@@ -67,6 +77,8 @@ Called by OnOrOffButton being pressed.
 '''
 func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle_types):
 	
+	has_saved = false
+	
 	if attack:
 		data._add_event(current_beat, type, local_position)
 		$ItemList.set_item_icon(current_beat, $Boulder.texture)
@@ -77,6 +89,10 @@ func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle
 		if check_all_buttons_off():
 			$ItemList.set_item_icon(current_beat, $Empty.texture)
 
+func set_icons():
+	for event in data.events:
+		print("setting icon")
+		$ItemList.set_item_icon(event.timing, $Boulder.texture)
 
 func initialize_chart() -> void:
 	
@@ -133,6 +149,15 @@ func play() -> void:
 			$ItemList.select(current_beat, true)
 			$ItemList.ensure_current_is_visible()
 
+func restart_beat():
+	var song_position : float
+	song_position = current_beat * beat_length
+	
+	$PlayTimer.start()
+	$Song.play(song_position)
+	
+	$ItemList.select(current_beat, true)
+	$ItemList.ensure_current_is_visible()
 
 '''
 Grabs the part of the chart you've changed to, saves the one you were at,
@@ -141,6 +166,9 @@ and loads changed chart. Resets all buttons to false if the loaded chart is empt
 func change_chart(index : int) -> void:
 	
 	current_beat = index
+	
+	if is_playing:
+		restart_beat()
 	
 	var exists : bool = false
 	var attacks : Array = []
@@ -211,14 +239,20 @@ func paste_attacks() -> void:
 		set_attack(pos, true, event.type)
 		set_button_at(pos, event.type)
 
-
+#region functions that open file selectors
 func save() -> void:
 	$SaveFolderSelect.popup()
 
 func load_data() -> void:
 	$LoadSaveSelect.popup()
 
+func load_song_import() -> void:
+	$SongImport.popup()
+#endregion
+
 func load_save_file(path: String) -> void:
+	
+	has_saved = true
 	
 	data = Globals.levelData.new()
 	
@@ -226,28 +260,41 @@ func load_save_file(path: String) -> void:
 		$ItemList.set_item_icon(i, $Empty.texture)
 	
 	data._load(path)
+	Globals.data_path = path
 	reset_buttons_to_false()
 	
 	for event in data.events:
 		$ItemList.set_item_icon(event.timing, $Boulder.texture)
-	
-	
+
 
 func save_folder_selected(path: String) -> void:
 	data.save(path, false)
-
-
+	has_saved = true
 
 
 func bpm_changed(value: float) -> void:
 	bpm = value
 	initialize_chart()
+	# remove or add chart items
 	
 	$ItemList.select(0, true)
 	data.bpm = bpm
 
 
-func song_import(path: String) -> void:
-	if path.get_extension() == ".ogg" or path.get_extension() == ".mp3":
-		$Song.stream = path.get_file()
+func song_import(path : String) -> void:
+	
+	var extension : String = path.get_extension()
+	
+	if extension == "ogg" or extension == "mp3" or extension == "mid":
+		$Song.stream = load(path)
+		$MarginContainer/BottomGUI/Labels/SongLabel.text = "Song: " + path.get_file()
+		data.song_path = path
 	# else say incorrect audio format!
+
+
+func play_test() -> void:
+	if not has_saved:
+		$SaveFolderSelect.popup()
+		has_saved = true
+	
+	get_tree().change_scene_to_file(test_level)

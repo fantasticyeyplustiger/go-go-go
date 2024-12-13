@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://fg5lh7e21fy2"]
 
 [ext_resource type="Script" path="res://Obstacles/RollingObstacle.gd" id="1_ojklq"]
-[ext_resource type="Texture2D" uid="uid://bttqsq4ajaflm" path="res://Sprites/bouler.png" id="2_inht4"]
+[ext_resource type="Texture2D" uid="uid://bji3afwe65a28" path="res://Sprites/RockPellet.png" id="2_li2jx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_datqh"]
 size = Vector2(80, 80)
@@ -17,8 +17,8 @@ direction = 2
 obstacle_type = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_inht4")
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_li2jx")
 
 [node name="Area2D" type="Area2D" parent="."]
 

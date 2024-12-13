@@ -8,7 +8,10 @@ const roll_direction = {directions.DOWN : Vector2.DOWN, directions.LEFT : Vector
 		directions.RIGHT : Vector2.RIGHT, directions.UP : Vector2.UP}
 
 const obstacle_speed = {obstacle_types.BOULDER : 750, obstacle_types.ROCK_PELLET : 2000,
-				obstacle_types.STEEL_BALL : 2000, obstacle_types.IRON_PELLET : 3000}
+				obstacle_types.STEEL_BALL : 1500, obstacle_types.IRON_PELLET : 3000}
+
+var data_path : String
+var current_beat : int
 
 # Globals.emit_signal(signal name)
 # Globals.(signal name).connect()
@@ -20,7 +23,8 @@ class levelData:
 	var events = []
 	var json = JSON.new
 	var random_attacks : bool
-	var bpm : int
+	var bpm : float
+	var song_path : String
 	
 	'''
 	Creates and returns an event (dictionary) with the given parameters.
@@ -48,17 +52,14 @@ class levelData:
 	
 	
 	'''
-	Creates an event from the given parameters and
-	removes any event that is exactly the same inside of the events array.
+	Removes an event at the specified beat and position.
 	'''
 	func _remove_event(timing : int, position : Vector2) -> void:
-		
-		var data_struct = _create_event(timing, 0, position)
 		
 		var iterator : int = 0
 		
 		for data in events:
-			if data_struct.x == data.x and data_struct.y == data.y and data_struct.timing == data.timing:
+			if position.x == data.x and position.y == data.y and timing == data.timing:
 				events.remove_at(iterator)
 				return
 			
@@ -121,12 +122,12 @@ class levelData:
 		file = null
 	
 	
-	
 	func _stringify(random_attacks_on : bool):
 		var saved_data = {
 			"events" : events,
 			"random_attacks" : random_attacks_on,
-			"bpm" : bpm
+			"bpm" : bpm,
+			"song_path" : song_path
 		}
 		return JSON.stringify(saved_data)
 	
@@ -135,7 +136,8 @@ class levelData:
 		var file = FileAccess.open(save_file, FileAccess.WRITE)
 		file.store_string(_stringify(random_attacks_on))
 		
+		Globals.data_path = file.get_path()
+		
 		file = null
-	
 	
 	

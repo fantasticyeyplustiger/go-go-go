@@ -13,7 +13,6 @@ func _on_pressed() -> void:
 	$AnimatedSprite2D.frame += 1
 	attack = true
 	
-	
 	match current_setting:
 		setting.NONE:
 			type = Globals.obstacle_types.BOULDER
@@ -38,15 +37,20 @@ func _on_pressed() -> void:
 			$AnimatedSprite2D.frame = 0
 		
 		_:
+			# YES THIS DEFAULT CASE IS NEEDED AND I HATE IT
+			@warning_ignore("int_as_enum_without_cast")
 			current_setting += 1
+			
+			@warning_ignore("int_as_enum_without_cast")
 			type += 1
+			
 			if current_setting > 4 or type > 3:
-				current_setting = 0
-				type = 0
+				
+				current_setting = setting.NONE
+				type = Globals.obstacle_types.BOULDER
+				
+				$AnimatedSprite2D.frame = 0
 	
-	print("Setting: ", current_setting)
-	print("Type: ", type)
-	print("Frame: ", $AnimatedSprite2D.frame)
 	Globals.emit_signal("instruct", local_position, attack, type)
 
 

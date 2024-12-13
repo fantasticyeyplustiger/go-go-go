@@ -93,13 +93,14 @@ use_native_dialog = true
 
 [node name="SongImport" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Open a File"
+title = "Import Song - AUDIO FILES ONLY"
 initial_position = 1
 size = Vector2i(638, 370)
 ok_button_text = "Open"
 dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
+root_subfolder = "Music"
 use_native_dialog = true
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
@@ -181,6 +182,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "LOAD"
 
+[node name="SongImportButton" type="Button" parent="MarginContainer/Buttons"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "IMPORT
+SONG"
+
 [node name="BottomGUI" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -208,6 +216,26 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 20
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = -936.0
+offset_top = -1968.0
+offset_right = 2901.0
+offset_bottom = 432.0
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="PlaytestButton" type="Button" parent="MarginContainer2"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 75
+text = "PLAY TEST"
 
 [node name="floor" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -282,3 +310,5 @@ offset_bottom = -1752.0
 [connection signal="pressed" from="MarginContainer/Buttons/PasteButton" to="." method="paste_attacks"]
 [connection signal="pressed" from="MarginContainer/Buttons/SaveButton" to="." method="save"]
 [connection signal="pressed" from="MarginContainer/Buttons/LoadButton" to="." method="load_data"]
+[connection signal="pressed" from="MarginContainer/Buttons/SongImportButton" to="." method="load_song_import"]
+[connection signal="pressed" from="MarginContainer2/PlaytestButton" to="." method="play_test"]

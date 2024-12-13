@@ -5,6 +5,8 @@ extends Node2D
 
 @onready var obstacle_holder : Node = $ObstacleHolder
 
+const level_editor : String = "res://LevelEditor/LevelEditor.tscn"
+
 var tile_size = 256
 
 var down_row_start : Vector2
@@ -42,7 +44,11 @@ Initializes important data and loads the level.
 - Called before everything else.
 '''
 func _ready() -> void:
-	data._load("res://SavedLevels/MR OOPS HARD MODE")
+	
+	if Globals.data_path.is_empty():
+		data._load("res://SavedLevels/MR OOPS HARD MODE")
+	else:
+		data._load(Globals.data_path)
 	
 	song_length = $Music.stream.get_length()
 	
@@ -285,3 +291,7 @@ func start_level() -> void:
 func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):
 		get_tree().reload_current_scene()
+
+
+func go_back() -> void:
+	get_tree().change_scene_to_file(level_editor)
