@@ -22,6 +22,7 @@ var total_beats : int
 
 var has_saved : bool = false
 var is_loading : bool = false
+var chart_initialized = false
 
 @export var rows : int = 6
 @export var columns : int = 6
@@ -33,8 +34,6 @@ func _ready():
 		data._load(Globals.data_path)
 		bpm = data.bpm
 		initialize_chart()
-		set_icons()
-	
 	
 	song = $Song
 	@warning_ignore("narrowing_conversion")
@@ -51,6 +50,8 @@ func _ready():
 	load_buttons(0, tile_size, $RightColumnStart)
 	load_buttons(0, tile_size, $LeftColumnStart)
 	
+	if not Globals.data_path.is_empty():
+		set_icons()
 
 '''
 Initializes all of the buttons inside of the editor.
@@ -77,6 +78,7 @@ Called by OnOrOffButton being pressed.
 '''
 func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle_types):
 	
+	print($ItemList.item_count)
 	has_saved = false
 	
 	if attack:
@@ -90,9 +92,11 @@ func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle
 			$ItemList.set_item_icon(current_beat, $Empty.texture)
 
 func set_icons():
+	
 	for event in data.events:
-		print("setting icon")
+		
 		$ItemList.set_item_icon(event.timing, $Boulder.texture)
+
 
 func initialize_chart() -> void:
 	
@@ -285,11 +289,11 @@ func song_import(path : String) -> void:
 	
 	var extension : String = path.get_extension()
 	
-	if extension == "ogg" or extension == "mp3" or extension == "mid":
+	if extension == "ogg" or extension == "mp3" or extension == "mid" and ResourceLoader.exists(path):
+		path = ProjectSettings.globalize_path(path)
 		$Song.stream = load(path)
 		$MarginContainer/BottomGUI/Labels/SongLabel.text = "Song: " + path.get_file()
 		data.song_path = path
-	# else say incorrect audio format!
 
 
 func play_test() -> void:
