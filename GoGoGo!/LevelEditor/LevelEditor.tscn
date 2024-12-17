@@ -81,7 +81,7 @@ use_native_dialog = true
 
 [node name="LoadSaveSelect" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Open a File"
+title = "Load A Level"
 initial_position = 1
 size = Vector2i(638, 370)
 ok_button_text = "Open"
@@ -93,28 +93,18 @@ use_native_dialog = true
 
 [node name="SongImport" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Select a Song"
+title = "Drag And Drop A Song!"
 initial_position = 1
 size = Vector2i(638, 370)
-ok_button_text = "Use"
+ok_button_text = "Open"
 dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
-access = 2
+root_subfolder = "Music"
 use_native_dialog = true
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_b3455")
-
-[node name="ItemList" type="ItemList" parent="."]
-layout_mode = 2
-offset_left = 252.0
-offset_top = -1936.0
-offset_right = 562.0
-offset_bottom = 400.0
-theme_override_font_sizes/font_size = 50
-allow_reselect = true
-icon_scale = 0.75
 
 [node name="PlayTimer" type="Timer" parent="."]
 
@@ -237,6 +227,16 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 75
 text = "PLAY TEST"
 
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 2
+offset_left = 252.0
+offset_top = -1936.0
+offset_right = 562.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 50
+allow_reselect = true
+icon_scale = 0.75
+
 [node name="floor" type="TileMapLayer" parent="."]
 use_parent_material = true
 position = Vector2(928, 0)
@@ -301,7 +301,6 @@ offset_bottom = -1752.0
 [connection signal="file_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
 [connection signal="file_selected" from="LoadSaveSelect" to="." method="load_save_file"]
 [connection signal="file_selected" from="SongImport" to="." method="song_import"]
-[connection signal="item_selected" from="ItemList" to="." method="change_chart"]
 [connection signal="timeout" from="PlayTimer" to="." method="for_every_beat"]
 [connection signal="pressed" from="MarginContainer/Buttons/Button" to="." method="quit"]
 [connection signal="pressed" from="MarginContainer/Buttons/PlayButton" to="." method="play"]
@@ -312,3 +311,4 @@ offset_bottom = -1752.0
 [connection signal="pressed" from="MarginContainer/Buttons/LoadButton" to="." method="load_data"]
 [connection signal="pressed" from="MarginContainer/Buttons/SongImportButton" to="." method="load_song_import"]
 [connection signal="pressed" from="MarginContainer2/PlaytestButton" to="." method="play_test"]
+[connection signal="item_selected" from="ItemList" to="." method="change_chart"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cokmfyr5qjpk5"
+path="res://.godot/imported/Excuse Filiburst.mp3-03a4202c46fd3fec8bbff7bc8bcbf8f5.mp3str"
+
+[deps]
+
+source_file="res://Music/Excuse Filiburst.mp3"
+dest_files=["res://.godot/imported/Excuse Filiburst.mp3-03a4202c46fd3fec8bbff7bc8bcbf8f5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
