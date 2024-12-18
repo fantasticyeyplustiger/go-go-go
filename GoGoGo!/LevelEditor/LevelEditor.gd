@@ -128,7 +128,8 @@ func reset_buttons_to_false() -> void:
 
 
 func quit() -> void:
-	self.queue_free()
+	$SaveFolderSelect.popup()
+	get_tree().quit()
 
 
 func play() -> void:
@@ -294,7 +295,6 @@ func song_import(path : String) -> void:
 		import_file(path, extension)
 		
 		$Song.stream = load(path)
-		$MarginContainer/BottomGUI/Labels/SongLabel.text = "Song: " + path.get_file()
 		data.song_path = path
 	
 	
@@ -308,7 +308,7 @@ func import_file(path : String, extension : String) -> void:
 	var audio_extension : String
 	var id : int = ResourceUID.create_id()
 	var import_path : String = "res://.godot/imported/" + path.get_file()
-	var path_two : String = "path=\"res://.godot/imported/" + path.get_file() + "-324fg67324h11h467845612g138241"
+	var path_two : String = "path=\"res://.godot/imported/" + path.get_file() + "-00000000000000000000000000000000"
 	
 	import_path += str( ResourceUID.id_to_text(id) ) + "." + extension + "str"
 	path_two += extension + "str"
@@ -357,3 +357,19 @@ func play_test() -> void:
 		has_saved = true
 	
 	get_tree().change_scene_to_file(test_level)
+
+
+func open_help_menu() -> void:
+	$EditorHelp.visible = true
+
+
+func select_song(path: String) -> void:
+	var extension : String = path.get_extension()
+	
+	if extension == "ogg" or extension == "mp3" or extension == "wav" and ResourceLoader.exists(path):
+		$Song.stream = load(path)
+		data.song_path = path
+
+
+func load_song_select() -> void:
+	$SongSelect.popup()

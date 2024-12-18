@@ -1,0 +1,23 @@
+[i]This is the level editor guide![/i]
+
+[b]Buttons:[/b]
+
+- [b]Quit[/b] : Exits the editor.
+
+- [b]Play[/b] : Goes through the chart in the editor and plays the song at the beat you're on. Plays on the current beat!
+
+- [b]Play Test[/b] : Makes you play the chart currently in the editor. If you haven't saved, it'll ask you to here. Plays on the current beat!
+
+- [b]BPM[/b] : Beats per minute. Determines how fast the chart will play in-game. If it isn't syncing properly, you might want to search up an online BPM finder and find your song's BPM there accordingly!
+
+- [b]Copy[/b] : Copies the attacks on the beat your on.
+
+- [b]Paste[/b] : Pastes the attack you copied onto the current beat of the chart you're on.
+
+- [b]Save[/b] : Saves your chart as an actual level.
+
+- [b]Load[/b] : Lets you select a level to load into the editor!
+
+- [b]Song Import[/b] : Lets you add a song into the Music folder by dragging and dropping.
+
+[b]NOTE : In order to use the newly imported song, you have to restart the application. Please save before you do this!

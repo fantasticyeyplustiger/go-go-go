@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=4 uid="uid://0vbf4nh5djlc"]
+[gd_scene load_steps=17 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
+[ext_resource type="AudioStream" uid="uid://0adpox03eva8" path="res://Music/Excuse Filiburst.mp3" id="2_5bs7l"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
 [ext_resource type="Texture2D" uid="uid://u2ryld5jhouk" path="res://Sprites/empty.png" id="3_c8yye"]
 [ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="3_fuvo5"]
 [ext_resource type="Texture2D" uid="uid://2m6iicmpflej" path="res://Sprites/WallRamp.png" id="4_h8q0s"]
 [ext_resource type="Texture2D" uid="uid://bttqsq4ajaflm" path="res://Sprites/bouler.png" id="4_u8j4i"]
 [ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_ovd7d"]
-[ext_resource type="AudioStream" uid="uid://dh3yd7e511h1p" path="res://Music/Mr Oops!.mp3" id="6_b3455"]
+[ext_resource type="PackedScene" uid="uid://3sxtuf7arlyc" path="res://LevelEditor/EditorHelp.tscn" id="9_dssst"]
 
 [sub_resource type="FontFile" id="FontFile_okppf"]
 cache/0/16/0/ascent = 0.0
@@ -25,10 +26,20 @@ cache/0/100/0/descent = 0.0
 cache/0/100/0/underline_position = 0.0
 cache/0/100/0/underline_thickness = 0.0
 cache/0/100/0/scale = 1.0
+cache/0/75/0/ascent = 0.0
+cache/0/75/0/descent = 0.0
+cache/0/75/0/underline_position = 0.0
+cache/0/75/0/underline_thickness = 0.0
+cache/0/75/0/scale = 1.0
+cache/0/80/0/ascent = 0.0
+cache/0/80/0/descent = 0.0
+cache/0/80/0/underline_position = 0.0
+cache/0/80/0/underline_thickness = 0.0
+cache/0/80/0/scale = 1.0
 
 [sub_resource type="Theme" id="Theme_rixxp"]
 default_font = SubResource("FontFile_okppf")
-default_font_size = 100
+default_font_size = 80
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fxrkx"]
 resource_name = "Walls"
@@ -77,11 +88,12 @@ size = Vector2i(638, 370)
 ok_button_text = "Save"
 dialog_hide_on_ok = true
 dialog_close_on_escape = false
+root_subfolder = "SavedLevels"
 use_native_dialog = true
 
 [node name="LoadSaveSelect" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Load A Level"
+title = "Load A Save!"
 initial_position = 1
 size = Vector2i(638, 370)
 ok_button_text = "Open"
@@ -103,8 +115,20 @@ file_mode = 0
 root_subfolder = "Music"
 use_native_dialog = true
 
+[node name="SongSelect" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Select A Song!"
+initial_position = 1
+size = Vector2i(638, 370)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+dialog_close_on_escape = false
+file_mode = 0
+root_subfolder = "Music"
+use_native_dialog = true
+
 [node name="Song" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_b3455")
+stream = ExtResource("2_5bs7l")
 
 [node name="PlayTimer" type="Timer" parent="."]
 
@@ -191,11 +215,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 20
 
-[node name="SongLabel" type="Label" parent="MarginContainer/BottomGUI/Labels"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 150
-text = "Song: Mr. Oops!"
-
 [node name="BeatLabel" type="Label" parent="MarginContainer/BottomGUI/Labels"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 150
@@ -219,13 +238,38 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="PlaytestButton" type="Button" parent="MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="HelpButton" type="Button" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 75
+text = "HELP
+"
+
+[node name="PlaytestButton" type="Button" parent="MarginContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 75
 text = "PLAY TEST"
+
+[node name="SongSelectButton" type="Button" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "CHOOSE
+SONG
+"
 
 [node name="ItemList" type="ItemList" parent="."]
 layout_mode = 2
@@ -297,10 +341,20 @@ offset_top = -1792.0
 offset_right = 712.0
 offset_bottom = -1752.0
 
+[node name="EditorHelp" parent="." instance=ExtResource("9_dssst")]
+visible = false
+layout_mode = 1
+offset_left = -998.0
+offset_top = -1760.0
+offset_right = -998.0
+offset_bottom = -1760.0
+scale = Vector2(1.8, 1.8)
+
 [connection signal="dir_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
 [connection signal="file_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
 [connection signal="file_selected" from="LoadSaveSelect" to="." method="load_save_file"]
 [connection signal="file_selected" from="SongImport" to="." method="song_import"]
+[connection signal="file_selected" from="SongSelect" to="." method="select_song"]
 [connection signal="timeout" from="PlayTimer" to="." method="for_every_beat"]
 [connection signal="pressed" from="MarginContainer/Buttons/Button" to="." method="quit"]
 [connection signal="pressed" from="MarginContainer/Buttons/PlayButton" to="." method="play"]
@@ -310,5 +364,7 @@ offset_bottom = -1752.0
 [connection signal="pressed" from="MarginContainer/Buttons/SaveButton" to="." method="save"]
 [connection signal="pressed" from="MarginContainer/Buttons/LoadButton" to="." method="load_data"]
 [connection signal="pressed" from="MarginContainer/Buttons/SongImportButton" to="." method="load_song_import"]
-[connection signal="pressed" from="MarginContainer2/PlaytestButton" to="." method="play_test"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/HelpButton" to="." method="open_help_menu"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/PlaytestButton" to="." method="play_test"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/SongSelectButton" to="." method="load_song_select"]
 [connection signal="item_selected" from="ItemList" to="." method="change_chart"]

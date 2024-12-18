@@ -105,6 +105,7 @@ func play() -> void:
 		
 		obstacle = get_obstacle(event)
 		self.add_child(obstacle)
+		move_child(obstacle, 6)
 		
 		event_position = Vector2(event.x, event.y)
 		spawn_position = get_spawn_position(event_position)

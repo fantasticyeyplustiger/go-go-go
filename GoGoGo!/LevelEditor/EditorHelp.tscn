@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://3sxtuf7arlyc"]
+
+[ext_resource type="Script" path="res://LevelEditor/EditorHelp.gd" id="1_wkd6f"]
+
+[node name="EditorHelp" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wkd6f")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.144063, 0.144063, 0.144063, 1)
+
+[node name="BG2" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 1870.0
+offset_bottom = 1030.0
+color = Color(0.183591, 0.18359, 0.18359, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 100
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+fit_content = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 1768.0
+offset_top = -51.0
+offset_right = 1968.0
+offset_bottom = 61.0
+color = Color(0.129558, 0.129558, 0.129558, 1)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1768.0
+offset_top = -51.0
+offset_right = 1968.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 75
+text = "X"
+
+[connection signal="pressed" from="Button" to="." method="close_help_menu"]

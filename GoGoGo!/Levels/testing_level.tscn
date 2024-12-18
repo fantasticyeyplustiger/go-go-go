@@ -85,14 +85,6 @@ pitch_scale = 3.0
 one_shot = true
 autostart = true
 
-[node name="WaveLabel" type="Label" parent="."]
-offset_left = -1192.0
-offset_top = -1059.0
-offset_right = -716.0
-offset_bottom = -854.0
-theme_override_font_sizes/font_size = 150
-text = "Beat: "
-
 [node name="ObstacleHolder" type="Node" parent="."]
 
 [node name="DownRowStart" type="Control" parent="."]
@@ -126,6 +118,50 @@ offset_left = 1664.0
 offset_top = -1408.0
 offset_right = 1704.0
 offset_bottom = -1368.0
+
+[node name="BG3" type="ColorRect" parent="."]
+visibility_layer = 527
+offset_left = -1664.0
+offset_top = 424.0
+offset_right = -1651.0
+offset_bottom = 464.0
+scale = Vector2(108.04, -60.52)
+color = Color(0, 0, 0, 1)
+
+[node name="BG4" type="ColorRect" parent="."]
+visibility_layer = 527
+offset_left = 1792.0
+offset_top = 424.0
+offset_right = 1805.0
+offset_bottom = 464.0
+scale = Vector2(108.04, -60.52)
+color = Color(0, 0, 0, 1)
+
+[node name="BG5" type="ColorRect" parent="."]
+visibility_layer = 527
+offset_left = -296.0
+offset_top = 440.0
+offset_right = -276.0
+offset_bottom = 443.0
+scale = Vector2(108.04, -60.52)
+color = Color(0, 0, 0, 1)
+
+[node name="BG6" type="ColorRect" parent="."]
+visibility_layer = 527
+offset_left = -296.0
+offset_top = -1792.0
+offset_right = -276.0
+offset_bottom = -1788.0
+scale = Vector2(108.04, -60.52)
+color = Color(0, 0, 0, 1)
+
+[node name="WaveLabel" type="Label" parent="."]
+offset_left = -1192.0
+offset_top = -1059.0
+offset_right = -716.0
+offset_bottom = -854.0
+theme_override_font_sizes/font_size = 150
+text = "Beat: "
 
 [node name="LevelEditorButton" type="Button" parent="."]
 custom_minimum_size = Vector2(500, 200)
