@@ -1,6 +1,6 @@
 extends Button
 
-enum setting {NONE = 0, BOULDER = 1, PELLET = 2, STEEL_BALL = 3, IRON_PELLET = 4}
+enum setting {NONE = 0, BOULDER = 1, PELLET = 2, STEEL_BALL = 3, IRON_PELLET = 4, LASER = 5}
 
 var current_setting = setting.NONE
 var attack : bool
@@ -31,6 +31,11 @@ func _on_pressed() -> void:
 			current_setting = setting.IRON_PELLET
 		
 		setting.IRON_PELLET:
+			current_setting = setting.LASER
+			type = Globals.obstacle_types.BOULDER
+			
+		
+		setting.LASER:
 			attack = false
 			current_setting = setting.NONE
 			type = Globals.obstacle_types.BOULDER
@@ -44,7 +49,7 @@ func _on_pressed() -> void:
 			@warning_ignore("int_as_enum_without_cast")
 			type += 1
 			
-			if current_setting > 4 or type > 3:
+			if current_setting > 5 or type > 4:
 				
 				current_setting = setting.NONE
 				type = Globals.obstacle_types.BOULDER

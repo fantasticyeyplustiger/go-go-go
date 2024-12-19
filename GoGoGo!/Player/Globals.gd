@@ -2,7 +2,7 @@ extends Node
 
 enum directions {DOWN, LEFT, RIGHT, UP}
 		
-enum obstacle_types {BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET}
+enum obstacle_types {BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET, LASER}
 
 const roll_direction = {directions.DOWN : Vector2.DOWN, directions.LEFT : Vector2.LEFT,
 		directions.RIGHT : Vector2.RIGHT, directions.UP : Vector2.UP}
@@ -21,17 +21,26 @@ signal instruct
 
 class levelData: 
 	var events = []
-	var json = JSON.new
+	var lasers = []
 	var random_attacks : bool
 	var bpm : float
 	var song_path : String
 	
+	
+	func _create_laser(timing : int, length : int, position : Vector2):
+		return {
+			"timing" : timing,
+			"x" : position.x,
+			"y" : position.y,
+			"length" : length
+		}
+	
+	#region event methods
 	'''
 	Creates and returns an event (dictionary) with the given parameters.
 	'''
 	func _create_event(timing : int, type : int, position : Vector2):
 		return {
-			"activated" : false,
 			"timing" : timing,
 			"type" : type,
 			"x" : position.x, # JSONs can't parse vectors, so position is separated into x and y
@@ -110,12 +119,14 @@ class levelData:
 				returning_events.append(position)
 		
 		return returning_events
+	#endregion
 	
 	func _load(save_file : String):
 		var file = FileAccess.open(save_file, FileAccess.READ)
 		var data = JSON.parse_string(file.get_line())
 		
 		events = data.events
+		
 		random_attacks = data.random_attacks
 		bpm = data.bpm
 		
@@ -125,6 +136,7 @@ class levelData:
 	func _stringify(random_attacks_on : bool):
 		var saved_data = {
 			"events" : events,
+			"lasers" : lasers,
 			"random_attacks" : random_attacks_on,
 			"bpm" : bpm,
 			"song_path" : song_path

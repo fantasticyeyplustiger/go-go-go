@@ -93,7 +93,7 @@ use_native_dialog = true
 
 [node name="LoadSaveSelect" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Load A Save!"
+title = "Open a File"
 initial_position = 1
 size = Vector2i(638, 370)
 ok_button_text = "Open"
@@ -105,7 +105,7 @@ use_native_dialog = true
 
 [node name="SongImport" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Drag And Drop A Song!"
+title = "Open a File"
 initial_position = 1
 size = Vector2i(638, 370)
 ok_button_text = "Open"
@@ -117,7 +117,7 @@ use_native_dialog = true
 
 [node name="SongSelect" type="FileDialog" parent="."]
 auto_translate_mode = 1
-title = "Select A Song!"
+title = "Open a File"
 initial_position = 1
 size = Vector2i(638, 370)
 ok_button_text = "Open"

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxas4qckpiqr4"]
+
+[ext_resource type="Texture2D" uid="uid://cl1ocv1n7qkhv" path="res://Sprites/Lasers.png" id="1_au1ne"]
+[ext_resource type="Script" path="res://Obstacles/LaserSpriteSwitch.gd" id="2_qv8cn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yr38l"]
+atlas = ExtResource("1_au1ne")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1diur"]
+atlas = ExtResource("1_au1ne")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s4dnh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yr38l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1diur")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4slrw"]
+size = Vector2(16, 16)
+
+[node name="LaserBeamMiddle" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_s4dnh")
+script = ExtResource("2_qv8cn")
+
+[node name="LaserDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserDetector"]
+shape = SubResource("RectangleShape2D_4slrw")
+
+[connection signal="area_entered" from="LaserDetector" to="." method="switch_sprite"]
