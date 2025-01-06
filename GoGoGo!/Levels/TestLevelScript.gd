@@ -30,11 +30,13 @@ var debug_vector : Vector2 = Vector2(-1, -1)
 
 var first_wave : bool = true
 var start : bool = false
+var obstacle_is_laser = false
 
 var boulder = preload("res://Obstacles/Boulder.tscn")
 var pellet = preload("res://Obstacles/RockPellet.tscn")
 var steel_ball = preload("res://Obstacles/SteelBall.tscn")
 var iron_pellet = preload("res://Obstacles/IronPellet.tscn")
+var laser = preload("res://Obstacles/LaserBeam.tscn")
 
 var arrow = preload("res://Arrows/boulder_arrow.tscn")
 
@@ -49,6 +51,7 @@ func _ready() -> void:
 		data._load("res://SavedLevels/MR OOPS HARD MODE")
 	else:
 		data._load(Globals.data_path)
+		bpm = data.bpm
 	
 	song_length = $Music.stream.get_length()
 	
@@ -126,9 +129,17 @@ func play() -> void:
 		#endregion
 		
 		# Changes where it rolls with the new direction.
-		obstacle.change_velocity(obstacle.direction)
+		if obstacle_is_laser:
+			var beats_to_wait : int = calculate_laser_time_length(event_position)
+			
+			obstacle.set_timer(beats_to_wait * beat_length)
+			obstacle.rotate_beam()
+		
+		else:
+			obstacle.change_velocity(obstacle.direction)
 		
 		obstacle.global_position = spawn_position
+		obstacle_is_laser = false
 		event.activated = true
 		
 	# Randomly changes the pitch to prevent "audio fatigue."
@@ -186,6 +197,37 @@ func show_arrows() -> void:
 		
 		new_arrow.set_wait(beat_length * 3)
 
+func calculate_laser_time_length(event_position : Vector2) -> int:
+	
+	var time_length : int = 1
+	var iterator : int = 1
+	var time_added : bool
+	
+	while true:
+		
+		time_added = false
+		
+		var events = data._get_events(current_beat + iterator)
+		
+		if events.is_empty():
+			break
+		
+		for event in events:
+			if event.type == Globals.obstacle_types.LASER \
+				and event.x == event_position.x \
+				and event.y == event_position.y:
+				
+				time_length += 1
+				time_added = true
+				break
+		
+		if not time_added:
+			break
+		
+	
+	return time_length
+
+
 '''
 Instantiates a specific type of obstacle from the data given.
 - Called from play().
@@ -213,6 +255,11 @@ func get_obstacle(event):
 		Globals.obstacle_types.IRON_PELLET:
 			var an_iron_pellet = iron_pellet.instantiate()
 			return an_iron_pellet
+		
+		Globals.obstacle_types.LASER:
+			var a_laser = laser.instantiate()
+			obstacle_is_laser = true
+			return a_laser
 
 '''
 Gets the type of obstacle from an int and converts it to the actual enum value.

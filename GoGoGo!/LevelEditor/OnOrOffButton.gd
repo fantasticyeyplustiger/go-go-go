@@ -32,7 +32,7 @@ func _on_pressed() -> void:
 		
 		setting.IRON_PELLET:
 			current_setting = setting.LASER
-			type = Globals.obstacle_types.BOULDER
+			type = Globals.obstacle_types.LASER
 			
 		
 		setting.LASER:
@@ -42,7 +42,7 @@ func _on_pressed() -> void:
 			$AnimatedSprite2D.frame = 0
 		
 		_:
-			# YES THIS DEFAULT CASE IS NEEDED AND I HATE IT
+			# YES THIS DEFAULT CASE IS NEEDED I DONT KNOW WHY BUT I HATE IT
 			@warning_ignore("int_as_enum_without_cast")
 			current_setting += 1
 			

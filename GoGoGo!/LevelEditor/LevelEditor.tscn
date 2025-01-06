@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
-[ext_resource type="AudioStream" uid="uid://0adpox03eva8" path="res://Music/Excuse Filiburst.mp3" id="2_5bs7l"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
+[ext_resource type="AudioStream" uid="uid://b53257tn8gnse" path="res://Music/Filibuster.mp3" id="2_v2ckd"]
 [ext_resource type="Texture2D" uid="uid://u2ryld5jhouk" path="res://Sprites/empty.png" id="3_c8yye"]
 [ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="3_fuvo5"]
 [ext_resource type="Texture2D" uid="uid://2m6iicmpflej" path="res://Sprites/WallRamp.png" id="4_h8q0s"]
@@ -128,7 +128,7 @@ root_subfolder = "Music"
 use_native_dialog = true
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_5bs7l")
+stream = ExtResource("2_v2ckd")
 
 [node name="PlayTimer" type="Timer" parent="."]
 

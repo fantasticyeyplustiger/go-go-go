@@ -25,15 +25,8 @@ class levelData:
 	var random_attacks : bool
 	var bpm : float
 	var song_path : String
+	var old_laser_length : int
 	
-	
-	func _create_laser(timing : int, length : int, position : Vector2):
-		return {
-			"timing" : timing,
-			"x" : position.x,
-			"y" : position.y,
-			"length" : length
-		}
 	
 	#region event methods
 	'''

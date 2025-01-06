@@ -51,6 +51,5 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_43who")
 }
-speed_scale = 2.0
 
 [connection signal="timeout" from="Timer" to="." method="disappear"]

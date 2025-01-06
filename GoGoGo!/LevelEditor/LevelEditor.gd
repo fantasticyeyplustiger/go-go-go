@@ -78,7 +78,6 @@ Called by OnOrOffButton being pressed.
 '''
 func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle_types):
 	
-	print($ItemList.item_count)
 	has_saved = false
 	
 	if attack:
@@ -91,6 +90,7 @@ func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle
 		if check_all_buttons_off():
 			$ItemList.set_item_icon(current_beat, $Empty.texture)
 
+
 func set_icons():
 	
 	for event in data.events:
@@ -99,6 +99,9 @@ func set_icons():
 
 
 func initialize_chart() -> void:
+	
+	while $ItemList.item_count > 0:
+		$ItemList.remove_item(0)
 	
 	beat_length = (60 / bpm)
 	
