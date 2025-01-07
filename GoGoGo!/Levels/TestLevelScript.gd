@@ -130,9 +130,8 @@ func play() -> void:
 		
 		# Changes where it rolls with the new direction.
 		if obstacle_is_laser:
-			var beats_to_wait : int = calculate_laser_time_length(event_position)
 			
-			obstacle.set_timer(beats_to_wait * beat_length)
+			obstacle.set_timer(beat_length)
 			obstacle.rotate_beam()
 		
 		else:
@@ -159,10 +158,12 @@ func show_arrows() -> void:
 	if current_beat + 3 < data.events.size():
 		current_events = data._get_events(current_beat + 3)
 	else:
+		print("events size too low at", current_beat)
 		return
 	
 	# If it's empty, there is no need to run this code.
 	if current_events.is_empty():
+		print("beat empty at ", current_beat + 3)
 		return
 	
 	var event_position : Vector2
@@ -196,36 +197,6 @@ func show_arrows() -> void:
 		self.add_child(new_arrow)
 		
 		new_arrow.set_wait(beat_length * 3)
-
-func calculate_laser_time_length(event_position : Vector2) -> int:
-	
-	var time_length : int = 1
-	var iterator : int = 1
-	var time_added : bool
-	
-	while true:
-		
-		time_added = false
-		
-		var events = data._get_events(current_beat + iterator)
-		
-		if events.is_empty():
-			break
-		
-		for event in events:
-			if event.type == Globals.obstacle_types.LASER \
-				and event.x == event_position.x \
-				and event.y == event_position.y:
-				
-				time_length += 1
-				time_added = true
-				break
-		
-		if not time_added:
-			break
-		
-	
-	return time_length
 
 
 '''

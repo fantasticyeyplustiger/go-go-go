@@ -53,6 +53,23 @@ func _ready():
 	if not Globals.data_path.is_empty():
 		set_icons()
 
+func _unhandled_input(event: InputEvent) -> void:
+	
+	if Input.is_action_pressed("copy"):
+		copy_attacks()
+	
+	elif Input.is_action_pressed("paste"):
+		paste_attacks()
+	
+	elif Input.is_action_pressed("save"):
+		save()
+	
+	elif Input.is_action_pressed("duplicate"):
+		pass
+	
+	pass
+
+
 '''
 Initializes all of the buttons inside of the editor.
 '''
@@ -233,7 +250,7 @@ func copy_attacks() -> void:
 		exists = data._check_event_exists(current_beat, buttons[i].local_position)
 		
 		if exists:
-			copy_data = data._get_events(current_beat)
+			copy_data.events = data._get_events(current_beat)
 			break
 	
 	$MarginContainer/Buttons/PasteButton.disabled = false
@@ -246,6 +263,20 @@ func paste_attacks() -> void:
 		var pos : Vector2 = Vector2(event.x, event.y)
 		set_attack(pos, true, event.type)
 		set_button_at(pos, event.type)
+
+func duplicate_attacks() -> void:
+	
+	if current_beat + 1 > $ItemList.item_count:
+		return
+	
+	copy_attacks()
+	
+	current_beat += 1
+	$ItemList.select($ItemList.get_index(), true)
+	
+	paste_attacks()
+	
+	pass
 
 #region functions that open file selectors
 func save() -> void:
@@ -269,6 +300,10 @@ func load_save_file(path: String) -> void:
 	
 	data._load(path)
 	Globals.data_path = path
+	
+	bpm = data.bpm
+	$MarginContainer/Buttons/SpinBox.value = bpm
+	
 	reset_buttons_to_false()
 	
 	for event in data.events:
@@ -289,6 +324,7 @@ func bpm_changed(value: float) -> void:
 	data.bpm = bpm
 
 
+#region song importing
 func song_import(path : String) -> void:
 	
 	var extension : String = path.get_extension()
@@ -345,14 +381,13 @@ func import_file(path : String, extension : String) -> void:
 	import.store_line("source_file=\"" + source_file + "\"")
 	import.store_line("dest_files=[\"" + path_two + "]\n")
 	
-	import.store_line("[params]\n")
-	import.store_line("loop=false")
-	import.store_line("loop_offset=0")
-	import.store_line("bpm=0")
-	import.store_line("beat_count=0")
-	import.store_line("bar_beats=4")
+	import.store_line("[params]\nloop=false")
+	import.store_line("loop_offset=0\nbpm=0")
+	import.store_line("beat_count=0\nbar_beats=4")
 	
 	import = null
+#endregion
+
 
 func play_test() -> void:
 	if not has_saved:

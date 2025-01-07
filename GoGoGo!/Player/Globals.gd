@@ -21,7 +21,6 @@ signal instruct
 
 class levelData: 
 	var events = []
-	var lasers = []
 	var random_attacks : bool
 	var bpm : float
 	var song_path : String
@@ -129,7 +128,6 @@ class levelData:
 	func _stringify(random_attacks_on : bool):
 		var saved_data = {
 			"events" : events,
-			"lasers" : lasers,
 			"random_attacks" : random_attacks_on,
 			"bpm" : bpm,
 			"song_path" : song_path

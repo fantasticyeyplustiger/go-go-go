@@ -5,8 +5,6 @@ func set_wait(wait_time : float) -> void:
 	$AnimationPlayer.speed_scale = 1 / wait_time
 	$AnimationPlayer.play("turn_visible")
 	$Timer.start()
-	
-	print($AnimationPlayer.speed_scale)
 
 func set_arrow(new_direction : Globals.directions) -> void:
 	match new_direction:
