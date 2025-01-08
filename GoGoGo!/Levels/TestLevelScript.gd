@@ -77,7 +77,7 @@ Places down every obstacle that exists for this beat from the events in data.
 '''
 func play() -> void:
 	
-	if current_beat > total_beats:
+	if current_beat > data.last_beat:
 		$PlayTimer.stop()
 		# Show win screen.
 	
@@ -136,14 +136,16 @@ func play() -> void:
 		
 		else:
 			obstacle.change_velocity(obstacle.direction)
+			
+			$SFX.pitch_scale = randf_range(1.5, 4.5)
+			$SFX.play()
 		
 		obstacle.global_position = spawn_position
 		obstacle_is_laser = false
 		event.activated = true
 		
 	# Randomly changes the pitch to prevent "audio fatigue."
-	$SFX.pitch_scale = randf_range(1.5, 4.5)
-	$SFX.play()
+	
 	
 	current_beat += 1
 
@@ -154,16 +156,18 @@ Shows the locations of where the next obstacles will appear after three beats.
 '''
 func show_arrows() -> void:
 	
+	
+	
 	# Condition is + 3 so it doesn't go out of the events' bounds.
-	if current_beat + 3 < data.events.size():
+	if current_beat + 3 < data.last_beat:
 		current_events = data._get_events(current_beat + 3)
 	else:
-		print("events size too low at", current_beat)
+		print("no arrow at", current_beat + 3)
 		return
 	
 	# If it's empty, there is no need to run this code.
 	if current_events.is_empty():
-		print("beat empty at ", current_beat + 3)
+		print("no arrows in ", current_beat + 3)
 		return
 	
 	var event_position : Vector2

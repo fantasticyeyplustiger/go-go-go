@@ -20,6 +20,8 @@ var song : AudioStreamPlayer
 var beat_length : float
 var total_beats : int
 
+var old_last_beat : int = -1
+
 var has_saved : bool = false
 var is_loading : bool = false
 var chart_initialized = false
@@ -308,6 +310,9 @@ func load_save_file(path: String) -> void:
 	
 	for event in data.events:
 		$ItemList.set_item_icon(event.timing, $Boulder.texture)
+	
+	if not data.last_beat == -1:
+		$ItemList.set_item_icon(data.last_beat, $End.texture)
 
 
 func save_folder_selected(path: String) -> void:
@@ -411,3 +416,27 @@ func select_song(path: String) -> void:
 
 func load_song_select() -> void:
 	$SongSelect.popup()
+
+
+func ending() -> void:
+	
+	print("current beat: ", current_beat)
+	print("old last beat: ", old_last_beat)
+	
+	var temp_current_beat : int = current_beat
+	
+	data.last_beat = current_beat
+	$ItemList.set_item_icon(current_beat, $End.texture)
+	
+	if not old_last_beat == -1:
+		change_chart(old_last_beat)
+		
+		if check_all_buttons_off():
+			$ItemList.set_item_icon(old_last_beat, $Empty.texture)
+		else:
+			$ItemList.set_item_icon(old_last_beat, $Boulder.texture)
+		
+		change_chart(temp_current_beat)
+	
+	old_last_beat = temp_current_beat
+	data.last_beat = temp_current_beat

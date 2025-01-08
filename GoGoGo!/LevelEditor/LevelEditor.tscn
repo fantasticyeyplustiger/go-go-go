@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://0vbf4nh5djlc"]
+[gd_scene load_steps=18 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bttqsq4ajaflm" path="res://Sprites/bouler.png" id="4_u8j4i"]
 [ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_ovd7d"]
 [ext_resource type="PackedScene" uid="uid://3sxtuf7arlyc" path="res://LevelEditor/EditorHelp.tscn" id="9_dssst"]
+[ext_resource type="Texture2D" uid="uid://vjdnlc7vdgy3" path="res://Sprites/end.png" id="9_t5ikq"]
 
 [sub_resource type="FontFile" id="FontFile_okppf"]
 cache/0/16/0/ascent = 0.0
@@ -203,6 +204,12 @@ theme_override_font_sizes/font_size = 75
 text = "IMPORT
 SONG"
 
+[node name="EndButton" type="Button" parent="MarginContainer/Buttons"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "END"
+
 [node name="BottomGUI" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -306,6 +313,10 @@ texture = ExtResource("3_c8yye")
 visible = false
 texture = ExtResource("4_u8j4i")
 
+[node name="End" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("9_t5ikq")
+
 [node name="DownRowStart" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 936.0
@@ -364,6 +375,7 @@ scale = Vector2(1.8, 1.8)
 [connection signal="pressed" from="MarginContainer/Buttons/SaveButton" to="." method="save"]
 [connection signal="pressed" from="MarginContainer/Buttons/LoadButton" to="." method="load_data"]
 [connection signal="pressed" from="MarginContainer/Buttons/SongImportButton" to="." method="load_song_import"]
+[connection signal="pressed" from="MarginContainer/Buttons/EndButton" to="." method="ending"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HelpButton" to="." method="open_help_menu"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/PlaytestButton" to="." method="play_test"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/SongSelectButton" to="." method="load_song_select"]

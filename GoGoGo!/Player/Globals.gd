@@ -25,7 +25,7 @@ class levelData:
 	var bpm : float
 	var song_path : String
 	var old_laser_length : int
-	
+	var last_beat : int = -1
 	
 	#region event methods
 	'''
@@ -121,6 +121,7 @@ class levelData:
 		
 		random_attacks = data.random_attacks
 		bpm = data.bpm
+		last_beat = data.last_beat
 		
 		file = null
 	
@@ -130,7 +131,8 @@ class levelData:
 			"events" : events,
 			"random_attacks" : random_attacks_on,
 			"bpm" : bpm,
-			"song_path" : song_path
+			"song_path" : song_path,
+			"last_beat" : last_beat
 		}
 		return JSON.stringify(saved_data)
 	

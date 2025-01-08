@@ -70,6 +70,9 @@ func reverse_type():
 		
 		$AnimatedSprite2D.frame -= 1
 	
+	if current_setting == setting.NONE:
+		attack = false
+	
 	Globals.emit_signal("instruct", local_position, attack, type)
 
 
