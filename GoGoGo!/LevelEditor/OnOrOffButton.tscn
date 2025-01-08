@@ -49,6 +49,7 @@ offset_top = -0.199999
 offset_right = 8.0
 offset_bottom = 0.23999
 theme_override_font_sizes/font_size = 50
+button_mask = 7
 script = ExtResource("1_6ewt5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -56,4 +57,4 @@ position = Vector2(120, 112)
 sprite_frames = SubResource("SpriteFrames_gdcnn")
 animation = &"cycle"
 
-[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="button_down" from="." to="." method="_on_pressed"]

@@ -53,7 +53,7 @@ func _ready():
 	if not Globals.data_path.is_empty():
 		set_icons()
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	
 	if Input.is_action_pressed("copy"):
 		copy_attacks()
