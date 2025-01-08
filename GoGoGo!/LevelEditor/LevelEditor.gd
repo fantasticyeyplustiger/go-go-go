@@ -85,7 +85,7 @@ func load_buttons(x : int, y : int, control_node : Control) -> void:
 		new_child.position = Vector2(x * i, y * i)
 		
 		@warning_ignore("integer_division")
-		new_child.local_position = Vector2(
+		new_child.local_position = Vector2i(
 			(roundi(new_child.global_position.x - $ButtonOrigin.position.x)) / tile_size,
 			(roundi(new_child.global_position.y - $ButtonOrigin.position.y)) / tile_size)
 		
@@ -95,7 +95,7 @@ func load_buttons(x : int, y : int, control_node : Control) -> void:
 Sets an attack at the corresponding location or deactivates it.
 Called by OnOrOffButton being pressed.
 '''
-func set_attack(local_position : Vector2, attack : bool, type : Globals.obstacle_types):
+func set_attack(local_position : Vector2i, attack : bool, type : Globals.obstacle_types):
 	
 	has_saved = false
 	
@@ -216,14 +216,14 @@ func change_chart(index : int) -> void:
 		return
 	
 	for attack in attacks:
-		var pos = Vector2(attack.x, attack.y)
+		var pos = Vector2i(attack.x, attack.y)
 		set_button_at(pos, attack.type)
 	
 
 '''
 Turns on a specific button with the position given.
 '''
-func set_button_at(pos : Vector2, type):
+func set_button_at(pos : Vector2i, type):
 	for button in buttons:
 		if button.local_position == pos:
 			button.switch_on(type)
@@ -262,7 +262,7 @@ func paste_attacks() -> void:
 	reset_buttons_to_false()
 	
 	for event in copy_data.events:
-		var pos : Vector2 = Vector2(event.x, event.y)
+		var pos : Vector2i = Vector2i(event.x, event.y)
 		set_attack(pos, true, event.type)
 		set_button_at(pos, event.type)
 
@@ -273,8 +273,7 @@ func duplicate_attacks() -> void:
 	
 	copy_attacks()
 	
-	current_beat += 1
-	$ItemList.select($ItemList.get_index(), true)
+	change_chart(current_beat + 1)
 	
 	paste_attacks()
 	

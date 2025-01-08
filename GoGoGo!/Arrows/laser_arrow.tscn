@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6r6ao0ofpyd3"]
+[gd_scene load_steps=7 format=3 uid="uid://dhkncdrrl83ka"]
 
-[ext_resource type="Texture2D" uid="uid://ckpyepkym28th" path="res://Sprites/arrow.png" id="1_7jl2n"]
-[ext_resource type="Script" path="res://Arrows/arrow.gd" id="2_wm5td"]
+[ext_resource type="Texture2D" uid="uid://d0gwse7jaeav2" path="res://Sprites/laserArrow.png" id="1_dnoie"]
+[ext_resource type="Script" path="res://Arrows/arrow.gd" id="2_ku7da"]
 
 [sub_resource type="Animation" id="Animation_tirne"]
 length = 0.001
@@ -55,10 +55,14 @@ _data = {
 "turn_visible": SubResource("Animation_6lg8n")
 }
 
-[node name="Arrow" type="Sprite2D"]
+[node name="LaserArrow" type="Sprite2D"]
 modulate = Color(1, 1, 1, 0)
-texture = ExtResource("1_7jl2n")
-script = ExtResource("2_wm5td")
+script = ExtResource("2_ku7da")
+is_laser = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -896)
+texture = ExtResource("1_dnoie")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

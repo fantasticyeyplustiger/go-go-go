@@ -9,13 +9,13 @@ const level_editor : String = "res://LevelEditor/LevelEditor.tscn"
 
 var tile_size = 256
 
-var down_row_start : Vector2
-var up_row_start : Vector2
-var right_col_start : Vector2
-var left_col_start : Vector2
+var down_row_start : Vector2i
+var up_row_start : Vector2i
+var right_col_start : Vector2i
+var left_col_start : Vector2i
 
-var spawn_positions : Array[Vector2] = []
-var local_positions : Array[Vector2] = []
+var spawn_positions : Array[Vector2i] = []
+var local_positions : Array[Vector2i] = []
 var current_events : Array
 
 var next_beat : float = 0
@@ -26,7 +26,7 @@ var current_beat : int = -3
 var bpm : float
 
 var data = Globals.levelData.new()
-var debug_vector : Vector2 = Vector2(-1, -1)
+var debug_vector : Vector2i = Vector2i(-1, -1)
 
 var first_wave : bool = true
 var start : bool = false
@@ -39,6 +39,7 @@ var iron_pellet = preload("res://Obstacles/IronPellet.tscn")
 var laser = preload("res://Obstacles/LaserBeam.tscn")
 
 var arrow = preload("res://Arrows/boulder_arrow.tscn")
+var laser_arrow = preload("res://Arrows/laser_arrow.tscn")
 
 
 '''
@@ -99,8 +100,8 @@ func play() -> void:
 		current_beat += 1
 		return
 	
-	var event_position : Vector2
-	var spawn_position : Vector2
+	var event_position : Vector2i
+	var spawn_position : Vector2i
 	var obstacle
 	
 	# Places all of the obstacles from the current beat.
@@ -110,7 +111,7 @@ func play() -> void:
 		self.add_child(obstacle)
 		move_child(obstacle, 6)
 		
-		event_position = Vector2(event.x, event.y)
+		event_position = Vector2i(event.x, event.y)
 		spawn_position = get_spawn_position(event_position)
 		
 		#region Decides obstacle's roll direction.
@@ -137,14 +138,13 @@ func play() -> void:
 		else:
 			obstacle.change_velocity(obstacle.direction)
 			
+			# Randomly changes the pitch to prevent "audio fatigue."
 			$SFX.pitch_scale = randf_range(1.5, 4.5)
 			$SFX.play()
 		
 		obstacle.global_position = spawn_position
 		obstacle_is_laser = false
 		event.activated = true
-		
-	# Randomly changes the pitch to prevent "audio fatigue."
 	
 	
 	current_beat += 1
@@ -162,23 +162,25 @@ func show_arrows() -> void:
 	if current_beat + 3 < data.last_beat:
 		current_events = data._get_events(current_beat + 3)
 	else:
-		print("no arrow at", current_beat + 3)
 		return
 	
 	# If it's empty, there is no need to run this code.
 	if current_events.is_empty():
-		print("no arrows in ", current_beat + 3)
 		return
 	
-	var event_position : Vector2
-	var spawn_position : Vector2
+	var event_position : Vector2i
+	var spawn_position : Vector2i
 	
 	for event in current_events:
 		
+		var new_arrow
 		# Change this to "get" a specific type of arrow eventually.
-		var new_arrow = arrow.instantiate()
+		if not event.type == Globals.obstacle_types.LASER:
+			new_arrow = arrow.instantiate()
+		else:
+			new_arrow = laser_arrow.instantiate()
 		
-		event_position = Vector2(event.x, event.y)
+		event_position = Vector2i(event.x, event.y)
 		spawn_position = get_spawn_position(event_position)
 		
 		#region Decides the arrow's pointing direction.
@@ -198,7 +200,7 @@ func show_arrows() -> void:
 		
 		new_arrow.global_position = spawn_position
 		
-		self.add_child(new_arrow)
+		$ArrowHolder.add_child(new_arrow)
 		
 		new_arrow.set_wait(beat_length * 3)
 
@@ -253,7 +255,7 @@ Uses local_position to find the spawn location's index in spawn_positions.
 (The two are initialized at the same spots and indexes.)
 - Called from show_arrows() and play().
 '''
-func get_spawn_position(local_position : Vector2) -> Vector2:
+func get_spawn_position(local_position : Vector2i) -> Vector2i:
 	var index = local_positions.find(local_position, 0)
 	return spawn_positions[index]
 
@@ -277,11 +279,11 @@ Initializes every spawn location and local position accordingly for a singular r
 - Called from _ready().
 - Calls init_local_positions().
 '''
-func spawn_at(start_pos : Vector2, x_add : int, y_add : int, constant : int) -> void:
+func spawn_at(start_pos : Vector2i, x_add : int, y_add : int, constant : int) -> void:
 	
 	for i in rows:
 		
-		var spawn_pos : Vector2 = Vector2((x_add * i), (y_add * i))
+		var spawn_pos : Vector2i = Vector2i((x_add * i), (y_add * i))
 		spawn_pos += start_pos
 		
 		spawn_positions.append(spawn_pos)
@@ -296,11 +298,11 @@ Initializes a row or column of local positions after a row or column of spawn lo
 func init_local_positions(constant_is_x : bool, constant : int) -> void:
 	if constant_is_x:
 		for i in columns:
-			local_positions.append(Vector2(constant, i + 1))
+			local_positions.append(Vector2i(constant, i + 1))
 	
 	else:
 		for i in rows:
-			local_positions.append(Vector2(i + 1, constant))
+			local_positions.append(Vector2i(i + 1, constant))
 
 '''
 - Starts the level after $StartLevel's timer goes off.

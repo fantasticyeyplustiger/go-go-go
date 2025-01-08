@@ -7,7 +7,7 @@ var attack : bool
 var reverse : int = 1
 var type : Globals.obstacle_types = Globals.obstacle_types.BOULDER
 
-var local_position : Vector2
+var local_position : Vector2i
 
 func _on_pressed() -> void:
 	
@@ -51,8 +51,6 @@ func _on_pressed() -> void:
 
 
 func reverse_type():
-	
-	print($AnimatedSprite2D.frame)
 	
 	if current_setting == setting.NONE:
 		

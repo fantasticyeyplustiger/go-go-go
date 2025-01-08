@@ -4,8 +4,8 @@ enum directions {DOWN, LEFT, RIGHT, UP}
 		
 enum obstacle_types {BOULDER, ROCK_PELLET, STEEL_BALL, IRON_PELLET, LASER}
 
-const roll_direction = {directions.DOWN : Vector2.DOWN, directions.LEFT : Vector2.LEFT,
-		directions.RIGHT : Vector2.RIGHT, directions.UP : Vector2.UP}
+const roll_direction = {directions.DOWN : Vector2i.DOWN, directions.LEFT : Vector2i.LEFT,
+		directions.RIGHT : Vector2i.RIGHT, directions.UP : Vector2i.UP}
 
 const obstacle_speed = {obstacle_types.BOULDER : 750, obstacle_types.ROCK_PELLET : 2000,
 				obstacle_types.STEEL_BALL : 1500, obstacle_types.IRON_PELLET : 3000}
@@ -31,7 +31,7 @@ class levelData:
 	'''
 	Creates and returns an event (dictionary) with the given parameters.
 	'''
-	func _create_event(timing : int, type : int, position : Vector2):
+	func _create_event(timing : int, type : int, position : Vector2i):
 		return {
 			"timing" : timing,
 			"type" : type,
@@ -47,7 +47,7 @@ class levelData:
 	- Called by LevelEditor.
 	- Calls _remove_event() and _create_event().
 	'''
-	func _add_event(timing : int, type : int, position : Vector2) -> void:
+	func _add_event(timing : int, type : int, position : Vector2i) -> void:
 		_remove_event(timing, position)
 		events.append(_create_event(timing, type, position))
 	
@@ -55,7 +55,7 @@ class levelData:
 	'''
 	Removes an event at the specified beat and position.
 	'''
-	func _remove_event(timing : int, position : Vector2) -> void:
+	func _remove_event(timing : int, position : Vector2i) -> void:
 		
 		var iterator : int = 0
 		
@@ -72,7 +72,7 @@ class levelData:
 	checks if the same event can be seen inside of the events array.
 	Returns true if exists, false otherwise.
 	'''
-	func _check_event_exists(timing : int, position : Vector2) -> bool:
+	func _check_event_exists(timing : int, position : Vector2i) -> bool:
 		
 		for data in events:
 			
@@ -102,12 +102,12 @@ class levelData:
 	Returns a Vector2 array with those positions.
 	'''
 	func _get_event_positions(timing : int):
-		var returning_events : Array[Vector2] = []
+		var returning_events : Array[Vector2i] = []
 		
 		for data in events:
 			
 			if data.timing == timing:
-				var position : Vector2 = Vector2(data.x, data.y)
+				var position : Vector2i = Vector2i(data.x, data.y)
 				returning_events.append(position)
 		
 		return returning_events

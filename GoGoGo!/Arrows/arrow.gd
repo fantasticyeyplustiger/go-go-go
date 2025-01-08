@@ -1,15 +1,20 @@
 extends Sprite2D
 
+@export var is_laser : bool
+
 func set_wait(wait_time : float) -> void:
 	$Timer.wait_time = wait_time
 	$AnimationPlayer.speed_scale = 1 / wait_time
-	$AnimationPlayer.play("turn_visible")
+	if is_laser:
+		$AnimationPlayer.play("turn_laser_visible")
+	else:
+		$AnimationPlayer.play("turn_visible")
 	$Timer.start()
 
 func set_arrow(new_direction : Globals.directions) -> void:
 	match new_direction:
 		Globals.directions.DOWN:
-			flip_v = true
+			set_rotation_degrees(180)
 		Globals.directions.RIGHT:
 			set_rotation_degrees(90)
 		Globals.directions.LEFT:

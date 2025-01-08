@@ -16,7 +16,14 @@ func rotate_beam():
 			self.rotation_degrees = 270
 		# directions.DOWN: Already facing down, so don't rotate.
 
+func play_animation() -> void:
+	
+	for laser in $Node.get_children():
+		laser.disable_collision()
+	
+	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$AnimationPlayer.play("fade_away")
+	
 
-func disappear() -> void:
-	self.visible = false
+func animation_finished(_anim_name: StringName) -> void:
 	self.queue_free()
