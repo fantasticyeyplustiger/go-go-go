@@ -11,6 +11,9 @@ var local_position : Vector2i
 
 func _on_pressed() -> void:
 	
+	print("setting at start: ", current_setting)
+	print("type at start: ", type)
+	
 	attack = true
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
@@ -47,6 +50,7 @@ func _on_pressed() -> void:
 		
 		$AnimatedSprite2D.frame = 0
 	
+	
 	Globals.emit_signal("instruct", local_position, attack, type)
 
 
@@ -60,8 +64,9 @@ func reverse_type():
 		$AnimatedSprite2D.frame = 5
 		
 	else:
-		@warning_ignore("int_as_enum_without_cast")
-		type -= 1
+		if not type == 0:
+			@warning_ignore("int_as_enum_without_cast")
+			type -= 1
 		
 		@warning_ignore("int_as_enum_without_cast")
 		current_setting -= 1
@@ -70,6 +75,7 @@ func reverse_type():
 	
 	if current_setting == setting.NONE:
 		attack = false
+	
 	
 	Globals.emit_signal("instruct", local_position, attack, type)
 
