@@ -11,7 +11,7 @@ grow_vertical = 2
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
 offset_right = 3500.0
-offset_bottom = 2000.0
+offset_bottom = 1400.0
 color = Color(0.145098, 0.145098, 0.145098, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
@@ -19,13 +19,13 @@ layout_mode = 2
 offset_left = 100.0
 offset_top = 100.0
 offset_right = 3400.0
-offset_bottom = 1900.0
+offset_bottom = 1300.0
 color = Color(0.184314, 0.184314, 0.184314, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 3500.0
-offset_bottom = 2000.0
+offset_bottom = 1400.0
 mouse_filter = 2
 theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 200
@@ -33,14 +33,25 @@ theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 200
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
-
-[node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
 text = "- SONG IMPORT -
 
-Choose a video from Youtube and send its URL inside"
+Choose a video from Youtube and put its URL inside."
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+placeholder_text = " (URL here)"
+
+[node name="WarningLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

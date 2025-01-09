@@ -189,6 +189,7 @@ func restart_beat():
 '''
 Grabs the part of the chart you've changed to, saves the one you were at,
 and loads changed chart. Resets all buttons to false if the loaded chart is empty.
+- Called whenever the player selects a different part of the chart. ($ItemList)
 '''
 func change_chart(index : int) -> void:
 	
@@ -241,7 +242,7 @@ func for_every_beat() -> void:
 	
 
 '''
-Copies the attack from this part of the chart
+Copies the attack from the part of the chart the player has selected.
 '''
 func copy_attacks() -> void:
 	
