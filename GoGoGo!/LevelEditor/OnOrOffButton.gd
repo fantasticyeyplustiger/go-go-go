@@ -38,6 +38,9 @@ func _on_pressed() -> void:
 		@warning_ignore("int_as_enum_without_cast")
 		type += 1
 	
+	if current_setting == setting.NONE and type > 0:
+		type = Globals.obstacle_types.BOULDER
+	
 	@warning_ignore("int_as_enum_without_cast")
 	current_setting += 1
 	
@@ -49,7 +52,6 @@ func _on_pressed() -> void:
 		type = Globals.obstacle_types.BOULDER
 		
 		$AnimatedSprite2D.frame = 0
-	
 	
 	Globals.emit_signal("instruct", local_position, attack, type)
 
@@ -75,7 +77,6 @@ func reverse_type():
 	
 	if current_setting == setting.NONE:
 		attack = false
-	
 	
 	Globals.emit_signal("instruct", local_position, attack, type)
 

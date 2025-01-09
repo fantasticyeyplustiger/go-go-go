@@ -205,7 +205,7 @@ func change_chart(index : int) -> void:
 		
 		if exists:
 			reset_buttons_to_false()
-			attacks = data._get_events(current_beat)
+			attacks = data._get_events(index)
 			break
 	
 	$MarginContainer/Buttons/SaveButton.disabled = false
