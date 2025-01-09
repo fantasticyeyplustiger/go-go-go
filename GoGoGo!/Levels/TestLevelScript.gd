@@ -52,6 +52,13 @@ func _ready() -> void:
 		data._load("res://SavedLevels/MR OOPS HARD MODE")
 	else:
 		data._load(Globals.data_path)
+		
+		print(Globals.data_path)
+		
+		print(data.song_path)
+		
+		$Music.stream = load(data.song_path)
+		
 		bpm = data.bpm
 	
 	song_length = $Music.stream.get_length()
