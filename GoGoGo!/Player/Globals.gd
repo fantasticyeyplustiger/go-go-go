@@ -123,6 +123,8 @@ class levelData:
 		bpm = data.bpm
 		last_beat = data.last_beat
 		
+		song_path = data.song_path
+		
 		file = null
 	
 	

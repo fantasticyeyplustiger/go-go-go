@@ -2,12 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://bvmsxqy62rv0g"
-valid=false
+uid="uid://do4rac8dxycf2"
+path="res://.godot/imported/Citadel.mp3-c51cf190cc29975656329a96e0bdbf26.mp3str"
 
 [deps]
 
 source_file="res://Music/Citadel.mp3"
+dest_files=["res://.godot/imported/Citadel.mp3-c51cf190cc29975656329a96e0bdbf26.mp3str"]
 
 [params]
 
