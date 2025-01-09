@@ -22,7 +22,7 @@ var next_beat : float = 0
 var beat_length : float
 var song_length : float
 var total_beats : int
-var current_beat : int = -3
+var current_beat : int = -4
 var bpm : float
 
 var data = Globals.levelData.new()
@@ -159,8 +159,8 @@ func show_arrows() -> void:
 	
 	
 	# Condition is + 3 so it doesn't go out of the events' bounds.
-	if current_beat + 3 < data.last_beat:
-		current_events = data._get_events(current_beat + 3)
+	if current_beat + 4 < data.last_beat:
+		current_events = data._get_events(current_beat + 4)
 	else:
 		return
 	
@@ -202,7 +202,7 @@ func show_arrows() -> void:
 		
 		$ArrowHolder.add_child(new_arrow)
 		
-		new_arrow.set_wait(beat_length * 3)
+		new_arrow.set_wait(beat_length * 4)
 
 
 '''
