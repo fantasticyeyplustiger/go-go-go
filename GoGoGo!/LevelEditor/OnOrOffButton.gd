@@ -11,9 +11,6 @@ var local_position : Vector2i
 
 func _on_pressed() -> void:
 	
-	print("setting at start: ", current_setting)
-	print("type at start: ", type)
-	
 	attack = true
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):

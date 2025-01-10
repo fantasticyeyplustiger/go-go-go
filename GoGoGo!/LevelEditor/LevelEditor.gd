@@ -36,6 +36,7 @@ func _ready():
 		data._load(Globals.data_path)
 		bpm = data.bpm
 		initialize_chart()
+		change_chart(0)
 	
 	song = $Song
 	@warning_ignore("narrowing_conversion")
@@ -316,7 +317,7 @@ func load_save_file(path: String) -> void:
 
 
 func save_folder_selected(path: String) -> void:
-	data.save(path, false)
+	data.save(path)
 	has_saved = true
 
 
@@ -419,9 +420,6 @@ func load_song_select() -> void:
 
 
 func ending() -> void:
-	
-	print("current beat: ", current_beat)
-	print("old last beat: ", old_last_beat)
 	
 	var temp_current_beat : int = current_beat
 	

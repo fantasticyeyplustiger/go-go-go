@@ -40,3 +40,4 @@ collision_mask = 128
 shape = SubResource("RectangleShape2D_4slrw")
 
 [connection signal="area_entered" from="LaserDetector" to="." method="switch_sprite"]
+[connection signal="area_exited" from="LaserDetector" to="." method="switch_to_normal"]

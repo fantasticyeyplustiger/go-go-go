@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dbq6h3ap7pg0f"]
+[gd_scene load_steps=2 format=3 uid="uid://dbq6h3ap7pg0f"]
+
+[ext_resource type="Script" path="res://LevelEditor/SongImporter.gd" id="1_p13fu"]
 
 [node name="SongImporter" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_p13fu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
@@ -48,10 +51,25 @@ Choose a video from Youtube and put its URL inside."
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-placeholder_text = " (URL here)"
+placeholder_text = " URL (include https) or Youtube ID (11 digits long) here"
 
 [node name="WarningLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
 
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 100
+text = "SUBMIT"
+
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1766, 737)
+zoom = Vector2(0.5, 0.5)
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="on_submit"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="http_request_completed"]

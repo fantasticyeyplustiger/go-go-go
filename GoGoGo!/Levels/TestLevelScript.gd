@@ -53,11 +53,8 @@ func _ready() -> void:
 	else:
 		data._load(Globals.data_path)
 		
-		print(Globals.data_path)
-		
-		print(data.song_path)
-		
-		$Music.stream = load(data.song_path)
+		if not data.song_path.is_empty():
+			$Music.stream = load(data.song_path)
 		
 		bpm = data.bpm
 	
