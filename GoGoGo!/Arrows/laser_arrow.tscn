@@ -18,21 +18,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_6lg8n"]
-resource_name = "turn_visible"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.766667, 0.833333, 1),
-"transitions": PackedFloat32Array(0.5, 1, 1, 0.203063, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_mmj2v"]
 resource_name = "turn_laser_visible"
 tracks/0/type = "value"
@@ -46,6 +31,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(3.24901, 0.406126),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.827451)]
+}
+
+[sub_resource type="Animation" id="Animation_6lg8n"]
+resource_name = "turn_visible"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.766667, 0.833333, 1),
+"transitions": PackedFloat32Array(0.5, 1, 1, 0.203063, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_43who"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=17 format=4 uid="uid://bmdbva8kn4x2k"]
 
 [ext_resource type="Script" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
 [ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
@@ -35,6 +35,15 @@ sources/1 = SubResource("TileSetAtlasSource_x32e3")
 sources/0 = SubResource("TileSetScenesCollectionSource_ha8rw")
 sources/2 = SubResource("TileSetAtlasSource_6xhs0")
 sources/3 = SubResource("TileSetAtlasSource_xkojb")
+
+[sub_resource type="Gradient" id="Gradient_l3f30"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 0.486275, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dljc1"]
+gradient = SubResource("Gradient_l3f30")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
 
 [node name="testing level" type="Node2D"]
 script = ExtResource("1_almtx")
@@ -155,6 +164,7 @@ scale = Vector2(108.04, -60.52)
 color = Color(0, 0, 0, 1)
 
 [node name="WaveLabel" type="Label" parent="."]
+visible = false
 offset_left = -1192.0
 offset_top = -1059.0
 offset_right = -716.0
@@ -188,268 +198,805 @@ bus = &"Music"
 [node name="Control" type="Control" parent="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -16.0
+offset_top = 1264.0
+offset_right = 24.0
+offset_bottom = 1304.0
+rotation = 3.14159
+scale = Vector2(0.5, 1)
 
 [node name="Control" type="Control" parent="Control/Control"]
 anchors_preset = 0
+offset_top = 8.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 48.0
+rotation = 3.14159
+scale = Vector2(1, 0.8)
 
 [node name="ColorRect" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_right = 30.0
-offset_bottom = 60.0
+offset_bottom = 30.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect2" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 88.0
 offset_right = 30.0
-offset_bottom = 148.0
+offset_bottom = 118.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect3" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 176.0
 offset_right = 30.0
-offset_bottom = 236.0
+offset_bottom = 206.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect4" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 264.0
 offset_right = 30.0
-offset_bottom = 324.0
+offset_bottom = 294.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect5" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 352.0
 offset_right = 30.0
-offset_bottom = 412.0
+offset_bottom = 382.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect6" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 440.0
 offset_right = 30.0
-offset_bottom = 500.0
+offset_bottom = 470.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect7" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 528.0
 offset_right = 30.0
-offset_bottom = 588.0
+offset_bottom = 558.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect8" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 616.0
 offset_right = 30.0
-offset_bottom = 676.0
+offset_bottom = 646.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect9" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 704.0
 offset_right = 30.0
-offset_bottom = 764.0
+offset_bottom = 734.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect10" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 792.0
 offset_right = 30.0
-offset_bottom = 852.0
+offset_bottom = 822.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect11" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 888.0
 offset_right = 30.0
-offset_bottom = 948.0
+offset_bottom = 918.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect12" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 976.0
 offset_right = 30.0
-offset_bottom = 1036.0
+offset_bottom = 1006.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect13" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1072.0
 offset_right = 30.0
-offset_bottom = 1132.0
+offset_bottom = 1102.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect14" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1160.0
 offset_right = 30.0
-offset_bottom = 1220.0
+offset_bottom = 1190.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect15" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1256.0
 offset_right = 30.0
-offset_bottom = 1316.0
+offset_bottom = 1286.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect16" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1344.0
 offset_right = 30.0
-offset_bottom = 1404.0
+offset_bottom = 1374.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect17" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1432.0
 offset_right = 30.0
-offset_bottom = 1492.0
+offset_bottom = 1462.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect18" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1520.0
 offset_right = 30.0
-offset_bottom = 1580.0
+offset_bottom = 1550.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect19" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1608.0
 offset_right = 30.0
-offset_bottom = 1668.0
+offset_bottom = 1638.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
 [node name="ColorRect20" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1696.0
 offset_right = 30.0
-offset_bottom = 1756.0
+offset_bottom = 1726.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect21" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="Control2" type="Control" parent="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = -464.0
+offset_right = 24.0
+offset_bottom = -424.0
+rotation = 3.14159
+scale = Vector2(0.5, 1)
+
+[node name="Control" type="Control" parent="Control/Control2"]
+anchors_preset = 0
+offset_left = -2.51778e-05
+offset_top = -288.0
+offset_right = 40.0
+offset_bottom = -248.0
+rotation = 3.14159
+scale = Vector2(1, 0.8)
+
+[node name="ColorRect" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 1784.0
 offset_right = 30.0
-offset_bottom = 1844.0
+offset_bottom = 30.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect22" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect2" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 1872.0
+offset_top = 88.0
 offset_right = 30.0
-offset_bottom = 1932.0
+offset_bottom = 118.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect23" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect3" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 1960.0
+offset_top = 176.0
 offset_right = 30.0
-offset_bottom = 2020.0
+offset_bottom = 206.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect24" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect4" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2048.0
+offset_top = 264.0
 offset_right = 30.0
-offset_bottom = 2108.0
+offset_bottom = 294.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect25" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect5" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2136.0
+offset_top = 352.0
 offset_right = 30.0
-offset_bottom = 2196.0
+offset_bottom = 382.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect26" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect6" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2224.0
+offset_top = 440.0
 offset_right = 30.0
-offset_bottom = 2284.0
+offset_bottom = 470.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect27" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect7" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2320.0
+offset_top = 528.0
 offset_right = 30.0
-offset_bottom = 2380.0
+offset_bottom = 558.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect28" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect8" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2408.0
+offset_top = 616.0
 offset_right = 30.0
-offset_bottom = 2468.0
+offset_bottom = 646.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect29" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect9" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2504.0
+offset_top = 704.0
 offset_right = 30.0
-offset_bottom = 2564.0
+offset_bottom = 734.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect30" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect10" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2592.0
+offset_top = 792.0
 offset_right = 30.0
-offset_bottom = 2652.0
+offset_bottom = 822.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect31" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect11" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2688.0
+offset_top = 888.0
 offset_right = 30.0
-offset_bottom = 2748.0
+offset_bottom = 918.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect32" type="ColorRect" parent="Control/Control/Control"]
-custom_minimum_size = Vector2(30, 60)
+[node name="ColorRect12" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
-offset_top = 2776.0
+offset_top = 976.0
 offset_right = 30.0
-offset_bottom = 2836.0
+offset_bottom = 1006.0
+rotation = 3.14159
 pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect13" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1072.0
+offset_right = 30.0
+offset_bottom = 1102.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect14" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1160.0
+offset_right = 30.0
+offset_bottom = 1190.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect15" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1256.0
+offset_right = 30.0
+offset_bottom = 1286.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect16" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1344.0
+offset_right = 30.0
+offset_bottom = 1374.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect17" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1432.0
+offset_right = 30.0
+offset_bottom = 1462.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect18" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1520.0
+offset_right = 30.0
+offset_bottom = 1550.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect19" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1608.0
+offset_right = 30.0
+offset_bottom = 1638.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect20" type="ColorRect" parent="Control/Control2/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1696.0
+offset_right = 30.0
+offset_bottom = 1726.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="Control3" type="Control" parent="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2160.0
+offset_top = 2672.0
+offset_right = 2200.0
+offset_bottom = 2712.0
+scale = Vector2(0.5, 1)
+
+[node name="Control" type="Control" parent="Control/Control3"]
+anchors_preset = 0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 48.0
+rotation = 3.14159
+scale = Vector2(1, 0.8)
+
+[node name="ColorRect" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_right = 30.0
+offset_bottom = 30.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect2" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 88.0
+offset_right = 30.0
+offset_bottom = 118.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect3" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 176.0
+offset_right = 30.0
+offset_bottom = 206.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect4" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 264.0
+offset_right = 30.0
+offset_bottom = 294.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect5" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 352.0
+offset_right = 30.0
+offset_bottom = 382.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect6" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 440.0
+offset_right = 30.0
+offset_bottom = 470.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect7" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 528.0
+offset_right = 30.0
+offset_bottom = 558.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect8" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 616.0
+offset_right = 30.0
+offset_bottom = 646.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect9" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 704.0
+offset_right = 30.0
+offset_bottom = 734.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect10" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 792.0
+offset_right = 30.0
+offset_bottom = 822.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect11" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 888.0
+offset_right = 30.0
+offset_bottom = 918.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect12" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 976.0
+offset_right = 30.0
+offset_bottom = 1006.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect13" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1072.0
+offset_right = 30.0
+offset_bottom = 1102.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect14" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1160.0
+offset_right = 30.0
+offset_bottom = 1190.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect15" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1256.0
+offset_right = 30.0
+offset_bottom = 1286.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect16" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1344.0
+offset_right = 30.0
+offset_bottom = 1374.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect17" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1432.0
+offset_right = 30.0
+offset_bottom = 1462.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect18" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1520.0
+offset_right = 30.0
+offset_bottom = 1550.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect19" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1608.0
+offset_right = 30.0
+offset_bottom = 1638.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect20" type="ColorRect" parent="Control/Control3/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1696.0
+offset_right = 30.0
+offset_bottom = 1726.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="Control4" type="Control" parent="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2160.0
+offset_top = 1544.0
+offset_right = 2200.0
+offset_bottom = 1584.0
+scale = Vector2(0.5, 1)
+
+[node name="Control" type="Control" parent="Control/Control4"]
+anchors_preset = 0
+offset_left = -2.51778e-05
+offset_top = -288.0
+offset_right = 40.0
+offset_bottom = -248.0
+rotation = 3.14159
+scale = Vector2(1, 0.8)
+
+[node name="ColorRect" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_right = 30.0
+offset_bottom = 30.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect2" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 88.0
+offset_right = 30.0
+offset_bottom = 118.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect3" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 176.0
+offset_right = 30.0
+offset_bottom = 206.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect4" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 264.0
+offset_right = 30.0
+offset_bottom = 294.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect5" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 352.0
+offset_right = 30.0
+offset_bottom = 382.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect6" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 440.0
+offset_right = 30.0
+offset_bottom = 470.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect7" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 528.0
+offset_right = 30.0
+offset_bottom = 558.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect8" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 616.0
+offset_right = 30.0
+offset_bottom = 646.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect9" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 704.0
+offset_right = 30.0
+offset_bottom = 734.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect10" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 792.0
+offset_right = 30.0
+offset_bottom = 822.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect11" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 888.0
+offset_right = 30.0
+offset_bottom = 918.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect12" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 976.0
+offset_right = 30.0
+offset_bottom = 1006.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect13" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1072.0
+offset_right = 30.0
+offset_bottom = 1102.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect14" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1160.0
+offset_right = 30.0
+offset_bottom = 1190.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect15" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1256.0
+offset_right = 30.0
+offset_bottom = 1286.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect16" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1344.0
+offset_right = 30.0
+offset_bottom = 1374.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect17" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1432.0
+offset_right = 30.0
+offset_bottom = 1462.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect18" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1520.0
+offset_right = 30.0
+offset_bottom = 1550.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect19" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1608.0
+offset_right = 30.0
+offset_bottom = 1638.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="ColorRect20" type="ColorRect" parent="Control/Control4/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+offset_top = 1696.0
+offset_right = 30.0
+offset_bottom = 1726.0
+rotation = 3.14159
+pivot_offset = Vector2(15, 30)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -1392.0
+offset_top = -2000.0
+offset_right = -272.0
+offset_bottom = 440.0
+texture = SubResource("GradientTexture2D_dljc1")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 1808.0
+offset_top = -2000.0
+offset_right = 2928.0
+offset_bottom = 440.0
+texture = SubResource("GradientTexture2D_dljc1")
+flip_h = true
 
 [connection signal="timeout" from="PlayTimer" to="." method="play"]
 [connection signal="timeout" from="StartLevel" to="." method="start_level"]
