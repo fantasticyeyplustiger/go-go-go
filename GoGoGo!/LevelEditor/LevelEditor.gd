@@ -338,7 +338,11 @@ func song_import(path : String) -> void:
 		
 		$Song.stream = AudioStreamOggVorbis.load_from_file(path)
 		
-		data.song_path = path
+		var directory = DirAccess.open("res://Music/")
+		
+		directory.copy(path, "res://Music/" + path.get_file())
+		
+		data.song_path = "res://Music/" + path.get_file()
 	
 	
 
@@ -358,8 +362,8 @@ func open_help_menu() -> void:
 func select_song(path: String) -> void:
 	var extension : String = path.get_extension()
 	
-	if extension == "ogg" or extension == "mp3" or extension == "wav" and ResourceLoader.exists(path):
-		$Song.stream = load(path)
+	if extension == "ogg":
+		$Song.stream = AudioStreamOggVorbis.load_from_file(path)
 		data.song_path = path
 
 
