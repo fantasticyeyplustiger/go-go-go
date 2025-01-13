@@ -26,6 +26,7 @@ class levelData:
 	var old_laser_length : int
 	var last_beat : int = -1
 	var song_path : String
+	var song
 	
 	#region event methods
 	'''

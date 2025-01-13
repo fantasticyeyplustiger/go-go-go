@@ -113,7 +113,7 @@ ok_button_text = "Open"
 dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
-root_subfolder = "Music"
+access = 1
 use_native_dialog = true
 
 [node name="SongSelect" type="FileDialog" parent="."]
@@ -125,7 +125,7 @@ ok_button_text = "Open"
 dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
-root_subfolder = "Music"
+access = 1
 use_native_dialog = true
 
 [node name="Song" type="AudioStreamPlayer" parent="."]

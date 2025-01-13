@@ -1,5 +1,17 @@
 [i]This is the level editor guide![/i]
 
+[b]Hotkeys:[/b]
+
+- [b]CTRL + S[/b] : Saves the level.
+
+- [b]CTRL + C[/b] : Copies the attacks on the current area of the chart you're on.
+
+- [b]CTRL + V[/b] : Pastes the attacks you've copied onto the current area of the chart you're on. Doesn't work if you haven't copied anything.
+
+- [b]Right Mouse Click[/b] : If used to chart, the obstacle goes back in order.
+
+- [b]Middle Mouse Click[/b] : If used to chart, it removes the obstacle at the button clicked.
+
 [b]Buttons:[/b]
 
 - [b]Quit[/b] : Exits the editor.
@@ -18,6 +30,4 @@
 
 - [b]Load[/b] : Lets you select a level to load into the editor!
 
-- [b]Song Import[/b] : Lets you add a song into the Music folder by dragging and dropping.
-
-[b]NOTE : In order to use the newly imported song, you have to restart the application. Please save before you do this!
+- [b]Song Import[/b] : Lets you add a song into the Music folder by dragging and dropping. [b]USE OGG AUDIO FILES ONLY.[/b]

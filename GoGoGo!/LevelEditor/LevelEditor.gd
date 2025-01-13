@@ -330,69 +330,17 @@ func bpm_changed(value: float) -> void:
 	data.bpm = bpm
 
 
-#region song importing
 func song_import(path : String) -> void:
 	
 	var extension : String = path.get_extension()
 	
-	if extension == "ogg" or extension == "mp3" or extension == "wav" and ResourceLoader.exists(path):
+	if extension == "ogg":
 		
-		import_file(path, extension)
+		$Song.stream = AudioStreamOggVorbis.load_from_file(path)
 		
-		$Song.stream = load(path)
 		data.song_path = path
 	
 	
-
-func import_file(path : String, extension : String) -> void:
-	
-	var new_path = path + ".import"
-	
-	var import = FileAccess.open(new_path, FileAccess.WRITE)
-	var source_file : String = "res://Music/" + path.get_file()
-	var audio_extension : String
-	var id : int = ResourceUID.create_id()
-	var import_path : String = "res://.godot/imported/" + path.get_file()
-	var path_two : String = "path=\"res://.godot/imported/" + path.get_file() + "-00000000000000000000000000000000"
-	
-	import_path += str( ResourceUID.id_to_text(id) ) + "." + extension + "str"
-	path_two += extension + "str"
-	
-	ResourceUID.add_id(id, source_file)
-	
-	print(new_path)
-	print(source_file)
-	print(id)
-	print(ResourceUID.id_to_text(id))
-	print(import_path)
-	print(path_two)
-	
-	import.store_line("[remap]\n")
-	import.store_line("importer=\"" + extension + "\"")
-	
-	match extension:
-		
-		"ogg":
-			audio_extension = "OggVorbis"
-		"mp3":
-			audio_extension = "MP3"
-		"wav":
-			audio_extension = "WAV"
-		
-	import.store_line("type=\"AudioStream" + audio_extension + "\"")
-	import.store_line(ResourceUID.id_to_text(id))
-	import.store_line(path_two)
-	
-	import.store_line("\n[deps]\n")
-	import.store_line("source_file=\"" + source_file + "\"")
-	import.store_line("dest_files=[\"" + path_two + "]\n")
-	
-	import.store_line("[params]\nloop=false")
-	import.store_line("loop_offset=0\nbpm=0")
-	import.store_line("beat_count=0\nbar_beats=4")
-	
-	import = null
-#endregion
 
 
 func play_test() -> void:
