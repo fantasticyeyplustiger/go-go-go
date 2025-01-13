@@ -4,6 +4,7 @@ extends Node2D
 @export var columns : int = 0
 
 @onready var obstacle_holder : Node = $ObstacleHolder
+@onready var music = $Control/Music
 
 const level_editor : String = "res://LevelEditor/LevelEditor.tscn"
 
@@ -49,16 +50,16 @@ Initializes important data and loads the level.
 func _ready() -> void:
 	
 	if Globals.data_path.is_empty():
-		data._load("res://SavedLevels/MR OOPS HARD MODE")
+		data._load("res://SavedLevels/filibuster")
 	else:
 		data._load(Globals.data_path)
 		
 		if not data.song_path.is_empty():
-			$Music.stream = load(data.song_path)
+			music.stream = load(data.song_path)
 		
 		bpm = data.bpm
 	
-	song_length = $Music.stream.get_length()
+	song_length = music.stream.get_length()
 	
 	#region Initializes spawn_positions and local_positions.
 	down_row_start = $DownRowStart.position
@@ -93,7 +94,7 @@ func play() -> void:
 		return
 	
 	if first_wave:
-		$Music.play()
+		music.play()
 		first_wave = false
 	
 	current_events = data._get_events(current_beat)
