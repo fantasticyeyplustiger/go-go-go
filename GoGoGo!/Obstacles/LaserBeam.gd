@@ -1,6 +1,6 @@
 extends Node2D
 
-var direction : Globals.directions
+var direction : Globals.directions = Globals.directions.DOWN
 
 func set_timer(wait_time : float):
 	$Timer.wait_time = wait_time
@@ -10,16 +10,17 @@ func rotate_beam():
 	match direction:
 		Globals.directions.LEFT:
 			self.rotation_degrees = 90
-			change_laser_middle_collision(9)
 			
 		Globals.directions.UP:
 			self.rotation_degrees = 180
-			change_laser_middle_collision(10)
 			
 		Globals.directions.RIGHT:
 			self.rotation_degrees = 270
 			
 		# directions.DOWN: Already facing down, so don't rotate.
+	
+	for child in $Node.get_children():
+		child.change_collision(direction)
 
 func play_animation() -> void:
 	

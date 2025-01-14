@@ -36,12 +36,12 @@ sources/0 = SubResource("TileSetScenesCollectionSource_ha8rw")
 sources/2 = SubResource("TileSetAtlasSource_6xhs0")
 sources/3 = SubResource("TileSetAtlasSource_xkojb")
 
-[sub_resource type="Gradient" id="Gradient_l3f30"]
+[sub_resource type="Gradient" id="Gradient_ntfq0"]
 interpolation_mode = 2
-colors = PackedColorArray(1, 1, 1, 0.486275, 0, 0, 0, 1)
+colors = PackedColorArray(1, 1, 1, 0.486275, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dljc1"]
-gradient = SubResource("Gradient_l3f30")
+gradient = SubResource("Gradient_ntfq0")
 fill_from = Vector2(1, 0)
 fill_to = Vector2(0, 0)
 
@@ -171,15 +171,6 @@ offset_right = -716.0
 offset_bottom = -854.0
 theme_override_font_sizes/font_size = 150
 text = "Beat: "
-
-[node name="LevelEditorButton" type="Button" parent="."]
-custom_minimum_size = Vector2(500, 200)
-offset_left = -1280.0
-offset_top = -1872.0
-offset_right = -780.0
-offset_bottom = -1672.0
-theme_override_font_sizes/font_size = 100
-text = "GO BACK"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -983,20 +974,29 @@ offset_bottom = 1726.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="LeftGradient" type="TextureRect" parent="."]
 offset_left = -1392.0
 offset_top = -2000.0
 offset_right = -272.0
 offset_bottom = 440.0
 texture = SubResource("GradientTexture2D_dljc1")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="RightGradient" type="TextureRect" parent="."]
 offset_left = 1808.0
 offset_top = -2000.0
 offset_right = 2928.0
 offset_bottom = 440.0
 texture = SubResource("GradientTexture2D_dljc1")
 flip_h = true
+
+[node name="LevelEditorButton" type="Button" parent="."]
+custom_minimum_size = Vector2(500, 200)
+offset_left = -1280.0
+offset_top = -1872.0
+offset_right = -780.0
+offset_bottom = -1672.0
+theme_override_font_sizes/font_size = 100
+text = "GO BACK"
 
 [connection signal="timeout" from="PlayTimer" to="." method="play"]
 [connection signal="timeout" from="StartLevel" to="." method="start_level"]
