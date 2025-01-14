@@ -95,6 +95,8 @@ save={
 [layer_names]
 
 2d_physics/layer_8="LASERS"
+2d_physics/layer_9="LASERS 2"
+2d_physics/layer_10="LASER_HEAD"
 
 [rendering]
 

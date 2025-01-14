@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 	for i in range(1, VU_COUNT + 1):
 		var hertz = i * FREQ_MAX / VU_COUNT
 		var frequency = spectrum.get_magnitude_for_frequency_range(previous_hertz, hertz)
-		var energy = clamp((MIN_DB + linear_to_db(frequency.length())) / MIN_DB, 0, 1)
+		var energy = clamp((MIN_DB + linear_to_db( frequency.length() ) ) / MIN_DB, 0, 1)
 		var height = energy * HEIGHT
 		
 		previous_hertz = hertz

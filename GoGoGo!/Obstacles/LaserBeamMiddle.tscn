@@ -29,14 +29,17 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="LaserBeamMiddle" type="AnimatedSprite2D"]
+z_index = 2
 sprite_frames = SubResource("SpriteFrames_s4dnh")
 script = ExtResource("2_qv8cn")
 
 [node name="LaserDetector" type="Area2D" parent="."]
+z_index = 2
 collision_layer = 128
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserDetector"]
+z_index = 2
 shape = SubResource("RectangleShape2D_4slrw")
 
 [connection signal="area_entered" from="LaserDetector" to="." method="switch_sprite"]

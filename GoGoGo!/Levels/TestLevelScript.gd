@@ -161,8 +161,6 @@ Shows the locations of where the next obstacles will appear after three beats.
 '''
 func show_arrows() -> void:
 	
-	
-	
 	# Condition is + 3 so it doesn't go out of the events' bounds.
 	if current_beat + 4 < data.last_beat:
 		current_events = data._get_events(current_beat + 4)

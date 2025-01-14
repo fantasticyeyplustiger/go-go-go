@@ -1,18 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://big4vaqgkxmc6"]
+[gd_scene load_steps=13 format=3 uid="uid://big4vaqgkxmc6"]
 
 [ext_resource type="Script" path="res://Obstacles/LaserBeam.gd" id="1_ccfla"]
 [ext_resource type="Texture2D" uid="uid://cl1ocv1n7qkhv" path="res://Sprites/Lasers.png" id="1_wtt3f"]
 [ext_resource type="PackedScene" uid="uid://bxas4qckpiqr4" path="res://Obstacles/LaserBeamMiddle.tscn" id="2_djnuu"]
+[ext_resource type="Texture2D" uid="uid://cmch0424ylhym" path="res://Lasers.png" id="3_ee7bs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ri8r"]
 atlas = ExtResource("1_wtt3f")
 region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpqhf"]
+atlas = ExtResource("3_ee7bs")
+region = Rect2(256, 0, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oltj4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0ri8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpqhf")
 }],
 "loop": true,
 "name": &"default",
@@ -26,6 +34,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q05u3"]
 size = Vector2(80, 1708)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r3xwk"]
+size = Vector2(21, 20)
 
 [sub_resource type="Animation" id="Animation_i8akx"]
 length = 0.001
@@ -88,39 +99,60 @@ _data = {
 }
 
 [node name="LaserBeam" type="Node2D"]
+z_index = 1
 script = ExtResource("1_ccfla")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_oltj4")
 
 [node name="Node" type="Node2D" parent="."]
+z_index = 1
 
 [node name="LaserBeamMiddle" parent="Node" instance=ExtResource("2_djnuu")]
+z_index = 1
 position = Vector2(0, 256)
 
 [node name="LaserBeamMiddle2" parent="Node" instance=ExtResource("2_djnuu")]
+z_index = 1
 position = Vector2(0, 512)
 
 [node name="LaserBeamMiddle3" parent="Node" instance=ExtResource("2_djnuu")]
+z_index = 1
 position = Vector2(0, 768)
 
 [node name="LaserBeamMiddle4" parent="Node" instance=ExtResource("2_djnuu")]
+z_index = 1
 position = Vector2(0, 1024)
 
 [node name="LaserBeamMiddle5" parent="Node" instance=ExtResource("2_djnuu")]
+z_index = 1
 position = Vector2(0, 1280)
 
 [node name="LaserBeamMiddle6" parent="Node" instance=ExtResource("2_djnuu")]
+z_index = 1
 position = Vector2(0, 1536)
 
 [node name="LaserBeamMiddle7" parent="Node" instance=ExtResource("2_djnuu")]
+z_index = 1
 position = Vector2(0, 1792)
 
 [node name="Area2D" type="Area2D" parent="."]
+z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+z_index = 1
 position = Vector2(0, 834)
 shape = SubResource("RectangleShape2D_q05u3")
+
+[node name="LaserHeadChecker" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserHeadChecker"]
+z_index = 1
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_r3xwk")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -131,5 +163,7 @@ libraries = {
 "": SubResource("AnimationLibrary_77yfi")
 }
 
+[connection signal="area_entered" from="LaserHeadChecker" to="." method="disable_laser_beam_end"]
+[connection signal="area_exited" from="LaserHeadChecker" to="." method="enable_laser_beam_end"]
 [connection signal="timeout" from="Timer" to="." method="play_animation"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="animation_finished"]

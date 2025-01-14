@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhkncdrrl83ka"]
+[gd_scene load_steps=9 format=3 uid="uid://dhkncdrrl83ka"]
 
 [ext_resource type="Texture2D" uid="uid://d0gwse7jaeav2" path="res://Sprites/laserArrow.png" id="1_dnoie"]
 [ext_resource type="Script" path="res://Arrows/arrow.gd" id="2_ku7da"]
@@ -17,6 +17,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emission_sphere_radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [128.0]
+}
 
 [sub_resource type="Animation" id="Animation_mmj2v"]
 resource_name = "turn_laser_visible"
@@ -31,6 +43,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(3.24901, 0.406126),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.827451)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emission_sphere_radius")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [128.0, 64.0]
 }
 
 [sub_resource type="Animation" id="Animation_6lg8n"]
@@ -55,6 +79,13 @@ _data = {
 "turn_visible": SubResource("Animation_6lg8n")
 }
 
+[sub_resource type="Curve" id="Curve_6j6u0"]
+_data = [Vector2(0.0337079, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.10989), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_yrs4o"]
+colors = PackedColorArray(1, 1, 0.827451, 0.901961, 1, 1, 1, 0)
+
 [node name="LaserArrow" type="Sprite2D"]
 modulate = Color(1, 1, 1, 0)
 script = ExtResource("2_ku7da")
@@ -71,5 +102,20 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_43who")
 }
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 20
+randomness = 1.0
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, 0)
+orbit_velocity_min = 1.0
+orbit_velocity_max = 2.0
+angle_max = 90.0
+scale_amount_min = 10.0
+scale_amount_max = 25.0
+scale_amount_curve = SubResource("Curve_6j6u0")
+color = Color(1, 1, 0.827451, 1)
+color_ramp = SubResource("Gradient_yrs4o")
 
 [connection signal="timeout" from="Timer" to="." method="disappear"]
