@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=16 format=4 uid="uid://bmdbva8kn4x2k"]
 
 [ext_resource type="Script" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
 [ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://b53257tn8gnse" path="res://Music/Filibuster.mp3" id="7_33kna"]
 [ext_resource type="Script" path="res://GUI/Equalizer.gd" id="7_eoydm"]
 [ext_resource type="AudioStream" uid="uid://chg0m6eftnsj0" path="res://SFX/Boulder Fall.mp3" id="8_wbrbc"]
+[ext_resource type="PackedScene" uid="uid://e5bfcpwl61fh" path="res://GUI/Gradient.tscn" id="10_n88tm"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ha8rw"]
 resource_name = "Walls"
@@ -35,15 +36,6 @@ sources/1 = SubResource("TileSetAtlasSource_x32e3")
 sources/0 = SubResource("TileSetScenesCollectionSource_ha8rw")
 sources/2 = SubResource("TileSetAtlasSource_6xhs0")
 sources/3 = SubResource("TileSetAtlasSource_xkojb")
-
-[sub_resource type="Gradient" id="Gradient_ntfq0"]
-interpolation_mode = 2
-colors = PackedColorArray(1, 1, 1, 0.486275, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dljc1"]
-gradient = SubResource("Gradient_ntfq0")
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
 
 [node name="testing level" type="Node2D"]
 script = ExtResource("1_almtx")
@@ -974,20 +966,18 @@ offset_bottom = 1726.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="LeftGradient" type="TextureRect" parent="."]
+[node name="LeftGradient" parent="." instance=ExtResource("10_n88tm")]
 offset_left = -1392.0
 offset_top = -2000.0
-offset_right = -272.0
-offset_bottom = 440.0
-texture = SubResource("GradientTexture2D_dljc1")
+offset_right = -1392.0
+offset_bottom = -2000.0
 
-[node name="RightGradient" type="TextureRect" parent="."]
-offset_left = 1808.0
-offset_top = -2000.0
-offset_right = 2928.0
+[node name="RightGradient" parent="." instance=ExtResource("10_n88tm")]
+offset_left = 2930.0
+offset_top = 440.0
+offset_right = 2930.0
 offset_bottom = 440.0
-texture = SubResource("GradientTexture2D_dljc1")
-flip_h = true
+rotation = 3.14159
 
 [node name="LevelEditorButton" type="Button" parent="."]
 custom_minimum_size = Vector2(500, 200)

@@ -443,24 +443,28 @@ texture = ExtResource("9_t5ikq")
 
 [node name="LowGradient" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_gtba3")
 
 [node name="MedGradient" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_gnm3i")
 
 [node name="HighGradient" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_s0w4x")
 
 [node name="MaxGradient" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_pqeob")

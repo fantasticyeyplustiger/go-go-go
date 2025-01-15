@@ -54,7 +54,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [128.0, 64.0]
+"values": [128.0, 48.0]
 }
 
 [sub_resource type="Animation" id="Animation_6lg8n"]
@@ -80,7 +80,7 @@ _data = {
 }
 
 [sub_resource type="Curve" id="Curve_6j6u0"]
-_data = [Vector2(0.0337079, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.10989), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.0337079, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_yrs4o"]
@@ -104,6 +104,7 @@ libraries = {
 }
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+scale = Vector2(1.2, 1.2)
 amount = 20
 randomness = 1.0
 emission_shape = 2
@@ -112,7 +113,7 @@ gravity = Vector2(0, 0)
 orbit_velocity_min = 1.0
 orbit_velocity_max = 2.0
 angle_max = 90.0
-scale_amount_min = 10.0
+scale_amount_min = 5.0
 scale_amount_max = 25.0
 scale_amount_curve = SubResource("Curve_6j6u0")
 color = Color(1, 1, 0.827451, 1)

@@ -29,7 +29,7 @@ func _on_pressed() -> void:
 		reverse_type()
 		return
 	
-	$AnimatedSprite2D.frame += 1
+	$Sprite.frame += 1
 	
 	if not current_setting == setting.NONE:
 		@warning_ignore("int_as_enum_without_cast")
@@ -48,7 +48,7 @@ func _on_pressed() -> void:
 		current_setting = setting.NONE
 		type = Globals.obstacle_types.BOULDER
 		
-		$AnimatedSprite2D.frame = 0
+		$Sprite.frame = 0
 	
 	Globals.emit_signal("instruct", local_position, attack, type)
 
@@ -60,7 +60,7 @@ func reverse_type():
 		current_setting = setting.LASER
 		type = Globals.obstacle_types.LASER
 		
-		$AnimatedSprite2D.frame = 5
+		$Sprite.frame = 5
 		
 	else:
 		if not type == 0:
@@ -70,7 +70,7 @@ func reverse_type():
 		@warning_ignore("int_as_enum_without_cast")
 		current_setting -= 1
 		
-		$AnimatedSprite2D.frame -= 1
+		$Sprite.frame -= 1
 	
 	if current_setting == setting.NONE:
 		attack = false
@@ -81,11 +81,11 @@ func reverse_type():
 func switch_off():
 	attack = false
 	current_setting = setting.NONE
-	$AnimatedSprite2D.frame = 0
+	$Sprite.frame = 0
 
 
 func switch_on(new_type):
-	$AnimatedSprite2D.frame = new_type + 1
+	$Sprite.frame = new_type + 1
 	current_setting = new_type + 1
 	type = new_type
 	

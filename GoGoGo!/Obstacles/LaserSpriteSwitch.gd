@@ -11,7 +11,7 @@ func change_collision(direction : Globals.directions):
 	
 	var detect_values : Vector2i
 	
-	# This code is horrible and I don't know how to make it better
+	# This code is horrible and I don't know how to make it better, but it works.
 	match direction:
 		Globals.directions.UP:
 			unique_collision_value = 6
