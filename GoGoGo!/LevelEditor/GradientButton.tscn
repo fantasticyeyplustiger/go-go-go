@@ -38,28 +38,35 @@ height = 256
 custom_minimum_size = Vector2(256, 256)
 offset_right = 256.0
 offset_bottom = 256.0
+button_mask = 7
 script = ExtResource("1_2x2go")
 
 [node name="LowGradient" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_oud6p")
 
 [node name="MedGradient" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_0qmm4")
 
 [node name="HighGradient" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_7nvm5")
 
 [node name="MaxGradient" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("GradientTexture2D_6auma")
+
+[connection signal="button_down" from="." to="." method="_on_pressed"]

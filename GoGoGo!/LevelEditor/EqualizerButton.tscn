@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cni57yc76qayn"]
+
+[ext_resource type="Texture2D" uid="uid://rvln37hsqncr" path="res://Sprites/EqualizerLow.png" id="1_fgs0a"]
+[ext_resource type="Script" path="res://EqualizerButton.gd" id="2_8dytf"]
+
+[node name="EqualizerButton" type="Button"]
+custom_minimum_size = Vector2(256, 256)
+offset_right = 264.0
+offset_bottom = 264.0
+button_mask = 7
+icon = ExtResource("1_fgs0a")
+script = ExtResource("2_8dytf")
+
+[connection signal="button_down" from="." to="." method="_on_pressed"]

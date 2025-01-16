@@ -12,7 +12,7 @@ const VU_COUNT = 20 # The amount of rectangles to manipulate.
 const FREQ_MAX = 11050.0
 const MIN_DB = 60
 
-var HEIGHT : int = 1800
+var HEIGHT : int = 3000
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

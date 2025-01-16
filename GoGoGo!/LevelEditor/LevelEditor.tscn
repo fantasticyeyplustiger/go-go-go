@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://0vbf4nh5djlc"]
+[gd_scene load_steps=21 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
@@ -76,38 +76,6 @@ sources/1 = SubResource("TileSetAtlasSource_ca4vl")
 sources/0 = SubResource("TileSetScenesCollectionSource_fxrkx")
 sources/2 = SubResource("TileSetAtlasSource_tny2p")
 sources/3 = SubResource("TileSetAtlasSource_frqsp")
-
-[sub_resource type="Gradient" id="Gradient_nx4vg"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.196078)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gtba3"]
-gradient = SubResource("Gradient_nx4vg")
-width = 256
-height = 256
-
-[sub_resource type="Gradient" id="Gradient_fbkjw"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.490196)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gnm3i"]
-gradient = SubResource("Gradient_fbkjw")
-width = 256
-height = 256
-
-[sub_resource type="Gradient" id="Gradient_e88kb"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.686275)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_s0w4x"]
-gradient = SubResource("Gradient_e88kb")
-width = 256
-height = 256
-
-[sub_resource type="Gradient" id="Gradient_6d6xp"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.843137)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_pqeob"]
-gradient = SubResource("Gradient_6d6xp")
-width = 256
-height = 256
 
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
@@ -441,34 +409,6 @@ texture = ExtResource("4_u8j4i")
 visible = false
 texture = ExtResource("9_t5ikq")
 
-[node name="LowGradient" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("GradientTexture2D_gtba3")
-
-[node name="MedGradient" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("GradientTexture2D_gnm3i")
-
-[node name="HighGradient" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("GradientTexture2D_s0w4x")
-
-[node name="MaxGradient" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("GradientTexture2D_pqeob")
-
 [node name="DownRowStart" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 768.0
@@ -532,3 +472,5 @@ scale = Vector2(1.8, 1.8)
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/PlaytestButton" to="." method="play_test"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/SongSelectButton" to="." method="load_song_select"]
 [connection signal="item_selected" from="ItemList" to="." method="change_chart"]
+[connection signal="color_changed" from="LeftGUI/EqualizerColor" to="." method="set_equalizer_color"]
+[connection signal="color_changed" from="LeftGUI/GradientColor" to="." method="set_gradient_color"]

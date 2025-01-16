@@ -27,7 +27,7 @@ func _on_pressed() -> void:
 		direction += 1
 		$Sprite.frame += 1
 	
-	# CALL SIGNAL TO ADD 
+	Globals.emit_signal("bg_pulse", is_on, direction)
 	
 
 func reverse_order():
@@ -36,6 +36,7 @@ func reverse_order():
 		is_on = true
 		direction = Globals.directions.UP
 		$Sprite.frame = 5
+		Globals.emit_signal("bg_pulse", is_on, direction)
 	
 	elif $Sprite.frame == 1 or direction == Globals.directions.DOWN:
 		remove_pulse()
@@ -52,4 +53,4 @@ func remove_pulse():
 	direction = Globals.directions.DOWN
 	$Sprite.frame = 0
 	
-	# call signal that removes pulse
+	Globals.emit_signal("bg_pulse", is_on, direction)

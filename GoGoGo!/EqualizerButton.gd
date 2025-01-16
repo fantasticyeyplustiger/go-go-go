@@ -1,16 +1,17 @@
 extends Button
 
-enum bright_level {LOW = 75, MED = 175, HIGH = 225, MAX = 255}
+enum height_level {LOW = 1200, MED = 1800, HIGH = 2500, MAX = 3200}
 
-var brightness : bright_level = bright_level.LOW
+var height : height_level = height_level.LOW
 
 var textures : Array[Texture2D]
 var current_texture : int = 0
 
 func _ready() -> void:
-	for child in self.get_children():
-		textures.append(child.texture)
-		child.queue_free()
+	textures.append(load("res://Sprites/EqualizerLow.png"))
+	textures.append(load("res://Sprites/EqualizerMed.png"))
+	textures.append(load("res://Sprites/EqualizerHigh.png"))
+	textures.append(load("res://Sprites/EqualizerMax.png"))
 
 
 func _on_pressed() -> void:
@@ -23,36 +24,37 @@ func _on_pressed() -> void:
 		reverse_order()
 		return
 	
-	if brightness >= bright_level.MAX or current_texture == 3:
+	if height >= height_level.MAX or current_texture == 3:
 		set_low()
 		return
 	
 	else:
 		@warning_ignore("int_as_enum_without_cast")
-		brightness += 1
+		height += 1
 		current_texture += 1
 		self.icon = textures[current_texture]
 	
-	# CALL SIGNAL TO ADD 
+	Globals.emit_signal("equalizer_height", height)
 	
 
 func reverse_order():
 	
-	if brightness == bright_level.LOW:
-		brightness = bright_level.MAX
+	if height == height_level.LOW:
+		height = height_level.MAX
 		current_texture = 3
 		self.icon = textures[3]
 	
 	else:
 		@warning_ignore("int_as_enum_without_cast")
-		brightness -= 1
+		height -= 1
 		current_texture -= 1
 		self.icon = textures[current_texture]
+	
+	Globals.emit_signal("equalizer_height", height)
 
 
 func set_low():
-	brightness = bright_level.LOW
+	height = height_level.LOW
 	current_texture = 0
 	self.icon = textures[0]
-	
-	# call signal that removes pulse
+	Globals.emit_signal("equalizer_height", height)

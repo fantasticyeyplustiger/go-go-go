@@ -45,6 +45,10 @@ func _ready():
 	$MarginContainer/Buttons/SpinBox.value = bpm
 	
 	Globals.instruct.connect(set_attack)
+	Globals.equalizer_height.connect(set_equalizer_height)
+	Globals.gradient_brightness.connect(set_gradient_brightness)
+	Globals.gradient_pulse.connect(set_gradient_pulse)
+	Globals.bg_pulse.connect(set_bg_pulse)
 	
 	total_buttons = (2 * rows) + (2 * columns)
 	
@@ -91,7 +95,7 @@ func load_buttons(x : int, y : int, control_node : Control) -> void:
 			(roundi(new_child.global_position.y - $ButtonOrigin.position.y)) / tile_size)
 		
 
-
+#region set functions
 '''
 Sets an attack at the corresponding location or deactivates it.
 Called by OnOrOffButton being pressed.
@@ -111,12 +115,40 @@ func set_attack(local_position : Vector2i, attack : bool, type : Globals.obstacl
 			$ItemList.set_item_icon(current_beat, $Empty.texture)
 
 
+func set_equalizer_height(height : int):
+	data.change_height(current_beat, height)
+	
+
+func set_equalizer_color(color : Color):
+	data.change_equalizer_color(current_beat, color)
+	
+
+func set_gradient_brightness(brightness : int):
+	data.change_brightness(current_beat, brightness)
+	
+
+func set_gradient_color(color : Color):
+	data.change_gradient_color(current_beat, color)
+
+func set_gradient_pulse(is_on : bool):
+	if is_on:
+		data.gradient_pulse_at(current_beat)
+	else:
+		data.remove_gradient_pulse_at(current_beat)
+
+func set_bg_pulse(is_on : bool, direction : Globals.directions):
+	if is_on:
+		data.set_bg_pulse(current_beat, direction)
+	else:
+		data.remove_bg_pulse(current_beat)
+
+
 func set_icons():
 	
 	for event in data.events:
 		
 		$ItemList.set_item_icon(event.timing, $Boulder.texture)
-
+#endregion
 
 func initialize_chart() -> void:
 	

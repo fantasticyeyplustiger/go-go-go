@@ -19,14 +19,111 @@ var current_beat : int
 @warning_ignore("unused_signal")
 signal instruct
 
+@warning_ignore("unused_signal")
+signal equalizer_height
+
+@warning_ignore("unused_signal")
+signal gradient_brightness
+
+@warning_ignore("unused_signal")
+signal gradient_pulse
+
+@warning_ignore("unused_signal")
+signal bg_pulse
+
 class levelData: 
 	var events = []
+	
+	var equalizer_heights = []
+	var equalizer_colors = []
+	var gradient_brightnesses = []
+	var gradient_pulse_times = []
+	var gradient_colors = []
+	var bg_pulses = []
+	
 	var random_attacks : bool
 	var bpm : float
 	var old_laser_length : int
 	var last_beat : int = -1
 	var song_path : String
-	var song
+	
+	
+	func create_change_event(current_beat : int, value : int, value_name : String):
+		return {
+			"timing" : current_beat,
+			value_name : value
+			}
+	
+	func create_color_event(current_beat : int, color : Color):
+		return {
+			"timing" : current_beat,
+			"color" : color.hex
+		}
+	
+	#region equalizer methods
+	func change_height(current_beat : int, new_height : int) -> void:
+		remove_height_change(current_beat)
+		equalizer_heights.append(create_change_event(current_beat, new_height, "height"))
+	
+	func remove_height_change(current_beat : int) -> void:
+		var iterator : int = 0
+		for height in equalizer_heights:
+			
+			if height.timing == current_beat:
+				equalizer_heights.remove_at(iterator)
+				return
+			
+			iterator += 1
+	
+	func change_equalizer_color(current_beat : int, new_color : Color) -> void:
+		equalizer_colors.append(create_color_event(current_beat, new_color))
+		
+	#endregion
+	
+	#region gradient methods
+	func change_brightness(current_beat : int, new_brightness : int) -> void:
+		remove_brightness_change(current_beat)
+		gradient_brightnesses.append(create_change_event(current_beat, new_brightness, "brightness"))
+	
+	func remove_brightness_change(current_beat : int) -> void:
+		var iterator : int = 0
+		for brightness in gradient_brightnesses:
+			
+			if brightness.timing == current_beat:
+				gradient_brightnesses.remove_at(iterator)
+				return
+			
+			iterator += 1
+	
+	func change_gradient_color(current_beat : int, new_color : Color) -> void:
+		gradient_colors.append(create_color_event(current_beat, new_color))
+	
+	func gradient_pulse_at(current_beat : int) -> void:
+		gradient_pulse_times.append(current_beat)
+	
+	func remove_gradient_pulse_at(current_beat : int) -> void:
+		var iterator : int = 0
+		for i in gradient_pulse_times:
+			if i == current_beat:
+				gradient_pulse_times.remove_at(iterator)
+			
+			iterator += 1
+	#endregion
+	
+	#region bg pulse methods
+	func set_bg_pulse(current_beat : int, direction : directions) -> void:
+		remove_bg_pulse(current_beat)
+		bg_pulses.append(create_change_event(current_beat, direction, "direction"))
+		pass
+	
+	func remove_bg_pulse(current_beat : int) -> void:
+		var iterator : int = 0
+		for pulse in bg_pulses:
+			if pulse.timing == current_beat:
+				bg_pulses.remove_at(iterator)
+			
+			iterator += 1
+	#endregion
 	
 	#region event methods
 	'''
@@ -123,6 +220,7 @@ class levelData:
 		return returning_events
 	#endregion
 	
+	#region saving and loading
 	'''
 	Loads from the [save_file] path.
 	
@@ -170,5 +268,5 @@ class levelData:
 		Globals.data_path = file.get_path()
 		
 		file = null
-	
+	#endregion
 	
