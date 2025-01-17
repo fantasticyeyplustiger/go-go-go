@@ -242,6 +242,11 @@ func change_chart(index : int) -> void:
 			attacks = data._get_events(index)
 			break
 	
+	if data.check_for_bg_events(current_beat):
+		print("true")
+	else:
+		print("false")
+	
 	$MarginContainer/Buttons/SaveButton.disabled = false
 	$MarginContainer/BottomGUI/Labels/BeatLabel.text = "Beat: " + str(current_beat)
 	

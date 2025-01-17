@@ -47,7 +47,6 @@ class levelData:
 	var last_beat : int = -1
 	var song_path : String
 	
-	
 	func create_change_event(current_beat : int, value : int, value_name : String):
 		return {
 			"timing" : current_beat,
@@ -59,6 +58,23 @@ class levelData:
 			"timing" : current_beat,
 			"color" : color.hex
 		}
+	
+	func check_for_bg_events(current_beat : int) -> bool:
+		var bg_events = []
+		bg_events.append_array(equalizer_heights)
+		bg_events.append_array(equalizer_colors)
+		bg_events.append_array(gradient_brightnesses)
+		bg_events.append_array(gradient_pulse_times)
+		bg_events.append_array(gradient_colors)
+		bg_events.append_array(bg_pulses)
+		
+		for event in bg_events:
+			if event.timing == current_beat:
+				return true
+		
+		return false
+	
+	
 	
 	#region equalizer methods
 	func change_height(current_beat : int, new_height : int) -> void:
@@ -248,6 +264,12 @@ class levelData:
 	func _stringify() -> String:
 		var saved_data = {
 			"events" : events,
+			"equalizer_heights" : equalizer_heights,
+			"equalizer_colors" : equalizer_colors,
+			"gradient_brightnesses" : gradient_brightnesses,
+			"gradient_pulse_times" : gradient_pulse_times,
+			"gradient_colors" : gradient_colors,
+			"bg_pulses" : bg_pulses,
 			"random_attacks" : random_attacks,
 			"bpm" : bpm,
 			"song_path" : song_path,
