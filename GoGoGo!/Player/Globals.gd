@@ -34,10 +34,10 @@ signal bg_pulse
 class levelData: 
 	var events = []
 	
-	var equalizer_heights = []
+	var equalizer_heights : Array[Vector2i] = []
 	var equalizer_colors = []
-	var gradient_brightnesses = []
-	var gradient_pulse_times = []
+	var gradient_brightnesses : Array[Vector2i] = []
+	var gradient_pulse_times : Array[int] = []
 	var gradient_colors = []
 	var bg_pulses = []
 	
@@ -46,12 +46,6 @@ class levelData:
 	var old_laser_length : int
 	var last_beat : int = -1
 	var song_path : String
-	
-	func create_change_event(current_beat : int, value : int, value_name : String):
-		return {
-			"timing" : current_beat,
-			value_name : value
-			}
 	
 	func create_color_event(current_beat : int, color : Color):
 		return {
@@ -79,13 +73,14 @@ class levelData:
 	#region equalizer methods
 	func change_height(current_beat : int, new_height : int) -> void:
 		remove_height_change(current_beat)
-		equalizer_heights.append(create_change_event(current_beat, new_height, "height"))
+		equalizer_heights.append( Vector2i(current_beat, new_height) )
+		equalizer_heights.sort_custom(sort_timing)
 	
 	func remove_height_change(current_beat : int) -> void:
 		var iterator : int = 0
 		for height in equalizer_heights:
 			
-			if height.timing == current_beat:
+			if height.x == current_beat:
 				equalizer_heights.remove_at(iterator)
 				return
 			
@@ -99,13 +94,14 @@ class levelData:
 	#region gradient methods
 	func change_brightness(current_beat : int, new_brightness : int) -> void:
 		remove_brightness_change(current_beat)
-		gradient_brightnesses.append(create_change_event(current_beat, new_brightness, "brightness"))
+		gradient_brightnesses.append( Vector2i(current_beat, new_brightness) )
+		gradient_brightnesses.sort_custom(sort_timing)
 	
 	func remove_brightness_change(current_beat : int) -> void:
 		var iterator : int = 0
 		for brightness in gradient_brightnesses:
 			
-			if brightness.timing == current_beat:
+			if brightness.x == current_beat:
 				gradient_brightnesses.remove_at(iterator)
 				return
 			
@@ -129,8 +125,8 @@ class levelData:
 	#region bg pulse methods
 	func set_bg_pulse(current_beat : int, direction : directions) -> void:
 		remove_bg_pulse(current_beat)
-		bg_pulses.append(create_change_event(current_beat, direction, "direction"))
-		pass
+		bg_pulses.append(Vector2i(current_beat, direction))
+		
 	
 	func remove_bg_pulse(current_beat : int) -> void:
 		var iterator : int = 0
@@ -285,10 +281,23 @@ class levelData:
 	'''
 	func save(save_file : String):
 		var file = FileAccess.open(save_file, FileAccess.WRITE)
+		
+		events.sort_custom(sort_events)
+		
 		file.store_string(_stringify())
 		
 		Globals.data_path = file.get_path()
 		
 		file = null
+	
+	func sort_events(a, b) -> bool:
+		if a.timing > b.timing:
+			return false
+		return true
+	
+	func sort_timing(a, b) -> bool:
+		if a[0] > b[0]:
+			return false
+		return true
 	#endregion
 	
