@@ -1,6 +1,6 @@
 extends Button
 
-enum height_level {LOW = 1200, MED = 1800, HIGH = 2500, MAX = 3200}
+enum height_level {LOW = 1200, MED = 1850, HIGH = 2500, MAX = 3150}
 
 var height : height_level = height_level.LOW
 
@@ -30,7 +30,7 @@ func _on_pressed() -> void:
 	
 	else:
 		@warning_ignore("int_as_enum_without_cast")
-		height += 1
+		height += 650
 		current_texture += 1
 		self.icon = textures[current_texture]
 	
@@ -46,7 +46,7 @@ func reverse_order():
 	
 	else:
 		@warning_ignore("int_as_enum_without_cast")
-		height -= 1
+		height -= 650
 		current_texture -= 1
 		self.icon = textures[current_texture]
 	
@@ -58,3 +58,16 @@ func set_low():
 	current_texture = 0
 	self.icon = textures[0]
 	Globals.emit_signal("equalizer_height", height)
+
+
+func change_sprite(new_height) -> void:
+	
+	match new_height:
+		1200:
+			self.icon = textures[0]
+		1850:
+			self.icon = textures[1]
+		2500:
+			self.icon = textures[2]
+		3150:
+			self.icon = textures[3]

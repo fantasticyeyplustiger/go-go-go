@@ -242,13 +242,13 @@ func change_chart(index : int) -> void:
 			attacks = data._get_events(index)
 			break
 	
-	if data.check_for_bg_events(current_beat):
-		print("true")
-	else:
-		print("false")
-	
 	$MarginContainer/Buttons/SaveButton.disabled = false
 	$MarginContainer/BottomGUI/Labels/BeatLabel.text = "Beat: " + str(current_beat)
+	
+	if not data.equalizer_heights.is_empty():
+		var new_height = data.find_in_between_at(current_beat, data.equalizer_heights)
+		$LeftGUI/EqualizerButton.change_sprite(new_height.value)
+	
 	
 	if attacks.size() == 0:
 		reset_buttons_to_false()

@@ -34,9 +34,9 @@ signal bg_pulse
 class levelData: 
 	var events = []
 	
-	var equalizer_heights : Array[Vector2i] = []
+	var equalizer_heights = []
 	var equalizer_colors = []
-	var gradient_brightnesses : Array[Vector2i] = []
+	var gradient_brightnesses = []
 	var gradient_pulse_times : Array[int] = []
 	var gradient_colors = []
 	var bg_pulses = []
@@ -46,6 +46,12 @@ class levelData:
 	var old_laser_length : int
 	var last_beat : int = -1
 	var song_path : String
+	
+	func create_bg_event(current_beat : int, value):
+		return{
+			"timing" : current_beat,
+			"value" : value
+		}
 	
 	func create_color_event(current_beat : int, color : Color):
 		return {
@@ -69,18 +75,45 @@ class levelData:
 		return false
 	
 	
+	func check_for_element_at(current_beat : int, array) -> bool:
+		for element in array:
+			if element.timing == current_beat:
+				return true
+		
+		return false
+	
+	
+	func find_in_between_at(current_beat : int, array, null_case):
+		var temp_element
+		
+		for element in array:
+			if current_beat >= element.timing:
+				temp_element = element
+				continue
+		
+		if not temp_element == null:
+			return temp_element
+		else:
+			return create_bg_event(0, null_case)
+	
+	func get_element_at(current_beat : int, array):
+		for element in array:
+			if element.timing == current_beat:
+				return element
+		
+		# Check if element exists there before trying to get it.
 	
 	#region equalizer methods
 	func change_height(current_beat : int, new_height : int) -> void:
 		remove_height_change(current_beat)
-		equalizer_heights.append( Vector2i(current_beat, new_height) )
+		equalizer_heights.append( create_bg_event(current_beat, new_height) )
 		equalizer_heights.sort_custom(sort_timing)
 	
 	func remove_height_change(current_beat : int) -> void:
 		var iterator : int = 0
 		for height in equalizer_heights:
 			
-			if height.x == current_beat:
+			if height.timing == current_beat:
 				equalizer_heights.remove_at(iterator)
 				return
 			
@@ -88,7 +121,7 @@ class levelData:
 	
 	func change_equalizer_color(current_beat : int, new_color : Color) -> void:
 		equalizer_colors.append(create_color_event(current_beat, new_color))
-		
+	
 	#endregion
 	
 	#region gradient methods
@@ -250,6 +283,8 @@ class levelData:
 		
 		song_path = data.song_path
 		
+		equalizer_heights = data.equalizer_heights
+		
 		file = null
 	
 	'''
@@ -282,7 +317,7 @@ class levelData:
 	func save(save_file : String):
 		var file = FileAccess.open(save_file, FileAccess.WRITE)
 		
-		events.sort_custom(sort_events)
+		#events.sort_custom(sort_events)
 		
 		file.store_string(_stringify())
 		
@@ -296,7 +331,7 @@ class levelData:
 		return true
 	
 	func sort_timing(a, b) -> bool:
-		if a[0] > b[0]:
+		if a.timing > b.timing:
 			return false
 		return true
 	#endregion

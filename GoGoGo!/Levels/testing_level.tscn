@@ -164,7 +164,7 @@ offset_bottom = -854.0
 theme_override_font_sizes/font_size = 150
 text = "Beat: "
 
-[node name="Control" type="Control" parent="."]
+[node name="Equalizer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -304.0
@@ -173,12 +173,12 @@ offset_right = -264.0
 offset_bottom = -2008.0
 script = ExtResource("7_eoydm")
 
-[node name="Music" type="AudioStreamPlayer" parent="Control"]
+[node name="Music" type="AudioStreamPlayer" parent="Equalizer"]
 stream = ExtResource("7_33kna")
 volume_db = -1.874
 bus = &"Music"
 
-[node name="Control" type="Control" parent="Control"]
+[node name="Control" type="Control" parent="Equalizer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -16.0
@@ -188,7 +188,7 @@ offset_bottom = 1304.0
 rotation = 3.14159
 scale = Vector2(0.5, 1)
 
-[node name="Control" type="Control" parent="Control/Control"]
+[node name="Control" type="Control" parent="Equalizer/Control"]
 anchors_preset = 0
 offset_top = 8.0
 offset_right = 40.0
@@ -196,7 +196,7 @@ offset_bottom = 48.0
 rotation = 3.14159
 scale = Vector2(1, 0.8)
 
-[node name="ColorRect" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_right = 30.0
@@ -204,7 +204,7 @@ offset_bottom = 30.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect2" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect2" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 88.0
@@ -213,7 +213,7 @@ offset_bottom = 118.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect3" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect3" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 176.0
@@ -222,7 +222,7 @@ offset_bottom = 206.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect4" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect4" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 264.0
@@ -231,7 +231,7 @@ offset_bottom = 294.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect5" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect5" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 352.0
@@ -240,7 +240,7 @@ offset_bottom = 382.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect6" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect6" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 440.0
@@ -249,7 +249,7 @@ offset_bottom = 470.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect7" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect7" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 528.0
@@ -258,7 +258,7 @@ offset_bottom = 558.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect8" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect8" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 616.0
@@ -267,7 +267,7 @@ offset_bottom = 646.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect9" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect9" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 704.0
@@ -276,7 +276,7 @@ offset_bottom = 734.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect10" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect10" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 792.0
@@ -285,7 +285,7 @@ offset_bottom = 822.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect11" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect11" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 888.0
@@ -294,7 +294,7 @@ offset_bottom = 918.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect12" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect12" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 976.0
@@ -303,7 +303,7 @@ offset_bottom = 1006.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect13" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect13" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1072.0
@@ -312,7 +312,7 @@ offset_bottom = 1102.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect14" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect14" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1160.0
@@ -321,7 +321,7 @@ offset_bottom = 1190.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect15" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect15" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1256.0
@@ -330,7 +330,7 @@ offset_bottom = 1286.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect16" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect16" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1344.0
@@ -339,7 +339,7 @@ offset_bottom = 1374.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect17" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect17" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1432.0
@@ -348,7 +348,7 @@ offset_bottom = 1462.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect18" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect18" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1520.0
@@ -357,7 +357,7 @@ offset_bottom = 1550.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect19" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect19" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1608.0
@@ -366,7 +366,7 @@ offset_bottom = 1638.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect20" type="ColorRect" parent="Control/Control/Control"]
+[node name="ColorRect20" type="ColorRect" parent="Equalizer/Control/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1696.0
@@ -375,7 +375,7 @@ offset_bottom = 1726.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="Control2" type="Control" parent="Control"]
+[node name="Control2" type="Control" parent="Equalizer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -16.0
@@ -385,7 +385,7 @@ offset_bottom = -424.0
 rotation = 3.14159
 scale = Vector2(0.5, 1)
 
-[node name="Control" type="Control" parent="Control/Control2"]
+[node name="Control" type="Control" parent="Equalizer/Control2"]
 anchors_preset = 0
 offset_left = -2.51778e-05
 offset_top = -288.0
@@ -394,7 +394,7 @@ offset_bottom = -248.0
 rotation = 3.14159
 scale = Vector2(1, 0.8)
 
-[node name="ColorRect" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_right = 30.0
@@ -402,7 +402,7 @@ offset_bottom = 30.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect2" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect2" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 88.0
@@ -411,7 +411,7 @@ offset_bottom = 118.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect3" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect3" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 176.0
@@ -420,7 +420,7 @@ offset_bottom = 206.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect4" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect4" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 264.0
@@ -429,7 +429,7 @@ offset_bottom = 294.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect5" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect5" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 352.0
@@ -438,7 +438,7 @@ offset_bottom = 382.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect6" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect6" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 440.0
@@ -447,7 +447,7 @@ offset_bottom = 470.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect7" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect7" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 528.0
@@ -456,7 +456,7 @@ offset_bottom = 558.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect8" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect8" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 616.0
@@ -465,7 +465,7 @@ offset_bottom = 646.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect9" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect9" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 704.0
@@ -474,7 +474,7 @@ offset_bottom = 734.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect10" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect10" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 792.0
@@ -483,7 +483,7 @@ offset_bottom = 822.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect11" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect11" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 888.0
@@ -492,7 +492,7 @@ offset_bottom = 918.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect12" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect12" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 976.0
@@ -501,7 +501,7 @@ offset_bottom = 1006.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect13" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect13" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1072.0
@@ -510,7 +510,7 @@ offset_bottom = 1102.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect14" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect14" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1160.0
@@ -519,7 +519,7 @@ offset_bottom = 1190.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect15" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect15" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1256.0
@@ -528,7 +528,7 @@ offset_bottom = 1286.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect16" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect16" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1344.0
@@ -537,7 +537,7 @@ offset_bottom = 1374.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect17" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect17" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1432.0
@@ -546,7 +546,7 @@ offset_bottom = 1462.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect18" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect18" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1520.0
@@ -555,7 +555,7 @@ offset_bottom = 1550.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect19" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect19" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1608.0
@@ -564,7 +564,7 @@ offset_bottom = 1638.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect20" type="ColorRect" parent="Control/Control2/Control"]
+[node name="ColorRect20" type="ColorRect" parent="Equalizer/Control2/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1696.0
@@ -573,7 +573,7 @@ offset_bottom = 1726.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="Control3" type="Control" parent="Control"]
+[node name="Control3" type="Control" parent="Equalizer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2160.0
@@ -582,7 +582,7 @@ offset_right = 2200.0
 offset_bottom = 2712.0
 scale = Vector2(0.5, 1)
 
-[node name="Control" type="Control" parent="Control/Control3"]
+[node name="Control" type="Control" parent="Equalizer/Control3"]
 anchors_preset = 0
 offset_top = 8.0
 offset_right = 40.0
@@ -590,7 +590,7 @@ offset_bottom = 48.0
 rotation = 3.14159
 scale = Vector2(1, 0.8)
 
-[node name="ColorRect" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_right = 30.0
@@ -598,7 +598,7 @@ offset_bottom = 30.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect2" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect2" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 88.0
@@ -607,7 +607,7 @@ offset_bottom = 118.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect3" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect3" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 176.0
@@ -616,7 +616,7 @@ offset_bottom = 206.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect4" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect4" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 264.0
@@ -625,7 +625,7 @@ offset_bottom = 294.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect5" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect5" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 352.0
@@ -634,7 +634,7 @@ offset_bottom = 382.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect6" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect6" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 440.0
@@ -643,7 +643,7 @@ offset_bottom = 470.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect7" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect7" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 528.0
@@ -652,7 +652,7 @@ offset_bottom = 558.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect8" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect8" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 616.0
@@ -661,7 +661,7 @@ offset_bottom = 646.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect9" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect9" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 704.0
@@ -670,7 +670,7 @@ offset_bottom = 734.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect10" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect10" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 792.0
@@ -679,7 +679,7 @@ offset_bottom = 822.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect11" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect11" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 888.0
@@ -688,7 +688,7 @@ offset_bottom = 918.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect12" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect12" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 976.0
@@ -697,7 +697,7 @@ offset_bottom = 1006.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect13" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect13" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1072.0
@@ -706,7 +706,7 @@ offset_bottom = 1102.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect14" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect14" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1160.0
@@ -715,7 +715,7 @@ offset_bottom = 1190.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect15" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect15" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1256.0
@@ -724,7 +724,7 @@ offset_bottom = 1286.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect16" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect16" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1344.0
@@ -733,7 +733,7 @@ offset_bottom = 1374.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect17" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect17" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1432.0
@@ -742,7 +742,7 @@ offset_bottom = 1462.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect18" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect18" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1520.0
@@ -751,7 +751,7 @@ offset_bottom = 1550.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect19" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect19" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1608.0
@@ -760,7 +760,7 @@ offset_bottom = 1638.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect20" type="ColorRect" parent="Control/Control3/Control"]
+[node name="ColorRect20" type="ColorRect" parent="Equalizer/Control3/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1696.0
@@ -769,7 +769,7 @@ offset_bottom = 1726.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="Control4" type="Control" parent="Control"]
+[node name="Control4" type="Control" parent="Equalizer"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2160.0
@@ -778,7 +778,7 @@ offset_right = 2200.0
 offset_bottom = 1584.0
 scale = Vector2(0.5, 1)
 
-[node name="Control" type="Control" parent="Control/Control4"]
+[node name="Control" type="Control" parent="Equalizer/Control4"]
 anchors_preset = 0
 offset_left = -2.51778e-05
 offset_top = -288.0
@@ -787,7 +787,7 @@ offset_bottom = -248.0
 rotation = 3.14159
 scale = Vector2(1, 0.8)
 
-[node name="ColorRect" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_right = 30.0
@@ -795,7 +795,7 @@ offset_bottom = 30.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect2" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect2" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 88.0
@@ -804,7 +804,7 @@ offset_bottom = 118.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect3" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect3" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 176.0
@@ -813,7 +813,7 @@ offset_bottom = 206.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect4" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect4" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 264.0
@@ -822,7 +822,7 @@ offset_bottom = 294.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect5" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect5" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 352.0
@@ -831,7 +831,7 @@ offset_bottom = 382.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect6" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect6" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 440.0
@@ -840,7 +840,7 @@ offset_bottom = 470.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect7" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect7" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 528.0
@@ -849,7 +849,7 @@ offset_bottom = 558.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect8" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect8" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 616.0
@@ -858,7 +858,7 @@ offset_bottom = 646.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect9" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect9" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 704.0
@@ -867,7 +867,7 @@ offset_bottom = 734.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect10" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect10" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 792.0
@@ -876,7 +876,7 @@ offset_bottom = 822.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect11" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect11" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 888.0
@@ -885,7 +885,7 @@ offset_bottom = 918.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect12" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect12" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 976.0
@@ -894,7 +894,7 @@ offset_bottom = 1006.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect13" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect13" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1072.0
@@ -903,7 +903,7 @@ offset_bottom = 1102.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect14" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect14" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1160.0
@@ -912,7 +912,7 @@ offset_bottom = 1190.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect15" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect15" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1256.0
@@ -921,7 +921,7 @@ offset_bottom = 1286.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect16" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect16" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1344.0
@@ -930,7 +930,7 @@ offset_bottom = 1374.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect17" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect17" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1432.0
@@ -939,7 +939,7 @@ offset_bottom = 1462.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect18" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect18" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1520.0
@@ -948,7 +948,7 @@ offset_bottom = 1550.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect19" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect19" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1608.0
@@ -957,7 +957,7 @@ offset_bottom = 1638.0
 rotation = 3.14159
 pivot_offset = Vector2(15, 30)
 
-[node name="ColorRect20" type="ColorRect" parent="Control/Control4/Control"]
+[node name="ColorRect20" type="ColorRect" parent="Equalizer/Control4/Control"]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 offset_top = 1696.0

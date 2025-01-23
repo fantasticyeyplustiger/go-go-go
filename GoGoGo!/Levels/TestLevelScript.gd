@@ -54,8 +54,8 @@ func _ready() -> void:
 	else:
 		data._load(Globals.data_path)
 		
-		if not data.song_path.is_empty():
-			music.stream = load(data.song_path)
+		#if not data.song_path.is_empty():
+			#music.stream = load(data.song_path)
 		
 		bpm = data.bpm
 	
@@ -99,6 +99,10 @@ func play() -> void:
 	
 	current_events = data._get_events(current_beat)
 	$WaveLabel.text = "Beat: " + str(current_beat) # Debugging.
+	
+	if data.check_for_element_at(current_beat, data.equalizer_heights):
+		var new_height = data.get_element_at(current_beat, data.equalizer_heights)
+		$Equalizer.set_height(new_height[1])
 	
 	# If it's empty, there is no need to run this code.
 	if current_events.is_empty():
