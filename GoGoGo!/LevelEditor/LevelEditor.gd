@@ -246,9 +246,19 @@ func change_chart(index : int) -> void:
 	$MarginContainer/BottomGUI/Labels/BeatLabel.text = "Beat: " + str(current_beat)
 	
 	if not data.equalizer_heights.is_empty():
-		var new_height = data.find_in_between_at(current_beat, data.equalizer_heights)
+		var new_height = data.find_in_between_at(current_beat, data.equalizer_heights, 1200, true)
 		$LeftGUI/EqualizerButton.change_sprite(new_height.value)
 	
+	if not data.gradient_brightnesses.is_empty():
+		var new_brightness = data.find_in_between_at(current_beat, data.gradient_brightnesses, 90, true)
+		$LeftGUI/GradientButton.change_sprite(new_brightness.value)
+	
+	if not data.gradient_pulse_times.is_empty():
+		var pulse_exists : bool = data.check_for_element_at(current_beat, data.gradient_pulse_times)
+		if pulse_exists:
+			$LeftGUI/GradientPulse.switch_on()
+		else:
+			$LeftGUI/GradientPulse.switch_off()
 	
 	if attacks.size() == 0:
 		reset_buttons_to_false()

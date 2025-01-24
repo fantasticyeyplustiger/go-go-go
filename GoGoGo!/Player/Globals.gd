@@ -37,7 +37,7 @@ class levelData:
 	var equalizer_heights = []
 	var equalizer_colors = []
 	var gradient_brightnesses = []
-	var gradient_pulse_times : Array[int] = []
+	var gradient_pulse_times = []
 	var gradient_colors = []
 	var bg_pulses = []
 	
@@ -75,15 +75,20 @@ class levelData:
 		return false
 	
 	
-	func check_for_element_at(current_beat : int, array) -> bool:
+	func check_for_timing_at(current_beat : int, array) -> bool:
 		for element in array:
 			if element.timing == current_beat:
 				return true
 		
 		return false
 	
+	func check_for_element_at(current_beat : int, array) -> bool:
+		for element in array:
+			if element == current_beat:
+				return true
+		return false
 	
-	func find_in_between_at(current_beat : int, array, null_case):
+	func find_in_between_at(current_beat : int, array, null_case, element_is_array : bool):
 		var temp_element
 		
 		for element in array:
@@ -94,7 +99,10 @@ class levelData:
 		if not temp_element == null:
 			return temp_element
 		else:
-			return create_bg_event(0, null_case)
+			if element_is_array:
+				return create_bg_event(0, null_case)
+			else:
+				return null_case
 	
 	func get_element_at(current_beat : int, array):
 		for element in array:
@@ -127,14 +135,14 @@ class levelData:
 	#region gradient methods
 	func change_brightness(current_beat : int, new_brightness : int) -> void:
 		remove_brightness_change(current_beat)
-		gradient_brightnesses.append( Vector2i(current_beat, new_brightness) )
+		gradient_brightnesses.append( create_bg_event(current_beat, new_brightness) )
 		gradient_brightnesses.sort_custom(sort_timing)
 	
 	func remove_brightness_change(current_beat : int) -> void:
 		var iterator : int = 0
 		for brightness in gradient_brightnesses:
 			
-			if brightness.x == current_beat:
+			if brightness.timing == current_beat:
 				gradient_brightnesses.remove_at(iterator)
 				return
 			
@@ -285,6 +293,11 @@ class levelData:
 		
 		equalizer_heights = data.equalizer_heights
 		
+		gradient_brightnesses = data.gradient_brightnesses
+		
+		gradient_pulse_times = data.gradient_pulse_times
+		
+		
 		file = null
 	
 	'''
@@ -324,11 +337,6 @@ class levelData:
 		Globals.data_path = file.get_path()
 		
 		file = null
-	
-	func sort_events(a, b) -> bool:
-		if a.timing > b.timing:
-			return false
-		return true
 	
 	func sort_timing(a, b) -> bool:
 		if a.timing > b.timing:

@@ -1,6 +1,6 @@
 extends Button
 
-enum bright_level {LOW = 75, MED = 175, HIGH = 225, MAX = 255}
+enum bright_level {LOW = 90, MED = 145, HIGH = 200, MAX = 255}
 
 var brightness : bright_level = bright_level.LOW
 
@@ -29,11 +29,11 @@ func _on_pressed() -> void:
 	
 	else:
 		@warning_ignore("int_as_enum_without_cast")
-		brightness += 1
+		brightness += 55
 		current_texture += 1
 		self.icon = textures[current_texture]
 	
-	# CALL SIGNAL TO ADD 
+	Globals.emit_signal("gradient_brightness", brightness)
 	
 
 func reverse_order():
@@ -45,7 +45,7 @@ func reverse_order():
 	
 	else:
 		@warning_ignore("int_as_enum_without_cast")
-		brightness -= 1
+		brightness -= 55
 		current_texture -= 1
 		self.icon = textures[current_texture]
 
@@ -55,4 +55,16 @@ func set_low():
 	current_texture = 0
 	self.icon = textures[0]
 	
-	# call signal that removes pulse
+	Globals.emit_signal("gradient_brightness", brightness)
+
+
+func change_sprite(new_brightness : int):
+	match new_brightness:
+		90:
+			self.icon = textures[0]
+		145:
+			self.icon = textures[1]
+		200:
+			self.icon = textures[2]
+		255:
+			self.icon = textures[3]
