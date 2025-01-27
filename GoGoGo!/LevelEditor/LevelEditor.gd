@@ -245,6 +245,18 @@ func change_chart(index : int) -> void:
 	$MarginContainer/Buttons/SaveButton.disabled = false
 	$MarginContainer/BottomGUI/Labels/BeatLabel.text = "Beat: " + str(current_beat)
 	
+	change_bg_chart()
+	
+	if attacks.size() == 0:
+		reset_buttons_to_false()
+		return
+	
+	for attack in attacks:
+		var pos = Vector2i(attack.x, attack.y)
+		set_button_at(pos, attack.type)
+	
+
+func change_bg_chart() -> void:
 	if not data.equalizer_heights.is_empty():
 		var new_height = data.find_in_between_at(current_beat, data.equalizer_heights, 1200, true)
 		$LeftGUI/EqualizerButton.change_sprite(new_height.value)
@@ -259,15 +271,7 @@ func change_chart(index : int) -> void:
 			$LeftGUI/GradientPulse.switch_on()
 		else:
 			$LeftGUI/GradientPulse.switch_off()
-	
-	if attacks.size() == 0:
-		reset_buttons_to_false()
-		return
-	
-	for attack in attacks:
-		var pos = Vector2i(attack.x, attack.y)
-		set_button_at(pos, attack.type)
-	
+
 
 '''
 Turns on a specific button with the position given.
@@ -361,6 +365,8 @@ func load_save_file(path: String) -> void:
 	
 	if not data.last_beat == -1:
 		$ItemList.set_item_icon(data.last_beat, $End.texture)
+	
+	change_bg_chart()
 
 
 func save_folder_selected(path: String) -> void:

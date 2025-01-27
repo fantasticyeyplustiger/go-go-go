@@ -60,7 +60,7 @@ func set_low():
 	Globals.emit_signal("equalizer_height", height)
 
 
-func change_sprite(new_height) -> void:
+func change_sprite(new_height : int) -> void:
 	
 	match new_height:
 		1200:

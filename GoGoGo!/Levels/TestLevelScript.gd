@@ -33,6 +33,9 @@ var first_wave : bool = true
 var start : bool = false
 var obstacle_is_laser = false
 
+var g_tween
+var g_tween2
+
 var boulder = preload("res://Obstacles/Boulder.tscn")
 var pellet = preload("res://Obstacles/RockPellet.tscn")
 var steel_ball = preload("res://Obstacles/SteelBall.tscn")
@@ -48,6 +51,9 @@ Initializes important data and loads the level.
 - Called before everything else.
 '''
 func _ready() -> void:
+	
+	g_tween = get_tree().create_tween()
+	g_tween2 = get_tree().create_tween()
 	
 	if Globals.data_path.is_empty():
 		data._load("res://SavedLevels/filibuster")
@@ -102,18 +108,7 @@ func play() -> void:
 	current_events = data._get_events(current_beat)
 	$WaveLabel.text = "Beat: " + str(current_beat) # Debugging.
 	
-	if data.check_for_timing_at(current_beat, data.equalizer_heights):
-		var new_height = data.get_element_at(current_beat, data.equalizer_heights)
-		$Equalizer.set_height(new_height.value)
-	
-	if data.check_for_timing_at(current_beat, data.gradient_brightnesses):
-		var new_brightness = data.get_element_at(current_beat, data.gradient_brightnesses)
-		$LeftGradient.change_opacity(new_brightness.value, beat_length)
-		$RightGradient.change_opacity(new_brightness.value, beat_length)
-	
-	if data.check_for_element_at(current_beat, data.gradient_pulse_times):
-		$LeftGradient.pulse(beat_length)
-		$RightGradient.pulse(beat_length)
+	bg_events()
 	
 	# If it's empty, there is no need to run this code.
 	if current_events.is_empty():
@@ -168,6 +163,25 @@ func play() -> void:
 	
 	
 	current_beat += 1
+
+func bg_events():
+	if data.check_for_timing_at(current_beat, data.equalizer_heights):
+		var new_height = data.get_element_at(current_beat, data.equalizer_heights)
+		$Equalizer.set_height(new_height.value)
+	
+	if data.check_for_timing_at(current_beat, data.gradient_brightnesses):
+		var brightness = data.get_element_at(current_beat, data.gradient_brightnesses)
+		
+		var new_brightness = $LeftGradient.modulate
+		new_brightness.a8 = brightness.value
+		
+		g_tween.tween_property($LeftGradient, "modulate", new_brightness, beat_length)
+		g_tween2.tween_property($RightGradient, "modulate", new_brightness, beat_length)
+	
+	if data.check_for_element_at(current_beat, data.gradient_pulse_times):
+		$LeftGradient.pulse(beat_length)
+		$RightGradient.pulse(beat_length)
+
 
 '''
 Shows the locations of where the next obstacles will appear after three beats.
