@@ -358,6 +358,9 @@ func load_save_file(path: String) -> void:
 	bpm = data.bpm
 	$MarginContainer/Buttons/SpinBox.value = bpm
 	
+	if not data.song_path == "":
+		select_song(data.song_path)
+	
 	reset_buttons_to_false()
 	
 	for event in data.events:
@@ -396,8 +399,6 @@ func song_import(path : String) -> void:
 		directory.copy(path, "res://Music/" + path.get_file())
 		
 		data.song_path = "res://Music/" + path.get_file()
-	
-	
 
 
 func play_test() -> void:
@@ -417,6 +418,7 @@ func select_song(path: String) -> void:
 	
 	if extension == "ogg":
 		$Song.stream = AudioStreamOggVorbis.load_from_file(path)
+		print(path)
 		data.song_path = path
 
 

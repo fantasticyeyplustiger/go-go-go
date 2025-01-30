@@ -2,7 +2,7 @@ extends Control
 
 func pulse(speed : float):
 	$AnimationPlayer.speed_scale = 1 / speed
-	$AnimationPlayer.speed_scale /= 3
+	$AnimationPlayer.speed_scale /= 2
 	$AnimationPlayer.play("pulse")
 
 '''

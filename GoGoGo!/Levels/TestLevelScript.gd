@@ -52,9 +52,6 @@ Initializes important data and loads the level.
 '''
 func _ready() -> void:
 	
-	g_tween = get_tree().create_tween()
-	g_tween2 = get_tree().create_tween()
-	
 	if Globals.data_path.is_empty():
 		data._load("res://SavedLevels/filibuster")
 	else:
@@ -174,6 +171,9 @@ func bg_events():
 		
 		var new_brightness = $LeftGradient.modulate
 		new_brightness.a8 = brightness.value
+		
+		g_tween = get_tree().create_tween()
+		g_tween2 = get_tree().create_tween()
 		
 		g_tween.tween_property($LeftGradient, "modulate", new_brightness, beat_length)
 		g_tween2.tween_property($RightGradient, "modulate", new_brightness, beat_length)
