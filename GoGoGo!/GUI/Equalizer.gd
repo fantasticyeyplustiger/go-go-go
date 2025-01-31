@@ -12,7 +12,7 @@ const VU_COUNT = 20 # The amount of rectangles to manipulate.
 const FREQ_MAX = 11050.0
 const MIN_DB = 60
 
-var HEIGHT : int = 3000
+var HEIGHT : int = 1800
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,9 +43,9 @@ func _process(_delta: float) -> void:
 		var tween4 = get_tree().create_tween()
 		
 		tween.tween_property(bottom_left_equalizer, "size", Vector2(height, size.y), 0.05)
-		tween2.tween_property(top_left_equalizer, "size", Vector2(height, size.y), 0.05)
+		tween2.tween_property(top_left_equalizer, "size", Vector2(height + 50, size.y), 0.05)
 		tween3.tween_property(bottom_right_equalizer, "size", Vector2(height, size.y), 0.05)
-		tween4.tween_property(top_right_equalizer, "size", Vector2(height, size.y), 0.05)
+		tween4.tween_property(top_right_equalizer, "size", Vector2(height + 50, size.y), 0.05)
 	
 
 

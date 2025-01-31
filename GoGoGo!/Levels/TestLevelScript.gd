@@ -103,7 +103,6 @@ func play() -> void:
 		first_wave = false
 	
 	current_events = data._get_events(current_beat)
-	$WaveLabel.text = "Beat: " + str(current_beat) # Debugging.
 	
 	bg_events()
 	
@@ -143,7 +142,6 @@ func play() -> void:
 		
 		# Changes where it rolls with the new direction.
 		if obstacle_is_laser:
-			
 			obstacle.set_timer(beat_length)
 			obstacle.rotate_beam()
 		

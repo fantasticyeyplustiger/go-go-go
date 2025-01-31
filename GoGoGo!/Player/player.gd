@@ -88,5 +88,5 @@ func get_damaged(_area):
 	if is_dashing and moving:
 		return
 	
-	#is_dead = true
+	is_dead = true
 	$temporarySprite.color = "#FF0000"
