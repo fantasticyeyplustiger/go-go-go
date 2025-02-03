@@ -23,7 +23,8 @@ var next_beat : float = 0
 var beat_length : float
 var song_length : float
 var total_beats : int
-var current_beat : int = -5
+var current_beat : int = 0
+var arrow_beats : int
 var bpm : float
 
 var data = Globals.levelData.new()
@@ -64,6 +65,7 @@ func _ready() -> void:
 		
 		bpm = data.bpm
 	
+	arrow_beats = -5
 	song_length = music.stream.get_length()
 	
 	#region Initializes spawn_positions and local_positions.
@@ -94,8 +96,8 @@ func play() -> void:
 	
 	show_arrows()
 	
-	if current_beat < 0:
-		current_beat += 1
+	if arrow_beats < 0:
+		arrow_beats += 1
 		return
 	
 	if first_wave:
@@ -188,9 +190,10 @@ Shows the locations of where the next obstacles will appear after three beats.
 '''
 func show_arrows() -> void:
 	
-	# Condition is + 3 so it doesn't go out of the events' bounds.
-	if current_beat + 5 < data.last_beat:
-		current_events = data._get_events(current_beat + 5)
+	# Condition is + 5 so it doesn't go out of the events' bounds.
+	if arrow_beats + 5 < data.last_beat:
+		current_events = data._get_events(arrow_beats + 5)
+		arrow_beats += 1
 	else:
 		return
 	
@@ -232,7 +235,7 @@ func show_arrows() -> void:
 		
 		$ArrowHolder.add_child(new_arrow)
 		
-		new_arrow.set_wait(beat_length * 5)
+		new_arrow.set_wait(beat_length * 4)
 
 
 '''
