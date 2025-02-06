@@ -1,5 +1,6 @@
 extends Node2D
 
+#region properties
 @export var rows : int = 0
 @export var columns : int = 0
 
@@ -45,7 +46,7 @@ var laser = preload("res://Obstacles/LaserBeam.tscn")
 
 var arrow = preload("res://Arrows/boulder_arrow.tscn")
 var laser_arrow = preload("res://Arrows/laser_arrow.tscn")
-
+#endregion
 
 '''
 Initializes important data and loads the level.
