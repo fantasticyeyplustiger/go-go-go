@@ -373,6 +373,10 @@ func load_save_file(path: String) -> void:
 
 
 func save_folder_selected(path: String) -> void:
+	
+	if data.last_beat == -1:
+		data.last_beat = total_beats
+	
 	data.save(path)
 	has_saved = true
 
@@ -445,3 +449,13 @@ func ending() -> void:
 	
 	old_last_beat = temp_current_beat
 	data.last_beat = temp_current_beat
+
+
+func set_random_level() -> void:
+	data.random_attacks = not data.random_attacks
+	
+	match data.random_attacks:
+		false:
+			$MarginContainer2/VBoxContainer/SetRandomButton.text = "random\nlevel off"
+		true:
+			$MarginContainer2/VBoxContainer/SetRandomButton.text = "RANDOM\nLEVEL ON"

@@ -17,6 +17,9 @@ var current_beat : int
 # Globals.(signal name).connect()
 
 @warning_ignore("unused_signal")
+signal player_sfx
+
+@warning_ignore("unused_signal")
 signal instruct
 
 @warning_ignore("unused_signal")

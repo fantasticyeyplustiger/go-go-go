@@ -290,6 +290,15 @@ text = "CHOOSE
 SONG
 "
 
+[node name="SetRandomButton" type="Button" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 75
+text = "RANDOM
+LEVEL OFF"
+
 [node name="ItemList" type="ItemList" parent="."]
 layout_mode = 2
 offset_left = -154.0
@@ -470,6 +479,7 @@ scale = Vector2(1.8, 1.8)
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HelpButton" to="." method="open_help_menu"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/PlaytestButton" to="." method="play_test"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/SongSelectButton" to="." method="load_song_select"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/SetRandomButton" to="." method="set_random_level"]
 [connection signal="item_selected" from="ItemList" to="." method="change_chart"]
 [connection signal="color_changed" from="LeftGUI/EqualizerColor" to="." method="set_equalizer_color"]
 [connection signal="color_changed" from="LeftGUI/GradientColor" to="." method="set_gradient_color"]

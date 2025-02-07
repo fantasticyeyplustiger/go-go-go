@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=17 format=4 uid="uid://bmdbva8kn4x2k"]
 
 [ext_resource type="Script" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
 [ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_53n1o"]
 [ext_resource type="AudioStream" uid="uid://b53257tn8gnse" path="res://Music/Filibuster.mp3" id="7_33kna"]
 [ext_resource type="Script" path="res://GUI/Equalizer.gd" id="7_eoydm"]
+[ext_resource type="AudioStream" uid="uid://cl43pcxk80kh4" path="res://SFX/20 FREE CINEMATIC WHOOSH SOUND EFFECTS  High quality 4k Audios-[AudioTrimmer.com].mp3" id="7_fapfh"]
 [ext_resource type="AudioStream" uid="uid://chg0m6eftnsj0" path="res://SFX/Boulder Fall.mp3" id="8_wbrbc"]
 [ext_resource type="PackedScene" uid="uid://e5bfcpwl61fh" path="res://GUI/Gradient.tscn" id="10_n88tm"]
 
@@ -71,6 +72,11 @@ position = Vector2(896, -640)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(768, -768)
 zoom = Vector2(0.45, 0.45)
+
+[node name="PlayerSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_fapfh")
+volume_db = -5.0
+pitch_scale = 2.0
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_wbrbc")

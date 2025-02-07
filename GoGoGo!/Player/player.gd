@@ -68,9 +68,13 @@ func move(direction):
 		(position + move_direction),
 		1.0/move_speed).set_trans(Tween.TRANS_BOUNCE)
 		
+		# play player sfx
+		Globals.player_sfx.emit()
+		
 		# player can't move while animation plays
 		moving = true
 		await move_animation.finished
+		
 		
 		if is_dashing:
 			await get_tree().create_timer(0.001).timeout
@@ -80,13 +84,27 @@ func move(direction):
 		
 		move_speed = 16
 
-'''
--- GET DAMAGED --
-- kills the player (will damage them later)
-'''
-func get_damaged(_area):
+func get_damaged(damage : int):
+	
 	if is_dashing and moving:
 		return
 	
-	is_dead = true
-	$temporarySprite.color = "#FF0000"
+	health -= damage
+	
+	if health <= 0:
+		is_dead = true
+		$temporarySprite.color = "#FF0000"
+	else:
+		$temporarySprite.color = "#FFA500"
+	
+	$HP.text = str(health)
+
+
+func laser_damage(_area) -> void:
+	get_damaged(10)
+
+func ball_damage(_area) -> void:
+	get_damaged(5)
+
+func pellet_damage(_area) -> void:
+	get_damaged(1)

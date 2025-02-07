@@ -46,6 +46,9 @@ var laser = preload("res://Obstacles/LaserBeam.tscn")
 
 var arrow = preload("res://Arrows/boulder_arrow.tscn")
 var laser_arrow = preload("res://Arrows/laser_arrow.tscn")
+
+var random_level = RandomLevel.new()
+var use_random : bool = false
 #endregion
 
 '''
@@ -53,6 +56,8 @@ Initializes important data and loads the level.
 - Called before everything else.
 '''
 func _ready() -> void:
+	
+	Globals.player_sfx.connect(player_sfx)
 	
 	if Globals.data_path.is_empty():
 		data._load("res://SavedLevels/filibuster")
@@ -65,6 +70,11 @@ func _ready() -> void:
 			#music.stream = load("res://Music/Filibuster.mp3")
 		
 		bpm = data.bpm
+	
+	if data.random_attacks:
+		random_level.initialize(rows, columns, data.events)
+		random_level.create_random_events()
+		use_random = true
 	
 	arrow_beats = -5
 	song_length = music.stream.get_length()
@@ -83,6 +93,9 @@ func _ready() -> void:
 	
 	init_play_timer()
 
+func player_sfx():
+	$PlayerSFX.pitch_scale = randf_range(1.5, 3)
+	$PlayerSFX.play()
 
 '''
 Shows the arrows for every obstacle that exists from the third beat after current_beat.
@@ -105,7 +118,10 @@ func play() -> void:
 		music.play()
 		first_wave = false
 	
-	current_events = data._get_events(current_beat)
+	if use_random:
+		current_events = random_level._get_events(current_beat)
+	else:
+		current_events = data._get_events(current_beat)
 	
 	bg_events()
 	
@@ -193,8 +209,14 @@ func show_arrows() -> void:
 	
 	# Condition is + 5 so it doesn't go out of the events' bounds.
 	if arrow_beats + 5 < data.last_beat:
-		current_events = data._get_events(arrow_beats + 5)
+		
+		if use_random:
+			current_events = random_level._get_events(arrow_beats + 5)
+		else:
+			current_events = data._get_events(arrow_beats + 5)
+		
 		arrow_beats += 1
+	
 	else:
 		return
 	

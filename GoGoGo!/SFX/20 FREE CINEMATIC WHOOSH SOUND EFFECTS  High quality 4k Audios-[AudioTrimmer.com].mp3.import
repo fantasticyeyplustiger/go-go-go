@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cl43pcxk80kh4"
+path="res://.godot/imported/20 FREE CINEMATIC WHOOSH SOUND EFFECTS  High quality 4k Audios-[AudioTrimmer.com].mp3-34723f7282e7213cce33aaf4eb1ef05e.mp3str"
+
+[deps]
+
+source_file="res://SFX/20 FREE CINEMATIC WHOOSH SOUND EFFECTS  High quality 4k Audios-[AudioTrimmer.com].mp3"
+dest_files=["res://.godot/imported/20 FREE CINEMATIC WHOOSH SOUND EFFECTS  High quality 4k Audios-[AudioTrimmer.com].mp3-34723f7282e7213cce33aaf4eb1ef05e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

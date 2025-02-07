@@ -99,6 +99,10 @@ save={
 2d_physics/layer_8="LASERS_LEFT"
 2d_physics/layer_9="LASERS_RIGHT"
 2d_physics/layer_10="LASER_HEAD"
+2d_physics/layer_13="BOULDER"
+2d_physics/layer_14="ROCK_PELLET"
+2d_physics/layer_15="STEEL_BALL"
+2d_physics/layer_16="IRON_PELLET"
 
 [rendering]
 

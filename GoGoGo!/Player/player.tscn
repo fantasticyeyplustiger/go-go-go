@@ -20,11 +20,28 @@ offset_right = 80.0
 offset_bottom = 80.0
 color = Color(0, 1, 0, 1)
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 15
-collision_mask = 15
+[node name="LaserHitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 992
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserHitbox"]
+shape = SubResource("RectangleShape2D_jx3e2")
+
+[node name="BallHitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 20480
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallHitbox"]
+shape = SubResource("RectangleShape2D_jx3e2")
+
+[node name="PelletHitbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 40960
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PelletHitbox"]
 shape = SubResource("RectangleShape2D_jx3e2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -34,4 +51,18 @@ shape = SubResource("RectangleShape2D_x4b14")
 
 [node name="DashDetector" type="RayCast2D" parent="."]
 
-[connection signal="area_entered" from="Hitbox" to="." method="get_damaged"]
+[node name="HP" type="Label" parent="."]
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 80.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 100
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="LaserHitbox" to="." method="laser_damage"]
+[connection signal="area_entered" from="BallHitbox" to="." method="ball_damage"]
+[connection signal="area_entered" from="PelletHitbox" to="." method="pellet_damage"]
