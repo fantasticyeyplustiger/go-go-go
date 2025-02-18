@@ -37,6 +37,9 @@ func _ready():
 		bpm = data.bpm
 		initialize_chart()
 		change_chart(0)
+		
+		if not data.song_path.is_empty():
+			$Song.stream = load(data.song_path)
 	
 	song = $Song
 	@warning_ignore("narrowing_conversion")
@@ -72,9 +75,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 		save()
 	
 	elif Input.is_action_pressed("duplicate"):
-		pass
-	
-	pass
+		duplicate_attacks()
 
 
 '''

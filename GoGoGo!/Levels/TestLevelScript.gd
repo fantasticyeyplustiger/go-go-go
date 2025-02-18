@@ -153,10 +153,10 @@ func play() -> void:
 			obstacle.direction = Globals.directions.UP
 		
 		elif event.x == 0 and event.y > 0:
-			obstacle.direction = Globals.directions.LEFT
-		
-		else: #elif event.x == rows + 1 and event.y > 0:, base direction is always RIGHT
 			obstacle.direction = Globals.directions.RIGHT
+		
+		else: #elif event.x == rows + 1 and event.y > 0:, base direction is always LEFT
+			obstacle.direction = Globals.directions.LEFT
 		#endregion
 		
 		# Changes where it rolls with the new direction.
@@ -244,10 +244,10 @@ func show_arrows() -> void:
 			new_arrow.set_arrow(Globals.directions.DOWN)
 		
 		elif event.x == 0 and event.y > 0:
-			new_arrow.set_arrow(Globals.directions.LEFT)
+			new_arrow.set_arrow(Globals.directions.RIGHT)
 		
 		elif event.x == rows + 1 and event.y > 0:
-			new_arrow.set_arrow(Globals.directions.RIGHT)
+			new_arrow.set_arrow(Globals.directions.LEFT)
 		
 		# it's already pointing up
 		# elif event.x > 0 and event.y == columns + 1:

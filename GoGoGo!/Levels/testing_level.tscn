@@ -112,17 +112,17 @@ offset_bottom = -1624.0
 [node name="LeftColumnStart" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -128.0
+offset_left = 1664.0
 offset_top = -1408.0
-offset_right = -88.0
+offset_right = 1704.0
 offset_bottom = -1368.0
 
 [node name="RightColumnStart" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1664.0
+offset_left = -128.0
 offset_top = -1408.0
-offset_right = 1704.0
+offset_right = -88.0
 offset_bottom = -1368.0
 
 [node name="BG3" type="ColorRect" parent="."]

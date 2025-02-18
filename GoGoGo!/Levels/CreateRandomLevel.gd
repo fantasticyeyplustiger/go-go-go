@@ -34,8 +34,6 @@ func create_random_events():
 	# for every beat there is an event, choose a number from 1-6 obstacles
 	# randomize locations of each obstacle. each obstacle must be in a different location.
 	
-	
-	
 	for timing in event_timings:
 		
 		var obstacle_count : int = randi_range(1, 4)
@@ -92,8 +90,6 @@ func check_for_event(timing : int, position : Vector2i) -> bool:
 '''
 Gets every event that happens on a certain beat and returns an array of those [events].
 Not to be confused with _get_event_positions(), which returns positions instead.
-
-- Called by LevelEditor.
 '''
 func _get_events(timing : int):
 	var returning_events = []
