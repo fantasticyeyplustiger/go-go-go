@@ -6,7 +6,7 @@ var inputs = {"right": Vector2.RIGHT, "left": Vector2.LEFT,
 var tile_size = 256
 var move_speed = 16
 var moving = false
-var health = 10
+var health = 20
 var is_dead : bool = false
 var is_dashing : bool = false
 

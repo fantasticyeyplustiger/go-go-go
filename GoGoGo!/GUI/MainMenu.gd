@@ -1,7 +1,9 @@
 extends Control
 
+var editor_path : String = "res://LevelEditor/LevelEditor.tscn"
+
 func enter_level_editor() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file(editor_path)
 
 
 func open_levels() -> void:

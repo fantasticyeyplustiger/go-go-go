@@ -185,7 +185,7 @@ func reset_buttons_to_false() -> void:
 
 func quit() -> void:
 	$SaveFolderSelect.popup()
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://GUI/MainMenu.tscn")
 
 
 func play() -> void:

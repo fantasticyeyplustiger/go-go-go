@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=23 format=4 uid="uid://bmdbva8kn4x2k"]
 
 [ext_resource type="Script" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
 [ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
@@ -6,9 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="3_pyhnl"]
 [ext_resource type="Texture2D" uid="uid://2m6iicmpflej" path="res://Sprites/WallRamp.png" id="4_ule1p"]
 [ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_53n1o"]
+[ext_resource type="Texture2D" uid="uid://c0cnno3iw20fn" path="res://Sprites/FloorCenter.png" id="6_4opvi"]
 [ext_resource type="AudioStream" uid="uid://b53257tn8gnse" path="res://Music/Filibuster.mp3" id="7_33kna"]
 [ext_resource type="Script" path="res://GUI/Equalizer.gd" id="7_eoydm"]
 [ext_resource type="AudioStream" uid="uid://cl43pcxk80kh4" path="res://SFX/20 FREE CINEMATIC WHOOSH SOUND EFFECTS  High quality 4k Audios-[AudioTrimmer.com].mp3" id="7_fapfh"]
+[ext_resource type="Texture2D" uid="uid://c7b4m3qgmvn6u" path="res://Sprites/FloorCorner.png" id="7_x4dm5"]
+[ext_resource type="Texture2D" uid="uid://dt4lpxgt8m4ws" path="res://Sprites/FloorSide.png" id="8_3hjjb"]
 [ext_resource type="AudioStream" uid="uid://chg0m6eftnsj0" path="res://SFX/Boulder Fall.mp3" id="8_wbrbc"]
 [ext_resource type="PackedScene" uid="uid://e5bfcpwl61fh" path="res://GUI/Gradient.tscn" id="10_n88tm"]
 
@@ -31,12 +34,30 @@ texture = ExtResource("5_53n1o")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kiq2d"]
+texture = ExtResource("6_4opvi")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jnav0"]
+texture = ExtResource("7_x4dm5")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f1djp"]
+texture = ExtResource("8_3hjjb")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_i2s3q"]
 tile_size = Vector2i(256, 256)
 sources/1 = SubResource("TileSetAtlasSource_x32e3")
 sources/0 = SubResource("TileSetScenesCollectionSource_ha8rw")
 sources/2 = SubResource("TileSetAtlasSource_6xhs0")
 sources/3 = SubResource("TileSetAtlasSource_xkojb")
+sources/4 = SubResource("TileSetAtlasSource_kiq2d")
+sources/5 = SubResource("TileSetAtlasSource_jnav0")
+sources/6 = SubResource("TileSetAtlasSource_f1djp")
 
 [node name="testing level" type="Node2D"]
 script = ExtResource("1_almtx")
@@ -53,7 +74,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="floor" type="TileMapLayer" parent="."]
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAAAPr/AQAAAAAAAAAAAPv/AQAAAAAAAAAAAPz/AQAAAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQAAAAAAAAAAAP//AQAAAAAAAAABAPr/AQAAAAAAAAABAPv/AQAAAAAAAAABAPz/AQAAAAAAAAABAP3/AQAAAAAAAAABAP7/AQAAAAAAAAABAP//AQAAAAAAAAACAPr/AQAAAAAAAAACAPv/AQAAAAAAAAACAPz/AQAAAAAAAAACAP3/AQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAADAPr/AQAAAAAAAAADAPv/AQAAAAAAAAADAPz/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAAEAPr/AQAAAAAAAAAEAPv/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAFAPr/AQAAAAAAAAAFAPv/AQAAAAAAAAAFAPz/AQAAAAAAAAAFAP3/AQAAAAAAAAAFAP7/AQAAAAAAAAAFAP//AQAAAAAAAAD///r/AAAAAAAAAQD///v/AAAAAAAAAQD///z/AAAAAAAAAQD///3/AAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAPr/AAAAAAAAAQAGAPv/AAAAAAAAAQAGAPz/AAAAAAAAAQAGAP3/AAAAAAAAAQAGAP7/AAAAAAAAAQAGAP//AAAAAAAAAQAAAPn/AAAAAAAAAQABAPn/AAAAAAAAAQACAPn/AAAAAAAAAQADAPn/AAAAAAAAAQAEAPn/AAAAAAAAAQAFAPn/AAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAAAAPr/BQAAAAAAAFAAAPv/BgAAAAAAAFAAAPz/BgAAAAAAAFAAAP3/BgAAAAAAAFAAAP7/BgAAAAAAAFAAAP//BQAAAAAAAAABAPr/BgAAAAAAADABAPz/BAAAAAAAAAABAP3/BAAAAAAAAAABAP7/BAAAAAAAAAABAP//BgAAAAAAAAACAPr/BgAAAAAAADACAPv/BAAAAAAAAAACAPz/BAAAAAAAAAACAP3/BAAAAAAAAAACAP7/BAAAAAAAAAACAP//BgAAAAAAAAADAPr/BgAAAAAAADADAPv/BAAAAAAAAAADAPz/BAAAAAAAAAADAP3/BAAAAAAAAAADAP7/BAAAAAAAAAADAP//BgAAAAAAAAAEAPr/BgAAAAAAADAEAPv/BAAAAAAAAAAEAPz/BAAAAAAAAAAEAP3/BAAAAAAAAAAEAP7/BAAAAAAAAAAEAP//BgAAAAAAAAAFAPr/BQAAAAAAADAFAPv/BgAAAAAAAGAFAPz/BgAAAAAAAGAFAP3/BgAAAAAAAGAFAP7/BgAAAAAAAGAFAP//BQAAAAAAAGD///r/AAAAAAAAAQD///v/AAAAAAAAAQD///z/AAAAAAAAAQD///3/AAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAPr/AAAAAAAAAQAGAPv/AAAAAAAAAQAGAPz/AAAAAAAAAQAGAP3/AAAAAAAAAQAGAP7/AAAAAAAAAQAGAP//AAAAAAAAAQAAAPn/AAAAAAAAAQABAPn/AAAAAAAAAQACAPn/AAAAAAAAAQADAPn/AAAAAAAAAQAEAPn/AAAAAAAAAQAFAPn/AAAAAAAAAQABAPv/BAAAAAAAAAA=")
 tile_set = SubResource("TileSet_i2s3q")
 rendering_quadrant_size = 128
 

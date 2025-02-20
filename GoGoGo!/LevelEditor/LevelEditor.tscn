@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://0vbf4nh5djlc"]
+[gd_scene load_steps=31 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://0cnijba70uv0" path="res://LevelEditor/GradientPulseButton.tscn" id="7_ac37h"]
 [ext_resource type="PackedScene" uid="uid://3sxtuf7arlyc" path="res://LevelEditor/EditorHelp.tscn" id="9_dssst"]
 [ext_resource type="Texture2D" uid="uid://vjdnlc7vdgy3" path="res://Sprites/end.png" id="9_t5ikq"]
+[ext_resource type="Texture2D" uid="uid://c0cnno3iw20fn" path="res://Sprites/FloorCenter.png" id="12_rw83t"]
+[ext_resource type="Texture2D" uid="uid://c7b4m3qgmvn6u" path="res://Sprites/FloorCorner.png" id="13_87iw3"]
+[ext_resource type="Texture2D" uid="uid://dt4lpxgt8m4ws" path="res://Sprites/FloorSide.png" id="14_203ne"]
 
 [sub_resource type="FontFile" id="FontFile_okppf"]
 cache/0/16/0/ascent = 0.0
@@ -74,12 +77,30 @@ texture = ExtResource("5_ovd7d")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yu7sv"]
+texture = ExtResource("12_rw83t")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gw2ij"]
+texture = ExtResource("13_87iw3")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ekc8"]
+texture = ExtResource("14_203ne")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_36nai"]
 tile_size = Vector2i(256, 256)
 sources/1 = SubResource("TileSetAtlasSource_ca4vl")
 sources/0 = SubResource("TileSetScenesCollectionSource_fxrkx")
 sources/2 = SubResource("TileSetAtlasSource_tny2p")
 sources/3 = SubResource("TileSetAtlasSource_frqsp")
+sources/4 = SubResource("TileSetAtlasSource_yu7sv")
+sources/5 = SubResource("TileSetAtlasSource_gw2ij")
+sources/6 = SubResource("TileSetAtlasSource_4ekc8")
 
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
@@ -168,7 +189,8 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "QUIT"
+text = "MAIN
+MENU"
 
 [node name="PlayButton" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 200)
@@ -391,7 +413,7 @@ OFF"
 [node name="floor" type="TileMapLayer" parent="."]
 use_parent_material = true
 position = Vector2(760, 0)
-tile_map_data = PackedByteArray("AAAAAPr/AQAAAAAAAAAAAPv/AQAAAAAAAAAAAPz/AQAAAAAAAAAAAP3/AQAAAAAAAAAAAP7/AQAAAAAAAAAAAP//AQAAAAAAAAABAPr/AQAAAAAAAAABAPv/AQAAAAAAAAABAPz/AQAAAAAAAAABAP3/AQAAAAAAAAABAP7/AQAAAAAAAAABAP//AQAAAAAAAAACAPr/AQAAAAAAAAACAPv/AQAAAAAAAAACAPz/AQAAAAAAAAACAP3/AQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAADAPr/AQAAAAAAAAADAPv/AQAAAAAAAAADAPz/AQAAAAAAAAADAP3/AQAAAAAAAAADAP7/AQAAAAAAAAADAP//AQAAAAAAAAAEAPr/AQAAAAAAAAAEAPv/AQAAAAAAAAAEAPz/AQAAAAAAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAAAAAAEAP//AQAAAAAAAAAFAPr/AQAAAAAAAAAFAPv/AQAAAAAAAAAFAPz/AQAAAAAAAAAFAP3/AQAAAAAAAAAFAP7/AQAAAAAAAAAFAP//AQAAAAAAAAD///r/AAAAAAAAAQD///v/AAAAAAAAAQD///z/AAAAAAAAAQD///3/AAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAPr/AAAAAAAAAQAGAPv/AAAAAAAAAQAGAPz/AAAAAAAAAQAGAP3/AAAAAAAAAQAGAP7/AAAAAAAAAQAGAP//AAAAAAAAAQAAAPn/AAAAAAAAAQABAPn/AAAAAAAAAQACAPn/AAAAAAAAAQADAPn/AAAAAAAAAQAEAPn/AAAAAAAAAQAFAPn/AAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAAAAPr/BQAAAAAAAFAAAPv/BgAAAAAAAFAAAPz/BgAAAAAAAFAAAP3/BgAAAAAAAFAAAP7/BgAAAAAAAFAAAP//BQAAAAAAAAABAPr/BgAAAAAAADABAPv/BAAAAAAAAAABAPz/BAAAAAAAAAABAP3/BAAAAAAAAAABAP7/BAAAAAAAAAABAP//BgAAAAAAAAACAPr/BgAAAAAAADACAPv/BAAAAAAAAAACAPz/BAAAAAAAAAACAP3/BAAAAAAAAAACAP7/BAAAAAAAAAACAP//BgAAAAAAAAADAPr/BgAAAAAAADADAPv/BAAAAAAAAAADAPz/BAAAAAAAAAADAP3/BAAAAAAAAAADAP7/BAAAAAAAAAADAP//BgAAAAAAAAAEAPr/BgAAAAAAADAEAPv/BAAAAAAAAAAEAPz/BAAAAAAAAAAEAP3/BAAAAAAAAAAEAP7/BAAAAAAAAAAEAP//BgAAAAAAAAAFAPr/BQAAAAAAADAFAPv/BgAAAAAAAGAFAPz/BgAAAAAAAGAFAP3/BgAAAAAAAGAFAP7/BgAAAAAAAGAFAP//BQAAAAAAAGD///r/AAAAAAAAAQD///v/AAAAAAAAAQD///z/AAAAAAAAAQD///3/AAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAPr/AAAAAAAAAQAGAPv/AAAAAAAAAQAGAPz/AAAAAAAAAQAGAP3/AAAAAAAAAQAGAP7/AAAAAAAAAQAGAP//AAAAAAAAAQAAAPn/AAAAAAAAAQABAPn/AAAAAAAAAQACAPn/AAAAAAAAAQADAPn/AAAAAAAAAQAEAPn/AAAAAAAAAQAFAPn/AAAAAAAAAQA=")
 tile_set = SubResource("TileSet_36nai")
 rendering_quadrant_size = 128
 
