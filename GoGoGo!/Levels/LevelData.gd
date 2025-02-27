@@ -23,11 +23,13 @@ func create_bg_event(current_beat : int, value):
 		"value" : value
 	}
 
+
 func create_color_event(current_beat : int, color : Color):
 	return {
 		"timing" : current_beat,
 		"color" : color.hex
 	}
+
 
 func check_for_bg_events(current_beat : int) -> bool:
 	var bg_events = []
@@ -52,11 +54,13 @@ func check_for_timing_at(current_beat : int, array) -> bool:
 	
 	return false
 
+
 func check_for_element_at(current_beat : int, array) -> bool:
 	for element in array:
 		if element == current_beat:
 			return true
 	return false
+
 
 func find_in_between_at(current_beat : int, array, null_case, element_is_array : bool):
 	var temp_element
@@ -74,6 +78,7 @@ func find_in_between_at(current_beat : int, array, null_case, element_is_array :
 		else:
 			return null_case
 
+
 func get_element_at(current_beat : int, array):
 	for element in array:
 		if element.timing == current_beat:
@@ -81,11 +86,13 @@ func get_element_at(current_beat : int, array):
 	
 	# Check if element exists there before trying to get it.
 
+
 #region equalizer methods
 func change_height(current_beat : int, new_height : int) -> void:
 	remove_height_change(current_beat)
 	equalizer_heights.append( create_bg_event(current_beat, new_height) )
 	equalizer_heights.sort_custom(sort_timing)
+
 
 func remove_height_change(current_beat : int) -> void:
 	var iterator : int = 0
@@ -97,16 +104,18 @@ func remove_height_change(current_beat : int) -> void:
 		
 		iterator += 1
 
+
 func change_equalizer_color(current_beat : int, new_color : Color) -> void:
 	equalizer_colors.append(create_color_event(current_beat, new_color))
-
 #endregion
+
 
 #region gradient methods
 func change_brightness(current_beat : int, new_brightness : int) -> void:
 	remove_brightness_change(current_beat)
 	gradient_brightnesses.append( create_bg_event(current_beat, new_brightness) )
 	gradient_brightnesses.sort_custom(sort_timing)
+
 
 func remove_brightness_change(current_beat : int) -> void:
 	var iterator : int = 0
@@ -118,11 +127,14 @@ func remove_brightness_change(current_beat : int) -> void:
 		
 		iterator += 1
 
+
 func change_gradient_color(current_beat : int, new_color : Color) -> void:
 	gradient_colors.append(create_color_event(current_beat, new_color))
 
+
 func gradient_pulse_at(current_beat : int) -> void:
 	gradient_pulse_times.append(current_beat)
+
 
 func remove_gradient_pulse_at(current_beat : int) -> void:
 	var iterator : int = 0
@@ -132,6 +144,7 @@ func remove_gradient_pulse_at(current_beat : int) -> void:
 		
 		iterator += 1
 #endregion
+
 
 #region bg pulse methods
 func set_bg_pulse(current_beat : int, direction : Globals.directions) -> void:
@@ -147,6 +160,7 @@ func remove_bg_pulse(current_beat : int) -> void:
 		
 		iterator += 1
 #endregion
+
 
 #region event methods
 '''
@@ -243,6 +257,7 @@ func _get_event_positions(timing : int):
 	return returning_events
 #endregion
 
+
 #region saving and loading
 '''
 Loads from the [save_file] path.
@@ -270,6 +285,7 @@ func _load(save_file : String):
 	
 	file = null
 
+
 '''
 Gets all of the data in this object and returns it as a single-line JSON String.
 
@@ -291,6 +307,7 @@ func _stringify() -> String:
 	}
 	return JSON.stringify(saved_data)
 
+
 '''
 Saves all of the data in this object into a file at the [save_file] path.
 
@@ -308,8 +325,9 @@ func save(save_file : String):
 	
 	file = null
 
+
 func sort_timing(a, b) -> bool:
 	if a.timing > b.timing:
 		return false
 	return true
-#endregion	
+#endregion

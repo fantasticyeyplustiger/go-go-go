@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://yympjaj4qw3"]
+[gd_scene load_steps=9 format=3 uid="uid://yympjaj4qw3"]
 
 [ext_resource type="Script" path="res://GUI/MainMenu.gd" id="1_6btb2"]
+[ext_resource type="PackedScene" uid="uid://bklv3nqbxi6ch" path="res://GUI/LevelButton.tscn" id="2_pxvd2"]
 
 [sub_resource type="Animation" id="Animation_fs0id"]
 length = 0.001
@@ -258,30 +259,22 @@ horizontal_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="Levels/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_constants/separation = 20
 
-[node name="Level1" type="Button" parent="Levels/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(300, 150)
+[node name="Level1" parent="Levels/VBoxContainer/HBoxContainer" instance=ExtResource("2_pxvd2")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 75
 text = "1"
+level_id = 1
 
-[node name="Level2" type="Button" parent="Levels/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(300, 150)
+[node name="Level2" parent="Levels/VBoxContainer/HBoxContainer" instance=ExtResource("2_pxvd2")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 75
 text = "2"
+level_id = 2
 
-[node name="Level3" type="Button" parent="Levels/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(300, 150)
+[node name="Level3" parent="Levels/VBoxContainer/HBoxContainer" instance=ExtResource("2_pxvd2")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 75
 text = "3"
-
-[node name="Level4" type="Button" parent="Levels/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(300, 150)
-layout_mode = 2
-theme_override_font_sizes/font_size = 75
-text = "4"
+level_id = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

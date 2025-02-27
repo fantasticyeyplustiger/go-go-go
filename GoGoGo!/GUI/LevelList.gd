@@ -3,13 +3,12 @@ extends Node
 class_name MainLevels
 
 var levels : PackedStringArray
-var start : String = "res://MainLevels"
+var path : String = "res://MainLevels/"
 
-func _ready() -> void:
-	
+func _init() -> void:
 	levels = [
-		start + "SkyHigh",
-		start + "MrOops",
-		start + "Filibuster"
+		path + "SkyHigh",
+		path + "MrOops",
+		path + "Filibuster"
 	]
 	
