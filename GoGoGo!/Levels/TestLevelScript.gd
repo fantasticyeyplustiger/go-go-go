@@ -28,7 +28,7 @@ var current_beat : int = 0
 var arrow_beats : int
 var bpm : float
 
-var data = Globals.levelData.new()
+var data = LevelData.new()
 var debug_vector : Vector2i = Vector2i(-1, -1)
 
 var first_wave : bool = true

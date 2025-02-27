@@ -139,6 +139,20 @@ offset_right = 1870.0
 offset_bottom = 1030.0
 color = Color(0.165656, 0.165656, 0.165656, 1)
 
+[node name="BG4" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1920.0
+offset_bottom = 1080.0
+color = Color(0.118581, 0.118581, 0.118581, 1)
+
+[node name="InnerBG" type="ColorRect" parent="BG4"]
+layout_mode = 2
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 1870.0
+offset_bottom = 1030.0
+color = Color(0.165656, 0.165656, 0.165656, 1)
+
 [node name="MainMenu" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 1920.0
@@ -262,6 +276,12 @@ custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "3"
+
+[node name="Level4" type="Button" parent="Levels/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "4"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -3,21 +3,16 @@ extends CharacterBody2D
 var inputs = {"right": Vector2.RIGHT, "left": Vector2.LEFT,
 		"up": Vector2.UP, "down": Vector2.DOWN}
 
-var tile_size = 256
-var move_speed = 16
-var moving = false
-var health = 20
+var tile_size : int = 256
+var move_speed : int = 16
+var health : int = 50
+
+var moving : bool = false
 var is_dead : bool = false
 var is_dashing : bool = false
 
 @onready var ray = $WallDetector
 @onready var dash_ray = $DashDetector
-
-'''
--- READY --
-'''
-func _ready():
-	pass
 
 func _physics_process(_delta):
 	if Input.is_action_pressed("dash"):
@@ -74,7 +69,6 @@ func move(direction):
 		# player can't move while animation plays
 		moving = true
 		await move_animation.finished
-		
 		
 		if is_dashing:
 			await get_tree().create_timer(0.001).timeout

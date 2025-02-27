@@ -7,8 +7,8 @@ var test_level : String = "res://Levels/testing_level.tscn"
 
 var bpm : float = 180.0
 var total_buttons : int
-var data : Globals.levelData = Globals.levelData.new()
-var copy_data : Globals.levelData = Globals.levelData.new()
+var data : LevelData = LevelData.new()
+var copy_data : LevelData = LevelData.new()
 
 var current_beat : int = 0
 var old_beat : int
@@ -348,7 +348,7 @@ func load_save_file(path: String) -> void:
 	
 	has_saved = true
 	
-	data = Globals.levelData.new()
+	data = LevelData.new()
 	
 	for i in $ItemList.item_count:
 		$ItemList.set_item_icon(i, $Empty.texture)
