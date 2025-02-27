@@ -8,6 +8,7 @@ extends Node2D
 @onready var music = $Equalizer/Music
 
 const level_editor : String = "res://LevelEditor/LevelEditor.tscn"
+const main_menu : String = "res://GUI/MainMenu.tscn"
 
 var tile_size = 256
 
@@ -374,5 +375,8 @@ func _unhandled_input(_event):
 		get_tree().reload_current_scene()
 
 
-func go_back() -> void:
+func go_editor() -> void:
 	get_tree().change_scene_to_file(level_editor)
+
+func go_main_menu() -> void:
+	get_tree().change_scene_to_file(main_menu)
