@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://0vbf4nh5djlc"]
+[gd_scene load_steps=32 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://rtgrw84fop4n" path="res://LevelEditor/GradientButton.tscn" id="5_tvh87"]
 [ext_resource type="PackedScene" uid="uid://c75sqqporjyi" path="res://LevelEditor/PulseButton.tscn" id="6_u6j44"]
 [ext_resource type="PackedScene" uid="uid://0cnijba70uv0" path="res://LevelEditor/GradientPulseButton.tscn" id="7_ac37h"]
+[ext_resource type="PackedScene" uid="uid://dpi5o3hjwmdmx" path="res://LevelEditor/ChangeBPMButton.tscn" id="8_1qwfi"]
 [ext_resource type="PackedScene" uid="uid://3sxtuf7arlyc" path="res://LevelEditor/EditorHelp.tscn" id="9_dssst"]
 [ext_resource type="Texture2D" uid="uid://vjdnlc7vdgy3" path="res://Sprites/end.png" id="9_t5ikq"]
 [ext_resource type="Texture2D" uid="uid://c0cnno3iw20fn" path="res://Sprites/FloorCenter.png" id="12_rw83t"]
@@ -343,6 +344,7 @@ theme_override_constants/separation = 20
 layout_mode = 2
 
 [node name="EqualizerColor" type="ColorPickerButton" parent="LeftGUI"]
+visible = false
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 icon = ExtResource("3_3nj4w")
@@ -352,18 +354,21 @@ color = Color(1, 1, 1, 0)
 layout_mode = 2
 
 [node name="GradientColor" type="ColorPickerButton" parent="LeftGUI"]
+visible = false
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 icon = ExtResource("3_3nj4w")
 color = Color(1, 1, 1, 0)
 
 [node name="PulseButton2" parent="LeftGUI" instance=ExtResource("6_u6j44")]
+visible = false
 layout_mode = 2
 
 [node name="GradientPulse" parent="LeftGUI" instance=ExtResource("7_ac37h")]
 layout_mode = 2
 
 [node name="Mirror" type="Button" parent="LeftGUI"]
+visible = false
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
@@ -371,6 +376,18 @@ text = "MANAGE
 SECOND
 SIDE
 OFF"
+
+[node name="ChangeBPM" parent="LeftGUI" instance=ExtResource("8_1qwfi")]
+layout_mode = 2
+
+[node name="NewBPM" type="LineEdit" parent="LeftGUI"]
+visible = false
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+placeholder_text = "(New BPM)"
+alignment = 1
+max_length = 4
 
 [node name="RightGUI" type="VBoxContainer" parent="."]
 visible = false

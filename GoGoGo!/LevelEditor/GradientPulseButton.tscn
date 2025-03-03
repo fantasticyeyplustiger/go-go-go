@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://0cnijba70uv0"]
 
-[ext_resource type="Script" path="res://LevelEditor/GradientPulseButton.gd" id="1_d33x7"]
+[ext_resource type="Script" path="res://BooleanButton.gd" id="1_j3t8r"]
 
 [node name="GradientPulse" type="Button"]
 custom_minimum_size = Vector2(256, 256)
@@ -15,6 +15,9 @@ theme_override_font_sizes/font_size = 45
 text = "gradient
 pulse
 off"
-script = ExtResource("1_d33x7")
+script = ExtResource("1_j3t8r")
+off_text = "GRADIENT\\nPULSE\\nON"
+on_text = "gradient\\npulse\\noff"
+signal_to_connect = "gradient_pulse"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

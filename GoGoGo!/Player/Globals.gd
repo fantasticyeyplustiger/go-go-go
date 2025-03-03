@@ -34,4 +34,7 @@ signal gradient_pulse
 
 @warning_ignore("unused_signal")
 signal bg_pulse
+
+@warning_ignore("unused_signal")
+signal change_bpm
 #endregion

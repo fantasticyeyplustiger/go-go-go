@@ -29,6 +29,7 @@ var chart_initialized = false
 @export var rows : int = 6
 @export var columns : int = 6
 
+@onready var chartList = $ItemList
 
 func _ready():
 	
@@ -107,13 +108,13 @@ func set_attack(local_position : Vector2i, attack : bool, type : Globals.obstacl
 	
 	if attack:
 		data._add_event(current_beat, type, local_position)
-		$ItemList.set_item_icon(current_beat, $Boulder.texture)
+		chartList.set_item_icon(current_beat, $Boulder.texture)
 	
 	else:
 		data._remove_event(current_beat, local_position)
 		
 		if check_all_buttons_off():
-			$ItemList.set_item_icon(current_beat, $Empty.texture)
+			chartList.set_item_icon(current_beat, $Empty.texture)
 
 
 func set_equalizer_height(height : int):
@@ -148,13 +149,13 @@ func set_icons():
 	
 	for event in data.events:
 		
-		$ItemList.set_item_icon(event.timing, $Boulder.texture)
+		chartList.set_item_icon(event.timing, $Boulder.texture)
 #endregion
 
 func initialize_chart() -> void:
 	
-	while $ItemList.item_count > 0:
-		$ItemList.remove_item(0)
+	while chartList.item_count > 0:
+		chartList.remove_item(0)
 	
 	beat_length = (60 / bpm)
 	
@@ -164,7 +165,7 @@ func initialize_chart() -> void:
 	var sprite : Sprite2D = $Empty
 	
 	for i in total_beats:
-		$ItemList.add_item(str(i), sprite.texture, true)
+		chartList.add_item(str(i), sprite.texture, true)
 
 
 func check_all_buttons_off() -> bool:
@@ -207,8 +208,8 @@ func play() -> void:
 			$PlayTimer.start()
 			$Song.play(song_position)
 			
-			$ItemList.select(current_beat, true)
-			$ItemList.ensure_current_is_visible()
+			chartList.select(current_beat, true)
+			chartList.ensure_current_is_visible()
 
 func restart_beat():
 	var song_position : float
@@ -217,13 +218,13 @@ func restart_beat():
 	$PlayTimer.start()
 	$Song.play(song_position)
 	
-	$ItemList.select(current_beat, true)
-	$ItemList.ensure_current_is_visible()
+	chartList.select(current_beat, true)
+	chartList.ensure_current_is_visible()
 
 '''
 Grabs the part of the chart you've changed to, saves the one you were at,
 and loads changed chart. Resets all buttons to false if the loaded chart is empty.
-- Called whenever the player selects a different part of the chart. ($ItemList)
+- Called whenever the player selects a different part of the chart. (chartList / $ItemList)
 '''
 func change_chart(index : int) -> void:
 	
@@ -289,8 +290,8 @@ func for_every_beat() -> void:
 	if current_beat > total_beats:
 		$PlayTimer.stop()
 	
-	$ItemList.select(current_beat, true)
-	$ItemList.ensure_current_is_visible()
+	chartList.select(current_beat, true)
+	chartList.ensure_current_is_visible()
 	change_chart(current_beat)
 	
 
@@ -322,7 +323,7 @@ func paste_attacks() -> void:
 
 func duplicate_attacks() -> void:
 	
-	if current_beat + 1 > $ItemList.item_count:
+	if current_beat + 1 > chartList.item_count:
 		return
 	
 	copy_attacks()
@@ -350,8 +351,8 @@ func load_save_file(path: String) -> void:
 	
 	data = LevelData.new()
 	
-	for i in $ItemList.item_count:
-		$ItemList.set_item_icon(i, $Empty.texture)
+	for i in chartList.item_count:
+		chartList.set_item_icon(i, $Empty.texture)
 	
 	data._load(path)
 	Globals.data_path = path
@@ -365,10 +366,10 @@ func load_save_file(path: String) -> void:
 	reset_buttons_to_false()
 	
 	for event in data.events:
-		$ItemList.set_item_icon(event.timing, $Boulder.texture)
+		chartList.set_item_icon(event.timing, $Boulder.texture)
 	
 	if not data.last_beat == -1:
-		$ItemList.set_item_icon(data.last_beat, $End.texture)
+		chartList.set_item_icon(data.last_beat, $End.texture)
 	
 	change_bg_chart()
 
@@ -387,7 +388,7 @@ func bpm_changed(value: float) -> void:
 	initialize_chart()
 	# remove or add chart items
 	
-	$ItemList.select(0, true)
+	chartList.select(0, true)
 	data.bpm = bpm
 
 
@@ -436,15 +437,15 @@ func ending() -> void:
 	var temp_current_beat : int = current_beat
 	
 	data.last_beat = current_beat
-	$ItemList.set_item_icon(current_beat, $End.texture)
+	chartList.set_item_icon(current_beat, $End.texture)
 	
 	if not old_last_beat == -1:
 		change_chart(old_last_beat)
 		
 		if check_all_buttons_off():
-			$ItemList.set_item_icon(old_last_beat, $Empty.texture)
+			chartList.set_item_icon(old_last_beat, $Empty.texture)
 		else:
-			$ItemList.set_item_icon(old_last_beat, $Boulder.texture)
+			chartList.set_item_icon(old_last_beat, $Boulder.texture)
 		
 		change_chart(temp_current_beat)
 	

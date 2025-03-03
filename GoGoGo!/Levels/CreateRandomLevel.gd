@@ -12,7 +12,6 @@ func initialize(new_rows : int, new_columns : int, new_events) -> void:
 	rows = new_rows
 	columns = new_columns
 	
-	
 	var temp_event_timings = []
 	
 	for event in new_events:
