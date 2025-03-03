@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c75sqqporjyi"]
 
 [ext_resource type="Texture2D" uid="uid://cixynfyc7rkbf" path="res://Sprites/NoPulse.png" id="1_knyxb"]
-[ext_resource type="Script" path="res://LevelEditor/PulseButton.gd" id="1_torea"]
+[ext_resource type="Script" uid="uid://22fvvgnl6qjt" path="res://LevelEditor/PulseButton.gd" id="1_torea"]
 [ext_resource type="Texture2D" uid="uid://dsjklsukgh5bs" path="res://Sprites/PulseDown.png" id="2_htiai"]
 [ext_resource type="Texture2D" uid="uid://dg1blo7h0ivx2" path="res://Sprites/PulseLeft.png" id="3_edn53"]
 [ext_resource type="Texture2D" uid="uid://df085m4i7uhum" path="res://Sprites/PulseRight.png" id="4_dgam1"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=4 uid="uid://bmdbva8kn4x2k"]
 
-[ext_resource type="Script" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
+[ext_resource type="Script" uid="uid://bxwpqskykerek" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
 [ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_xb43s"]
 [ext_resource type="Texture2D" uid="uid://bflq3giud6ni0" path="res://Sprites/FloorTile1.png" id="3_pyhnl"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dmpu0du8wcee" path="res://Sprites/WallRampCorner.png" id="5_53n1o"]
 [ext_resource type="Texture2D" uid="uid://c0cnno3iw20fn" path="res://Sprites/FloorCenter.png" id="6_4opvi"]
 [ext_resource type="AudioStream" uid="uid://b53257tn8gnse" path="res://Music/Filibuster.mp3" id="7_33kna"]
-[ext_resource type="Script" path="res://GUI/Equalizer.gd" id="7_eoydm"]
+[ext_resource type="Script" uid="uid://bguxjj25pelsn" path="res://GUI/Equalizer.gd" id="7_eoydm"]
 [ext_resource type="AudioStream" uid="uid://cl43pcxk80kh4" path="res://SFX/20 FREE CINEMATIC WHOOSH SOUND EFFECTS  High quality 4k Audios-[AudioTrimmer.com].mp3" id="7_fapfh"]
 [ext_resource type="Texture2D" uid="uid://c7b4m3qgmvn6u" path="res://Sprites/FloorCorner.png" id="7_x4dm5"]
 [ext_resource type="Texture2D" uid="uid://dt4lpxgt8m4ws" path="res://Sprites/FloorSide.png" id="8_3hjjb"]

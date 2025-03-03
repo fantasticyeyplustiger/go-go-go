@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://64r4ci878vvr"]
 
-[ext_resource type="Script" path="res://Obstacles/RollingObstacle.gd" id="1_blng4"]
+[ext_resource type="Script" uid="uid://dxduhutpov6a7" path="res://Obstacles/RollingObstacle.gd" id="1_blng4"]
 [ext_resource type="Texture2D" uid="uid://bkpghwum4auim" path="res://Sprites/IronPellet.png" id="2_pgedo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q5ya"]

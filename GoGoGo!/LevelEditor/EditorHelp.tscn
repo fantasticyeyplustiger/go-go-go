@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://3sxtuf7arlyc"]
 
-[ext_resource type="Script" path="res://LevelEditor/EditorHelp.gd" id="1_wkd6f"]
+[ext_resource type="Script" uid="uid://cbffstmva1qi5" path="res://LevelEditor/EditorHelp.gd" id="1_wkd6f"]
 
 [node name="EditorHelp" type="Control"]
 layout_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bxas4qckpiqr4"]
 
 [ext_resource type="Texture2D" uid="uid://cl1ocv1n7qkhv" path="res://Sprites/Lasers.png" id="1_au1ne"]
-[ext_resource type="Script" path="res://Obstacles/LaserSpriteSwitch.gd" id="2_qv8cn"]
+[ext_resource type="Script" uid="uid://cvfi3q21amau8" path="res://Obstacles/LaserSpriteSwitch.gd" id="2_qv8cn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yr38l"]
 atlas = ExtResource("1_au1ne")

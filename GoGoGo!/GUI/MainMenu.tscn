@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://yympjaj4qw3"]
 
-[ext_resource type="Script" path="res://GUI/MainMenu.gd" id="1_6btb2"]
+[ext_resource type="Script" uid="uid://tn7j80q5pvyo" path="res://GUI/MainMenu.gd" id="1_6btb2"]
 [ext_resource type="PackedScene" uid="uid://bklv3nqbxi6ch" path="res://GUI/LevelButton.tscn" id="2_pxvd2"]
 
 [sub_resource type="Animation" id="Animation_fs0id"]
@@ -80,11 +80,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7g5pj"]
 _data = {
-"RESET": SubResource("Animation_fs0id"),
-"move_down": SubResource("Animation_mfosu"),
-"move_left": SubResource("Animation_vbh3p"),
-"move_right": SubResource("Animation_wjjlr"),
-"move_up": SubResource("Animation_gsbnn")
+&"RESET": SubResource("Animation_fs0id"),
+&"move_down": SubResource("Animation_mfosu"),
+&"move_left": SubResource("Animation_vbh3p"),
+&"move_right": SubResource("Animation_wjjlr"),
+&"move_up": SubResource("Animation_gsbnn")
 }
 
 [node name="MainMenu" type="Control"]
@@ -278,7 +278,7 @@ level_id = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7g5pj")
+&"": SubResource("AnimationLibrary_7g5pj")
 }
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="open_levels"]

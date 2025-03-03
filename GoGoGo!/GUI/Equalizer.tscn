@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://can6tqvr8xn68"]
 
-[ext_resource type="Script" path="res://GUI/Equalizer.gd" id="1_r8qhs"]
+[ext_resource type="Script" uid="uid://bguxjj25pelsn" path="res://GUI/Equalizer.gd" id="1_r8qhs"]
 
 [node name="Equalizer" type="Control"]
 layout_mode = 3

@@ -37,4 +37,7 @@ signal bg_pulse
 
 @warning_ignore("unused_signal")
 signal change_bpm
+
+@warning_ignore("unused_signal")
+signal get_new_bpm
 #endregion

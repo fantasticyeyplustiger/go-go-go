@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://big4vaqgkxmc6"]
 
-[ext_resource type="Script" path="res://Obstacles/LaserBeam.gd" id="1_ccfla"]
+[ext_resource type="Script" uid="uid://cv8t7vrgurxpo" path="res://Obstacles/LaserBeam.gd" id="1_ccfla"]
 [ext_resource type="Texture2D" uid="uid://cl1ocv1n7qkhv" path="res://Sprites/Lasers.png" id="1_wtt3f"]
 [ext_resource type="PackedScene" uid="uid://bxas4qckpiqr4" path="res://Obstacles/LaserBeamMiddle.tscn" id="2_djnuu"]
 [ext_resource type="Texture2D" uid="uid://cmch0424ylhym" path="res://Lasers.png" id="3_ee7bs"]
@@ -94,8 +94,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_77yfi"]
 _data = {
-"RESET": SubResource("Animation_i8akx"),
-"fade_away": SubResource("Animation_8o260")
+&"RESET": SubResource("Animation_i8akx"),
+&"fade_away": SubResource("Animation_8o260")
 }
 
 [node name="LaserBeam" type="Node2D"]

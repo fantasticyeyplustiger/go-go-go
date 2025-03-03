@@ -5,6 +5,7 @@ const tile_size : int = 256
 
 var test_level : String = "res://Levels/testing_level.tscn"
 
+var starting_bpm : float = 180.0
 var bpm : float = 180.0
 var total_buttons : int
 var data : LevelData = LevelData.new()
@@ -16,7 +17,7 @@ var is_playing : bool = false
 var buttons : Array[Button]
 
 var song_length : int
-var song : AudioStreamPlayer
+
 var beat_length : float
 var total_beats : int
 
@@ -29,7 +30,8 @@ var chart_initialized = false
 @export var rows : int = 6
 @export var columns : int = 6
 
-@onready var chartList = $ItemList
+@onready var song : AudioStreamPlayer = $Song
+@onready var chartList : ItemList = $ItemList
 
 func _ready():
 	
@@ -40,19 +42,20 @@ func _ready():
 		change_chart(0)
 		
 		if not data.song_path.is_empty():
-			$Song.stream = load(data.song_path)
+			song.stream = load(data.song_path)
 	
-	song = $Song
 	@warning_ignore("narrowing_conversion")
 	song_length = song.stream.get_length()
 	
-	$MarginContainer/Buttons/SpinBox.value = bpm
-	
 	Globals.instruct.connect(set_attack)
 	Globals.equalizer_height.connect(set_equalizer_height)
+	
 	Globals.gradient_brightness.connect(set_gradient_brightness)
 	Globals.gradient_pulse.connect(set_gradient_pulse)
+	
 	Globals.bg_pulse.connect(set_bg_pulse)
+	
+	Globals.get_new_bpm.connect(turn_new_bpm_button_visible)
 	
 	total_buttons = (2 * rows) + (2 * columns)
 	
@@ -121,9 +124,11 @@ func set_equalizer_height(height : int):
 	data.change_height(current_beat, height)
 	
 
+
 func set_equalizer_color(color : Color):
 	data.change_equalizer_color(current_beat, color)
 	
+
 
 func set_gradient_brightness(brightness : int):
 	data.change_brightness(current_beat, brightness)
@@ -132,11 +137,13 @@ func set_gradient_brightness(brightness : int):
 func set_gradient_color(color : Color):
 	data.change_gradient_color(current_beat, color)
 
+
 func set_gradient_pulse(is_on : bool):
 	if is_on:
 		data.gradient_pulse_at(current_beat)
 	else:
 		data.remove_gradient_pulse_at(current_beat)
+
 
 func set_bg_pulse(is_on : bool, direction : Globals.directions):
 	if is_on:
@@ -144,11 +151,11 @@ func set_bg_pulse(is_on : bool, direction : Globals.directions):
 	else:
 		data.remove_bg_pulse(current_beat)
 
-
+'''
+Puts a boulder as the icon of every part charted inside chartList.
+'''
 func set_icons():
-	
 	for event in data.events:
-		
 		chartList.set_item_icon(event.timing, $Boulder.texture)
 #endregion
 
@@ -183,9 +190,19 @@ func reset_buttons_to_false() -> void:
 	for button in buttons:
 		button.switch_off()
 
+'''
+Turns $LeftGUI/NewBPM visible.
+'''
+func turn_new_bpm_button_visible():
+	$LeftGUI/NewBPM.visible = true
 
+'''
+Asks the player to save if they've made any changes; then, sends player to the main menu.
+'''
 func quit() -> void:
-	$SaveFolderSelect.popup()
+	if not has_saved:
+		$SaveFolderSelect.popup()
+	
 	get_tree().change_scene_to_file("res://GUI/MainMenu.tscn")
 
 
@@ -345,6 +362,10 @@ func load_song_import() -> void:
 	$SongImport.popup()
 #endregion
 
+'''
+Loads a level. Doesn't check if the file is valid as of now.
+Sets the chart according to the data inside of the file.
+'''
 func load_save_file(path: String) -> void:
 	
 	has_saved = true
@@ -391,7 +412,9 @@ func bpm_changed(value: float) -> void:
 	chartList.select(0, true)
 	data.bpm = bpm
 
-
+'''
+Attempts to import a song into the editor. Only works with ogg files at the moment.
+'''
 func song_import(path : String) -> void:
 	
 	var extension : String = path.get_extension()

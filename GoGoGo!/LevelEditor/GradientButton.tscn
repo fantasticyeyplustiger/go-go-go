@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://rtgrw84fop4n"]
 
-[ext_resource type="Script" path="res://LevelEditor/GradientButton.gd" id="1_2x2go"]
+[ext_resource type="Script" uid="uid://d14m4iekb7c5r" path="res://LevelEditor/GradientButton.gd" id="1_2x2go"]
 
 [sub_resource type="Gradient" id="Gradient_nx4vg"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.196078)

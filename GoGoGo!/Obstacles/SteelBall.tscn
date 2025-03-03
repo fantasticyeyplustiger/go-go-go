@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bygm43b0g2aaw"]
 
 [ext_resource type="Texture2D" uid="uid://b3mw7lgxdp6qw" path="res://Sprites/fat bouler.png" id="1_s71o0"]
-[ext_resource type="Script" path="res://Obstacles/RollingObstacle.gd" id="1_soe57"]
+[ext_resource type="Script" uid="uid://dxduhutpov6a7" path="res://Obstacles/RollingObstacle.gd" id="1_soe57"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ff2it"]
 size = Vector2(160, 160)

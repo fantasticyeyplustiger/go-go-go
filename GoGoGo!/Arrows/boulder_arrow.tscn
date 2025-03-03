@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c6r6ao0ofpyd3"]
 
 [ext_resource type="Texture2D" uid="uid://ckpyepkym28th" path="res://Sprites/arrow.png" id="1_7jl2n"]
-[ext_resource type="Script" path="res://Arrows/arrow.gd" id="2_wm5td"]
+[ext_resource type="Script" uid="uid://di1rt5khs6dsy" path="res://Arrows/arrow.gd" id="2_wm5td"]
 
 [sub_resource type="Animation" id="Animation_tirne"]
 length = 0.001
@@ -50,9 +50,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_43who"]
 _data = {
-"RESET": SubResource("Animation_tirne"),
-"turn_laser_visible": SubResource("Animation_mmj2v"),
-"turn_visible": SubResource("Animation_6lg8n")
+&"RESET": SubResource("Animation_tirne"),
+&"turn_laser_visible": SubResource("Animation_mmj2v"),
+&"turn_visible": SubResource("Animation_6lg8n")
 }
 
 [node name="Arrow" type="Sprite2D"]

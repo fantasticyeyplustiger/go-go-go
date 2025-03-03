@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://e5bfcpwl61fh"]
 
-[ext_resource type="Script" path="res://GUI/Gradient.gd" id="1_shrcy"]
+[ext_resource type="Script" uid="uid://caxo1we7vh17g" path="res://GUI/Gradient.gd" id="1_shrcy"]
 
 [sub_resource type="Gradient" id="Gradient_6q1yc"]
 interpolation_mode = 2
@@ -43,8 +43,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j7tx0"]
 _data = {
-"RESET": SubResource("Animation_yvqit"),
-"pulse": SubResource("Animation_mjv7x")
+&"RESET": SubResource("Animation_yvqit"),
+&"pulse": SubResource("Animation_mjv7x")
 }
 
 [node name="Control" type="Control"]

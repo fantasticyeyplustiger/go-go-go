@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dpi5o3hjwmdmx"]
 
-[ext_resource type="Script" path="res://BooleanButton.gd" id="1_dnfn7"]
+[ext_resource type="Script" uid="uid://ceb2byw15fgyx" path="res://BooleanButton.gd" id="1_dnfn7"]
 
 [node name="ChangeBPM" type="Button"]
 custom_minimum_size = Vector2(256, 256)
@@ -16,3 +16,7 @@ text = "change
 bpm:
 no"
 script = ExtResource("1_dnfn7")
+off_text = "change bpm off"
+on_text = "CHANGE BPM ON"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

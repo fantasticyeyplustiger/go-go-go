@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=4 uid="uid://0vbf4nh5djlc"]
 
-[ext_resource type="Script" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
+[ext_resource type="Script" uid="uid://blpc2eckpnj6e" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
 [ext_resource type="AudioStream" uid="uid://b53257tn8gnse" path="res://Music/Filibuster.mp3" id="2_v2ckd"]
 [ext_resource type="Texture2D" uid="uid://b7emg3rnetlby" path="res://Sprites/EqualizerMed.png" id="3_3nj4w"]
@@ -121,7 +121,6 @@ script = ExtResource("1_1127s")
 [node name="SaveFolderSelect" type="FileDialog" parent="."]
 initial_position = 1
 size = Vector2i(638, 370)
-ok_button_text = "Save"
 dialog_hide_on_ok = true
 dialog_close_on_escape = false
 root_subfolder = "SavedLevels"

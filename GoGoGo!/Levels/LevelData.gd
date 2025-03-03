@@ -6,10 +6,14 @@ var events = []
 
 var equalizer_heights = []
 var equalizer_colors = []
+
 var gradient_brightnesses = []
 var gradient_pulse_times = []
 var gradient_colors = []
+
 var bg_pulses = []
+
+var bpm_changes = []
 
 var random_attacks : bool
 var bpm : float
@@ -17,6 +21,7 @@ var old_laser_length : int
 var last_beat : int = -1
 var song_path : String
 
+#region bg event general methods
 func create_bg_event(current_beat : int, value):
 	return{
 		"timing" : current_beat,
@@ -85,6 +90,34 @@ func get_element_at(current_beat : int, array):
 			return element
 	
 	# Check if element exists there before trying to get it.
+#endregion
+
+
+#region bpm change methods
+func change_bpm(current_beat : int, new_bpm) -> void:
+	remove_bpm_change(current_beat)
+	bpm_changes.append( create_bg_event(current_beat, new_bpm) )
+	bpm_changes.sort_custom(sort_timing)
+
+
+func set_bpm(current_beat : int, new_bpm) -> void:
+	for height in equalizer_heights:
+		
+		if height.timing == current_beat:
+			height.value = new_bpm
+			return
+
+
+func remove_bpm_change(current_beat : int) -> void:
+	var iterator : int = 0
+	for height in equalizer_heights:
+		
+		if height.timing == current_beat:
+			bpm_changes.remove_at(iterator)
+			return
+		
+		iterator += 1
+#endregion
 
 
 #region equalizer methods

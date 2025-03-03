@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c640xr3dmutlw"]
 
-[ext_resource type="Script" path="res://Obstacles/RollingObstacle.gd" id="1_vnufw"]
+[ext_resource type="Script" uid="uid://dxduhutpov6a7" path="res://Obstacles/RollingObstacle.gd" id="1_vnufw"]
 [ext_resource type="Texture2D" uid="uid://bttqsq4ajaflm" path="res://Sprites/bouler.png" id="2_qpimg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btsxh"]

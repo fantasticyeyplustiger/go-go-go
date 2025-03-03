@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cni57yc76qayn"]
 
 [ext_resource type="Texture2D" uid="uid://rvln37hsqncr" path="res://Sprites/EqualizerLow.png" id="1_fgs0a"]
-[ext_resource type="Script" path="res://EqualizerButton.gd" id="2_8dytf"]
+[ext_resource type="Script" uid="uid://3nexesrg80lg" path="res://EqualizerButton.gd" id="2_8dytf"]
 
 [node name="EqualizerButton" type="Button"]
 custom_minimum_size = Vector2(256, 256)
