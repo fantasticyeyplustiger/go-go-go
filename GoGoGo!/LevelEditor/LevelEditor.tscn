@@ -521,3 +521,4 @@ scale = Vector2(1.8, 1.8)
 [connection signal="item_selected" from="ItemList" to="." method="change_chart"]
 [connection signal="color_changed" from="LeftGUI/EqualizerColor" to="." method="set_equalizer_color"]
 [connection signal="color_changed" from="LeftGUI/GradientColor" to="." method="set_gradient_color"]
+[connection signal="text_changed" from="LeftGUI/NewBPM" to="." method="new_bpm_changed"]

@@ -25,7 +25,7 @@ var old_last_beat : int = -1
 
 var has_saved : bool = false
 var is_loading : bool = false
-var chart_initialized = false
+var chart_initialized : bool = false
 
 @export var rows : int = 6
 @export var columns : int = 6
@@ -38,14 +38,15 @@ func _ready():
 	if not Globals.data_path.is_empty():
 		data._load(Globals.data_path)
 		bpm = data.bpm
-		initialize_chart()
-		change_chart(0)
 		
 		if not data.song_path.is_empty():
 			song.stream = load(data.song_path)
 	
 	@warning_ignore("narrowing_conversion")
-	song_length = song.stream.get_length()
+	song_length = song.stream.get_length() # MUST BE INITIALIZED BEFORE THE CHART IS
+	
+	initialize_chart()
+	change_chart(0)
 	
 	Globals.instruct.connect(set_attack)
 	Globals.equalizer_height.connect(set_equalizer_height)
@@ -193,8 +194,9 @@ func reset_buttons_to_false() -> void:
 '''
 Turns $LeftGUI/NewBPM visible.
 '''
-func turn_new_bpm_button_visible():
-	$LeftGUI/NewBPM.visible = true
+func turn_new_bpm_button_visible(is_on : bool):
+	$LeftGUI/NewBPM.visible = is_on
+	$LeftGUI/NewBPM.text = bpm
 
 '''
 Asks the player to save if they've made any changes; then, sends player to the main menu.
@@ -290,6 +292,11 @@ func change_bg_chart() -> void:
 			$LeftGUI/GradientPulse.switch_on()
 		else:
 			$LeftGUI/GradientPulse.switch_off()
+	
+	if not data.bpm_changes.is_empty():
+		var bpm_change = data.find_in_between_at(current_beat, data.bpm_changes, bpm, true)
+		$LeftGUI/NewBPM.visible = true
+		$LeftGUI/NewBPM.text = str(bpm_change)
 
 
 '''
@@ -484,3 +491,8 @@ func set_random_level() -> void:
 			$MarginContainer2/VBoxContainer/SetRandomButton.text = "random\nlevel off"
 		true:
 			$MarginContainer2/VBoxContainer/SetRandomButton.text = "RANDOM\nLEVEL ON"
+
+
+func new_bpm_changed(new_text: String) -> void:
+	if new_text.is_valid_int():
+		data.add_

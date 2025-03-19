@@ -36,22 +36,6 @@ func create_color_event(current_beat : int, color : Color):
 	}
 
 
-func check_for_bg_events(current_beat : int) -> bool:
-	var bg_events = []
-	bg_events.append_array(equalizer_heights)
-	bg_events.append_array(equalizer_colors)
-	bg_events.append_array(gradient_brightnesses)
-	bg_events.append_array(gradient_pulse_times)
-	bg_events.append_array(gradient_colors)
-	bg_events.append_array(bg_pulses)
-	
-	for event in bg_events:
-		if event.timing == current_beat:
-			return true
-	
-	return false
-
-
 func check_for_timing_at(current_beat : int, array) -> bool:
 	for element in array:
 		if element.timing == current_beat:
