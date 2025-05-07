@@ -365,6 +365,8 @@ layout_mode = 2
 
 [node name="GradientPulse" parent="LeftGUI" instance=ExtResource("7_ac37h")]
 layout_mode = 2
+off_text = "GRADIENT PULSE ON"
+on_text = "gradient pulse off"
 
 [node name="Mirror" type="Button" parent="LeftGUI"]
 visible = false
@@ -377,6 +379,7 @@ SIDE
 OFF"
 
 [node name="ChangeBPM" parent="LeftGUI" instance=ExtResource("8_1qwfi")]
+visible = false
 layout_mode = 2
 
 [node name="NewBPM" type="LineEdit" parent="LeftGUI"]

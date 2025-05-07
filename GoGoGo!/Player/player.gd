@@ -11,14 +11,18 @@ var moving : bool = false
 var is_dead : bool = false
 var is_dashing : bool = false
 
+var non_dashing_color : String = "00ff00"
+
 @onready var ray = $WallDetector
 @onready var dash_ray = $DashDetector
 
 func _physics_process(_delta):
-	if Input.is_action_pressed("dash"):
+	if Input.is_action_pressed("dash") and health > 0:
 		is_dashing = true
+		$temporarySprite.color = "#45b6fe"
 	else:
 		is_dashing = false
+		$temporarySprite.color = non_dashing_color
 
 '''
 -- UNHANDLED INPUT --
@@ -88,8 +92,10 @@ func get_damaged(damage : int):
 	if health <= 0:
 		is_dead = true
 		$temporarySprite.color = "#FF0000"
+		non_dashing_color = "#FF0000"
 	else:
 		$temporarySprite.color = "#FFA500"
+		non_dashing_color = "#FFA500"
 	
 	$HP.text = str(health)
 

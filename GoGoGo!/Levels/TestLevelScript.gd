@@ -107,6 +107,7 @@ func play() -> void:
 	
 	if current_beat > data.last_beat:
 		$PlayTimer.stop()
+		$Label.visible = true
 		# Show win screen.
 	
 	show_arrows()

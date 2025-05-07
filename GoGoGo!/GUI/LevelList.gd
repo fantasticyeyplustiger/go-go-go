@@ -9,6 +9,9 @@ func _init() -> void:
 	levels = [
 		path + "SkyHigh",
 		path + "MrOops",
-		path + "Filibuster"
+		path + "Filibuster",
+		path + "SkyHighRandom",
+		path + "MrOopsRandom",
+		path + "FilibusterRandom"
 	]
 	

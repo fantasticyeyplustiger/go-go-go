@@ -1024,6 +1024,20 @@ offset_bottom = -1672.0
 theme_override_font_sizes/font_size = 100
 text = "GO BACK"
 
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_top = -1120.0
+offset_right = 1558.0
+offset_bottom = -376.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 180
+text = "good job you win
+(please go back to
+main menu lol)"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="PlayTimer" to="." method="play"]
 [connection signal="timeout" from="StartLevel" to="." method="start_level"]
 [connection signal="pressed" from="LevelEditorButton" to="." method="go_editor"]

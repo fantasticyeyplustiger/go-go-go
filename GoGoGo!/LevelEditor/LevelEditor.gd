@@ -23,7 +23,7 @@ var total_beats : int
 
 var old_last_beat : int = -1
 
-var has_saved : bool = false
+var has_saved : bool = true
 var is_loading : bool = false
 var chart_initialized : bool = false
 
@@ -495,4 +495,4 @@ func set_random_level() -> void:
 
 func new_bpm_changed(new_text: String) -> void:
 	if new_text.is_valid_int():
-		data.add_
+		data.set_bpm(current_beat, int(new_text))
