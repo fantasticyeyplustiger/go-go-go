@@ -196,7 +196,7 @@ Turns $LeftGUI/NewBPM visible.
 '''
 func turn_new_bpm_button_visible(is_on : bool):
 	$LeftGUI/NewBPM.visible = is_on
-	$LeftGUI/NewBPM.text = bpm
+	$LeftGUI/NewBPM.text = str(bpm)
 
 '''
 Asks the player to save if they've made any changes; then, sends player to the main menu.
