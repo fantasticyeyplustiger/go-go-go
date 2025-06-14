@@ -185,6 +185,16 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "EDITOR"
 
+[node name="LoadLevel" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "LOAD LEVEL FROM FILE"
+
+[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "QUIT"
+
 [node name="SettingsButton" type="Button" parent="MainMenu/VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -317,6 +327,8 @@ libraries = {
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="open_levels"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/EditorButton" to="." method="enter_level_editor"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/LoadLevel" to="." method="load_level"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/QuitButton" to="." method="quit"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/SettingsButton" to="." method="open_settings"]
 [connection signal="pressed" from="MainMenuButton" to="." method="move_to_main_menu"]
 [connection signal="pressed" from="MainMenuButton2" to="." method="move_up_to_main_menu"]

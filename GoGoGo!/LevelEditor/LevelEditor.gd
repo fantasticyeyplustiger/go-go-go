@@ -65,8 +65,10 @@ func _ready():
 	load_buttons(0, tile_size, $RightColumnStart)
 	load_buttons(0, tile_size, $LeftColumnStart)
 	
+	
 	if not Globals.data_path.is_empty():
 		set_icons()
+	
 
 func _unhandled_input(_event: InputEvent) -> void:
 	
@@ -355,8 +357,6 @@ func duplicate_attacks() -> void:
 	change_chart(current_beat + 1)
 	
 	paste_attacks()
-	
-	pass
 
 #region functions that open file selectors
 func save() -> void:
@@ -430,11 +430,14 @@ func song_import(path : String) -> void:
 		
 		$Song.stream = AudioStreamOggVorbis.load_from_file(path)
 		
-		var directory = DirAccess.open("res://Music/")
+		var directory = DirAccess.open("user://")
+		directory.make_dir("Music") # in case it doesn't already exist
 		
-		directory.copy(path, "res://Music/" + path.get_file())
+		@warning_ignore("unused_variable")
+		var new_file = FileAccess.open("user://Music/" + path.get_file(), FileAccess.WRITE)
+		directory.copy(path, "user://Music/" + path.get_file())
 		
-		data.song_path = "res://Music/" + path.get_file()
+		data.song_path = "user://Music/" + path.get_file()
 
 
 func play_test() -> void:
@@ -454,8 +457,8 @@ func select_song(path: String) -> void:
 	
 	if extension == "ogg":
 		$Song.stream = AudioStreamOggVorbis.load_from_file(path)
-		print(path)
 		data.song_path = path
+		print(path)
 
 
 func load_song_select() -> void:

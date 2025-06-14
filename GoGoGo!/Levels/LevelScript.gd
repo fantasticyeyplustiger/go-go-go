@@ -1,3 +1,7 @@
+## NOTE: THIS SCRIPT IS THE ORIGINAL LEVEL SCRIPT. IT IS NOT THE CURRENT LEVEL SCRIPT USED.
+## THE CURRENT ONE IS "res://Levels/TestLevelScript.gd".
+## it's still here so i can recheck some stuff every now and then
+
 extends Node2D
 
 @export var rows : int = 0

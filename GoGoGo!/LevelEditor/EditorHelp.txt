@@ -1,12 +1,16 @@
 [i]This is the level editor guide![/i]
 
+Before anything else, here is an important note. If you want to share a level to someone by giving them the level file, [b]you have to give them the song for the level too.[/b] I couldn't figure out a way to put the song data in the level data automatically, unfortunately.
+
 [b]Hotkeys:[/b]
 
 - [b]CTRL + S[/b] : Saves the level.
 
-- [b]CTRL + C[/b] : Copies the attacks on the current area of the chart you're on.
+- [b]CTRL + C[/b] : Copies the attacks on the current area of the chart you're on. DOES NOT COPY BACKGROUND EFFECTS, such as equalizer changes.
 
 - [b]CTRL + V[/b] : Pastes the attacks you've copied onto the current area of the chart you're on. Doesn't work if you haven't copied anything.
+
+- [b]CTRL + D[/b] : Copies the attacks on the current area of the chart you're on and pastes them on the next beat. THIS WILL OVERRIDE ATTACKS ON THAT NEXT BEAT, NO MATTER WHAT.
 
 - [b]Right Mouse Click[/b] : If used to chart, the obstacle goes back in order.
 
@@ -30,4 +34,16 @@
 
 - [b]Load[/b] : Lets you select a level to load into the editor!
 
-- [b]Song Import[/b] : Lets you add a song into the Music folder by dragging and dropping. [b]USE OGG AUDIO FILES ONLY.[/b]
+- [b]Song Import[/b] : Lets you add a song into the Music folder by dragging and dropping a file. [b]USE OGG AUDIO FILES ONLY. MP3 FILES AND WAV FILES WILL NOT WORK.[/b]
+
+- [b]End[/b] : Ends the level at this beat. If you don't put an end, the end will automatically be put at the end of the song.
+
+- [b]Random Level[/b] : If it is turned on, the game will convert every "charted attack" into a "randomized attack." Randomized attacks do not save, so you won't lose any data if you decide to turn this on!
+
+[b]CHART[/b]
+
+- [b]Blank Squares[/b] : If you click on these, an obstacle will appear on that spot at that beat in the level. The obstacle's sprite will be shown for reference.
+
+- [b]Equalizer[/b] : On that beat, the equalizer will change to match that "height." It will continue being that "height" until it is changed on another beat.
+
+- [b]Gradient[/b] : On that beat, the gradient near the equalizers will change to match the new brightness. Likewise, it will continue being that bright until it is changed on another beat.

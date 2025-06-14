@@ -160,7 +160,7 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_77yfi")
+&"": SubResource("AnimationLibrary_77yfi")
 }
 
 [connection signal="area_entered" from="LaserHeadChecker" to="." method="disable_laser_beam_end"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://nccqf6jptax3"]
+
+[ext_resource type="Script" uid="uid://c1q77vum11ubb" path="res://PauseMenu.gd" id="1_exy6n"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_exy6n")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2

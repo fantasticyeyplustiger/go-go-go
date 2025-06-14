@@ -100,7 +100,7 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_43who")
+&"": SubResource("AnimationLibrary_43who")
 }
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

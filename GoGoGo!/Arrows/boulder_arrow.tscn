@@ -65,7 +65,7 @@ autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_43who")
+&"": SubResource("AnimationLibrary_43who")
 }
 
 [connection signal="timeout" from="Timer" to="." method="disappear"]
