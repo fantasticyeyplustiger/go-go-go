@@ -2,7 +2,7 @@
 
 Before anything else, here is an important note. If you want to share a level to someone by giving them the level file, [b]you have to give them the song for the level too.[/b] I couldn't figure out a way to put the song data in the level data automatically, unfortunately.
 
-Additionally, making the level faster or slower entirely depends on the BPM. As long as you have the song's BPM, you can just halve or double it accordingly.
+Additionally, making the level faster or slower entirely depends on the BPM. As long as you have the song's BPM, you can just halve or double it accordingly. Please don't make it go ridiculously high, though. It'll probably break after like 1000 or something...
 
 The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
 
@@ -17,6 +17,10 @@ The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
 - [b]CTRL + V[/b] : Pastes the attacks you've copied onto the current area of the chart you're on. Doesn't work if you haven't copied anything.
 
 - [b]CTRL + D[/b] : Copies the attacks on the current area of the chart you're on and pastes them on the next beat. THIS WILL OVERRIDE ATTACKS ON THAT NEXT BEAT, NO MATTER WHAT.
+
+- [b]W or Up Arrow[/b] : Goes up one beat on the chart if possible.
+
+- [b]S or Down Arrow[/b] : Goes down one beat on the chart if possible.
 
 - [b]Right Mouse Click[/b] : If used to chart, the obstacle goes back in order.
 

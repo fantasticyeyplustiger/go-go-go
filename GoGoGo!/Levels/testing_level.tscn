@@ -1040,7 +1040,7 @@ offset_left = -24.0
 offset_top = -1152.0
 offset_right = 1600.0
 offset_bottom = -328.0
-color = Color(0.10748, 0.10748, 0.10748, 1)
+color = Color(0.105882, 0.105882, 0.105882, 0.607843)
 
 [node name="EndLabel" type="Label" parent="."]
 visible = false
@@ -1051,7 +1051,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 50
 theme_override_font_sizes/font_size = 180
-text = "good job you win
+text = "ending
 (please go back to
 main menu lol)"
 horizontal_alignment = 1

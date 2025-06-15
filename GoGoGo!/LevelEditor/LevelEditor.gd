@@ -83,7 +83,23 @@ func _unhandled_input(_event: InputEvent) -> void:
 	
 	elif Input.is_action_just_pressed("duplicate"):
 		duplicate_attacks()
+	
+	elif Input.is_action_just_pressed("up"):
+		go_up_chart()
+	
+	elif Input.is_action_just_pressed("down"):
+		go_down_chart()
 
+
+func go_up_chart() -> void:
+	if not current_beat <= 0:
+		change_chart(current_beat - 1)
+		$ItemList.select(current_beat, true)
+
+func go_down_chart() -> void:
+	if not current_beat >= $ItemList.item_count - 1:
+		change_chart(current_beat + 1)
+		$ItemList.select(current_beat, true)
 
 '''
 Initializes all of the buttons inside of the editor.
@@ -336,6 +352,9 @@ func copy_attacks() -> void:
 			copy_data.events = data._get_events(current_beat)
 			break
 	
+	if not exists:
+		copy_data.events = []
+	
 	$MarginContainer/Buttons/PasteButton.disabled = false
 
 func paste_attacks() -> void:
@@ -371,10 +390,16 @@ func load_song_import() -> void:
 #endregion
 
 '''
-Loads a level. Doesn't check if the file is valid as of now.
+Loads a level. Doesn't actually check if the file is valid as of now.
 Sets the chart according to the data inside of the file.
 '''
 func load_save_file(path: String) -> void:
+	
+	if not path.get_extension() == "ggg":
+		$LoadFilePopup.visible = true
+		await get_tree().create_timer(3.0).timeout
+		$LoadFilePopup.visible = false
+		return
 	
 	has_saved = true
 	
@@ -413,7 +438,7 @@ func save_folder_selected(path: String) -> void:
 	if data.song_path == "":
 		data.song_path = "res://Music/SkyHigh.ogg"
 	
-	data.save(path)
+	data.save(path + ".ggg")
 	has_saved = true
 
 
@@ -524,7 +549,7 @@ func reset_everything() -> void:
 		
 		# Basically just loops until it finds a valid name it can use without overwriting anything
 		while true:
-			if reset_saves.get_files().has(str(iterator)):
+			if reset_saves.get_files().has(str(iterator) + ".ggg"):
 				iterator += 1
 			else:
 				save_file_path += str(iterator)

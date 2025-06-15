@@ -92,11 +92,6 @@ func _ready() -> void:
 	#endregion
 	
 	init_play_timer()
-	
-	if not Globals.setting_player_sfx:
-		$PlayerSFX.volume_linear = 0
-	if not Globals.boulder_sfx:
-		$SFX.volume_linear = 0
 
 func player_sfx():
 	$PlayerSFX.pitch_scale = randf_range(1.5, 3)
@@ -108,6 +103,12 @@ Places down every obstacle that exists for this beat from the events in data.
 - Called once every "beat" (from $PlayTimer).
 '''
 func play() -> void:
+	
+	# In case player decides to change these settings mid-game.
+	if not Globals.setting_player_sfx:
+		$PlayerSFX.volume_linear = 0
+	if not Globals.boulder_sfx:
+		$SFX.volume_linear = 0
 	
 	if current_beat > data.last_beat:
 		$PlayTimer.stop()
@@ -379,7 +380,8 @@ func start_level() -> void:
 	Globals.attempt_count += 1
 
 '''
-- Respawns the player when they press the letter "R."
+Respawns the player when they press the letter "R."
+Pauses game if player presses "ESC."
 '''
 func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):
@@ -392,7 +394,7 @@ Pauses the game and opens the pause menu.
 '''
 func pause() -> void:
 	Engine.time_scale = 0.0
-	$Equalizer/Music.stream_paused = true
+	music.stream_paused = true
 	$PlayerSFX.stream_paused = true
 	$SFX.stream_paused = true
 	$PauseMenuCanvas/PauseMenu.visible = true
@@ -401,6 +403,6 @@ func pause() -> void:
 Continues the game's audio.
 '''
 func continue_audio() -> void:
-	$Equalizer/Music.stream_paused = false
+	music.stream_paused = false
 	$PlayerSFX.stream_paused = false
 	$SFX.stream_paused = false

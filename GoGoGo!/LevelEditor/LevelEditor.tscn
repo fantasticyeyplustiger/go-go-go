@@ -511,6 +511,32 @@ offset_right = -998.0
 offset_bottom = -1760.0
 scale = Vector2(1.8, 1.8)
 
+[node name="LoadFilePopup" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="LoadFilePopup"]
+custom_minimum_size = Vector2(2100, 549)
+layout_mode = 0
+offset_left = -385.0
+offset_top = -956.0
+offset_right = 1715.0
+offset_bottom = -407.0
+color = Color(0.105882, 0.105882, 0.105882, 0.607843)
+
+[node name="Label" type="Label" parent="LoadFilePopup"]
+layout_mode = 0
+offset_left = -335.0
+offset_top = -979.0
+offset_right = 1664.0
+offset_bottom = -430.0
+theme_override_font_sizes/font_size = 200
+text = "INVALID EXTENSION,
+MUST BE .ggg FILE"
+horizontal_alignment = 1
+
 [connection signal="dir_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
 [connection signal="file_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
 [connection signal="file_selected" from="LoadSaveSelect" to="." method="load_save_file"]
