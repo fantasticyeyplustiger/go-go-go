@@ -1,0 +1,1 @@
+{"boulder_sfx":true,"master_volume_percent":0.5,"music_volume_percent":0.5,"setting_player_sfx":false,"sfx_volume_percent":0.5}

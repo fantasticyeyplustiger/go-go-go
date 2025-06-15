@@ -15,8 +15,8 @@ var bg_pulses = []
 
 var bpm_changes = []
 
-var random_attacks : bool
-var bpm : float
+var random_attacks : bool = false
+var bpm : float = 180.0
 var old_laser_length : int
 var last_beat : int = -1
 var song_path : String

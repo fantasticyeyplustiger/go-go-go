@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d23ech25rmlc"]
+[gd_scene load_steps=5 format=3 uid="uid://d23ech25rmlc"]
 
 [ext_resource type="Script" uid="uid://t8pqbkov8j2f" path="res://GUI/Settings.gd" id="1_1gk1d"]
 [ext_resource type="Script" uid="uid://ceb2byw15fgyx" path="res://BooleanButton.gd" id="1_lqlgg"]
+[ext_resource type="AudioStream" uid="uid://bmm4yalg4d0yn" path="res://Music/SkyHigh.ogg" id="3_ffdj1"]
+[ext_resource type="AudioStream" uid="uid://chg0m6eftnsj0" path="res://SFX/Boulder Fall.mp3" id="4_3igls"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -13,6 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_1gk1d")
 
 [node name="BG" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.118581, 0.118581, 0.118581, 1)
@@ -26,6 +29,7 @@ offset_bottom = 1030.0
 color = Color(0.165656, 0.165656, 0.165656, 1)
 
 [node name="Settings" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
@@ -53,7 +57,7 @@ text = "Master Volume: 100"
 [node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer"]
 layout_mode = 2
 value = 100.0
-tick_count = 20
+tick_count = 21
 ticks_on_borders = true
 
 [node name="MusicVolume" type="Label" parent="Settings/VBoxContainer"]
@@ -64,7 +68,7 @@ text = "Music Volume: 50"
 [node name="MusicSlider" type="HSlider" parent="Settings/VBoxContainer"]
 layout_mode = 2
 value = 50.0
-tick_count = 20
+tick_count = 21
 ticks_on_borders = true
 
 [node name="SFXVolume" type="Label" parent="Settings/VBoxContainer"]
@@ -75,7 +79,7 @@ text = "SFX Volume: 50"
 [node name="SFXSlider" type="HSlider" parent="Settings/VBoxContainer"]
 layout_mode = 2
 value = 50.0
-tick_count = 20
+tick_count = 21
 ticks_on_borders = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
@@ -95,7 +99,7 @@ text = "YES"
 script = ExtResource("1_lqlgg")
 off_text = "NO"
 on_text = "YES"
-signal_to_connect = "update_no_boulder_sfx"
+signal_to_connect = "update_boulder_sfx"
 is_on = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Settings/VBoxContainer"]
@@ -115,18 +119,104 @@ text = "YES"
 script = ExtResource("1_lqlgg")
 off_text = "NO"
 on_text = "YES"
-signal_to_connect = "update_no_player_sfx"
+signal_to_connect = "update_player_sfx"
 is_on = true
 
 [node name="ApplyChanges" type="Button" parent="Settings/VBoxContainer"]
+custom_minimum_size = Vector2(650, 120)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 75
+disabled = true
 text = "APPLY CHANGES"
+
+[node name="BackButton" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(453, 150)
+layout_mode = 0
+offset_left = 72.0
+offset_top = 80.0
+offset_right = 525.0
+offset_bottom = 230.0
+theme_override_font_sizes/font_size = 100
+text = "BACK"
+
+[node name="TestingArea" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 704.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TestingArea"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="TestingArea/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 50
+
+[node name="TestSound" type="Button" parent="TestingArea/VBoxContainer/HBoxContainer1"]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "TEST MUSIC"
+
+[node name="StopSound" type="Button" parent="TestingArea/VBoxContainer/HBoxContainer1"]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+disabled = true
+text = "STOP"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TestingArea/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 50
+
+[node name="TestSound" type="Button" parent="TestingArea/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "TEST SFX"
+
+[node name="StopSound" type="Button" parent="TestingArea/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(350, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+disabled = true
+text = "STOP"
+
+[node name="Label" type="Label" parent="TestingArea/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 27
+text = "Note: You have to apply changes for the audio to change."
+horizontal_alignment = 2
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ffdj1")
+bus = &"Music"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3igls")
+bus = &"SFX"
 
 [connection signal="value_changed" from="Settings/VBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="Settings/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="Settings/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer/BooleanButton" to="." method="boolean_button_pressed"]
 [connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer/BooleanButton" to="Settings/VBoxContainer/HBoxContainer/BooleanButton" method="_on_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer2/BooleanButton" to="." method="boolean_button_pressed"]
 [connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer2/BooleanButton" to="Settings/VBoxContainer/HBoxContainer2/BooleanButton" method="_on_pressed"]
 [connection signal="pressed" from="Settings/VBoxContainer/ApplyChanges" to="." method="apply_changes"]
+[connection signal="pressed" from="BackButton" to="." method="go_back"]
+[connection signal="pressed" from="TestingArea/VBoxContainer/HBoxContainer1/TestSound" to="." method="test_music"]
+[connection signal="pressed" from="TestingArea/VBoxContainer/HBoxContainer1/StopSound" to="." method="stop_music"]
+[connection signal="pressed" from="TestingArea/VBoxContainer/HBoxContainer2/TestSound" to="." method="test_sfx"]
+[connection signal="pressed" from="TestingArea/VBoxContainer/HBoxContainer2/StopSound" to="." method="stop_sound"]
+[connection signal="finished" from="Music" to="." method="stop_music"]
+[connection signal="finished" from="SFX" to="." method="stop_sound"]

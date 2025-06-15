@@ -1,8 +1,8 @@
 [gd_scene load_steps=32 format=4 uid="uid://0vbf4nh5djlc"]
 
 [ext_resource type="Script" uid="uid://blpc2eckpnj6e" path="res://LevelEditor/LevelEditor.gd" id="1_1127s"]
+[ext_resource type="AudioStream" uid="uid://bmm4yalg4d0yn" path="res://Music/SkyHigh.ogg" id="2_2nxej"]
 [ext_resource type="PackedScene" uid="uid://2odvmam36alb" path="res://StaticObjects/box.tscn" id="2_7h8jr"]
-[ext_resource type="AudioStream" uid="uid://b53257tn8gnse" path="res://Music/Filibuster.mp3" id="2_v2ckd"]
 [ext_resource type="Texture2D" uid="uid://b7emg3rnetlby" path="res://Sprites/EqualizerMed.png" id="3_3nj4w"]
 [ext_resource type="PackedScene" uid="uid://cni57yc76qayn" path="res://LevelEditor/EqualizerButton.tscn" id="3_actlo"]
 [ext_resource type="Texture2D" uid="uid://u2ryld5jhouk" path="res://Sprites/empty.png" id="3_c8yye"]
@@ -163,7 +163,8 @@ access = 2
 use_native_dialog = true
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_v2ckd")
+stream = ExtResource("2_2nxej")
+bus = &"Music"
 
 [node name="PlayTimer" type="Timer" parent="."]
 
@@ -203,7 +204,8 @@ text = "PLAY"
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
 theme = SubResource("Theme_rixxp")
-max_value = 2763.0
+max_value = 3000.0
+value = 180.0
 prefix = "BPM: "
 
 [node name="CopyButton" type="Button" parent="MarginContainer/Buttons"]
@@ -299,7 +301,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 75
-text = "HELP
+text = "GUIDE
 "
 
 [node name="PlaytestButton" type="Button" parent="MarginContainer2/VBoxContainer"]
@@ -318,6 +320,15 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 60
 text = "RANDOM
 LEVEL OFF"
+
+[node name="ResetButton" type="Button" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(400, 190)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "RESET
+EVERYTHING"
 
 [node name="ItemList" type="ItemList" parent="."]
 layout_mode = 2
@@ -519,6 +530,7 @@ scale = Vector2(1.8, 1.8)
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HelpButton" to="." method="open_help_menu"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/PlaytestButton" to="." method="play_test"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/SetRandomButton" to="." method="set_random_level"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/ResetButton" to="." method="reset_everything"]
 [connection signal="item_selected" from="ItemList" to="." method="change_chart"]
 [connection signal="color_changed" from="LeftGUI/EqualizerColor" to="." method="set_equalizer_color"]
 [connection signal="color_changed" from="LeftGUI/GradientColor" to="." method="set_gradient_color"]

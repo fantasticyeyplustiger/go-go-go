@@ -72,16 +72,16 @@ func _ready():
 
 func _unhandled_input(_event: InputEvent) -> void:
 	
-	if Input.is_action_pressed("copy"):
+	if Input.is_action_just_pressed("copy"):
 		copy_attacks()
 	
-	elif Input.is_action_pressed("paste"):
+	elif Input.is_action_just_pressed("paste"):
 		paste_attacks()
 	
-	elif Input.is_action_pressed("save"):
+	elif Input.is_action_just_pressed("save"):
 		save()
 	
-	elif Input.is_action_pressed("duplicate"):
+	elif Input.is_action_just_pressed("duplicate"):
 		duplicate_attacks()
 
 
@@ -355,6 +355,7 @@ func duplicate_attacks() -> void:
 	copy_attacks()
 	
 	change_chart(current_beat + 1)
+	$ItemList.select(current_beat, true)
 	
 	paste_attacks()
 
@@ -378,6 +379,7 @@ func load_save_file(path: String) -> void:
 	has_saved = true
 	
 	data = LevelData.new()
+	print(chartList.item_count)
 	
 	for i in chartList.item_count:
 		chartList.set_item_icon(i, $Empty.texture)
@@ -386,6 +388,7 @@ func load_save_file(path: String) -> void:
 	Globals.data_path = path
 	
 	bpm = data.bpm
+	chartList.select(0, true)
 	$MarginContainer/Buttons/SpinBox.value = bpm
 	
 	if not data.song_path == "":
@@ -397,15 +400,18 @@ func load_save_file(path: String) -> void:
 		chartList.set_item_icon(event.timing, $Boulder.texture)
 	
 	if not data.last_beat == -1:
-		chartList.set_item_icon(data.last_beat, $End.texture)
+		chartList.set_item_icon(data.last_beat - 1, $End.texture)
 	
 	change_bg_chart()
+	change_chart(0)
 
 
 func save_folder_selected(path: String) -> void:
 	
 	if data.last_beat == -1:
 		data.last_beat = total_beats
+	if data.song_path == "":
+		data.song_path = "res://Music/SkyHigh.ogg"
 	
 	data.save(path)
 	has_saved = true
@@ -499,3 +505,32 @@ func set_random_level() -> void:
 func new_bpm_changed(new_text: String) -> void:
 	if new_text.is_valid_int():
 		data.set_bpm(current_beat, int(new_text))
+
+
+func reset_everything() -> void:
+	
+	save()
+	
+	var directory = DirAccess.open("user://")
+	directory.make_dir("ResetAutoSaves") # in case it doesn't exist for whatever reason
+	
+	var save_file_path = "user://ResetAutoSaves/"
+	var reset_saves = DirAccess.open("user://ResetAutoSaves")
+	
+	if reset_saves.get_files().is_empty():
+		save_file_path += "1"
+	else:
+		var iterator : int = 2
+		
+		# Basically just loops until it finds a valid name it can use without overwriting anything
+		while true:
+			if reset_saves.get_files().has(str(iterator)):
+				iterator += 1
+			else:
+				save_file_path += str(iterator)
+				break
+	
+	save_folder_selected(save_file_path)
+	
+	Globals.data_path = ""
+	get_tree().reload_current_scene()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://nccqf6jptax3"]
+[gd_scene load_steps=3 format=3 uid="uid://nccqf6jptax3"]
 
 [ext_resource type="Script" uid="uid://c1q77vum11ubb" path="res://PauseMenu.gd" id="1_exy6n"]
+[ext_resource type="PackedScene" uid="uid://d23ech25rmlc" path="res://GUI/Settings.tscn" id="2_41xcd"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -68,7 +69,23 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "MAIN MENU"
 
+[node name="Settings" parent="." instance=ExtResource("2_41xcd")]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 64.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.9, 0.9)
+back_button_exists = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Continue" to="." method="resume"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Restart" to="." method="restart"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Editor" to="." method="editor"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="open_settings"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Menu" to="." method="main_menu"]

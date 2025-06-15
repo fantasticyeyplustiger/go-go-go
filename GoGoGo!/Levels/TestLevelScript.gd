@@ -92,6 +92,11 @@ func _ready() -> void:
 	#endregion
 	
 	init_play_timer()
+	
+	if not Globals.setting_player_sfx:
+		$PlayerSFX.volume_linear = 0
+	if not Globals.boulder_sfx:
+		$SFX.volume_linear = 0
 
 func player_sfx():
 	$PlayerSFX.pitch_scale = randf_range(1.5, 3)
@@ -370,6 +375,8 @@ func init_local_positions(constant_is_x : bool, constant : int) -> void:
 '''
 func start_level() -> void:
 	$PlayTimer.start()
+	$AttemptCount.text = "Attempt " + str(Globals.attempt_count)
+	Globals.attempt_count += 1
 
 '''
 - Respawns the player when they press the letter "R."
@@ -377,6 +384,8 @@ func start_level() -> void:
 func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):
 		get_tree().reload_current_scene()
+	if Input.is_action_pressed("pause"):
+		pause()
 
 '''
 Pauses the game and opens the pause menu.
@@ -384,6 +393,8 @@ Pauses the game and opens the pause menu.
 func pause() -> void:
 	Engine.time_scale = 0.0
 	$Equalizer/Music.stream_paused = true
+	$PlayerSFX.stream_paused = true
+	$SFX.stream_paused = true
 	$PauseMenuCanvas/PauseMenu.visible = true
 
 '''
@@ -391,3 +402,5 @@ Continues the game's audio.
 '''
 func continue_audio() -> void:
 	$Equalizer/Music.stream_paused = false
+	$PlayerSFX.stream_paused = false
+	$SFX.stream_paused = false

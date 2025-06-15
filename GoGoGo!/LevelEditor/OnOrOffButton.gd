@@ -1,5 +1,7 @@
 extends Button
 
+# this entire script sucks but theres nothing i can do about it now without breaking the whole game :sob:
+
 enum setting {NONE = 0, BOULDER = 1, PELLET = 2, STEEL_BALL = 3, IRON_PELLET = 4, LASER = 5}
 
 var current_setting = setting.NONE
@@ -14,7 +16,7 @@ func _on_pressed() -> void:
 	attack = true
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-		$AnimatedSprite2D.frame = 0
+		$Sprite.frame = 0
 		
 		current_setting = setting.NONE
 		type = Globals.obstacle_types.BOULDER

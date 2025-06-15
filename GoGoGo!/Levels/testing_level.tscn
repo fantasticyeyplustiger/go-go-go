@@ -194,6 +194,17 @@ offset_bottom = -854.0
 theme_override_font_sizes/font_size = 150
 text = "Beat: "
 
+[node name="AttemptCount" type="Label" parent="."]
+offset_left = -1280.0
+offset_top = -1640.0
+offset_right = -804.0
+offset_bottom = -1435.0
+theme_override_colors/font_outline_color = Color(0.393086, 0.393086, 0.393085, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 50
+text = "Attempt "
+
 [node name="Equalizer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://yympjaj4qw3"]
+[gd_scene load_steps=10 format=3 uid="uid://yympjaj4qw3"]
 
 [ext_resource type="Script" uid="uid://tn7j80q5pvyo" path="res://GUI/MainMenu.gd" id="1_6btb2"]
 [ext_resource type="PackedScene" uid="uid://bklv3nqbxi6ch" path="res://GUI/LevelButton.tscn" id="2_pxvd2"]
+[ext_resource type="PackedScene" uid="uid://d23ech25rmlc" path="res://GUI/Settings.tscn" id="2_xskdj"]
 
 [sub_resource type="Animation" id="Animation_fs0id"]
 length = 0.001
@@ -127,35 +128,6 @@ offset_right = 1870.0
 offset_bottom = 1030.0
 color = Color(0.165656, 0.165656, 0.165656, 1)
 
-[node name="BG3" type="ColorRect" parent="."]
-layout_mode = 0
-offset_top = 1080.0
-offset_right = 1920.0
-offset_bottom = 2160.0
-color = Color(0.118581, 0.118581, 0.118581, 1)
-
-[node name="InnerBG" type="ColorRect" parent="BG3"]
-layout_mode = 2
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 1870.0
-offset_bottom = 1030.0
-color = Color(0.165656, 0.165656, 0.165656, 1)
-
-[node name="BG4" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = -1920.0
-offset_bottom = 1080.0
-color = Color(0.118581, 0.118581, 0.118581, 1)
-
-[node name="InnerBG" type="ColorRect" parent="BG4"]
-layout_mode = 2
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 1870.0
-offset_bottom = 1030.0
-color = Color(0.165656, 0.165656, 0.165656, 1)
-
 [node name="MainMenu" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 1920.0
@@ -174,7 +146,7 @@ theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 250
+theme_override_font_sizes/font_size = 225
 text = "Go! Go! Go!"
 
 [node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer"]
@@ -187,7 +159,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "EDITOR"
 
+[node name="SettingsButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "SETTINGS
+"
+
 [node name="LoadLevel" type="Button" parent="MainMenu/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "LOAD LEVEL FROM FILE"
@@ -197,35 +176,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 75
 text = "QUIT"
 
-[node name="SettingsButton" type="Button" parent="MainMenu/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 75
-text = "SETTINGS
-"
-
-[node name="Settings" type="MarginContainer" parent="."]
-layout_mode = 0
+[node name="Settings" parent="." instance=ExtResource("2_xskdj")]
+layout_mode = 1
 offset_top = 1080.0
-offset_right = 1920.0
-offset_bottom = 2160.0
-mouse_filter = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="Settings/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 100
-text = "Settings"
-horizontal_alignment = 1
+offset_bottom = 1080.0
 
 [node name="MainMenuButton" type="Button" parent="."]
 layout_mode = 2
@@ -254,7 +208,7 @@ mouse_filter = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_bottom = 90
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Levels"]
 layout_mode = 2
@@ -317,8 +271,8 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 50
 text = "Controls:
-[WASD] or [Arrow Keys] to move
-[Shift] to Dash while moving
+[WASD] or [Arrow Keys] to move, [R] to restart, [ESC] to pause
+[Shift] to Dash while moving (move two spaces at once)
 You have invincibility frames while dashing and moving
 [ Survive to win! ]"
 
@@ -329,8 +283,8 @@ libraries = {
 
 [connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="open_levels"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/EditorButton" to="." method="enter_level_editor"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/SettingsButton" to="." method="open_settings"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/LoadLevel" to="." method="load_level"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/QuitButton" to="." method="quit"]
-[connection signal="pressed" from="MainMenu/VBoxContainer/SettingsButton" to="." method="open_settings"]
 [connection signal="pressed" from="MainMenuButton" to="." method="move_to_main_menu"]
 [connection signal="pressed" from="MainMenuButton2" to="." method="move_up_to_main_menu"]

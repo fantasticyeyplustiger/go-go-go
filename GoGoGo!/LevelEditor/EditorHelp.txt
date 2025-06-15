@@ -6,6 +6,8 @@ Additionally, making the level faster or slower entirely depends on the BPM. As 
 
 The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
 
+[b]CTRL + Z DOES NOT EXIST. THERE IS NO UNDO AND REDO IN THIS EDITOR.[/b] It was too hard to code...
+
 [b]Hotkeys:[/b]
 
 - [b]CTRL + S[/b] : Saves the level.

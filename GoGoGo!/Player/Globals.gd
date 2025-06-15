@@ -27,44 +27,46 @@ signal bg_pulse
 signal change_bpm
 signal get_new_bpm
 signal stopped_pausing
-signal update_no_boulder_sfx
-signal update_no_player_sfx
+signal update_boulder_sfx
+signal update_player_sfx
 #endregion
 
-var master_volume_percent : int = 100
-var music_volume_percent : int = 50
-var sfx_volume_percent : int = 50
-var no_boulder_sfx : bool = false
-var no_player_sfx : bool = false
+var master_volume_percent : float = 1.0
+var music_volume_percent : float = 0.5
+var sfx_volume_percent : float = 0.5
+var boulder_sfx : bool = true
+var setting_player_sfx : bool = true
+
+var attempt_count : int = 1
 
 # for the record this is coded terribly and i know it is im just too lazy to make it better
 func _ready() -> void:
-	connect("update_no_boulder_sfx", update_no_boulder_sfx_variable)
-	connect("update_no_player_sfx", update_no_player_sfx_variable)
+	connect("update_boulder_sfx", update_boulder_sfx_variable)
+	connect("update_player_sfx", update_player_sfx_variable)
 
-func update_no_boulder_sfx_variable(new_value : bool) -> void:
-	no_boulder_sfx = new_value
+func update_boulder_sfx_variable(new_value : bool) -> void:
+	boulder_sfx = new_value
 
-func update_no_player_sfx_variable(new_value : bool) -> void:
-	no_player_sfx = new_value
+func update_player_sfx_variable(new_value : bool) -> void:
+	setting_player_sfx = new_value
 
 func load_settings() -> void:
 	var save_file = FileAccess.open("res://SettingsData.txt", FileAccess.READ)
-	var data = JSON.parse_string(save_file.get_line)
+	var data = JSON.parse_string(save_file.get_line())
 	
 	master_volume_percent = data.master_volume_percent
 	music_volume_percent = data.music_volume_percent
 	sfx_volume_percent = data.sfx_volume_percent
-	no_boulder_sfx = data.no_boulder_sfx
-	no_player_sfx = data.no_player_sfx
+	boulder_sfx = data.boulder_sfx
+	setting_player_sfx = data.setting_player_sfx
 
 func save_settings() -> void:
 	var json = {
 		"master_volume_percent" : master_volume_percent,
 		"music_volume_percent" : music_volume_percent,
 		"sfx_volume_percent" : sfx_volume_percent,
-		"no_boulder_sfx" : no_boulder_sfx,
-		"no_player_sfx" : no_player_sfx
+		"boulder_sfx" : boulder_sfx,
+		"setting_player_sfx" : setting_player_sfx
 	}
 	
 	var save_file = FileAccess.open("res://SettingsData.txt", FileAccess.WRITE)
