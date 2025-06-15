@@ -3,6 +3,10 @@ extends Control
 var editor_path : String = "res://LevelEditor/LevelEditor.tscn"
 
 
+func _ready() -> void:
+	$AnimationPlayer.play("RESET")
+
+
 func enter_level_editor() -> void:
 	get_tree().change_scene_to_file(editor_path)
 

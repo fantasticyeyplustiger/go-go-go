@@ -80,11 +80,12 @@ _data = {
 }
 
 [sub_resource type="Curve" id="Curve_6j6u0"]
-_data = [Vector2(0.0337079, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.267045, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.04495, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_yrs4o"]
-colors = PackedColorArray(1, 1, 0.827451, 0.901961, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.553333, 1)
+colors = PackedColorArray(1, 0.396078, 0.34902, 0.901961, 1, 1, 1, 0)
 
 [node name="LaserArrow" type="Sprite2D"]
 modulate = Color(1, 1, 1, 0)
@@ -105,7 +106,7 @@ libraries = {
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 scale = Vector2(1.2, 1.2)
-amount = 20
+amount = 24
 randomness = 1.0
 emission_shape = 2
 emission_sphere_radius = 128.0
@@ -113,7 +114,7 @@ gravity = Vector2(0, 0)
 orbit_velocity_min = 1.0
 orbit_velocity_max = 2.0
 angle_max = 90.0
-scale_amount_min = 5.0
+scale_amount_min = 10.0
 scale_amount_max = 25.0
 scale_amount_curve = SubResource("Curve_6j6u0")
 color = Color(1, 1, 0.827451, 1)

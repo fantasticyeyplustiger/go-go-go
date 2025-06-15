@@ -3,8 +3,7 @@ extends Button
 @export var off_text : String = "off"
 @export var on_text : String = "on"
 @export var signal_to_connect : String = "get_new_bpm"
-
-var is_on : bool = false
+@export var is_on : bool = false
 
 func _ready() -> void:
 	change_spaces_to_next_lines(off_text, true)

@@ -1,0 +1,132 @@
+[gd_scene load_steps=3 format=3 uid="uid://d23ech25rmlc"]
+
+[ext_resource type="Script" uid="uid://t8pqbkov8j2f" path="res://GUI/Settings.gd" id="1_1gk1d"]
+[ext_resource type="Script" uid="uid://ceb2byw15fgyx" path="res://BooleanButton.gd" id="1_lqlgg"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1gk1d")
+
+[node name="BG" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.118581, 0.118581, 0.118581, 1)
+
+[node name="InnerBG" type="ColorRect" parent="BG"]
+layout_mode = 2
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 1870.0
+offset_bottom = 1030.0
+color = Color(0.165656, 0.165656, 0.165656, 1)
+
+[node name="Settings" type="MarginContainer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="MasterVolume" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Master Volume: 100"
+
+[node name="MasterSlider" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="MusicVolume" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Music Volume: 50"
+
+[node name="MusicSlider" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+value = 50.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="SFXVolume" type="Label" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "SFX Volume: 50"
+
+[node name="SFXSlider" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
+value = 50.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="ObstacleSFX" type="Label" parent="Settings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "SFX for obstacle spawns :"
+
+[node name="BooleanButton" type="Button" parent="Settings/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "YES"
+script = ExtResource("1_lqlgg")
+off_text = "NO"
+on_text = "YES"
+signal_to_connect = "update_no_boulder_sfx"
+is_on = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="PlayerSFX" type="Label" parent="Settings/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "SFX for player movement :"
+
+[node name="BooleanButton" type="Button" parent="Settings/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "YES"
+script = ExtResource("1_lqlgg")
+off_text = "NO"
+on_text = "YES"
+signal_to_connect = "update_no_player_sfx"
+is_on = true
+
+[node name="ApplyChanges" type="Button" parent="Settings/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 75
+text = "APPLY CHANGES"
+
+[connection signal="value_changed" from="Settings/VBoxContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="Settings/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Settings/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer/BooleanButton" to="Settings/VBoxContainer/HBoxContainer/BooleanButton" method="_on_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/HBoxContainer2/BooleanButton" to="Settings/VBoxContainer/HBoxContainer2/BooleanButton" method="_on_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/ApplyChanges" to="." method="apply_changes"]

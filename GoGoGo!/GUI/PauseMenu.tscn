@@ -11,5 +11,64 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_exy6n")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = 500.0
+offset_top = 100.0
+offset_right = 1420.0
+offset_bottom = 980.0
+color = Color(0.151276, 0.151276, 0.151276, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/margin_left = 525
+theme_override_constants/margin_top = 125
+theme_override_constants/margin_right = 525
+theme_override_constants/margin_bottom = 125
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "CONTINUE"
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "RESTART"
+
+[node name="Editor" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "EDITOR"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "SETTINGS"
+
+[node name="Menu" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "MAIN MENU"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Continue" to="." method="resume"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Restart" to="." method="restart"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Editor" to="." method="editor"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Menu" to="." method="main_menu"]

@@ -59,6 +59,7 @@ Initializes important data and loads the level.
 func _ready() -> void:
 	
 	Globals.player_sfx.connect(player_sfx)
+	Globals.stopped_pausing.connect(continue_audio)
 	
 	if Globals.data_path.is_empty():
 		data._load("res://SavedLevels/filibuster")
@@ -67,8 +68,6 @@ func _ready() -> void:
 		
 		if not data.song_path.is_empty():
 			music.stream = load(data.song_path)
-		#else:
-			#music.stream = load("res://Music/Filibuster.mp3")
 		
 		bpm = data.bpm
 	
@@ -77,7 +76,7 @@ func _ready() -> void:
 		random_level.create_random_events()
 		use_random = true
 	
-	arrow_beats = -5
+	arrow_beats = -5 # So they start earlier than the actual obstacles.
 	song_length = music.stream.get_length()
 	
 	#region Initializes spawn_positions and local_positions.
@@ -107,7 +106,8 @@ func play() -> void:
 	
 	if current_beat > data.last_beat:
 		$PlayTimer.stop()
-		$Label.visible = true
+		$EndLabel.visible = true
+		$EndColorRect.visible = true
 		# Show win screen.
 	
 	show_arrows()
@@ -180,6 +180,9 @@ func play() -> void:
 	
 	current_beat += 1
 
+'''
+Handles any changes in the background from the level's data.
+'''
 func bg_events():
 	if data.check_for_timing_at(current_beat, data.equalizer_heights):
 		var new_height = data.get_element_at(current_beat, data.equalizer_heights)
@@ -375,9 +378,16 @@ func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):
 		get_tree().reload_current_scene()
 
+'''
+Pauses the game and opens the pause menu.
+'''
+func pause() -> void:
+	Engine.time_scale = 0.0
+	$Equalizer/Music.stream_paused = true
+	$PauseMenuCanvas/PauseMenu.visible = true
 
-func go_editor() -> void:
-	get_tree().change_scene_to_file(level_editor)
-
-func go_main_menu() -> void:
-	get_tree().change_scene_to_file(main_menu)
+'''
+Continues the game's audio.
+'''
+func continue_audio() -> void:
+	$Equalizer/Music.stream_paused = false

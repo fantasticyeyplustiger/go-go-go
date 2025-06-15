@@ -2,6 +2,10 @@
 
 Before anything else, here is an important note. If you want to share a level to someone by giving them the level file, [b]you have to give them the song for the level too.[/b] I couldn't figure out a way to put the song data in the level data automatically, unfortunately.
 
+Additionally, making the level faster or slower entirely depends on the BPM. As long as you have the song's BPM, you can just halve or double it accordingly.
+
+The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
+
 [b]Hotkeys:[/b]
 
 - [b]CTRL + S[/b] : Saves the level.
@@ -44,6 +48,14 @@ Before anything else, here is an important note. If you want to share a level to
 
 - [b]Blank Squares[/b] : If you click on these, an obstacle will appear on that spot at that beat in the level. The obstacle's sprite will be shown for reference.
 
+- - [b]Boulder[/b] : Deals 5 damage. Rolls down the row or column slowly.
+- - [b]Rock Pellet[/b] : Deals only 1 damage. Speeds down the row or column at a fast speed.
+- - [b]Steel Ball[/b] : Deals 5 damage. Rolls down the row or column twice as fast as a Boulder does.
+- - [b]Iron Pellet[/b] : Deals only 1 damage. Speeds down the row or column twice as fast as a Steel Ball does.
+- - [b]Laser[/b] : Deals 10 damage. Will attack an entire row or column instantly.
+
 - [b]Equalizer[/b] : On that beat, the equalizer will change to match that "height." It will continue being that "height" until it is changed on another beat.
 
 - [b]Gradient[/b] : On that beat, the gradient near the equalizers will change to match the new brightness. Likewise, it will continue being that bright until it is changed on another beat.
+
+- [b]Gradient Pulse[/b] : On that beat, the gradient near the equalizers will pulse.

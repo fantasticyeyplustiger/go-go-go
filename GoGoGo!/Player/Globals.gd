@@ -13,31 +13,59 @@ const obstacle_speed = {obstacle_types.BOULDER : 750, obstacle_types.ROCK_PELLET
 var data_path : String
 var current_beat : int
 
-# Globals.emit_signal(signal name)
-# Globals.(signal name).connect()
+# Globals.emit_signal(signal name) FOR EMITTING SIGNAL
+# Globals.(signal name).connect() FOR CONNECTING SIGNAL TO A FUNCTION
 
 #region signals
-@warning_ignore("unused_signal")
+@warning_ignore_start("unused_signal")
 signal player_sfx
-
-@warning_ignore("unused_signal")
 signal instruct
-
-@warning_ignore("unused_signal")
 signal equalizer_height
-
-@warning_ignore("unused_signal")
 signal gradient_brightness
-
-@warning_ignore("unused_signal")
 signal gradient_pulse
-
-@warning_ignore("unused_signal")
 signal bg_pulse
-
-@warning_ignore("unused_signal")
 signal change_bpm
-
-@warning_ignore("unused_signal")
 signal get_new_bpm
+signal stopped_pausing
+signal update_no_boulder_sfx
+signal update_no_player_sfx
 #endregion
+
+var master_volume_percent : int = 100
+var music_volume_percent : int = 50
+var sfx_volume_percent : int = 50
+var no_boulder_sfx : bool = false
+var no_player_sfx : bool = false
+
+# for the record this is coded terribly and i know it is im just too lazy to make it better
+func _ready() -> void:
+	connect("update_no_boulder_sfx", update_no_boulder_sfx_variable)
+	connect("update_no_player_sfx", update_no_player_sfx_variable)
+
+func update_no_boulder_sfx_variable(new_value : bool) -> void:
+	no_boulder_sfx = new_value
+
+func update_no_player_sfx_variable(new_value : bool) -> void:
+	no_player_sfx = new_value
+
+func load_settings() -> void:
+	var save_file = FileAccess.open("res://SettingsData.txt", FileAccess.READ)
+	var data = JSON.parse_string(save_file.get_line)
+	
+	master_volume_percent = data.master_volume_percent
+	music_volume_percent = data.music_volume_percent
+	sfx_volume_percent = data.sfx_volume_percent
+	no_boulder_sfx = data.no_boulder_sfx
+	no_player_sfx = data.no_player_sfx
+
+func save_settings() -> void:
+	var json = {
+		"master_volume_percent" : master_volume_percent,
+		"music_volume_percent" : music_volume_percent,
+		"sfx_volume_percent" : sfx_volume_percent,
+		"no_boulder_sfx" : no_boulder_sfx,
+		"no_player_sfx" : no_player_sfx
+	}
+	
+	var save_file = FileAccess.open("res://SettingsData.txt", FileAccess.WRITE)
+	save_file.store_string( JSON.stringify(json) )
