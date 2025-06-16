@@ -36,13 +36,18 @@ var first_wave : bool = true
 var start : bool = false
 var obstacle_is_laser = false
 
+# Obstacles
 var boulder = preload("res://Obstacles/Boulder.tscn")
 var pellet = preload("res://Obstacles/RockPellet.tscn")
 var steel_ball = preload("res://Obstacles/SteelBall.tscn")
 var iron_pellet = preload("res://Obstacles/IronPellet.tscn")
 var laser = preload("res://Obstacles/LaserBeam.tscn")
 
-var arrow = preload("res://Arrows/boulder_arrow.tscn")
+# Arrows
+var boulder_arrow = preload("res://Arrows/boulder_arrow.tscn")
+var rock_pellet_arrow = preload("res://Arrows/rock_pellet_arrow.tscn")
+var steel_ball_arrow = preload("res://Arrows/steel_ball_arrow.tscn")
+var iron_pellet_arrow = preload("res://Arrows/iron_pellet_arrow.tscn")
 var laser_arrow = preload("res://Arrows/laser_arrow.tscn")
 
 var random_level = RandomLevel.new()
@@ -70,7 +75,10 @@ func _ready() -> void:
 		data._load(Globals.data_path)
 		
 		if not data.song_path.is_empty():
-			music.stream = load(data.song_path)
+			if data.song_path.begins_with("res://"):
+				music.stream = load(data.song_path)
+			else:
+				music.stream = AudioStreamOggVorbis.load_from_file(data.song_path)
 		
 		bpm = data.bpm
 	
@@ -258,11 +266,14 @@ func show_arrows() -> void:
 	for event in current_events:
 		
 		var new_arrow
-		# Change this to "get" a specific type of arrow eventually.
-		if not event.type == Globals.obstacle_types.LASER:
-			new_arrow = arrow.instantiate()
-		else:
-			new_arrow = laser_arrow.instantiate()
+		
+		match int(event.type):
+			Globals.obstacle_types.BOULDER, 0 : new_arrow = boulder_arrow.instantiate()
+			Globals.obstacle_types.ROCK_PELLET, 1 : new_arrow = rock_pellet_arrow.instantiate()
+			Globals.obstacle_types.STEEL_BALL, 2 : new_arrow = steel_ball_arrow.instantiate()
+			Globals.obstacle_types.IRON_PELLET, 3 : new_arrow = iron_pellet_arrow.instantiate()
+			Globals.obstacle_types.LASER, 4 : new_arrow = laser_arrow.instantiate()
+			_: new_arrow = boulder_arrow.instantiate()
 		
 		event_position = Vector2i(event.x, event.y)
 		spawn_position = get_spawn_position(event_position)

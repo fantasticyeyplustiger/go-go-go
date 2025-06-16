@@ -13,7 +13,7 @@ config_version=5
 config/name="Go Go Go!"
 run/main_scene="res://GUI/MainMenu.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://1ja5lf7t420c"
 
 [autoload]
 

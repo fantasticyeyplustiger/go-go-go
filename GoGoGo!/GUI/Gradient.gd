@@ -1,6 +1,7 @@
 extends Control
 
 func pulse():
+	$AnimationPlayer.stop()
 	$AnimationPlayer.play("pulse")
 
 '''

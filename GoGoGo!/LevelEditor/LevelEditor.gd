@@ -40,7 +40,10 @@ func _ready():
 		bpm = data.bpm
 		
 		if not data.song_path.is_empty():
-			song.stream = load(data.song_path)
+			if data.song_path.begins_with("res://"):
+				song.stream = load(data.song_path)
+			else:
+				song.stream = AudioStreamOggVorbis.load_from_file(data.song_path)
 	
 	@warning_ignore("narrowing_conversion")
 	song_length = song.stream.get_length() # MUST BE INITIALIZED BEFORE THE CHART IS
@@ -343,7 +346,7 @@ func set_button_at(pos : Vector2i, type):
 func for_every_beat() -> void:
 	
 	current_beat += 1
-	if current_beat > total_beats:
+	if current_beat >= total_beats:
 		$PlayTimer.stop()
 	
 	chartList.select(current_beat, true)
@@ -415,10 +418,7 @@ func load_save_file(path: String) -> void:
 		$LoadFilePopup.visible = false
 		return
 	
-	has_saved = true
-	
 	data = LevelData.new()
-	print(chartList.item_count)
 	
 	for i in chartList.item_count:
 		chartList.set_item_icon(i, $Empty.texture)
@@ -443,6 +443,8 @@ func load_save_file(path: String) -> void:
 	
 	change_bg_chart()
 	change_chart(0)
+	
+	has_saved = true
 
 
 func save_folder_selected(path: String) -> void:
@@ -452,11 +454,15 @@ func save_folder_selected(path: String) -> void:
 	if data.song_path == "":
 		data.song_path = "res://Music/SkyHigh.ogg"
 	
-	data.save(path + ".ggg")
+	if path.get_extension() == "ggg":
+		data.save(path)
+	else:
+		data.save(path + ".ggg")
 	has_saved = true
 
 
 func bpm_changed(value: float) -> void:
+	has_saved = false
 	bpm = value
 	initialize_chart()
 	# remove or add chart items
@@ -485,6 +491,7 @@ func song_import(path : String) -> void:
 		directory.copy(path, "user://Music/" + path.get_file())
 		
 		data.song_path = "user://Music/" + path.get_file()
+		has_saved = false # at the end so if extension is invalid it won't imply something changed
 
 
 func play_test() -> void:
@@ -506,6 +513,7 @@ func select_song(path: String) -> void:
 	if extension == "ogg":
 		$Song.stream = AudioStreamOggVorbis.load_from_file(path)
 		data.song_path = path
+		has_saved = false # at the end so if extension is invalid it won't imply something changed
 
 
 func load_song_select() -> void:
@@ -515,7 +523,7 @@ func load_song_select() -> void:
 
 
 func ending() -> void:
-	
+	has_saved = false
 	var temp_current_beat : int = current_beat
 	
 	data.last_beat = current_beat
@@ -537,6 +545,7 @@ func ending() -> void:
 
 func set_random_level() -> void:
 	data.random_attacks = not data.random_attacks
+	has_saved = false
 	
 	match data.random_attacks:
 		false:

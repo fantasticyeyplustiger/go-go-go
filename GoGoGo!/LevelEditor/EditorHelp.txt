@@ -56,7 +56,7 @@ Additionally, the sound quality in the editor is weirdly lower than it actually 
 
 - [b]Random Level[/b] : If it is turned on, the game will convert every "charted attack" into a "randomized attack." Randomized attacks do not save, so you won't lose any data if you decide to turn this on!
 
-- [b]Reset Everything[/b] : Makes an auto save in the "ResetAutoSaves" folder and then resets the editor. If you accidentally reset, you can just load that autosave. (It'll be the latest one.)
+- [b]Reset Everything[/b] : Makes an auto save in the "ResetAutoSaves" folder and then resets the editor: song, chart, bpm, everything. If you accidentally reset, you can just load that autosave. (It'll be the latest one.)
 
 [b]CHART[/b]
 
@@ -78,4 +78,12 @@ Additionally, the sound quality in the editor is weirdly lower than it actually 
 
 [b]OTHER INFORMATION THAT YOU DON'T REALLY NEED BUT MIGHT WANNA KNOW[/b]
 
-- 
+- Gradient changes will gradually change to that new gradient brightness in a single beat.
+
+- Both gradient pulses and background pulses take two beats for their animations to finish. If you place them repeatedly beat after beat, however, it'll "restart" the animation each time before it finishes rather than "placing" a new object and playing another animation.
+
+- A randomized attack is formed by choosing an obstacle type for that attack, randomly choosing the amount of obstacles (1-4), and randomly choosing their positions accordingly. If you make an attack with only one object and turn on random attacks, it can still choose 4 obstacles, so you may want to consider lowering the amount of attacks for a "randomized" version of your level!
+
+- The chart limit is defined by (song length / beat length) * 2, where beat length is (bpm / 60).
+
+- [b]%AppData% / Godot / app_userdata / Go Go Go![/b] is the path for user data in Windows.
