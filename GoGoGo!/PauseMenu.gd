@@ -8,7 +8,7 @@ func restart() -> void:
 	get_tree().reload_current_scene()
 
 func resume() -> void:
-	going_somewhere_else()
+	Engine.time_scale = 1.0
 	self.visible = false
 	Globals.emit_signal("stopped_pausing")
 

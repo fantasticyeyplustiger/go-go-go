@@ -36,9 +36,6 @@ var first_wave : bool = true
 var start : bool = false
 var obstacle_is_laser = false
 
-var g_tween
-var g_tween2
-
 var boulder = preload("res://Obstacles/Boulder.tscn")
 var pellet = preload("res://Obstacles/RockPellet.tscn")
 var steel_ball = preload("res://Obstacles/SteelBall.tscn")
@@ -50,13 +47,19 @@ var laser_arrow = preload("res://Arrows/laser_arrow.tscn")
 
 var random_level = RandomLevel.new()
 var use_random : bool = false
+var paused : bool = false
+
+var wait_for_arrows : int = -4 # Not sure why it has to be -4 instead of -5, but it works
 #endregion
+
 
 '''
 Initializes important data and loads the level.
 - Called before everything else.
 '''
 func _ready() -> void:
+	
+	$AttemptCount.text = "Attempt " + str(Globals.attempt_count)
 	
 	Globals.player_sfx.connect(player_sfx)
 	Globals.stopped_pausing.connect(continue_audio)
@@ -76,7 +79,8 @@ func _ready() -> void:
 		random_level.create_random_events()
 		use_random = true
 	
-	arrow_beats = -5 # So they start earlier than the actual obstacles.
+	arrow_beats = Globals.beat_to_play_on - 5 # So they start earlier than the actual obstacles.
+	current_beat = Globals.beat_to_play_on
 	song_length = music.stream.get_length()
 	
 	#region Initializes spawn_positions and local_positions.
@@ -125,12 +129,12 @@ func play() -> void:
 	
 	show_arrows()
 	
-	if arrow_beats < 0:
-		arrow_beats += 1
+	if wait_for_arrows < 0:
+		wait_for_arrows += 1
 		return
 	
 	if first_wave:
-		music.play()
+		music.play(beat_length * current_beat)
 		first_wave = false
 	
 	if use_random:
@@ -207,8 +211,8 @@ func bg_events():
 		var new_brightness = $LeftGradient.modulate
 		new_brightness.a8 = brightness.value
 		
-		g_tween = get_tree().create_tween()
-		g_tween2 = get_tree().create_tween()
+		var g_tween = get_tree().create_tween()
+		var g_tween2 = get_tree().create_tween()
 		
 		g_tween.tween_property($LeftGradient, "modulate", new_brightness, beat_length)
 		g_tween2.tween_property($RightGradient, "modulate", new_brightness, beat_length)
@@ -225,7 +229,7 @@ func bg_events():
 
 
 '''
-Shows the locations of where the next obstacles will appear after three beats.
+Shows the locations of where the next obstacles will appear after x beats.
 - Called from play().
 - Calls get_spawn_position() and set_arrow(), an Arrow method.
 '''
@@ -389,7 +393,6 @@ func init_local_positions(constant_is_x : bool, constant : int) -> void:
 '''
 func start_level() -> void:
 	$PlayTimer.start()
-	$AttemptCount.text = "Attempt " + str(Globals.attempt_count)
 	Globals.attempt_count += 1
 
 '''
@@ -400,7 +403,10 @@ func _unhandled_input(_event):
 	if Input.is_action_pressed("respawn"):
 		get_tree().reload_current_scene()
 	if Input.is_action_pressed("pause"):
-		pause()
+		paused = not paused
+		
+		if paused: pause()
+		else: $PauseMenuCanvas/PauseMenu.resume()
 
 '''
 Pauses the game and opens the pause menu.

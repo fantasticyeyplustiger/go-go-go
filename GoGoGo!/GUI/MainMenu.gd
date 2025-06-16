@@ -6,6 +6,7 @@ var editor_path : String = "res://LevelEditor/LevelEditor.tscn"
 func _ready() -> void:
 	$AnimationPlayer.play("RESET")
 	Globals.data_path = ""
+	Globals.beat_to_play_on = 0
 
 
 func enter_level_editor() -> void:

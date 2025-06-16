@@ -65,9 +65,9 @@ func _ready():
 	load_buttons(0, tile_size, $RightColumnStart)
 	load_buttons(0, tile_size, $LeftColumnStart)
 	
-	
 	if not Globals.data_path.is_empty():
 		set_icons()
+		chartList.set_item_icon(data.last_beat, $End.texture)
 	
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -140,24 +140,27 @@ func set_attack(local_position : Vector2i, attack : bool, type : Globals.obstacl
 
 
 func set_equalizer_height(height : int):
+	has_saved = false
 	data.change_height(current_beat, height)
 	
 
-
 func set_equalizer_color(color : Color):
+	has_saved = false
 	data.change_equalizer_color(current_beat, color)
 	
 
-
 func set_gradient_brightness(brightness : int):
+	has_saved = false
 	data.change_brightness(current_beat, brightness)
 	
 
 func set_gradient_color(color : Color):
+	has_saved = false
 	data.change_gradient_color(current_beat, color)
 
 
 func set_gradient_pulse(is_on : bool):
+	has_saved = false
 	if is_on:
 		data.gradient_pulse_at(current_beat)
 	else:
@@ -165,6 +168,7 @@ func set_gradient_pulse(is_on : bool):
 
 
 func set_bg_pulse(is_on : bool):
+	has_saved = false
 	if is_on:
 		data.set_bg_pulse(current_beat)
 	else:
@@ -175,7 +179,9 @@ Puts a boulder as the icon of every part charted inside chartList.
 '''
 func set_icons():
 	for event in data.events:
-		chartList.set_item_icon(event.timing, $Boulder.texture)
+		# If statement placed in case user charts on beat 200 and lowers BPM so that chart is no longer available.
+		if not event.timing >= chartList.item_count:
+			chartList.set_item_icon(event.timing, $Boulder.texture)
 #endregion
 
 func initialize_chart() -> void:
@@ -190,7 +196,7 @@ func initialize_chart() -> void:
 	
 	var sprite : Sprite2D = $Empty
 	
-	for i in total_beats:
+	for i in total_beats * 2:
 		chartList.add_item(str(i), sprite.texture, true)
 
 
@@ -318,10 +324,11 @@ func change_bg_chart() -> void:
 		else:
 			$LeftGUI/BgPulseButton.switch_off()
 	
-	if not data.bpm_changes.is_empty():
-		var bpm_change = data.find_in_between_at(current_beat, data.bpm_changes, bpm, true)
-		$LeftGUI/NewBPM.visible = true
-		$LeftGUI/NewBPM.text = str(bpm_change)
+	## Too lazy to work on this atm so just leaving it commented for now
+	#if not data.bpm_changes.is_empty():
+		#var bpm_change = data.find_in_between_at(current_beat, data.bpm_changes, bpm, true)
+		#$LeftGUI/NewBPM.visible = true
+		#$LeftGUI/NewBPM.text = str(bpm_change)
 
 
 '''
@@ -454,6 +461,8 @@ func bpm_changed(value: float) -> void:
 	initialize_chart()
 	# remove or add chart items
 	
+	set_icons()
+	
 	chartList.select(0, true)
 	data.bpm = bpm
 
@@ -481,8 +490,9 @@ func song_import(path : String) -> void:
 func play_test() -> void:
 	if not has_saved:
 		$SaveFolderSelect.popup()
-		has_saved = true
+		return
 	
+	Globals.beat_to_play_on = current_beat
 	get_tree().change_scene_to_file(test_level)
 
 
@@ -496,10 +506,11 @@ func select_song(path: String) -> void:
 	if extension == "ogg":
 		$Song.stream = AudioStreamOggVorbis.load_from_file(path)
 		data.song_path = path
-		print(path)
 
 
 func load_song_select() -> void:
+	var directory = DirAccess.open("user://")
+	directory.make_dir("Music") # in case it doesn't already exist
 	$SongSelect.popup()
 
 

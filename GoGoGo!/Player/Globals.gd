@@ -38,6 +38,7 @@ var boulder_sfx : bool = true
 var setting_player_sfx : bool = true
 
 var attempt_count : int = 1
+var beat_to_play_on : int = 0
 
 # for the record this is coded terribly and i know it is im just too lazy to make it better
 func _ready() -> void:

@@ -2,9 +2,13 @@
 
 Before anything else, here is an important note. If you want to share a level to someone by giving them the level file, [b]you have to give them the song for the level too.[/b] I couldn't figure out a way to put the song data in the level data automatically, unfortunately.
 
-Additionally, making the level faster or slower entirely depends on the BPM. As long as you have the song's BPM, you can just halve or double it accordingly. Please don't make it go ridiculously high, though. It'll probably break after like 1000 or something...
+Making the level faster or slower entirely depends on the BPM. As long as you have the song's BPM, you can just halve or double it accordingly. Please don't make it go ridiculously high, though. It'll probably break after like 1000 or something...
 
 The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
+
+Please do not put in a song thats too long. When you import a song, it automatically copies it over to your user folder so that the level's song path will always be consistent no matter what PC it's in. If you import an hour long song, for example, it'll also copy it over... and it might break the editor.
+
+Additionally, the sound quality in the editor is weirdly lower than it actually is in-game. I have yet to figure out why, but it's still high enough quality for you to chart accurately. I would know.
 
 [b]CTRL + Z DOES NOT EXIST. THERE IS NO UNDO AND REDO IN THIS EDITOR.[/b] It was too hard to code...
 
@@ -32,9 +36,7 @@ The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
 
 - [b]Play[/b] : Goes through the chart in the editor and plays the song at the beat you're on. Plays on the current beat!
 
-- [b]Play Test[/b] : Makes you play the chart currently in the editor. If you haven't saved, it'll ask you to here. Plays on the current beat!
-
-- [b]BPM[/b] : Beats per minute. Determines how fast the chart will play in-game. If it isn't syncing properly, you might want to search up an online BPM finder and find your song's BPM there accordingly!
+- [b]BPM[/b] : Beats per minute. Determines how fast the chart will play in-game. If it isn't syncing properly, you might want to search up an online BPM finder and find your song's BPM there accordingly! Also, if you lower your song's BPM, you may notice some of your later attacks "missing" and "not available" because of the chart getting shorter. This is only a change in [i]visibility[/i]. The attacks do not delete themselves from the actual level data.
 
 - [b]Copy[/b] : Copies the attacks on the beat your on.
 
@@ -48,7 +50,13 @@ The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
 
 - [b]End[/b] : Ends the level at this beat. If you don't put an end, the end will automatically be put at the end of the song.
 
+- [b]Play Test[/b] : Makes you play the chart currently in the editor. If you haven't saved, it won't send you to the test level. Plays on the current beat!
+
+- [b]Select Song[/b] : Allows you to select a song from the ones you've already imported.
+
 - [b]Random Level[/b] : If it is turned on, the game will convert every "charted attack" into a "randomized attack." Randomized attacks do not save, so you won't lose any data if you decide to turn this on!
+
+- [b]Reset Everything[/b] : Makes an auto save in the "ResetAutoSaves" folder and then resets the editor. If you accidentally reset, you can just load that autosave. (It'll be the latest one.)
 
 [b]CHART[/b]
 
@@ -66,4 +74,8 @@ The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
 
 - [b]Gradient Pulse[/b] : On that beat, the gradient near the equalizers will pulse.
 
-- [b]Background Pulse[/b] : On that beat, two "bars" will pulse outwards of the equalizers.
+- [b]Background Pulse[/b] : On that beat, two glowing "bars" will pulse outwards of the equalizers.
+
+[b]OTHER INFORMATION THAT YOU DON'T REALLY NEED BUT MIGHT WANNA KNOW[/b]
+
+- 
