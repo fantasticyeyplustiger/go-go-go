@@ -65,3 +65,5 @@ The arrows / particles for obstacles will [i]always[/i] be 5 beats ahead.
 - [b]Gradient[/b] : On that beat, the gradient near the equalizers will change to match the new brightness. Likewise, it will continue being that bright until it is changed on another beat.
 
 - [b]Gradient Pulse[/b] : On that beat, the gradient near the equalizers will pulse.
+
+- [b]Background Pulse[/b] : On that beat, two "bars" will pulse outwards of the equalizers.

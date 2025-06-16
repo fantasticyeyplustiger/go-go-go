@@ -164,9 +164,9 @@ func set_gradient_pulse(is_on : bool):
 		data.remove_gradient_pulse_at(current_beat)
 
 
-func set_bg_pulse(is_on : bool, direction : Globals.directions):
+func set_bg_pulse(is_on : bool):
 	if is_on:
-		data.set_bg_pulse(current_beat, direction)
+		data.set_bg_pulse(current_beat)
 	else:
 		data.remove_bg_pulse(current_beat)
 
@@ -310,6 +310,13 @@ func change_bg_chart() -> void:
 			$LeftGUI/GradientPulse.switch_on()
 		else:
 			$LeftGUI/GradientPulse.switch_off()
+	
+	if not data.bg_pulses.is_empty():
+		var pulse_exists : bool = data.check_for_element_at(current_beat, data.bg_pulses)
+		if pulse_exists:
+			$LeftGUI/BgPulseButton.switch_on()
+		else:
+			$LeftGUI/BgPulseButton.switch_off()
 	
 	if not data.bpm_changes.is_empty():
 		var bpm_change = data.find_in_between_at(current_beat, data.bpm_changes, bpm, true)

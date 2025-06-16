@@ -1,8 +1,6 @@
 extends Control
 
-func pulse(speed : float):
-	$AnimationPlayer.speed_scale = 1 / speed
-	$AnimationPlayer.speed_scale /= 2
+func pulse():
 	$AnimationPlayer.play("pulse")
 
 '''

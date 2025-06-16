@@ -164,15 +164,15 @@ func remove_gradient_pulse_at(current_beat : int) -> void:
 
 
 #region bg pulse methods
-func set_bg_pulse(current_beat : int, direction : Globals.directions) -> void:
+func set_bg_pulse(current_beat : int) -> void:
 	remove_bg_pulse(current_beat)
-	bg_pulses.append(Vector2i(current_beat, direction))
+	bg_pulses.append(current_beat)
 	
 
 func remove_bg_pulse(current_beat : int) -> void:
 	var iterator : int = 0
 	for pulse in bg_pulses:
-		if pulse.timing == current_beat:
+		if pulse == current_beat:
 			bg_pulses.remove_at(iterator)
 		
 		iterator += 1
@@ -298,6 +298,8 @@ func _load(save_file : String):
 	gradient_brightnesses = data.gradient_brightnesses
 	
 	gradient_pulse_times = data.gradient_pulse_times
+	
+	bg_pulses = data.bg_pulses
 	
 	
 	file = null

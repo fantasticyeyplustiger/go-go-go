@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=25 format=4 uid="uid://bmdbva8kn4x2k"]
 
 [ext_resource type="Script" uid="uid://bxwpqskykerek" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
 [ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://chg0m6eftnsj0" path="res://SFX/Boulder Fall.mp3" id="8_wbrbc"]
 [ext_resource type="PackedScene" uid="uid://e5bfcpwl61fh" path="res://GUI/Gradient.tscn" id="10_n88tm"]
 [ext_resource type="PackedScene" uid="uid://nccqf6jptax3" path="res://GUI/PauseMenu.tscn" id="15_eh44g"]
+[ext_resource type="PackedScene" uid="uid://ckckja28wjpfv" path="res://GUI/Pulse.tscn" id="16_xie0y"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ha8rw"]
 resource_name = "Walls"
@@ -1055,6 +1056,20 @@ text = "ending
 (please go back to
 main menu lol)"
 horizontal_alignment = 1
+
+[node name="LeftPulse" parent="." instance=ExtResource("16_xie0y")]
+visible = false
+offset_left = -296.0
+offset_top = -2000.0
+offset_right = -296.0
+offset_bottom = -2000.0
+
+[node name="RightPulse" parent="." instance=ExtResource("16_xie0y")]
+visible = false
+offset_left = 1784.0
+offset_top = -2000.0
+offset_right = 1784.0
+offset_bottom = -2000.0
 
 [connection signal="timeout" from="PlayTimer" to="." method="play"]
 [connection signal="timeout" from="StartLevel" to="." method="start_level"]

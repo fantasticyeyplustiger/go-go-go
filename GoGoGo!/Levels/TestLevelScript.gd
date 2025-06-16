@@ -92,6 +92,12 @@ func _ready() -> void:
 	#endregion
 	
 	init_play_timer()
+	
+	# must be after play timer because beat_length is initialized there
+	$LeftPulse/AnimationPlayer.speed_scale = 1 / (beat_length * 2)
+	$RightPulse/AnimationPlayer.speed_scale = 1 / (beat_length * 2)
+	$LeftGradient/AnimationPlayer.speed_scale = 1 / (beat_length * 2)
+	$RightGradient/AnimationPlayer.speed_scale = 1 / (beat_length * 2)
 
 func player_sfx():
 	$PlayerSFX.pitch_scale = randf_range(1.5, 3)
@@ -112,6 +118,7 @@ func play() -> void:
 	
 	if current_beat > data.last_beat:
 		$PlayTimer.stop()
+		await get_tree().create_timer(3.0).timeout
 		$EndLabel.visible = true
 		$EndColorRect.visible = true
 		# Show win screen.
@@ -207,8 +214,14 @@ func bg_events():
 		g_tween2.tween_property($RightGradient, "modulate", new_brightness, beat_length)
 	
 	if data.check_for_element_at(current_beat, data.gradient_pulse_times):
-		$LeftGradient.pulse(beat_length)
-		$RightGradient.pulse(beat_length)
+		$LeftGradient.pulse()
+		$RightGradient.pulse()
+	
+	if data.check_for_element_at(current_beat, data.bg_pulses):
+		$LeftPulse.visible = true
+		$LeftPulse.pulse_left()
+		$RightPulse.visible = true
+		$RightPulse.pulse_right()
 
 
 '''

@@ -374,8 +374,17 @@ layout_mode = 2
 
 [node name="GradientPulse" parent="LeftGUI" instance=ExtResource("7_ac37h")]
 layout_mode = 2
-off_text = "GRADIENT PULSE ON"
-on_text = "gradient pulse off"
+off_text = "gradient pulse off"
+on_text = "GRADIENT PULSE ON"
+
+[node name="BgPulseButton" parent="LeftGUI" instance=ExtResource("7_ac37h")]
+layout_mode = 2
+text = "bg
+pulse
+off"
+off_text = "bg pulse off"
+on_text = "BG PULSE ON"
+signal_to_connect = "bg_pulse"
 
 [node name="Mirror" type="Button" parent="LeftGUI"]
 visible = false
