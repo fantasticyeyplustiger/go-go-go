@@ -99,7 +99,7 @@ _data = {
 }
 
 [node name="LaserBeam" type="Node2D"]
-z_index = 1
+z_index = 2
 script = ExtResource("1_ccfla")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

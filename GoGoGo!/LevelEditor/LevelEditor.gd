@@ -92,6 +92,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 	
 	elif Input.is_action_just_pressed("down"):
 		go_down_chart()
+	
+	elif Input.is_action_just_pressed("play"):
+		play()
 
 
 func go_up_chart() -> void:
@@ -414,7 +417,7 @@ func load_save_file(path: String) -> void:
 	
 	if not path.get_extension() == "ggg":
 		$LoadFilePopup.visible = true
-		await get_tree().create_timer(3.0).timeout
+		await get_tree().create_timer(2.5).timeout
 		$LoadFilePopup.visible = false
 		return
 	
@@ -431,6 +434,12 @@ func load_save_file(path: String) -> void:
 	$MarginContainer/Buttons/SpinBox.value = bpm
 	
 	if not data.song_path == "":
+		# Used because the base dir isn't actually saved as "user" but as the absolute path
+		# Mainly for when a person gives another person a level from their user files
+		# Also the reason why music can ONLY be in user://Music or res://Music
+		if not data.song_path.get_base_dir() == "user://Music" and not data.song_path.get_base_dir() == "res://Music":
+			data.song_path = "user://Music/" + data.song_path.get_file()
+		
 		select_song(data.song_path)
 	
 	reset_buttons_to_false()
@@ -586,3 +595,48 @@ func reset_everything() -> void:
 	
 	Globals.data_path = ""
 	get_tree().reload_current_scene()
+
+'''
+Attempts to import a level from user-chosen file.
+Copies level file over to user folder. Only works if file is a .ggg file.
+'''
+func import_level(path : String) -> void:
+	
+	if not path.get_extension() == "ggg":
+		$LoadFilePopup.visible = true
+		await get_tree().create_timer(2.5).timeout
+		$LoadFilePopup.visible = false
+		return
+	
+	var user_dir = DirAccess.open("user://")
+	
+	if not path.get_base_dir() == "user://":
+		
+		# If a level with the same name already exists in user data, loop until there isn't.
+		var new_path
+		var adding_string : int = 0
+		
+		if FileAccess.file_exists("user://" + path.get_file()):
+			while true:
+				if FileAccess.file_exists("user://" + str(adding_string) + path.get_file()):
+					adding_string += 1
+				else:
+					new_path = "user://" + str(adding_string) + path.get_file()
+					break
+		else:
+			new_path = path.get_file()
+		
+		var _new_file = FileAccess.open(new_path, FileAccess.WRITE)
+		
+		user_dir.copy(path, new_path)
+		
+		load_save_file(new_path)
+
+
+func load_level_import() -> void:
+	$LevelImport.popup()
+
+
+func play_test_at_beat_zero() -> void:
+	current_beat = 0
+	play_test()

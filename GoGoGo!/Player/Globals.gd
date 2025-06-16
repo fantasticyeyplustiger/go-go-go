@@ -17,7 +17,7 @@ var current_beat : int
 # Globals.(signal name).connect() FOR CONNECTING SIGNAL TO A FUNCTION
 
 #region signals
-@warning_ignore_start("unused_signal")
+@warning_ignore_start("unused_signal") # used throughout other scripts
 signal player_sfx
 signal instruct
 signal equalizer_height
@@ -26,7 +26,6 @@ signal gradient_pulse
 signal bg_pulse
 signal change_bpm
 signal get_new_bpm
-signal stopped_pausing
 signal update_boulder_sfx
 signal update_player_sfx
 #endregion

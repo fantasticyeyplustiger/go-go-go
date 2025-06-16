@@ -6,11 +6,13 @@ extends Node2D
 
 @onready var obstacle_holder : Node = $ObstacleHolder
 @onready var music = $Equalizer/Music
+@onready var pulse = preload("res://GUI/Pulse.tscn")
 
 const level_editor : String = "res://LevelEditor/LevelEditor.tscn"
 const main_menu : String = "res://GUI/MainMenu.tscn"
-
-var tile_size = 256
+const left_pulse_pos : Vector2 = Vector2(-296, -2000)
+const right_pulse_pos : Vector2 = Vector2(1784, -2000)
+const tile_size : int = 256
 
 var down_row_start : Vector2i
 var up_row_start : Vector2i
@@ -67,7 +69,7 @@ func _ready() -> void:
 	$AttemptCount.text = "Attempt " + str(Globals.attempt_count)
 	
 	Globals.player_sfx.connect(player_sfx)
-	Globals.stopped_pausing.connect(continue_audio)
+	get_window().focus_exited.connect(pause)
 	
 	if Globals.data_path.is_empty():
 		data._load("res://SavedLevels/filibuster")
@@ -105,9 +107,6 @@ func _ready() -> void:
 	
 	init_play_timer()
 	
-	# must be after play timer because beat_length is initialized there
-	$LeftPulse/AnimationPlayer.speed_scale = 1 / (beat_length * 2)
-	$RightPulse/AnimationPlayer.speed_scale = 1 / (beat_length * 2)
 	$LeftGradient/AnimationPlayer.speed_scale = 1 / (beat_length * 2)
 	$RightGradient/AnimationPlayer.speed_scale = 1 / (beat_length * 2)
 
@@ -230,11 +229,20 @@ func bg_events():
 		$RightGradient.pulse()
 	
 	if data.check_for_element_at(current_beat, data.bg_pulses):
-		$LeftPulse.visible = true
-		$LeftPulse.pulse_left()
-		$RightPulse.visible = true
-		$RightPulse.pulse_right()
+		add_bg_pulse(left_pulse_pos, true)
+		add_bg_pulse(right_pulse_pos, false)
 
+func add_bg_pulse(target_position : Vector2, is_left : bool) -> void:
+	var new_pulse = pulse.instantiate()
+	new_pulse.set_anim_speed( 1 / (beat_length * 2) )
+	
+	if is_left:
+		new_pulse.pulse_left()
+	else:
+		new_pulse.pulse_right()
+	
+	new_pulse.position = target_position
+	add_child(new_pulse)
 
 '''
 Shows the locations of where the next obstacles will appear after x beats.
@@ -423,16 +431,5 @@ func _unhandled_input(_event):
 Pauses the game and opens the pause menu.
 '''
 func pause() -> void:
-	Engine.time_scale = 0.0
-	music.stream_paused = true
-	$PlayerSFX.stream_paused = true
-	$SFX.stream_paused = true
+	get_tree().paused = true
 	$PauseMenuCanvas/PauseMenu.visible = true
-
-'''
-Continues the game's audio.
-'''
-func continue_audio() -> void:
-	music.stream_paused = false
-	$PlayerSFX.stream_paused = false
-	$SFX.stream_paused = false

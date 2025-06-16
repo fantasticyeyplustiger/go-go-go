@@ -3,6 +3,7 @@ extends Sprite2D
 @export var is_laser : bool
 
 func set_wait(wait_time : float) -> void:
+	visible = true
 	$Timer.wait_time = wait_time
 	$AnimationPlayer.speed_scale = 1 / wait_time
 	if is_laser:

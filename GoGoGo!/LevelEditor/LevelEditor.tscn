@@ -150,6 +150,18 @@ file_mode = 0
 access = 2
 use_native_dialog = true
 
+[node name="LevelImport" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 1
+size = Vector2i(638, 370)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+dialog_close_on_escape = false
+file_mode = 0
+access = 2
+use_native_dialog = true
+
 [node name="SongSelect" type="FileDialog" parent="."]
 auto_translate_mode = 1
 title = "Open a File"
@@ -191,6 +203,7 @@ theme_override_constants/separation = 20
 [node name="Button" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 64
 text = "MAIN
 MENU"
@@ -198,6 +211,7 @@ MENU"
 [node name="PlayButton" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 100
 text = "PLAY"
 
@@ -212,12 +226,14 @@ prefix = "BPM: "
 [node name="CopyButton" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 100
 text = "COPY"
 
 [node name="PasteButton" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 100
 disabled = true
 text = "PASTE"
@@ -225,6 +241,7 @@ text = "PASTE"
 [node name="DuplicateButton" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 65
 disabled = true
 text = "DUPLICATE"
@@ -232,6 +249,7 @@ text = "DUPLICATE"
 [node name="SaveButton" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 100
 disabled = true
 text = "SAVE"
@@ -239,21 +257,25 @@ text = "SAVE"
 [node name="LoadButton" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 100
 text = "LOAD"
+
+[node name="LevelImportButton" type="Button" parent="MarginContainer/Buttons"]
+custom_minimum_size = Vector2(400, 190)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 75
+text = "IMPORT
+LEVEL"
 
 [node name="SongImportButton" type="Button" parent="MarginContainer/Buttons"]
 custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 75
 text = "IMPORT
 SONG"
-
-[node name="EndButton" type="Button" parent="MarginContainer/Buttons"]
-custom_minimum_size = Vector2(400, 190)
-layout_mode = 2
-theme_override_font_sizes/font_size = 100
-text = "END"
 
 [node name="BottomGUI" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -301,6 +323,7 @@ custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+focus_mode = 0
 theme_override_font_sizes/font_size = 110
 text = "GUIDE
 "
@@ -310,6 +333,7 @@ custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+focus_mode = 0
 theme_override_font_sizes/font_size = 75
 text = "PLAY TEST"
 
@@ -318,6 +342,24 @@ custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 60
+text = "PLAY TEST
+AT BEAT 0"
+
+[node name="EndButton" type="Button" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(400, 190)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 100
+text = "END"
+
+[node name="SelectSongButton" type="Button" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(400, 190)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
 theme_override_font_sizes/font_size = 60
 text = "SELECT
 SONG"
@@ -327,6 +369,7 @@ custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+focus_mode = 0
 theme_override_font_sizes/font_size = 60
 text = "RANDOM
 LEVEL OFF"
@@ -336,6 +379,7 @@ custom_minimum_size = Vector2(400, 190)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+focus_mode = 0
 theme_override_font_sizes/font_size = 60
 text = "RESET
 EVERYTHING"
@@ -560,6 +604,7 @@ horizontal_alignment = 1
 [connection signal="file_selected" from="SaveFolderSelect" to="." method="save_folder_selected"]
 [connection signal="file_selected" from="LoadSaveSelect" to="." method="load_save_file"]
 [connection signal="file_selected" from="SongImport" to="." method="song_import"]
+[connection signal="file_selected" from="LevelImport" to="." method="import_level"]
 [connection signal="file_selected" from="SongSelect" to="." method="select_song"]
 [connection signal="timeout" from="PlayTimer" to="." method="for_every_beat"]
 [connection signal="pressed" from="MarginContainer/Buttons/Button" to="." method="quit"]
@@ -570,11 +615,13 @@ horizontal_alignment = 1
 [connection signal="pressed" from="MarginContainer/Buttons/DuplicateButton" to="." method="duplicate_attacks"]
 [connection signal="pressed" from="MarginContainer/Buttons/SaveButton" to="." method="save"]
 [connection signal="pressed" from="MarginContainer/Buttons/LoadButton" to="." method="load_data"]
+[connection signal="pressed" from="MarginContainer/Buttons/LevelImportButton" to="." method="load_level_import"]
 [connection signal="pressed" from="MarginContainer/Buttons/SongImportButton" to="." method="load_song_import"]
-[connection signal="pressed" from="MarginContainer/Buttons/EndButton" to="." method="ending"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/HelpButton" to="." method="open_help_menu"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/PlaytestButton" to="." method="play_test"]
-[connection signal="pressed" from="MarginContainer2/VBoxContainer/PlaytestButton2" to="." method="load_song_select"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/PlaytestButton2" to="." method="play_test_at_beat_zero"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/EndButton" to="." method="ending"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/SelectSongButton" to="." method="load_song_select"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/SetRandomButton" to="." method="set_random_level"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/ResetButton" to="." method="reset_everything"]
 [connection signal="item_selected" from="ItemList" to="." method="change_chart"]

@@ -1,6 +1,6 @@
 [i]This is the level editor guide![/i]
 
-Before anything else, here is an important note. If you want to share a level to someone by giving them the level file, [b]you have to give them the song for the level too.[/b] I couldn't figure out a way to put the song data in the level data automatically, unfortunately.
+Before anything else, here is an important note. If you want to share a level to someone by giving them the level file, [b]you have to give them the song for the level too,[/b] where they should then import the song into the editor using Song Import. You can also put it in manually, of course. I couldn't figure out a way to put the audio data in the level data automatically, unfortunately.
 
 Making the level faster or slower entirely depends on the BPM. As long as you have the song's BPM, you can just halve or double it accordingly. Please don't make it go ridiculously high, though. It'll probably break after like 1000 or something...
 
@@ -44,13 +44,17 @@ Additionally, the sound quality in the editor is weirdly lower than it actually 
 
 - [b]Save[/b] : Saves your chart as an actual level.
 
-- [b]Load[/b] : Lets you select a level to load into the editor!
+- [b]Load[/b] : Lets you select a level from the ones you've already saved / imported to load into the editor!
 
-- [b]Song Import[/b] : Lets you add a song into the Music folder by dragging and dropping a file. [b]USE OGG AUDIO FILES ONLY. MP3 FILES AND WAV FILES WILL NOT WORK.[/b]
+- [b]Import Level[/b] : Allows you to import levels from anywhere else on your computer.
 
-- [b]End[/b] : Ends the level at this beat. If you don't put an end, the end will automatically be put at the end of the song.
+- [b]Song Import[/b] : Lets you add a song into the Music folder by dragging and dropping a file. [b]USE OGG AUDIO FILES ONLY. MP3 FILES AND WAV FILES WILL NOT WORK.[/b] Additionally, please do not try to rewrite the song path manually in the level data to the absolute path of the audio file or anything else. I haven't tested it, but I'm pretty sure it would break the editor.
 
 - [b]Play Test[/b] : Makes you play the chart currently in the editor. If you haven't saved, it won't send you to the test level. Plays on the current beat!
+
+- [b]Play Test At Beat Zero : Makes you play the chart currently in the editor from the very start. Likewise, if you haven't saved, it won't send you to the test level.
+
+- [b]End[/b] : Ends the level at this beat. If you don't put an end, the end will automatically be put at the end of the song.
 
 - [b]Select Song[/b] : Allows you to select a song from the ones you've already imported.
 

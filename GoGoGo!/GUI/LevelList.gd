@@ -8,10 +8,10 @@ var path : String = "res://MainLevels/"
 func _init() -> void:
 	levels = [
 		path + "SkyHigh.ggg",
+		path + "RulerOfReality.ggg",
 		path + "MrOops.ggg",
-		path + "Filibuster.ggg",
 		path + "SkyHighRandom.ggg",
-		path + "MrOopsRandom.ggg",
-		path + "FilibusterRandom.ggg"
+		path + "RulerOfRealityRandom.ggg",
+		path + "MrOopsRandom.ggg"
 	]
 	
