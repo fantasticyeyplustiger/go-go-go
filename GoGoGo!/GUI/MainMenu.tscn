@@ -64,21 +64,6 @@ tracks/0/keys = {
 "values": [Vector2(-1920, 0), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_gsbnn"]
-resource_name = "move_up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.435275, 0.420448),
-"update": 0,
-"values": [Vector2(0, -1080), Vector2(0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_xskdj"]
 resource_name = "move_right_right"
 tracks/0/type = "value"
@@ -92,6 +77,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(1920, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gsbnn"]
+resource_name = "move_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.435275, 0.420448),
+"update": 0,
+"values": [Vector2(0, -1080), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_j2b6q"]
@@ -139,6 +139,7 @@ dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
 access = 1
+filters = PackedStringArray("*.ggg")
 use_native_dialog = true
 
 [node name="SongImport" type="FileDialog" parent="."]
@@ -151,6 +152,7 @@ dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.ogg")
 use_native_dialog = true
 
 [node name="LevelImport" type="FileDialog" parent="."]
@@ -163,6 +165,7 @@ dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.ggg")
 use_native_dialog = true
 
 [node name="BG1" type="ColorRect" parent="."]

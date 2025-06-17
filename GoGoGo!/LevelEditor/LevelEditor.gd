@@ -415,11 +415,12 @@ Sets the chart according to the data inside of the file.
 '''
 func load_save_file(path: String) -> void:
 	
-	if not path.get_extension() == "ggg":
-		$LoadFilePopup.visible = true
-		await get_tree().create_timer(2.5).timeout
-		$LoadFilePopup.visible = false
-		return
+	if not OS.get_name() == "Linux" or not OS.get_name() == "X11":
+		if not path.get_extension() == "ggg":
+			$LoadFilePopup.visible = true
+			await get_tree().create_timer(2.5).timeout
+			$LoadFilePopup.visible = false
+			return
 	
 	data = LevelData.new()
 	
@@ -602,18 +603,19 @@ Copies level file over to user folder. Only works if file is a .ggg file.
 '''
 func import_level(path : String) -> void:
 	
-	if not path.get_extension() == "ggg":
-		$LoadFilePopup.visible = true
-		await get_tree().create_timer(2.5).timeout
-		$LoadFilePopup.visible = false
-		return
+	if not OS.get_name() == "Linux" or not OS.get_name() == "X11":
+		if not path.get_extension() == "ggg":
+			$LoadFilePopup.visible = true
+			await get_tree().create_timer(2.5).timeout
+			$LoadFilePopup.visible = false
+			return
 	
 	var user_dir = DirAccess.open("user://")
 	
 	if not path.get_base_dir() == "user://":
 		
 		# If a level with the same name already exists in user data, loop until there isn't.
-		var new_path
+		var new_path : String
 		var adding_string : int = 0
 		
 		if FileAccess.file_exists("user://" + path.get_file()):
@@ -625,6 +627,9 @@ func import_level(path : String) -> void:
 					break
 		else:
 			new_path = path.get_file()
+		
+		if OS.get_name() == "Linux" or OS.get_name() == "X11":
+			new_path = new_path.get_basename()
 		
 		var _new_file = FileAccess.open(new_path, FileAccess.WRITE)
 		

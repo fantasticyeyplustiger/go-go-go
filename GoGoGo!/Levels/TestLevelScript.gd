@@ -72,7 +72,7 @@ func _ready() -> void:
 	get_window().focus_exited.connect(pause)
 	
 	if Globals.data_path.is_empty():
-		data._load("res://SavedLevels/filibuster")
+		data._load("res://MainLevels/Filibuster")
 	else:
 		data._load(Globals.data_path)
 		

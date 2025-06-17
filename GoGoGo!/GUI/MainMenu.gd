@@ -46,11 +46,12 @@ func quit() -> void:
 
 func load_level(path : String) -> void:
 	
-	if not path.get_extension() == "ggg":
-		$LoadFilePopup.visible = true
-		await get_tree().create_timer(2.5).timeout
-		$LoadFilePopup.visible = false
-		return
+	if not OS.get_name() == "Linux" or not OS.get_name() == "X11":
+		if not path.get_extension() == "ggg":
+			$LoadFilePopup.visible = true
+			await get_tree().create_timer(2.5).timeout
+			$LoadFilePopup.visible = false
+			return
 	
 	Globals.data_path = path
 	
@@ -70,16 +71,17 @@ func open_load_level() -> void:
 
 func import_level(path : String) -> void:
 	
-	if not path.get_extension() == "ggg":
-		popup("The level must be a .ggg file!")
-		return
+	if not OS.get_name() == "Linux" or not OS.get_name() == "X11":
+		if not path.get_extension() == "ggg":
+			popup("The level must be a .ggg file!")
+			return
 	
 	var user_dir = DirAccess.open("user://")
 	
 	if not path.get_base_dir() == "user://":
 		
 		# If a level with the same name already exists in user data, loop until there isn't.
-		var new_path
+		var new_path : String
 		var adding_string : int = 0
 		
 		if FileAccess.file_exists("user://" + path.get_file()):
@@ -91,6 +93,9 @@ func import_level(path : String) -> void:
 					break
 		else:
 			new_path = path.get_file()
+		
+		if OS.get_name() == "Linux" or OS.get_name() == "X11":
+			new_path = new_path.get_basename()
 		
 		var _new_file = FileAccess.open(new_path, FileAccess.WRITE)
 		

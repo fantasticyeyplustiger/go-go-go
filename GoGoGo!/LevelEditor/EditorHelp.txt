@@ -84,7 +84,7 @@ Additionally, the sound quality in the editor is weirdly lower than it actually 
 
 - Gradient changes will gradually change to that new gradient brightness in a single beat.
 
-- Both gradient pulses and background pulses take two beats for their animations to finish. If you place them repeatedly beat after beat, however, it'll "restart" the animation each time before it finishes rather than "placing" a new object and playing another animation.
+- Both gradient pulses and background pulses take two beats for their animations to finish. If you place a gradient pulse repeatedly beat after beat, however, it'll "restart" the animation each time before it finishes rather than "placing" a new object and playing another animation, which BG pulses do.
 
 - A randomized attack is formed by choosing an obstacle type for that attack, randomly choosing the amount of obstacles (1-4), and randomly choosing their positions accordingly. If you make an attack with only one object and turn on random attacks, it can still choose 4 obstacles, so you may want to consider lowering the amount of attacks for a "randomized" version of your level!
 

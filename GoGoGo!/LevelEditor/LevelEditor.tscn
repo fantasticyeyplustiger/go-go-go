@@ -124,6 +124,7 @@ size = Vector2i(638, 370)
 dialog_hide_on_ok = true
 dialog_close_on_escape = false
 access = 1
+filters = PackedStringArray("*.ggg")
 use_native_dialog = true
 
 [node name="LoadSaveSelect" type="FileDialog" parent="."]
@@ -136,6 +137,7 @@ dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
 access = 1
+filters = PackedStringArray("*.ggg")
 use_native_dialog = true
 
 [node name="SongImport" type="FileDialog" parent="."]
@@ -148,6 +150,7 @@ dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.ogg")
 use_native_dialog = true
 
 [node name="LevelImport" type="FileDialog" parent="."]
@@ -160,6 +163,7 @@ dialog_hide_on_ok = true
 dialog_close_on_escape = false
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.ggg")
 use_native_dialog = true
 
 [node name="SongSelect" type="FileDialog" parent="."]
@@ -173,6 +177,7 @@ dialog_close_on_escape = false
 file_mode = 0
 access = 1
 root_subfolder = "Music"
+filters = PackedStringArray("*.ogg")
 use_native_dialog = true
 
 [node name="Song" type="AudioStreamPlayer" parent="."]
