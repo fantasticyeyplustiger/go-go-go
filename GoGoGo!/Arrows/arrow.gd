@@ -4,13 +4,11 @@ extends Sprite2D
 
 func set_wait(wait_time : float) -> void:
 	visible = true
-	$Timer.wait_time = wait_time
 	$AnimationPlayer.speed_scale = 1 / wait_time
 	if is_laser:
 		$AnimationPlayer.play("turn_laser_visible")
 	else:
 		$AnimationPlayer.play("turn_visible")
-	$Timer.start()
 
 func set_arrow(new_direction : Globals.directions) -> void:
 	match new_direction:
@@ -22,6 +20,6 @@ func set_arrow(new_direction : Globals.directions) -> void:
 			set_rotation_degrees(270)
 
 
-func disappear() -> void:
+func disappear(_anim_name : StringName) -> void:
 	self.visible = false
 	self.queue_free()

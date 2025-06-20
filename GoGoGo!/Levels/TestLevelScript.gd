@@ -6,6 +6,7 @@ extends Node2D
 
 @onready var obstacle_holder : Node = $ObstacleHolder
 @onready var music = $Equalizer/Music
+@onready var end_screen = $Canvas/EndScreen
 @onready var pulse = preload("res://GUI/Pulse.tscn")
 
 const level_editor : String = "res://LevelEditor/LevelEditor.tscn"
@@ -36,7 +37,7 @@ var debug_vector : Vector2i = Vector2i(-1, -1)
 
 var first_wave : bool = true
 var start : bool = false
-var obstacle_is_laser = false
+var obstacle_is_laser : bool = false
 
 # Obstacles
 var boulder = preload("res://Obstacles/Boulder.tscn")
@@ -54,7 +55,6 @@ var laser_arrow = preload("res://Arrows/laser_arrow.tscn")
 
 var random_level = RandomLevel.new()
 var use_random : bool = false
-var paused : bool = false
 
 var wait_for_arrows : int = -4 # Not sure why it has to be -4 instead of -5, but it works
 #endregion
@@ -65,11 +65,11 @@ Initializes important data and loads the level.
 - Called before everything else.
 '''
 func _ready() -> void:
-	
+	Engine.time_scale = 1.0
 	$AttemptCount.text = "Attempt " + str(Globals.attempt_count)
 	
 	Globals.player_sfx.connect(player_sfx)
-	get_window().focus_exited.connect(pause)
+	Globals.player_death.connect(die)
 	
 	if Globals.data_path.is_empty():
 		data._load("res://MainLevels/Filibuster")
@@ -130,9 +130,7 @@ func play() -> void:
 	if current_beat > data.last_beat:
 		$PlayTimer.stop()
 		await get_tree().create_timer(3.0).timeout
-		$EndLabel.visible = true
-		$EndColorRect.visible = true
-		# Show win screen.
+		$Canvas/EndScreen.visible = true
 	
 	show_arrows()
 	
@@ -413,23 +411,20 @@ func init_local_positions(constant_is_x : bool, constant : int) -> void:
 func start_level() -> void:
 	$PlayTimer.start()
 	Globals.attempt_count += 1
+	end_screen.set_attempt_count(Globals.attempt_count)
 
 '''
 Respawns the player when they press the letter "R."
 Pauses game if player presses "ESC."
 '''
 func _unhandled_input(_event):
-	if Input.is_action_pressed("respawn"):
+	if Input.is_action_just_pressed("respawn"):
 		get_tree().reload_current_scene()
-	if Input.is_action_pressed("pause"):
-		paused = not paused
-		
-		if paused: pause()
-		else: $PauseMenuCanvas/PauseMenu.resume()
 
-'''
-Pauses the game and opens the pause menu.
-'''
-func pause() -> void:
+func die() -> void:
+	Globals.player_death.disconnect(die)
+	await get_tree().create_timer(2.0).timeout
+	Engine.time_scale = 0
+	$PlayTimer.stop()
 	get_tree().paused = true
-	$PauseMenuCanvas/PauseMenu.visible = true
+	$Canvas/DeathScreen.visible = true

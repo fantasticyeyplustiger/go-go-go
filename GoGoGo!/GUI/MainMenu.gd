@@ -6,8 +6,10 @@ var is_playing_loaded_level : bool = false
 
 func _ready() -> void:
 	$AnimationPlayer.play("RESET")
+	Engine.time_scale = 1.0
 	Globals.data_path = ""
 	Globals.beat_to_play_on = 0
+	Globals.attempt_count = 1
 
 
 func enter_level_editor() -> void:
@@ -92,7 +94,7 @@ func import_level(path : String) -> void:
 					new_path = "user://" + str(adding_string) + path.get_file()
 					break
 		else:
-			new_path = path.get_file()
+			new_path = "user://" + path.get_file()
 		
 		if OS.get_name() == "Linux" or OS.get_name() == "X11":
 			new_path = new_path.get_basename()

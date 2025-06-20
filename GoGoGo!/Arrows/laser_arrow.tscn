@@ -200,9 +200,6 @@ offset_right = 5.0
 offset_bottom = 128.0
 color = Color(1, 0, 0, 1)
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_43who")
@@ -224,4 +221,4 @@ scale_amount_curve = SubResource("Curve_6j6u0")
 color = Color(1, 1, 0.827451, 1)
 color_ramp = SubResource("Gradient_yrs4o")
 
-[connection signal="timeout" from="Timer" to="." method="disappear"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="disappear"]

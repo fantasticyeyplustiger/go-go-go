@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://mwrty0fjheqb"]
+
+[ext_resource type="Script" uid="uid://cojdfwi3ynjj" path="res://GUI/EndScreen.gd" id="1_8bhjp"]
+
+[node name="EndScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8bhjp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 500.0
+offset_top = 100.0
+offset_right = 1420.0
+offset_bottom = 912.0
+color = Color(0.151276, 0.151276, 0.151276, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_constants/margin_left = 525
+theme_override_constants/margin_top = 125
+theme_override_constants/margin_right = 525
+theme_override_constants/margin_bottom = 125
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 150
+text = "YOU WON!!!"
+horizontal_alignment = 1
+
+[node name="AttemptCount" type="Label" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Total Attempt Count for this run:"
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "RETRY"
+
+[node name="Editor" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "EDITOR"
+
+[node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "MAIN MENU"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Restart" to="." method="restart"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Editor" to="." method="editor"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainMenu" to="." method="main_menu"]

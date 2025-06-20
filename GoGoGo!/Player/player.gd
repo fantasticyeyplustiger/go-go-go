@@ -93,6 +93,7 @@ func get_damaged(damage : int):
 		is_dead = true
 		$temporarySprite.color = "#FF0000"
 		non_dashing_color = "#FF0000"
+		Globals.emit_signal("player_death")
 	else:
 		$temporarySprite.color = "#FFA500"
 		non_dashing_color = "#FFA500"

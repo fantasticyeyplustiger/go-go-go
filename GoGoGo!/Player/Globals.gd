@@ -19,6 +19,7 @@ var current_beat : int
 #region signals
 @warning_ignore_start("unused_signal") # used throughout other scripts
 signal player_sfx
+signal player_death
 signal instruct
 signal equalizer_height
 signal gradient_brightness
@@ -28,6 +29,7 @@ signal change_bpm
 signal get_new_bpm
 signal update_boulder_sfx
 signal update_player_sfx
+@warning_ignore_restore("unused_signal")
 #endregion
 
 var master_volume_percent : float = 1.0

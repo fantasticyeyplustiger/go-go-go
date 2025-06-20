@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bmdbva8kn4x2k"]
+[gd_scene load_steps=26 format=4 uid="uid://bmdbva8kn4x2k"]
 
 [ext_resource type="Script" uid="uid://bxwpqskykerek" path="res://Levels/TestLevelScript.gd" id="1_almtx"]
 [ext_resource type="PackedScene" uid="uid://5re3nmcyjgut" path="res://Player/player.tscn" id="2_2enu4"]
@@ -15,6 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://chg0m6eftnsj0" path="res://SFX/Boulder Fall.mp3" id="8_wbrbc"]
 [ext_resource type="PackedScene" uid="uid://e5bfcpwl61fh" path="res://GUI/Gradient.tscn" id="10_n88tm"]
 [ext_resource type="PackedScene" uid="uid://nccqf6jptax3" path="res://GUI/PauseMenu.tscn" id="15_eh44g"]
+[ext_resource type="PackedScene" uid="uid://cuvu8acjctx0e" path="res://GUI/DeathScreen.tscn" id="16_xie0y"]
+[ext_resource type="PackedScene" uid="uid://mwrty0fjheqb" path="res://GUI/EndScreen.tscn" id="17_yvu5s"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ha8rw"]
 resource_name = "Walls"
@@ -1050,11 +1052,17 @@ offset_bottom = -1672.0
 theme_override_font_sizes/font_size = 100
 text = "PAUSE"
 
-[node name="PauseMenuCanvas" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="PauseMenu" parent="PauseMenuCanvas" instance=ExtResource("15_eh44g")]
+[node name="PauseMenu" parent="Canvas" instance=ExtResource("15_eh44g")]
+visible = false
+
+[node name="DeathScreen" parent="Canvas" instance=ExtResource("16_xie0y")]
+visible = false
+
+[node name="EndScreen" parent="Canvas" instance=ExtResource("17_yvu5s")]
 visible = false
 
 [connection signal="timeout" from="PlayTimer" to="." method="play"]
 [connection signal="timeout" from="StartLevel" to="." method="start_level"]
-[connection signal="pressed" from="Pause" to="." method="pause"]
+[connection signal="pressed" from="Pause" to="Canvas/PauseMenu" method="pause"]

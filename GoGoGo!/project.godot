@@ -24,7 +24,9 @@ Globals="*res://Player/Globals.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+window/size/resizable=false
 window/size/borderless=true
+window/stretch/mode="viewport"
 
 [input]
 
@@ -119,3 +121,4 @@ play={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true

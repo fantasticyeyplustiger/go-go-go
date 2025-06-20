@@ -34,6 +34,8 @@ var chart_initialized : bool = false
 @onready var chartList : ItemList = $ItemList
 
 func _ready():
+	Globals.attempt_count = 1
+	Engine.time_scale = 1.0
 	
 	if not Globals.data_path.is_empty():
 		data._load(Globals.data_path)
@@ -626,7 +628,7 @@ func import_level(path : String) -> void:
 					new_path = "user://" + str(adding_string) + path.get_file()
 					break
 		else:
-			new_path = path.get_file()
+			new_path = "user://" + path.get_file()
 		
 		if OS.get_name() == "Linux" or OS.get_name() == "X11":
 			new_path = new_path.get_basename()
